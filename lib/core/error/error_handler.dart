@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:dio/dio.dart';
 import 'package:health_care/core/error/failure.dart';
 import 'package:health_care/core/global/resources/strings_manger.dart';
@@ -8,7 +10,7 @@ enum DataSource {
   BAD_REQUEST,
   BAD_CERTIFICATE,
   FORBIDDEN,
-  UNAUTHORISED,
+  UNAUTHORIZED,
   NOT_FOUND,
   INTERNAL_SERVER_ERROR,
   CONNECT_TIMEOUT,
@@ -49,8 +51,8 @@ class ErrorHandler implements Exception {
             return DataSource.BAD_REQUEST.getFailure();
           case ResponseCode.FORBIDDEN:
             return DataSource.FORBIDDEN.getFailure();
-          case ResponseCode.UNAUTHORISED:
-            return DataSource.UNAUTHORISED.getFailure();
+          case ResponseCode.UNAUTHORIZED:
+            return DataSource.UNAUTHORIZED.getFailure();
           case ResponseCode.NOT_FOUND:
             return DataSource.NOT_FOUND.getFailure();
           case ResponseCode.INTERNAL_SERVER_ERROR:
@@ -78,8 +80,8 @@ extension DataSourceExtension on DataSource {
       case DataSource.BAD_CERTIFICATE:
         return Failure(
             ResponseCode.BAD_CERTIFICATE, ResponseMessage.BAD_CERTIFICATE);
-      case DataSource.UNAUTHORISED:
-        return Failure(ResponseCode.UNAUTHORISED, ResponseMessage.UNAUTHORISED);
+      case DataSource.UNAUTHORIZED:
+        return Failure(ResponseCode.UNAUTHORIZED, ResponseMessage.UNAUTHORIZED);
       case DataSource.NOT_FOUND:
         return Failure(ResponseCode.NOT_FOUND, ResponseMessage.NOT_FOUND);
       case DataSource.INTERNAL_SERVER_ERROR:
@@ -115,7 +117,7 @@ class ResponseCode {
   static const int BAD_REQUEST = 400; // failure, api rejected the request
   static const int FORBIDDEN = 403; // failure, api rejected the request
   static const int BAD_CERTIFICATE = 403; // failure, api rejected the request
-  static const int UNAUTHORISED = 401; // failure user is not authorised
+  static const int UNAUTHORIZED = 401; // failure user is not authorized
   static const int NOT_FOUND =
       404; // failure, api url is not correct and not found
   static const int INTERNAL_SERVER_ERROR =
@@ -143,8 +145,8 @@ class ResponseMessage {
       AppStrings.badCertificate; // failure, api rejected our request
   static const String FORBIDDEN =
       AppStrings.forbiddenError; // failure,  api rejected our request
-  static const String UNAUTHORISED =
-      AppStrings.unauthorizedError; // failure, user is not authorised
+  static const String UNAUTHORIZED =
+      AppStrings.unauthorizedError; // failure, user is not authorized
   static const String NOT_FOUND = AppStrings
       .notFoundError; // failure, API url is not correct and not found in api side.
   static const String INTERNAL_SERVER_ERROR =
