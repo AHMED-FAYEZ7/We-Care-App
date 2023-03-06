@@ -2,7 +2,10 @@
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:health_care/core/network/api_constance.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+
+import '../preferences/app_prefs.dart';
 
 const String APPLICATION_JSON = "application/json";
 const String CONTENT_TYPE = "content-type";
@@ -11,33 +14,37 @@ const String AUTHORIZATION = "authorization";
 const String DEFAULT_LANGUAGE = "language";
 
 class DioFactory {
-  // AppPreferences _appPreferences;
-  //
-  // DioFactory(this._appPreferences);
+  AppPreferences _appPreferences;
+
+  DioFactory(this._appPreferences);
 
   Future<Dio> getDio() async {
     Dio dio = Dio();
-    int _timeOut = 60 * 1000; // 1 min
+    // int _timeOut = 60 * 1000; // 1 min
     // String language = await _appPreferences.getAppLanguage();
-    // String token = await _appPreferences.getToken();
+    String token = await _appPreferences.getToken();
     Map<String, String> headers = {
       CONTENT_TYPE: APPLICATION_JSON,
       ACCEPT: APPLICATION_JSON,
-      // AUTHORIZATION: token,
+      AUTHORIZATION: token,
       // DEFAULT_LANGUAGE: language
     };
 
     dio.options = BaseOptions(
-        // baseUrl: Constant.baseUrl,
-        // connectTimeout: _timeOut,
-        // receiveTimeout: _timeOut,
-        headers: headers);
+      baseUrl: AppConstance.baseUrl,
+      connectTimeout: const Duration(seconds: 20),
+      receiveTimeout: const Duration(seconds: 20),
+      headers: headers,
+    );
 
     if (kReleaseMode) {
       print("release mode no logs");
     } else {
       dio.interceptors.add(PrettyDioLogger(
-          requestHeader: true, requestBody: true, responseHeader: true));
+        requestHeader: true,
+        requestBody: true,
+        responseHeader: true,
+      ));
     }
 
     return dio;
