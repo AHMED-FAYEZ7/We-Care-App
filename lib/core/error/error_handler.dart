@@ -38,13 +38,17 @@ class ErrorHandler implements Exception {
   Failure _handleError(DioError error) {
     switch (error.type) {
       case DioErrorType.connectionTimeout:
-        return DataSource.CONNECT_TIMEOUT.getFailure();
+        return DataSource.CONNECT_TIMEOUT
+            .getFailure(message: error.response!.data['message']);
       case DioErrorType.sendTimeout:
-        return DataSource.SEND_TIMEOUT.getFailure();
+        return DataSource.SEND_TIMEOUT
+            .getFailure(message: error.response!.data['message']);
       case DioErrorType.receiveTimeout:
-        return DataSource.RECEIVE_TIMEOUT.getFailure();
+        return DataSource.RECEIVE_TIMEOUT
+            .getFailure(message: error.response!.data['message']);
       case DioErrorType.badCertificate:
-        return DataSource.BAD_CERTIFICATE.getFailure();
+        return DataSource.BAD_CERTIFICATE
+            .getFailure(message: error.response!.data['message']);
       case DioErrorType.badResponse:
         switch (error.response?.statusCode) {
           case ResponseCode.BAD_REQUEST:
@@ -52,24 +56,30 @@ class ErrorHandler implements Exception {
               message: error.response!.data['message'],
             );
           case ResponseCode.FORBIDDEN:
-            return DataSource.FORBIDDEN.getFailure();
+            return DataSource.FORBIDDEN
+                .getFailure(message: error.response!.data['message']);
           case ResponseCode.UNAUTHORIZED:
-            return DataSource.UNAUTHORIZED.getFailure();
+            return DataSource.UNAUTHORIZED
+                .getFailure(message: error.response!.data['message']);
           case ResponseCode.NOT_FOUND:
             return DataSource.NOT_FOUND.getFailure(
               message: error.response!.data['message'],
             );
           case ResponseCode.INTERNAL_SERVER_ERROR:
-            return DataSource.INTERNAL_SERVER_ERROR.getFailure();
+            return DataSource.INTERNAL_SERVER_ERROR
+                .getFailure(message: error.response!.data['message']);
           default:
             return DataSource.DEFAULT.getFailure();
         }
       case DioErrorType.cancel:
-        return DataSource.CANCEL.getFailure();
+        return DataSource.CANCEL
+            .getFailure(message: error.response!.data['message']);
       case DioErrorType.connectionError:
-        return DataSource.NO_INTERNET_CONNECTION.getFailure();
+        return DataSource.NO_INTERNET_CONNECTION
+            .getFailure(message: error.response!.data['message']);
       case DioErrorType.unknown:
-        return DataSource.DEFAULT.getFailure();
+        return DataSource.DEFAULT
+            .getFailure(message: error.response!.data['message']);
     }
   }
 }
@@ -85,17 +95,17 @@ extension DataSourceExtension on DataSource {
       case DataSource.FORBIDDEN:
         return Failure(
           ResponseCode.FORBIDDEN,
-          ResponseMessage.FORBIDDEN,
+          message ?? ResponseMessage.FORBIDDEN,
         );
       case DataSource.BAD_CERTIFICATE:
         return Failure(
           ResponseCode.BAD_CERTIFICATE,
-          ResponseMessage.BAD_CERTIFICATE,
+          message ?? ResponseMessage.BAD_CERTIFICATE,
         );
       case DataSource.UNAUTHORIZED:
         return Failure(
           ResponseCode.UNAUTHORIZED,
-          ResponseMessage.UNAUTHORIZED,
+          message ?? ResponseMessage.UNAUTHORIZED,
         );
       case DataSource.NOT_FOUND:
         return Failure(
@@ -105,47 +115,47 @@ extension DataSourceExtension on DataSource {
       case DataSource.INTERNAL_SERVER_ERROR:
         return Failure(
           ResponseCode.INTERNAL_SERVER_ERROR,
-          ResponseMessage.INTERNAL_SERVER_ERROR,
+          message ?? ResponseMessage.INTERNAL_SERVER_ERROR,
         );
       case DataSource.CONNECT_TIMEOUT:
         return Failure(
           ResponseCode.CONNECT_TIMEOUT,
-          ResponseMessage.CONNECT_TIMEOUT,
+          message ?? ResponseMessage.CONNECT_TIMEOUT,
         );
       case DataSource.CANCEL:
         return Failure(
           ResponseCode.CANCEL,
-          ResponseMessage.CANCEL,
+          message ?? ResponseMessage.CANCEL,
         );
       case DataSource.RECEIVE_TIMEOUT:
         return Failure(
           ResponseCode.RECEIVE_TIMEOUT,
-          ResponseMessage.RECEIVE_TIMEOUT,
+          message ?? ResponseMessage.RECEIVE_TIMEOUT,
         );
       case DataSource.SEND_TIMEOUT:
         return Failure(
           ResponseCode.SEND_TIMEOUT,
-          ResponseMessage.SEND_TIMEOUT,
+          message ?? ResponseMessage.SEND_TIMEOUT,
         );
       case DataSource.CACHE_ERROR:
         return Failure(
           ResponseCode.CACHE_ERROR,
-          ResponseMessage.CACHE_ERROR,
+          message ?? ResponseMessage.CACHE_ERROR,
         );
       case DataSource.NO_INTERNET_CONNECTION:
         return Failure(
           ResponseCode.NO_INTERNET_CONNECTION,
-          ResponseMessage.NO_INTERNET_CONNECTION,
+          message ?? ResponseMessage.NO_INTERNET_CONNECTION,
         );
       case DataSource.DEFAULT:
         return Failure(
           ResponseCode.DEFAULT,
-          ResponseMessage.DEFAULT,
+          message ?? ResponseMessage.DEFAULT,
         );
       default:
         return Failure(
           ResponseCode.DEFAULT,
-          ResponseMessage.DEFAULT,
+          message ?? ResponseMessage.DEFAULT,
         );
     }
   }
