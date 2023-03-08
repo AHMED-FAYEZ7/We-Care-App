@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:health_care/authentication/data/response/doctor_repo/doctor_response.dart';
+import 'package:health_care/authentication/data/response/doctor_response/doctor_response.dart';
 import 'package:health_care/core/network/api_constance.dart';
 import 'package:retrofit/retrofit.dart';
 

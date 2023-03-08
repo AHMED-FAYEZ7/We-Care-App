@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:health_care/authentication/domain/usecase/patient_signup_usecase.dart';
 import 'package:health_care/core/services/services_locator.dart';
 
 import 'authentication/presentation/screens/onboarding_screen.dart';

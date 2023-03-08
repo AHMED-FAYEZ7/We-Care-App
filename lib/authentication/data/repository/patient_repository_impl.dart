@@ -20,11 +20,13 @@ class PatientAuthRepositoryImpl extends PatientAuthRepository {
 
   @override
   Future<Either<Failure, PatientAuth>> patientSignUp(
-      PatientSignUpRequest patientSignUpRequest) async {
+    PatientSignUpRequest patientSignUpRequest,
+  ) async {
     if (await _networkInfo.isConnected) {
       try {
-        final response =
-            await _patientRemoteDataSource.patientSignUp(patientSignUpRequest);
+        final response = await _patientRemoteDataSource.patientSignUp(
+          patientSignUpRequest,
+        );
         if (response.status == ApiInternalStatus.SUCCESS) {
           return Right(response.toDomain());
         } else {

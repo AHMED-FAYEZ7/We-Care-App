@@ -34,10 +34,6 @@ class DoctorUser {
     this.username,
     this.v,
   );
-
-  @override
-  String toString() =>
-      '$v, $username, $type, $active, $confirmed, $email, $name, $id, $status, $averageRating, $appointments, $patients, $timeTable, $timePerPatient, $fees, $specialization, ';
 }
 
 class DoctorData {
@@ -45,18 +41,13 @@ class DoctorData {
   DoctorData(
     this.user,
   );
-  @override
-  String toString() => '${user ?? 'unknown'}';
 }
 
 class DoctorAuth {
-  @override
   DoctorData? data;
   String token;
   DoctorAuth(
     this.data,
     this.token,
   );
-  @override
-  String toString() => ' ${data ?? 'unknown'}';
 }

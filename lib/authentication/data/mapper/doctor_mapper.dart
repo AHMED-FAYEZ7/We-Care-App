@@ -1,4 +1,4 @@
-import 'package:health_care/authentication/data/response/doctor_repo/doctor_response.dart';
+import 'package:health_care/authentication/data/response/doctor_response/doctor_response.dart';
 import 'package:health_care/authentication/domain/model/doctor_model.dart';
 import 'package:health_care/core/utils/extension.dart';
 

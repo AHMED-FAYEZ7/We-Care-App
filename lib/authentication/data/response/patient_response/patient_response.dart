@@ -1,6 +1,5 @@
 // ignore_for_file: depend_on_referenced_packages
 
-import 'package:dio/dio.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../../../core/response/base_response.dart';

@@ -34,9 +34,9 @@ class DoctorSignUpUseCaseInput {
   String specialization;
 
   DoctorSignUpUseCaseInput(
+    this.email,
     this.name,
     this.password,
-    this.email,
     this.passwordConfirm,
     this.specialization,
   );

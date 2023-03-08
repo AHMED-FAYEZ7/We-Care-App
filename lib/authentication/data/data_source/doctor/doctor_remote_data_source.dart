@@ -1,12 +1,6 @@
-import 'dart:convert';
-
-import 'package:dio/dio.dart';
 import 'package:health_care/authentication/data/network/doctor_api/doctor_api.dart';
 import 'package:health_care/authentication/data/request/doctor_request.dart';
-import 'package:health_care/authentication/data/response/doctor_repo/doctor_response.dart';
-import 'package:health_care/core/error/error_handler.dart';
-import 'package:health_care/core/error/exceptions.dart';
-import 'package:health_care/core/network/error_message_model.dart';
+import 'package:health_care/authentication/data/response/doctor_response/doctor_response.dart';
 
 abstract class BaseDoctorRemoteDataSource {
   Future<DoctorAuthResponse> doctorSignUp(

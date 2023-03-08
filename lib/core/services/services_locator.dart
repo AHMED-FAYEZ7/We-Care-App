@@ -2,10 +2,16 @@
 
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
+import 'package:health_care/authentication/data/data_source/doctor/doctor_remote_data_source.dart';
 import 'package:health_care/authentication/data/data_source/patient/patient_remote_data_source.dart';
+import 'package:health_care/authentication/data/network/doctor_api/doctor_api.dart';
 import 'package:health_care/authentication/data/network/patient_api/patient_api.dart';
+import 'package:health_care/authentication/data/repository/doctor_repository_impl.dart';
 import 'package:health_care/authentication/data/repository/patient_repository_impl.dart';
+import 'package:health_care/authentication/domain/model/doctor_model.dart';
+import 'package:health_care/authentication/domain/repository/doctor_auth_repository.dart';
 import 'package:health_care/authentication/domain/repository/patient_auth_repository.dart';
+import 'package:health_care/authentication/domain/usecase/doctor_sinup_usecase.dart';
 import 'package:health_care/authentication/domain/usecase/patient_signup_usecase.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -45,8 +51,26 @@ Future<void> initAppModule() async {
       () => PatientAuthRepositoryImpl(sl(), sl()));
 
   // Patient useCase
+
   sl.registerFactory<PatientSignUpUseCase>(() => PatientSignUpUseCase(sl()));
+
+  // Patient  service client
+  sl.registerLazySingleton<DoctorServiceClient>(() => DoctorServiceClient(dio));
+
+  // Patient remote data source
+  sl.registerLazySingleton<BaseDoctorRemoteDataSource>(
+      () => DoctorRemoteDataSourceImpl(sl()));
+
+  // Patient repository
+  sl.registerLazySingleton<BaseDoctorAuthRepository>(
+      () => DoctorAuthRepositoryImpl(sl(), sl()));
+
+  // Patient useCase
+
+  sl.registerFactory<DoctorSignUpUseCase>(() => DoctorSignUpUseCase(sl()));
 }
+
+
 
 // initRegisterModule() {
 //   if (!GetIt.I.isRegistered<PatientSignUpUseCase>()) {

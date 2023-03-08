@@ -18,7 +18,6 @@ class PatientUser {
     this.active,
     this.type,
     this.userName,
-    // string <=====
     this.v,
   );
 }
