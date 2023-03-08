@@ -53,5 +53,4 @@ class DoctorRemoteDataSourceImpl implements BaseDoctorRemoteDataSource {
   //     return "fail";
   //   }
   // }
-
 }

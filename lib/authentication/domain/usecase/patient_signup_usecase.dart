@@ -8,7 +8,7 @@ import '../../data/request/patient_request.dart';
 
 class PatientSignUpUseCase
     implements BaseUseCase<PatientSignUpUseCaseInput, PatientAuth> {
-  final PatientAuthRepository _patientAuthRepository;
+  final BasePatientAuthRepository _patientAuthRepository;
 
   PatientSignUpUseCase(this._patientAuthRepository);
 

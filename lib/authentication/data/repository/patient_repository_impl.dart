@@ -9,7 +9,7 @@ import 'package:health_care/core/network/network_info.dart';
 
 import '../../../core/error/error_handler.dart';
 
-class PatientAuthRepositoryImpl extends PatientAuthRepository {
+class PatientAuthRepositoryImpl extends BasePatientAuthRepository {
   final PatientRemoteDataSource _patientRemoteDataSource;
   final NetworkInfo _networkInfo;
 

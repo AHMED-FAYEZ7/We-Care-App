@@ -4,7 +4,7 @@ import 'package:health_care/core/error/failure.dart';
 
 import '../../data/request/patient_request.dart';
 
-abstract class PatientAuthRepository {
+abstract class BasePatientAuthRepository {
   Future<Either<Failure, PatientAuth>> patientSignUp(
       PatientSignUpRequest patientSignUpRequest);
 }

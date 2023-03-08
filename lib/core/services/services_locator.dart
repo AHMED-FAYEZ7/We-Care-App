@@ -47,7 +47,7 @@ Future<void> initAppModule() async {
       () => PatientRemoteDataSourceImplementer(sl()));
 
   // Patient repository
-  sl.registerLazySingleton<PatientAuthRepository>(
+  sl.registerLazySingleton<BasePatientAuthRepository>(
       () => PatientAuthRepositoryImpl(sl(), sl()));
 
   // Patient useCase
@@ -69,8 +69,6 @@ Future<void> initAppModule() async {
 
   sl.registerFactory<DoctorSignUpUseCase>(() => DoctorSignUpUseCase(sl()));
 }
-
-
 
 // initRegisterModule() {
 //   if (!GetIt.I.isRegistered<PatientSignUpUseCase>()) {
