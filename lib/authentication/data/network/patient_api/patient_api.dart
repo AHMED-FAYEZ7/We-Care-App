@@ -1,8 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:health_care/core/network/api_constance.dart';
 import 'package:retrofit/retrofit.dart';
-
-import '../../response/patient_repo/patient_response.dart';
+import '../../response/patient_response/patient_response.dart';
 
 part 'patient_api.g.dart';
 

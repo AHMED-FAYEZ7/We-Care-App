@@ -1,7 +1,7 @@
 import 'package:health_care/authentication/domain/model/patient_model.dart';
 import 'package:health_care/core/utils/extension.dart';
 
-import '../response/patient_repo/patient_response.dart';
+import '../response/patient_response/patient_response.dart';
 
 extension PatientUserResponseMapper on PatientUserResponse? {
   PatientUser toDomain() {
@@ -14,7 +14,7 @@ extension PatientUserResponseMapper on PatientUserResponse? {
       this?.active?.orFalse() ?? FALSE,
       this?.type?.orEmpty() ?? EMPTY,
       this?.userName?.orEmpty() ?? EMPTY,
-      this?.v?.orEmpty() ?? EMPTY,
+      this?.v?.orZero() ?? ZERO,
     );
   }
 }

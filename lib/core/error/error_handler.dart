@@ -48,13 +48,17 @@ class ErrorHandler implements Exception {
       case DioErrorType.badResponse:
         switch (error.response?.statusCode) {
           case ResponseCode.BAD_REQUEST:
-            return DataSource.BAD_REQUEST.getFailure();
+            return DataSource.BAD_REQUEST.getFailure(
+              message: error.response!.data['message'],
+            );
           case ResponseCode.FORBIDDEN:
             return DataSource.FORBIDDEN.getFailure();
           case ResponseCode.UNAUTHORIZED:
             return DataSource.UNAUTHORIZED.getFailure();
           case ResponseCode.NOT_FOUND:
-            return DataSource.NOT_FOUND.getFailure();
+            return DataSource.NOT_FOUND.getFailure(
+              message: error.response!.data['message'],
+            );
           case ResponseCode.INTERNAL_SERVER_ERROR:
             return DataSource.INTERNAL_SERVER_ERROR.getFailure();
           default:
@@ -71,41 +75,78 @@ class ErrorHandler implements Exception {
 }
 
 extension DataSourceExtension on DataSource {
-  Failure getFailure() {
+  Failure getFailure({String? message}) {
     switch (this) {
       case DataSource.BAD_REQUEST:
-        return Failure(ResponseCode.BAD_REQUEST, ResponseMessage.BAD_REQUEST);
+        return Failure(
+          ResponseCode.BAD_REQUEST,
+          message ?? ResponseMessage.BAD_REQUEST,
+        );
       case DataSource.FORBIDDEN:
-        return Failure(ResponseCode.FORBIDDEN, ResponseMessage.FORBIDDEN);
+        return Failure(
+          ResponseCode.FORBIDDEN,
+          ResponseMessage.FORBIDDEN,
+        );
       case DataSource.BAD_CERTIFICATE:
         return Failure(
-            ResponseCode.BAD_CERTIFICATE, ResponseMessage.BAD_CERTIFICATE);
+          ResponseCode.BAD_CERTIFICATE,
+          ResponseMessage.BAD_CERTIFICATE,
+        );
       case DataSource.UNAUTHORIZED:
-        return Failure(ResponseCode.UNAUTHORIZED, ResponseMessage.UNAUTHORIZED);
+        return Failure(
+          ResponseCode.UNAUTHORIZED,
+          ResponseMessage.UNAUTHORIZED,
+        );
       case DataSource.NOT_FOUND:
-        return Failure(ResponseCode.NOT_FOUND, ResponseMessage.NOT_FOUND);
+        return Failure(
+          ResponseCode.NOT_FOUND,
+          message ?? ResponseMessage.NOT_FOUND,
+        );
       case DataSource.INTERNAL_SERVER_ERROR:
-        return Failure(ResponseCode.INTERNAL_SERVER_ERROR,
-            ResponseMessage.INTERNAL_SERVER_ERROR);
+        return Failure(
+          ResponseCode.INTERNAL_SERVER_ERROR,
+          ResponseMessage.INTERNAL_SERVER_ERROR,
+        );
       case DataSource.CONNECT_TIMEOUT:
         return Failure(
-            ResponseCode.CONNECT_TIMEOUT, ResponseMessage.CONNECT_TIMEOUT);
+          ResponseCode.CONNECT_TIMEOUT,
+          ResponseMessage.CONNECT_TIMEOUT,
+        );
       case DataSource.CANCEL:
-        return Failure(ResponseCode.CANCEL, ResponseMessage.CANCEL);
+        return Failure(
+          ResponseCode.CANCEL,
+          ResponseMessage.CANCEL,
+        );
       case DataSource.RECEIVE_TIMEOUT:
         return Failure(
-            ResponseCode.RECEIVE_TIMEOUT, ResponseMessage.RECEIVE_TIMEOUT);
+          ResponseCode.RECEIVE_TIMEOUT,
+          ResponseMessage.RECEIVE_TIMEOUT,
+        );
       case DataSource.SEND_TIMEOUT:
-        return Failure(ResponseCode.SEND_TIMEOUT, ResponseMessage.SEND_TIMEOUT);
+        return Failure(
+          ResponseCode.SEND_TIMEOUT,
+          ResponseMessage.SEND_TIMEOUT,
+        );
       case DataSource.CACHE_ERROR:
-        return Failure(ResponseCode.CACHE_ERROR, ResponseMessage.CACHE_ERROR);
+        return Failure(
+          ResponseCode.CACHE_ERROR,
+          ResponseMessage.CACHE_ERROR,
+        );
       case DataSource.NO_INTERNET_CONNECTION:
-        return Failure(ResponseCode.NO_INTERNET_CONNECTION,
-            ResponseMessage.NO_INTERNET_CONNECTION);
+        return Failure(
+          ResponseCode.NO_INTERNET_CONNECTION,
+          ResponseMessage.NO_INTERNET_CONNECTION,
+        );
       case DataSource.DEFAULT:
-        return Failure(ResponseCode.DEFAULT, ResponseMessage.DEFAULT);
+        return Failure(
+          ResponseCode.DEFAULT,
+          ResponseMessage.DEFAULT,
+        );
       default:
-        return Failure(ResponseCode.DEFAULT, ResponseMessage.DEFAULT);
+        return Failure(
+          ResponseCode.DEFAULT,
+          ResponseMessage.DEFAULT,
+        );
     }
   }
 }

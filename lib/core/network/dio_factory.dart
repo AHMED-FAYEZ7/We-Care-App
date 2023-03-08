@@ -20,7 +20,6 @@ class DioFactory {
 
   Future<Dio> getDio() async {
     Dio dio = Dio();
-    // int _timeOut = 60 * 1000; // 1 min
     // String language = await _appPreferences.getAppLanguage();
     String token = await _appPreferences.getToken();
     Map<String, String> headers = {
@@ -32,8 +31,8 @@ class DioFactory {
 
     dio.options = BaseOptions(
       baseUrl: AppConstance.baseUrl,
-      connectTimeout: const Duration(seconds: 20),
-      receiveTimeout: const Duration(seconds: 20),
+      connectTimeout: const Duration(seconds: 60),
+      receiveTimeout: const Duration(seconds: 60),
       headers: headers,
     );
 

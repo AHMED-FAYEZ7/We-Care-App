@@ -23,6 +23,7 @@ dependencies:
   retrofit_generator: ^5.0.0
   analyzer: ^5.2.0
   shared_preferences: ^2.0.18
+  json_annotation: ^4.8.0
 
 dev_dependencies:
   flutter_test:

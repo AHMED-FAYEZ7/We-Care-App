@@ -10,8 +10,8 @@ import 'package:health_care/core/network/network_info.dart';
 import '../../../core/error/error_handler.dart';
 
 class PatientAuthRepositoryImpl extends PatientAuthRepository {
-  PatientRemoteDataSource _patientRemoteDataSource;
-  NetworkInfo _networkInfo;
+  final PatientRemoteDataSource _patientRemoteDataSource;
+  final NetworkInfo _networkInfo;
 
   PatientAuthRepositoryImpl(
     this._patientRemoteDataSource,
@@ -23,24 +23,17 @@ class PatientAuthRepositoryImpl extends PatientAuthRepository {
       PatientSignUpRequest patientSignUpRequest) async {
     if (await _networkInfo.isConnected) {
       try {
-        // its safe to call the API
         final response =
             await _patientRemoteDataSource.patientSignUp(patientSignUpRequest);
-        if (response.status == ApiInternalStatus.SUCCESS) // success
-        {
-          // return data from right
+        if (response.status == ApiInternalStatus.SUCCESS) {
           return Right(response.toDomain());
-        } else
-        // return biz logic error from left
-        {
-          return Left(Failure(ResponseCode.DEFAULT,
-              response.message ?? ResponseMessage.DEFAULT));
+        } else {
+          return Left(Failure(1, response.message));
         }
-      } catch (error) {
-        return (left(ErrorHandler.handle(error).failure));
+      } catch (e) {
+        return Left(ErrorHandler.handle(e).failure);
       }
     } else {
-      // return connection error
       return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
     }
   }

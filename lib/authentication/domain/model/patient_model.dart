@@ -7,7 +7,7 @@ class PatientUser {
   bool active;
   String type;
   String userName;
-  String v;
+  int v;
 
   PatientUser(this.appointments, this.id, this.name, this.email, this.confirmed,
       this.active, this.type, this.userName, this.v);

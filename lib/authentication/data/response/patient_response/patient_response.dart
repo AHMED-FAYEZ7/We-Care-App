@@ -1,7 +1,9 @@
 // ignore_for_file: depend_on_referenced_packages
 
-import 'package:health_care/core/response/base_response.dart';
+import 'package:dio/dio.dart';
 import 'package:json_annotation/json_annotation.dart';
+
+import '../../../../core/response/base_response.dart';
 
 part 'patient_response.g.dart';
 
@@ -19,15 +21,24 @@ class PatientUserResponse {
   bool? confirmed;
   @JsonKey(name: "active")
   bool? active;
-  @JsonKey(name: "Patient")
+  @JsonKey(name: "__t")
   String? type;
   @JsonKey(name: "username")
   String? userName;
   @JsonKey(name: "__v")
-  String? v;
+  int? v;
 
-  PatientUserResponse(this.appointments, this.id, this.name, this.email,
-      this.confirmed, this.active, this.type, this.userName, this.v);
+  PatientUserResponse(
+    this.appointments,
+    this.id,
+    this.name,
+    this.email,
+    this.confirmed,
+    this.active,
+    this.type,
+    this.userName,
+    this.v,
+  );
 
   factory PatientUserResponse.fromJson(Map<String, dynamic> json) =>
       _$PatientUserResponseFromJson(json);
@@ -55,11 +66,16 @@ class PatientAuthResponse extends BaseResponse {
   @JsonKey(name: "data")
   PatientDataResponse? data;
 
-  PatientAuthResponse(super.status, super.message, this.token, this.data);
-
-  @override
-  Map<String, dynamic> toJson() => _$PatientAuthResponseToJson(this);
+  PatientAuthResponse(
+    super.status,
+    super.message,
+    this.token,
+    this.data,
+  );
 
   factory PatientAuthResponse.fromJson(Map<String, dynamic> json) =>
       _$PatientAuthResponseFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() => _$PatientAuthResponseToJson(this);
 }

@@ -1,7 +1,7 @@
 import 'package:health_care/authentication/data/network/patient_api/patient_api.dart';
 
 import '../../request/patient_request.dart';
-import '../../response/patient_repo/patient_response.dart';
+import '../../response/patient_response/patient_response.dart';
 
 abstract class PatientRemoteDataSource {
   Future<PatientAuthResponse> patientSignUp(
@@ -9,7 +9,7 @@ abstract class PatientRemoteDataSource {
 }
 
 class PatientRemoteDataSourceImplementer implements PatientRemoteDataSource {
-  PatientServiceClient _patientServiceClient;
+  final PatientServiceClient _patientServiceClient;
   PatientRemoteDataSourceImplementer(this._patientServiceClient);
 
   @override

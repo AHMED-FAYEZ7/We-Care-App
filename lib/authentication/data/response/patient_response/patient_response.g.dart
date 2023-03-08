@@ -16,9 +16,9 @@ PatientUserResponse _$PatientUserResponseFromJson(Map<String, dynamic> json) =>
       json['email'] as String?,
       json['confirmed'] as bool?,
       json['active'] as bool?,
-      json['Patient'] as String?,
+      json['__t'] as String?,
       json['username'] as String?,
-      json['__v'] as String?,
+      json['__v'] as int?,
     );
 
 Map<String, dynamic> _$PatientUserResponseToJson(
@@ -30,7 +30,7 @@ Map<String, dynamic> _$PatientUserResponseToJson(
       'email': instance.email,
       'confirmed': instance.confirmed,
       'active': instance.active,
-      'Patient': instance.type,
+      '__t': instance.type,
       'username': instance.userName,
       '__v': instance.v,
     };
