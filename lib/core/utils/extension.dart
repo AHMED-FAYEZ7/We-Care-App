@@ -2,6 +2,7 @@
 
 const String EMPTY = "";
 const int ZERO = 0;
+const double ZERO_DOUBLE = 0;
 
 extension NonNullString on String? {
   String orEmpty() {
@@ -23,6 +24,16 @@ extension NonNullInt on int? {
   }
 }
 
+extension NonNullDouble on double? {
+  double orZeroDouble() {
+    if (this == null) {
+      return ZERO_DOUBLE;
+    } else {
+      return this!;
+    }
+  }
+}
+
 List<String> EMPTY_LIST = [];
 
 extension NonNullList on List<String>? {
@@ -37,7 +48,7 @@ extension NonNullList on List<String>? {
 
 bool FALSE = false;
 
-extension NonNullboll on bool? {
+extension NonNullBoll on bool? {
   bool orFalse() {
     if (this == null) {
       return FALSE;

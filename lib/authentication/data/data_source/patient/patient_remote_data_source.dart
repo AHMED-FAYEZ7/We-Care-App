@@ -5,7 +5,8 @@ import '../../response/patient_response/patient_response.dart';
 
 abstract class PatientRemoteDataSource {
   Future<PatientAuthResponse> patientSignUp(
-      PatientSignUpRequest patientSignUpRequest);
+    PatientSignUpRequest patientSignUpRequest,
+  );
 }
 
 class PatientRemoteDataSourceImplementer implements PatientRemoteDataSource {
@@ -14,7 +15,8 @@ class PatientRemoteDataSourceImplementer implements PatientRemoteDataSource {
 
   @override
   Future<PatientAuthResponse> patientSignUp(
-      PatientSignUpRequest patientSignUpRequest) async {
+    PatientSignUpRequest patientSignUpRequest,
+  ) async {
     return await _patientServiceClient.patientSignUp(
       patientSignUpRequest.name,
       patientSignUpRequest.password,
