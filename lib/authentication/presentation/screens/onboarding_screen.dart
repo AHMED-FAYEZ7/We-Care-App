@@ -19,7 +19,7 @@ class OnBoardingScreen extends StatelessWidget {
                 "fff",
                 "ssff",
                 "opp88dd@gmail.com",
-                "ssffp",
+                "ssff",
               )))
                   .fold(
                 (failure) {
