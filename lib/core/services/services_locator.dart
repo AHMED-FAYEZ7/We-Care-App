@@ -17,7 +17,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../network/dio_factory.dart';
 import '../network/network_info.dart';
-import '../preferences/app_prefs.dart';
+import '../app/app_prefs.dart';
 
 final sl = GetIt.instance;
 
