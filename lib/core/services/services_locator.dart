@@ -8,7 +8,6 @@ import 'package:health_care/authentication/data/network/doctor_api/doctor_api.da
 import 'package:health_care/authentication/data/network/patient_api/patient_api.dart';
 import 'package:health_care/authentication/data/repository/doctor_repository_impl.dart';
 import 'package:health_care/authentication/data/repository/patient_repository_impl.dart';
-import 'package:health_care/authentication/domain/model/doctor_model.dart';
 import 'package:health_care/authentication/domain/repository/doctor_auth_repository.dart';
 import 'package:health_care/authentication/domain/repository/patient_auth_repository.dart';
 import 'package:health_care/authentication/domain/usecase/doctor_sinup_usecase.dart';
