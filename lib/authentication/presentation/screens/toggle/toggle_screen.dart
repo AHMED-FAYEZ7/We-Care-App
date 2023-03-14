@@ -15,13 +15,13 @@ class ToggleScreen extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
-              Navigator.pushReplacementNamed(context, Routes.doctorLoginRoute);
+              Navigator.pushReplacementNamed(context, Routes.userLoginRoute);
             },
             child: const Text("to doctor"),
           ),
           TextButton(
             onPressed: () {
-              Navigator.pushReplacementNamed(context, Routes.patientLoginRoute);
+              Navigator.pushReplacementNamed(context, Routes.userLoginRoute);
             },
             child: const Text("to patient"),
           ),

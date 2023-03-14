@@ -5,8 +5,8 @@ const String JSON_PATH = "assets/json";
 
 class ImageAssets {
   static const String splashLogo = "$IMAGE_PATH/splash_logo.png";
-  static const String onBoardingLogo1 = "$IMAGE_PATH/onboarding_logo1.svg";
-  static const String onBoardingLogo2 = "$IMAGE_PATH/onboarding_logo2.svg";
+  static const String onBoardingLogo1 = "$IMAGE_PATH/on_boarding_logo1.jpg";
+  static const String onBoardingLogo2 = "$IMAGE_PATH/on_boarding_logo2.jpg";
   static const String onBoardingLogo3 = "$IMAGE_PATH/onboarding_logo3.svg";
   static const String onBoardingLogo4 = "$IMAGE_PATH/onboarding_logo4.svg";
 
