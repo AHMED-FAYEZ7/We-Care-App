@@ -6,5 +6,6 @@ import '../../data/request/patient_request.dart';
 
 abstract class BasePatientAuthRepository {
   Future<Either<Failure, PatientAuth>> patientSignUp(
-      PatientSignUpRequest patientSignUpRequest);
+    PatientSignUpRequest patientSignUpRequest,
+  );
 }

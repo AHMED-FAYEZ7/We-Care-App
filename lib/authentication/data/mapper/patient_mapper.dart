@@ -1,7 +1,6 @@
+import 'package:health_care/authentication/data/response/patient_response/patient_response.dart';
 import 'package:health_care/authentication/domain/model/patient_model.dart';
 import 'package:health_care/core/utils/extension.dart';
-
-import '../response/patient_response/patient_response.dart';
 
 extension PatientUserResponseMapper on PatientUserResponse? {
   PatientUser toDomain() {

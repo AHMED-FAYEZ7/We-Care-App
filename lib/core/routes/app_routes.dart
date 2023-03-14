@@ -7,11 +7,14 @@ import 'package:health_care/authentication/presentation/screens/patient/patient_
 import 'package:health_care/authentication/presentation/screens/splash/splash_screen.dart';
 import 'package:health_care/authentication/presentation/screens/toggle/toggle_screen.dart';
 import 'package:health_care/core/global/resources/strings_manger.dart';
+import 'package:health_care/core/services/services_locator.dart';
 import 'package:health_care/doctor/presentation/screens/doctor_main_screen.dart';
 import 'package:health_care/patient/presentation/screens/patient_main_screen.dart';
+import 'package:health_care/test.dart';
 
 class Routes {
   static const String splashRoute = "/";
+  static const String testRoute = "/test";
   static const String onBoardingRoute = "/onBoarding";
   static const String toggleRoute = "/toggle";
   static const String doctorLoginRoute = "/doctorLogin";
@@ -28,6 +31,10 @@ class RouteGenerator {
     switch (routeSettings.name) {
       case Routes.splashRoute:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
+      case Routes.testRoute:
+        initUserModule();
+        initUserLoginModule();
+        return MaterialPageRoute(builder: (_) => TestPage());
       case Routes.onBoardingRoute:
         return MaterialPageRoute(builder: (_) => OnBoardingScreen());
       case Routes.toggleRoute:
@@ -35,10 +42,12 @@ class RouteGenerator {
       case Routes.doctorLoginRoute:
         return MaterialPageRoute(builder: (_) => DoctorLoginScreen());
       case Routes.doctorRegisterRoute:
+        initDoctorSignUpModule();
         return MaterialPageRoute(builder: (_) => const DoctorRegisterScreen());
       case Routes.patientLoginRoute:
         return MaterialPageRoute(builder: (_) => PatientLoginScreen());
       case Routes.patientRegisterRoute:
+        initPatientSignUpModule();
         return MaterialPageRoute(builder: (_) => const PatientRegisterScreen());
       case Routes.doctorMainRoute:
         return MaterialPageRoute(builder: (_) => const DoctorMainScreen());

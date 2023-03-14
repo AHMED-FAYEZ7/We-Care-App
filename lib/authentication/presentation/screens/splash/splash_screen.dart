@@ -22,27 +22,28 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   _goNext() async {
-    _appPreferences.isDoctorLoggedIn().then((isDoctorLoggedIn) {
-      if (isDoctorLoggedIn) {
-        Navigator.pushReplacementNamed(context, Routes.doctorMainRoute);
-      } else {
-        _appPreferences.isPatientLoggedIn().then((isPatientLoggedIn) {
-          if (isPatientLoggedIn) {
-            Navigator.pushReplacementNamed(context, Routes.patientMainRoute);
-          } else {
-            _appPreferences
-                .isOnBoardingScreenViewed()
-                .then((isOnBoardingScreenViewed) {
-              if (isOnBoardingScreenViewed) {
-                Navigator.pushReplacementNamed(context, Routes.toggleRoute);
-              } else {
-                Navigator.pushReplacementNamed(context, Routes.onBoardingRoute);
-              }
-            });
-          }
-        });
-      }
-    });
+    Navigator.pushReplacementNamed(context, Routes.testRoute);
+    // _appPreferences.isDoctorLoggedIn().then((isDoctorLoggedIn) {
+    //   if (isDoctorLoggedIn) {
+    //     Navigator.pushReplacementNamed(context, Routes.doctorMainRoute);
+    //   } else {
+    //     _appPreferences.isPatientLoggedIn().then((isPatientLoggedIn) {
+    //       if (isPatientLoggedIn) {
+    //         Navigator.pushReplacementNamed(context, Routes.patientMainRoute);
+    //       } else {
+    //         _appPreferences
+    //             .isOnBoardingScreenViewed()
+    //             .then((isOnBoardingScreenViewed) {
+    //           if (isOnBoardingScreenViewed) {
+    //             Navigator.pushReplacementNamed(context, Routes.toggleRoute);
+    //           } else {
+    //             Navigator.pushReplacementNamed(context, Routes.onBoardingRoute);
+    //           }
+    //         });
+    //       }
+    //     });
+    //   }
+    // });
   }
 
   @override
