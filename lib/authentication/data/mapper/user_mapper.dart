@@ -2,6 +2,7 @@ import 'package:health_care/authentication/data/response/user_response/user_resp
 import 'package:health_care/authentication/domain/model/user_model.dart';
 import 'package:health_care/core/utils/extension.dart';
 
+//////////// user login ////////////
 extension UserResponseMapper on UserResponse? {
   User toDomain() {
     return User(
@@ -34,11 +35,23 @@ extension UserDataResponseMapper on UserDataResponse? {
   }
 }
 
+/////////// user forget password ///////////////////
 extension UserForgetPasswordMapper on UserForgetPasswordResponse? {
   UserForgetPassword toDomain() {
     return UserForgetPassword(
-      this?.status.orEmpty() ?? EMPTY,
-      this?.message.orEmpty() ?? EMPTY,
+      this?.status?.orEmpty() ?? EMPTY,
+      this?.message?.orEmpty() ?? EMPTY,
+    );
+  }
+}
+
+/////////// user update password /////////////////
+extension UserUpdatePasswordMapper on UserUpdatePasswordResponse? {
+  UserUpdatePassword toDomain() {
+    return UserUpdatePassword(
+      this?.status?.orEmpty() ?? EMPTY,
+      this?.message?.orEmpty() ?? EMPTY,
+      this?.token?.orEmpty() ?? EMPTY,
     );
   }
 }

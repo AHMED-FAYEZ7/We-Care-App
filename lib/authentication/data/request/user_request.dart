@@ -2,6 +2,7 @@
 
 import 'package:equatable/equatable.dart';
 
+//////////////// user login /////////////////////
 class UserLoginRequest extends Equatable {
   String email;
   String password;
@@ -18,6 +19,7 @@ class UserLoginRequest extends Equatable {
   );
 }
 
+//////////////// user forget password /////////////////////
 class UserForgetPasswordRequest extends Equatable {
   String email;
 
@@ -28,5 +30,25 @@ class UserForgetPasswordRequest extends Equatable {
 
   UserForgetPasswordRequest(
     this.email,
+  );
+}
+
+//////////////// user update password /////////////////////
+class UserUpdatePasswordRequest extends Equatable {
+  String currentPassword;
+  String newPassword;
+  String confirmNewPassword;
+
+  @override
+  List<Object> get props => [
+        currentPassword,
+        newPassword,
+        confirmNewPassword,
+      ];
+
+  UserUpdatePasswordRequest(
+    this.currentPassword,
+    this.newPassword,
+    this.confirmNewPassword,
   );
 }

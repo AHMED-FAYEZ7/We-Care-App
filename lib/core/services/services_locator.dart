@@ -10,7 +10,7 @@ import 'package:health_care/authentication/data/network/patient_api/patient_api.
 import 'package:health_care/authentication/data/network/user_api/user_api.dart';
 import 'package:health_care/authentication/data/repository/doctor_repository_impl.dart';
 import 'package:health_care/authentication/data/repository/patient_repository_impl.dart';
-import 'package:health_care/authentication/data/repository/user_data_impl.dart';
+import 'package:health_care/authentication/data/repository/user_repository_impl.dart';
 import 'package:health_care/authentication/domain/repository/doctor_auth_repository.dart';
 import 'package:health_care/authentication/domain/repository/patient_auth_repository.dart';
 import 'package:health_care/authentication/domain/repository/user_repository.dart';
@@ -18,6 +18,7 @@ import 'package:health_care/authentication/domain/usecase/doctor_sinup_usecase.d
 import 'package:health_care/authentication/domain/usecase/patient_signup_usecase.dart';
 import 'package:health_care/authentication/domain/usecase/user_forget_password_usecase.dart';
 import 'package:health_care/authentication/domain/usecase/user_login_usecase.dart';
+import 'package:health_care/authentication/domain/usecase/user_update_password_usecase.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../network/dio_factory.dart';
@@ -90,5 +91,12 @@ initUserForgetPasswordModule() {
   if (!GetIt.I.isRegistered<UserForgetPasswordUseCase>()) {
     sl.registerFactory<UserForgetPasswordUseCase>(
         () => UserForgetPasswordUseCase(sl()));
+  }
+}
+
+initUserUpdatePasswordModule() {
+  if (!GetIt.I.isRegistered<UserUpdatePasswordUseCase>()) {
+    sl.registerFactory<UserUpdatePasswordUseCase>(
+        () => UserUpdatePasswordUseCase(sl()));
   }
 }

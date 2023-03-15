@@ -9,12 +9,16 @@ abstract class UserRemoteDataSource {
   Future<UserForgetPasswordResponse> userForgetPassword(
     UserForgetPasswordRequest userForgetPasswordRequest,
   );
+  Future<UserUpdatePasswordResponse> userUpdatePassword(
+    UserUpdatePasswordRequest userUpdatePasswordRequest,
+  );
 }
 
 class UserRemoteDataSourceImplementer implements UserRemoteDataSource {
   final UserServiceClient _userServiceClient;
   UserRemoteDataSourceImplementer(this._userServiceClient);
 
+  //////////// user login ////////////
   @override
   Future<UserDataResponse> userLogin(
     UserLoginRequest userLoginRequest,
@@ -25,12 +29,25 @@ class UserRemoteDataSourceImplementer implements UserRemoteDataSource {
     );
   }
 
+  /////////// user forget password ///////////////////
   @override
   Future<UserForgetPasswordResponse> userForgetPassword(
     UserForgetPasswordRequest userForgetPasswordRequest,
   ) async {
     return await _userServiceClient.userForgetPassword(
       userForgetPasswordRequest.email,
+    );
+  }
+
+  /////////// user update password /////////////////
+  @override
+  Future<UserUpdatePasswordResponse> userUpdatePassword(
+    UserUpdatePasswordRequest userUpdatePasswordRequest,
+  ) async {
+    return await _userServiceClient.userUpdatePassword(
+      userUpdatePasswordRequest.currentPassword,
+      userUpdatePasswordRequest.newPassword,
+      userUpdatePasswordRequest.confirmNewPassword,
     );
   }
 }

@@ -9,14 +9,24 @@ part 'user_api.g.dart';
 abstract class UserServiceClient {
   factory UserServiceClient(Dio dio, {String baseUrl}) = _UserServiceClient;
 
+  //////////// user login ////////////
   @POST("api/v1/users/login")
   Future<UserDataResponse> userLogin(
     @Field("email") String email,
     @Field("password") String password,
   );
 
+  /////////// user forget password ///////////////////
   @POST("api/v1/users/forgotPassword")
   Future<UserForgetPasswordResponse> userForgetPassword(
     @Field("email") String email,
+  );
+
+  /////////// user update password /////////////////
+  @PATCH("api/v1/users/updatePassword")
+  Future<UserUpdatePasswordResponse> userUpdatePassword(
+    @Field("passwordCurrent") String currentPassword,
+    @Field("password") String newPassword,
+    @Field("passwordConfirm") String confirmNewPassword,
   );
 }

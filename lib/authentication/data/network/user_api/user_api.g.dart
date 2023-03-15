@@ -72,6 +72,37 @@ class _UserServiceClient implements UserServiceClient {
     return value;
   }
 
+  @override
+  Future<UserUpdatePasswordResponse> userUpdatePassword(
+    currentPassword,
+    newPassword,
+    confirmNewPassword,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'passwordCurrent': currentPassword,
+      'password': newPassword,
+      'passwordConfirm': confirmNewPassword,
+    };
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<UserUpdatePasswordResponse>(Options(
+      method: 'PATCH',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'api/v1/users/updatePassword',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = UserUpdatePasswordResponse.fromJson(_result.data!);
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

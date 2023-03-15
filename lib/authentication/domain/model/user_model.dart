@@ -1,3 +1,4 @@
+//////////// user login ////////////
 class User {
   List<String> appointments;
   String id;
@@ -33,6 +34,7 @@ class UserData {
   UserData(this.token, this.data);
 }
 
+/////////// user forget password ///////////////////
 class UserForgetPassword {
   String status;
   String message;
@@ -41,4 +43,13 @@ class UserForgetPassword {
     this.status,
     this.message,
   );
+}
+
+/////////// user update password /////////////////
+class UserUpdatePassword {
+  String status;
+  String message;
+  String token;
+
+  UserUpdatePassword(this.status, this.message, this.token);
 }

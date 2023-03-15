@@ -20,12 +20,11 @@ class DioFactory {
 
   Future<Dio> getDio() async {
     Dio dio = Dio();
-    // String language = await _appPreferences.getAppLanguage();
     String token = await _appPreferences.getToken();
     Map<String, String> headers = {
       CONTENT_TYPE: APPLICATION_JSON,
       ACCEPT: APPLICATION_JSON,
-      AUTHORIZATION: token,
+      AUTHORIZATION: "Bearer $token",
       // DEFAULT_LANGUAGE: language
     };
 

@@ -15,9 +15,12 @@ class BaseUserRepositoryImpl extends BaseUserRepository {
     this._userRemoteDataSource,
     this._networkInfo,
   );
+
+  //////////////// user login /////////////////////
   @override
   Future<Either<Failure, UserData>> userLogin(
-      UserLoginRequest userLoginRequest) async {
+    UserLoginRequest userLoginRequest,
+  ) async {
     if (await _networkInfo.isConnected) {
       try {
         final response = await _userRemoteDataSource.userLogin(
@@ -36,6 +39,7 @@ class BaseUserRepositoryImpl extends BaseUserRepository {
     }
   }
 
+  //////////////// user forget password /////////////////////
   @override
   Future<Either<Failure, UserForgetPassword>> userForgetPassword(
     UserForgetPasswordRequest userForgetPasswordRequest,
@@ -44,6 +48,29 @@ class BaseUserRepositoryImpl extends BaseUserRepository {
       try {
         final response = await _userRemoteDataSource.userForgetPassword(
           userForgetPasswordRequest,
+        );
+        if (response.status == ApiInternalStatus.SUCCESS) {
+          return Right(response.toDomain());
+        } else {
+          return Left(Failure(1, response.message));
+        }
+      } catch (error) {
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
+
+  //////////////// user update password /////////////////////
+  @override
+  Future<Either<Failure, UserUpdatePassword>> userUpdatePassword(
+    UserUpdatePasswordRequest userUpdatePasswordRequest,
+  ) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final response = await _userRemoteDataSource.userUpdatePassword(
+          userUpdatePasswordRequest,
         );
         if (response.status == ApiInternalStatus.SUCCESS) {
           return Right(response.toDomain());

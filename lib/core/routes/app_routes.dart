@@ -4,8 +4,9 @@ import 'package:health_care/authentication/presentation/screens/onboarding/onboa
 import 'package:health_care/authentication/presentation/screens/patient/patient_register_screen.dart';
 import 'package:health_care/authentication/presentation/screens/splash/splash_screen.dart';
 import 'package:health_care/authentication/presentation/screens/toggle/toggle_screen.dart';
-import 'package:health_care/authentication/presentation/screens/user/forget_password_screen.dart';
+import 'package:health_care/authentication/presentation/screens/user/user_forget_password_screen.dart';
 import 'package:health_care/authentication/presentation/screens/user/user_login_screen.dart';
+import 'package:health_care/authentication/presentation/screens/user/user_update_password_screen.dart';
 import 'package:health_care/core/global/resources/strings_manger.dart';
 import 'package:health_care/core/services/services_locator.dart';
 import 'package:health_care/doctor/presentation/screens/doctor_main_screen.dart';
@@ -19,6 +20,7 @@ class Routes {
   static const String toggleRoute = "/toggle";
   static const String userLoginRoute = "/userLogin";
   static const String userForgetPasswordRoute = "/userForgetPassword";
+  static const String userUpdatePasswordRoute = "/userUpdatePassword";
   static const String doctorRegisterRoute = "/doctorRegister";
   static const String patientRegisterRoute = "/patientRegister";
   static const String forgotPasswordRoute = "/forgotPassword";
@@ -33,7 +35,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const SplashScreen());
       case Routes.testRoute:
         initUserModule();
-        initUserForgetPasswordModule();
+        initUserUpdatePasswordModule();
         return MaterialPageRoute(builder: (_) => TestPage());
       case Routes.onBoardingRoute:
         return MaterialPageRoute(builder: (_) => OnBoardingScreen());
@@ -51,6 +53,11 @@ class RouteGenerator {
         initUserForgetPasswordModule();
         return MaterialPageRoute(
             builder: (_) => const UserForgetPasswordScreen());
+      case Routes.userUpdatePasswordRoute:
+        initUserModule();
+        initUserUpdatePasswordModule();
+        return MaterialPageRoute(
+            builder: (_) => const UserUpdatePasswordScreen());
       case Routes.patientRegisterRoute:
         initPatientSignUpModule();
         return MaterialPageRoute(builder: (_) => const PatientRegisterScreen());

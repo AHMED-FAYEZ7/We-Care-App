@@ -6,6 +6,7 @@ import '../../../../core/response/base_response.dart';
 
 part 'user_response.g.dart';
 
+/////////////////////// user login  ///////////////////////////
 @JsonSerializable()
 class UserResponse {
   @JsonKey(name: "appointments")
@@ -76,6 +77,7 @@ class UserDataResponse extends BaseResponse {
   Map<String, dynamic> toJson() => _$UserDataResponseToJson(this);
 }
 
+/////////////////// user forget password ///////////////////////
 @JsonSerializable()
 class UserForgetPasswordResponse extends BaseResponse {
   UserForgetPasswordResponse(
@@ -88,4 +90,23 @@ class UserForgetPasswordResponse extends BaseResponse {
 
   @override
   Map<String, dynamic> toJson() => _$UserForgetPasswordResponseToJson(this);
+}
+
+/////////////////// user update password ///////////////////////
+@JsonSerializable()
+class UserUpdatePasswordResponse extends BaseResponse {
+  @JsonKey(name: "token")
+  String? token;
+
+  UserUpdatePasswordResponse(
+    super.status,
+    super.message,
+    this.token,
+  );
+
+  factory UserUpdatePasswordResponse.fromJson(Map<String, dynamic> json) =>
+      _$UserUpdatePasswordResponseFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() => _$UserUpdatePasswordResponseToJson(this);
 }
