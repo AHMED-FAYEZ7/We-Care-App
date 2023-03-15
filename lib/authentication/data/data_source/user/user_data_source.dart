@@ -6,6 +6,9 @@ abstract class UserRemoteDataSource {
   Future<UserDataResponse> userLogin(
     UserLoginRequest userLoginRequest,
   );
+  Future<UserForgetPasswordResponse> userForgetPassword(
+    UserForgetPasswordRequest userForgetPasswordRequest,
+  );
 }
 
 class UserRemoteDataSourceImplementer implements UserRemoteDataSource {
@@ -19,6 +22,15 @@ class UserRemoteDataSourceImplementer implements UserRemoteDataSource {
     return await _userServiceClient.userLogin(
       userLoginRequest.email,
       userLoginRequest.password,
+    );
+  }
+
+  @override
+  Future<UserForgetPasswordResponse> userForgetPassword(
+    UserForgetPasswordRequest userForgetPasswordRequest,
+  ) async {
+    return await _userServiceClient.userForgetPassword(
+      userForgetPasswordRequest.email,
     );
   }
 }

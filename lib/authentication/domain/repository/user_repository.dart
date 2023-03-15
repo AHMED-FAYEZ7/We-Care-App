@@ -7,4 +7,7 @@ abstract class BaseUserRepository {
   Future<Either<Failure, UserData>> userLogin(
     UserLoginRequest userLoginRequest,
   );
+  Future<Either<Failure, UserForgetPassword>> userForgetPassword(
+    UserForgetPasswordRequest userForgetPasswordRequest,
+  );
 }

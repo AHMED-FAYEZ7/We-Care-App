@@ -59,3 +59,17 @@ Map<String, dynamic> _$UserDataResponseToJson(UserDataResponse instance) =>
       'token': instance.token,
       'data': instance.data,
     };
+
+UserForgetPasswordResponse _$UserForgetPasswordResponseFromJson(
+        Map<String, dynamic> json) =>
+    UserForgetPasswordResponse(
+      json['status'] as String?,
+      json['message'] as String?,
+    );
+
+Map<String, dynamic> _$UserForgetPasswordResponseToJson(
+        UserForgetPasswordResponse instance) =>
+    <String, dynamic>{
+      'status': instance.status,
+      'message': instance.message,
+    };

@@ -32,3 +32,13 @@ class UserData {
 
   UserData(this.token, this.data);
 }
+
+class UserForgetPassword {
+  String status;
+  String message;
+
+  UserForgetPassword(
+    this.status,
+    this.message,
+  );
+}

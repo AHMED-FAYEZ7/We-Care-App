@@ -16,6 +16,7 @@ import 'package:health_care/authentication/domain/repository/patient_auth_reposi
 import 'package:health_care/authentication/domain/repository/user_repository.dart';
 import 'package:health_care/authentication/domain/usecase/doctor_sinup_usecase.dart';
 import 'package:health_care/authentication/domain/usecase/patient_signup_usecase.dart';
+import 'package:health_care/authentication/domain/usecase/user_forget_password_usecase.dart';
 import 'package:health_care/authentication/domain/usecase/user_login_usecase.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -82,5 +83,12 @@ initUserModule() async {
 initUserLoginModule() {
   if (!GetIt.I.isRegistered<UserLoginUseCase>()) {
     sl.registerFactory<UserLoginUseCase>(() => UserLoginUseCase(sl()));
+  }
+}
+
+initUserForgetPasswordModule() {
+  if (!GetIt.I.isRegistered<UserForgetPasswordUseCase>()) {
+    sl.registerFactory<UserForgetPasswordUseCase>(
+        () => UserForgetPasswordUseCase(sl()));
   }
 }

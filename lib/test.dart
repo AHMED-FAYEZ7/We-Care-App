@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:health_care/authentication/domain/usecase/user_login_usecase.dart';
+import 'package:health_care/authentication/domain/usecase/user_forget_password_usecase.dart';
 import 'package:health_care/core/services/services_locator.dart';
 
 class TestPage extends StatelessWidget {
   TestPage({Key? key}) : super(key: key);
 
-  final UserLoginUseCase _userLoginUseCase = sl<UserLoginUseCase>();
+  final UserForgetPasswordUseCase _userForgetPasswordUseCase =
+      sl<UserForgetPasswordUseCase>();
 
   @override
   Widget build(BuildContext context) {
@@ -18,18 +19,15 @@ class TestPage extends StatelessWidget {
           ),
           TextButton(
             onPressed: () async {
-              (await _userLoginUseCase.call(UserLoginUseCaseInput(
+              (await _userForgetPasswordUseCase.call(
                 'ralofac165@wwgoc.com',
-                '123',
-              )))
+              ))
                   .fold(
                 (failure) {
                   print(failure.message.toString());
                 },
                 (data) {
-                  print(data.data!.user!.name);
-                  print(data.data!.user!.type);
-                  print(data.token);
+                  print(data.message.toString());
                 },
               );
             },

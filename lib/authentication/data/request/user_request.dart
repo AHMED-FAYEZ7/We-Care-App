@@ -17,3 +17,16 @@ class UserLoginRequest extends Equatable {
     this.password,
   );
 }
+
+class UserForgetPasswordRequest extends Equatable {
+  String email;
+
+  @override
+  List<Object> get props => [
+        email,
+      ];
+
+  UserForgetPasswordRequest(
+    this.email,
+  );
+}

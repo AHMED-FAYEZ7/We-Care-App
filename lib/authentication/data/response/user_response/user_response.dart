@@ -75,3 +75,17 @@ class UserDataResponse extends BaseResponse {
   @override
   Map<String, dynamic> toJson() => _$UserDataResponseToJson(this);
 }
+
+@JsonSerializable()
+class UserForgetPasswordResponse extends BaseResponse {
+  UserForgetPasswordResponse(
+    super.status,
+    super.message,
+  );
+
+  factory UserForgetPasswordResponse.fromJson(Map<String, dynamic> json) =>
+      _$UserForgetPasswordResponseFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() => _$UserForgetPasswordResponseToJson(this);
+}

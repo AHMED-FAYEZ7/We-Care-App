@@ -25,11 +25,20 @@ extension DataResponseMapper on DataResponse? {
   }
 }
 
-extension AuthResponseMapper on UserDataResponse? {
+extension UserDataResponseMapper on UserDataResponse? {
   UserData toDomain() {
     return UserData(
       this?.token?.orEmpty() ?? EMPTY,
       this?.data?.toDomain(),
+    );
+  }
+}
+
+extension UserForgetPasswordMapper on UserForgetPasswordResponse? {
+  UserForgetPassword toDomain() {
+    return UserForgetPassword(
+      this?.status.orEmpty() ?? EMPTY,
+      this?.message.orEmpty() ?? EMPTY,
     );
   }
 }
