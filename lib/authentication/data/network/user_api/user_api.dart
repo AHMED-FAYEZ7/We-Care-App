@@ -33,4 +33,10 @@ abstract class UserServiceClient {
   /////////// user delete me /////////////////
   @DELETE("api/v1/users/deleteMe")
   Future userDeleteMe();
+
+  /////////// user email confirmation ///////////////////
+  @POST("api/v1/users/emailConfirmation")
+  Future<UserEmailConfirmationResponse> userEmailConfirmation(
+    @Field("pin") int pin,
+  );
 }

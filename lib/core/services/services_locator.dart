@@ -17,6 +17,7 @@ import 'package:health_care/authentication/domain/repository/user_repository.dar
 import 'package:health_care/authentication/domain/usecase/doctor_sinup_usecase.dart';
 import 'package:health_care/authentication/domain/usecase/patient_signup_usecase.dart';
 import 'package:health_care/authentication/domain/usecase/user_delete_me_usecse.dart';
+import 'package:health_care/authentication/domain/usecase/user_email_confirmation_usecase.dart';
 import 'package:health_care/authentication/domain/usecase/user_forget_password_usecase.dart';
 import 'package:health_care/authentication/domain/usecase/user_login_usecase.dart';
 import 'package:health_care/authentication/domain/usecase/user_update_password_usecase.dart';
@@ -105,5 +106,12 @@ initUserUpdatePasswordModule() {
 initUserDeleteMeModule() {
   if (!GetIt.I.isRegistered<UserDeleteMeUseCase>()) {
     sl.registerFactory<UserDeleteMeUseCase>(() => UserDeleteMeUseCase(sl()));
+  }
+}
+
+initUserEmailConfirmationModule() {
+  if (!GetIt.I.isRegistered<UserEmailConfirmationUseCase>()) {
+    sl.registerFactory<UserEmailConfirmationUseCase>(
+        () => UserEmailConfirmationUseCase(sl()));
   }
 }

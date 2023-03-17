@@ -53,3 +53,14 @@ class UserUpdatePassword {
 
   UserUpdatePassword(this.status, this.message, this.token);
 }
+
+/////////// user email confirmation ///////////////////
+class UserEmailConfirmation {
+  String status;
+  String message;
+
+  UserEmailConfirmation(
+    this.status,
+    this.message,
+  );
+}

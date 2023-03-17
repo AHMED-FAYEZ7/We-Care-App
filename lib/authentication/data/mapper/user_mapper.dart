@@ -55,3 +55,13 @@ extension UserUpdatePasswordMapper on UserUpdatePasswordResponse? {
     );
   }
 }
+
+/////////// user email confirmation ///////////////////
+extension UserEmailConfirmationMapper on UserEmailConfirmationResponse? {
+  UserEmailConfirmation toDomain() {
+    return UserEmailConfirmation(
+      this?.status?.orEmpty() ?? EMPTY,
+      this?.message?.orEmpty() ?? EMPTY,
+    );
+  }
+}

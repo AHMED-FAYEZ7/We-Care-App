@@ -102,4 +102,26 @@ class BaseUserRepositoryImpl extends BaseUserRepository {
       return DataSource.NO_INTERNET_CONNECTION.getFailure();
     }
   }
+
+  @override
+  Future<Either<Failure, UserEmailConfirmation>> userEmailConfirmation(
+    UserEmailConfirmationRequest userEmailConfirmationRequest,
+  ) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final response = await _userRemoteDataSource.userEmailConfirmation(
+          userEmailConfirmationRequest,
+        );
+        if (response.status == ApiInternalStatus.SUCCESS) {
+          return Right(response.toDomain());
+        } else {
+          return Left(Failure(1, response.message));
+        }
+      } catch (error) {
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
 }

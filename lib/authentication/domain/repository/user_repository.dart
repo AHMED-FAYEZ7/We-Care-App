@@ -16,4 +16,7 @@ abstract class BaseUserRepository {
     UserUpdatePasswordRequest userUpdatePasswordRequest,
   );
   Future<Failure> userDeleteMe();
+  Future<Either<Failure, UserEmailConfirmation>> userEmailConfirmation(
+    UserEmailConfirmationRequest userEmailConfirmationRequest,
+  );
 }

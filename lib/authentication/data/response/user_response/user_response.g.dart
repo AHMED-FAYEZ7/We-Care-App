@@ -89,3 +89,17 @@ Map<String, dynamic> _$UserUpdatePasswordResponseToJson(
       'message': instance.message,
       'token': instance.token,
     };
+
+UserEmailConfirmationResponse _$UserEmailConfirmationResponseFromJson(
+        Map<String, dynamic> json) =>
+    UserEmailConfirmationResponse(
+      json['status'] as String?,
+      json['message'] as String?,
+    );
+
+Map<String, dynamic> _$UserEmailConfirmationResponseToJson(
+        UserEmailConfirmationResponse instance) =>
+    <String, dynamic>{
+      'status': instance.status,
+      'message': instance.message,
+    };

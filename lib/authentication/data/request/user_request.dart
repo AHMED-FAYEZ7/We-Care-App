@@ -52,3 +52,17 @@ class UserUpdatePasswordRequest extends Equatable {
     this.confirmNewPassword,
   );
 }
+
+//////////////// user email confirmation /////////////////////
+class UserEmailConfirmationRequest extends Equatable {
+  int pin;
+
+  @override
+  List<Object> get props => [
+        pin,
+      ];
+
+  UserEmailConfirmationRequest(
+    this.pin,
+  );
+}

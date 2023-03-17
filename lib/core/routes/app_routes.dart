@@ -4,6 +4,7 @@ import 'package:health_care/authentication/presentation/screens/onboarding/onboa
 import 'package:health_care/authentication/presentation/screens/patient/patient_register_screen.dart';
 import 'package:health_care/authentication/presentation/screens/splash/splash_screen.dart';
 import 'package:health_care/authentication/presentation/screens/toggle/toggle_screen.dart';
+import 'package:health_care/authentication/presentation/screens/user/user_email_confirmation_screen.dart';
 import 'package:health_care/authentication/presentation/screens/user/user_forget_password_screen.dart';
 import 'package:health_care/authentication/presentation/screens/user/user_login_screen.dart';
 import 'package:health_care/authentication/presentation/screens/user/user_update_password_screen.dart';
@@ -19,6 +20,7 @@ class Routes {
   static const String onBoardingRoute = "/onBoarding";
   static const String toggleRoute = "/toggle";
   static const String userLoginRoute = "/userLogin";
+  static const String userEmailConfirmationRoute = "/userEmailConfirmation";
   static const String userForgetPasswordRoute = "/userForgetPassword";
   static const String userUpdatePasswordRoute = "/userUpdatePassword";
   static const String doctorRegisterRoute = "/doctorRegister";
@@ -48,6 +50,11 @@ class RouteGenerator {
         initUserModule();
         initUserLoginModule();
         return MaterialPageRoute(builder: (_) => UserLoginScreen());
+      case Routes.userEmailConfirmationRoute:
+        initUserModule();
+        initUserEmailConfirmationModule();
+        return MaterialPageRoute(
+            builder: (_) => const UserEmailConfirmationScreen());
       case Routes.userForgetPasswordRoute:
         initUserModule();
         initUserForgetPasswordModule();

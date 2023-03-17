@@ -13,6 +13,9 @@ abstract class UserRemoteDataSource {
     UserUpdatePasswordRequest userUpdatePasswordRequest,
   );
   Future userDeleteMe();
+  Future<UserEmailConfirmationResponse> userEmailConfirmation(
+    UserEmailConfirmationRequest userEmailConfirmationRequest,
+  );
 }
 
 class UserRemoteDataSourceImplementer implements UserRemoteDataSource {
@@ -56,5 +59,15 @@ class UserRemoteDataSourceImplementer implements UserRemoteDataSource {
   @override
   Future userDeleteMe() async {
     return await _userServiceClient.userDeleteMe();
+  }
+
+  /////////// user email confirmation /////////////////
+  @override
+  Future<UserEmailConfirmationResponse> userEmailConfirmation(
+    UserEmailConfirmationRequest userEmailConfirmationRequest,
+  ) async {
+    return await _userServiceClient.userEmailConfirmation(
+      userEmailConfirmationRequest.pin,
+    );
   }
 }
