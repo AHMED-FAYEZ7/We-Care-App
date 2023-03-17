@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:health_care/authentication/domain/usecase/user_update_password_usecase.dart';
+import 'package:health_care/authentication/domain/usecase/user_delete_me_usecse.dart';
 import 'package:health_care/core/services/services_locator.dart';
 
 class TestPage extends StatelessWidget {
   TestPage({Key? key}) : super(key: key);
 
-  final UserUpdatePasswordUseCase _userUpdatePasswordUseCase =
-      sl<UserUpdatePasswordUseCase>();
+  final UserDeleteMeUseCase _userDeleteMeUseCase = sl<UserDeleteMeUseCase>();
 
   @override
   Widget build(BuildContext context) {
@@ -19,20 +18,9 @@ class TestPage extends StatelessWidget {
           ),
           TextButton(
             onPressed: () async {
-              (await _userUpdatePasswordUseCase
-                      .call(UserUpdatePasswordUseCaseInput(
-                '1234',
-                '123',
-                '123',
-              )))
-                  .fold(
-                (failure) {
-                  print(failure.message.toString());
-                },
-                (data) {
-                  print(data.token.toString());
-                },
-              );
+              (await _userDeleteMeUseCase.call().then((value) {
+                print(value.message.toString());
+              }));
             },
             child: const Text(
               "Login Callllll",

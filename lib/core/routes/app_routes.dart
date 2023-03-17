@@ -35,7 +35,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const SplashScreen());
       case Routes.testRoute:
         initUserModule();
-        initUserUpdatePasswordModule();
+        initUserDeleteMeModule();
         return MaterialPageRoute(builder: (_) => TestPage());
       case Routes.onBoardingRoute:
         return MaterialPageRoute(builder: (_) => OnBoardingScreen());

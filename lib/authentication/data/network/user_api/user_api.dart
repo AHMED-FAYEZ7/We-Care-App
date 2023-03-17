@@ -29,4 +29,8 @@ abstract class UserServiceClient {
     @Field("password") String newPassword,
     @Field("passwordConfirm") String confirmNewPassword,
   );
+
+  /////////// user delete me /////////////////
+  @DELETE("api/v1/users/deleteMe")
+  Future userDeleteMe();
 }

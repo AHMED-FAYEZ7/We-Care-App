@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:dartz/dartz.dart';
 import 'package:health_care/authentication/data/request/user_request.dart';
 import 'package:health_care/authentication/domain/model/user_model.dart';
@@ -13,4 +15,5 @@ abstract class BaseUserRepository {
   Future<Either<Failure, UserUpdatePassword>> userUpdatePassword(
     UserUpdatePasswordRequest userUpdatePasswordRequest,
   );
+  Future<Failure> userDeleteMe();
 }

@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:dartz/dartz.dart';
 import 'package:health_care/authentication/data/data_source/user/user_data_source.dart';
 import 'package:health_care/authentication/data/mapper/user_mapper.dart';
@@ -82,6 +84,22 @@ class BaseUserRepositoryImpl extends BaseUserRepository {
       }
     } else {
       return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
+
+  /////////// user delete me /////////////////
+  @override
+  Future<Failure> userDeleteMe() async {
+    if (await _networkInfo.isConnected) {
+      try {
+        print("333333333333");
+        return await _userRemoteDataSource.userDeleteMe();
+      } catch (error) {
+        print("22222222222222222222");
+        return ErrorHandler.handle(error).failure;
+      }
+    } else {
+      return DataSource.NO_INTERNET_CONNECTION.getFailure();
     }
   }
 }

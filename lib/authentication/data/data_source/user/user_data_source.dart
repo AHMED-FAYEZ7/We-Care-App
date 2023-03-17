@@ -12,6 +12,7 @@ abstract class UserRemoteDataSource {
   Future<UserUpdatePasswordResponse> userUpdatePassword(
     UserUpdatePasswordRequest userUpdatePasswordRequest,
   );
+  Future userDeleteMe();
 }
 
 class UserRemoteDataSourceImplementer implements UserRemoteDataSource {
@@ -49,5 +50,11 @@ class UserRemoteDataSourceImplementer implements UserRemoteDataSource {
       userUpdatePasswordRequest.newPassword,
       userUpdatePasswordRequest.confirmNewPassword,
     );
+  }
+
+  /////////// user delete me /////////////////
+  @override
+  Future userDeleteMe() async {
+    return await _userServiceClient.userDeleteMe();
   }
 }
