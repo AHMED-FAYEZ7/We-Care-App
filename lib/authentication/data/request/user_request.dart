@@ -66,3 +66,26 @@ class UserEmailConfirmationRequest extends Equatable {
     this.pin,
   );
 }
+
+//////////////// user update info /////////////////////
+class UserUpdateInfoRequest extends Equatable {
+  bool emailConfirmed;
+  String name;
+  String username;
+  String email;
+
+  @override
+  List<Object> get props => [
+        emailConfirmed,
+        name,
+        username,
+        email,
+      ];
+
+  UserUpdateInfoRequest(
+    this.emailConfirmed,
+    this.name,
+    this.username,
+    this.email,
+  );
+}

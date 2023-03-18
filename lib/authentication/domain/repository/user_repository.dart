@@ -19,4 +19,7 @@ abstract class BaseUserRepository {
   Future<Either<Failure, UserEmailConfirmation>> userEmailConfirmation(
     UserEmailConfirmationRequest userEmailConfirmationRequest,
   );
+  Future<Either<Failure, UserUpdateInfo>> userUpdateInfo(
+    UserUpdateInfoRequest userUpdateInfoRequest,
+  );
 }

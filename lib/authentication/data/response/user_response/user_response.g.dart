@@ -103,3 +103,21 @@ Map<String, dynamic> _$UserEmailConfirmationResponseToJson(
       'status': instance.status,
       'message': instance.message,
     };
+
+UserUpdateInfoResponse _$UserUpdateInfoResponseFromJson(
+        Map<String, dynamic> json) =>
+    UserUpdateInfoResponse(
+      json['status'] as String?,
+      json['message'] as String?,
+      json['data'] == null
+          ? null
+          : DataResponse.fromJson(json['data'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$UserUpdateInfoResponseToJson(
+        UserUpdateInfoResponse instance) =>
+    <String, dynamic>{
+      'status': instance.status,
+      'message': instance.message,
+      'data': instance.data,
+    };

@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:dartz/dartz.dart';
 import 'package:health_care/authentication/data/data_source/user/user_data_source.dart';
 import 'package:health_care/authentication/data/mapper/user_mapper.dart';
@@ -92,10 +90,10 @@ class BaseUserRepositoryImpl extends BaseUserRepository {
   Future<Failure> userDeleteMe() async {
     if (await _networkInfo.isConnected) {
       try {
-        print("333333333333");
+        // print("333333333333");
         return await _userRemoteDataSource.userDeleteMe();
       } catch (error) {
-        print("22222222222222222222");
+        // print("22222222222222222222");
         return ErrorHandler.handle(error).failure;
       }
     } else {
@@ -111,6 +109,29 @@ class BaseUserRepositoryImpl extends BaseUserRepository {
       try {
         final response = await _userRemoteDataSource.userEmailConfirmation(
           userEmailConfirmationRequest,
+        );
+        if (response.status == ApiInternalStatus.SUCCESS) {
+          return Right(response.toDomain());
+        } else {
+          return Left(Failure(1, response.message));
+        }
+      } catch (error) {
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    } else {
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
+
+  //////////////// user update info /////////////////////
+  @override
+  Future<Either<Failure, UserUpdateInfo>> userUpdateInfo(
+    UserUpdateInfoRequest userUpdateInfoRequest,
+  ) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final response = await _userRemoteDataSource.userUpdateInfo(
+          userUpdateInfoRequest,
         );
         if (response.status == ApiInternalStatus.SUCCESS) {
           return Right(response.toDomain());

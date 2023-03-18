@@ -16,6 +16,9 @@ abstract class UserRemoteDataSource {
   Future<UserEmailConfirmationResponse> userEmailConfirmation(
     UserEmailConfirmationRequest userEmailConfirmationRequest,
   );
+  Future<UserUpdateInfoResponse> userUpdateInfo(
+    UserUpdateInfoRequest userUpdateInfoRequest,
+  );
 }
 
 class UserRemoteDataSourceImplementer implements UserRemoteDataSource {
@@ -68,6 +71,18 @@ class UserRemoteDataSourceImplementer implements UserRemoteDataSource {
   ) async {
     return await _userServiceClient.userEmailConfirmation(
       userEmailConfirmationRequest.pin,
+    );
+  }
+
+  @override
+  Future<UserUpdateInfoResponse> userUpdateInfo(
+    UserUpdateInfoRequest userUpdateInfoRequest,
+  ) async {
+    return await _userServiceClient.userUpdateInfo(
+      userUpdateInfoRequest.emailConfirmed,
+      userUpdateInfoRequest.name,
+      userUpdateInfoRequest.username,
+      userUpdateInfoRequest.email,
     );
   }
 }

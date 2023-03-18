@@ -65,3 +65,12 @@ extension UserEmailConfirmationMapper on UserEmailConfirmationResponse? {
     );
   }
 }
+
+/////////// user email confirmation ///////////////////
+extension UserUpdateInfoMapper on UserUpdateInfoResponse? {
+  UserUpdateInfo toDomain() {
+    return UserUpdateInfo(
+      this?.data?.toDomain(),
+    );
+  }
+}

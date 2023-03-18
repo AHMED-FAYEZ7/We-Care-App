@@ -20,6 +20,7 @@ import 'package:health_care/authentication/domain/usecase/user_delete_me_usecse.
 import 'package:health_care/authentication/domain/usecase/user_email_confirmation_usecase.dart';
 import 'package:health_care/authentication/domain/usecase/user_forget_password_usecase.dart';
 import 'package:health_care/authentication/domain/usecase/user_login_usecase.dart';
+import 'package:health_care/authentication/domain/usecase/user_update_info_usecase.dart';
 import 'package:health_care/authentication/domain/usecase/user_update_password_usecase.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -113,5 +114,12 @@ initUserEmailConfirmationModule() {
   if (!GetIt.I.isRegistered<UserEmailConfirmationUseCase>()) {
     sl.registerFactory<UserEmailConfirmationUseCase>(
         () => UserEmailConfirmationUseCase(sl()));
+  }
+}
+
+initUserUpdateInfoModule() {
+  if (!GetIt.I.isRegistered<UserUpdateInfoUseCase>()) {
+    sl.registerFactory<UserUpdateInfoUseCase>(
+        () => UserUpdateInfoUseCase(sl()));
   }
 }

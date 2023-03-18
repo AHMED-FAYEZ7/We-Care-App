@@ -39,4 +39,13 @@ abstract class UserServiceClient {
   Future<UserEmailConfirmationResponse> userEmailConfirmation(
     @Field("pin") int pin,
   );
+
+  /////////// user update info ///////////////////
+  @PATCH("api/v1/users/updateInfo")
+  Future<UserUpdateInfoResponse> userUpdateInfo(
+    @Field("confirmed") bool emailConfirmed,
+    @Field("name") String name,
+    @Field("username") String username,
+    @Field("email") String email,
+  );
 }

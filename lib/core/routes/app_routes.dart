@@ -7,6 +7,7 @@ import 'package:health_care/authentication/presentation/screens/toggle/toggle_sc
 import 'package:health_care/authentication/presentation/screens/user/user_email_confirmation_screen.dart';
 import 'package:health_care/authentication/presentation/screens/user/user_forget_password_screen.dart';
 import 'package:health_care/authentication/presentation/screens/user/user_login_screen.dart';
+import 'package:health_care/authentication/presentation/screens/user/user_update_info_screen.dart';
 import 'package:health_care/authentication/presentation/screens/user/user_update_password_screen.dart';
 import 'package:health_care/core/global/resources/strings_manger.dart';
 import 'package:health_care/core/services/services_locator.dart';
@@ -23,6 +24,7 @@ class Routes {
   static const String userEmailConfirmationRoute = "/userEmailConfirmation";
   static const String userForgetPasswordRoute = "/userForgetPassword";
   static const String userUpdatePasswordRoute = "/userUpdatePassword";
+  static const String userUpdateInfoRoute = "/userUpdateInfo";
   static const String doctorRegisterRoute = "/doctorRegister";
   static const String patientRegisterRoute = "/patientRegister";
   static const String forgotPasswordRoute = "/forgotPassword";
@@ -37,7 +39,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const SplashScreen());
       case Routes.testRoute:
         initUserModule();
-        initUserDeleteMeModule();
+        initUserUpdateInfoModule();
         return MaterialPageRoute(builder: (_) => TestPage());
       case Routes.onBoardingRoute:
         return MaterialPageRoute(builder: (_) => OnBoardingScreen());
@@ -65,6 +67,10 @@ class RouteGenerator {
         initUserUpdatePasswordModule();
         return MaterialPageRoute(
             builder: (_) => const UserUpdatePasswordScreen());
+      case Routes.userUpdateInfoRoute:
+        initUserModule();
+        initUserUpdateInfoModule();
+        return MaterialPageRoute(builder: (_) => const UserUpdateInfoScreen());
       case Routes.patientRegisterRoute:
         initPatientSignUpModule();
         return MaterialPageRoute(builder: (_) => const PatientRegisterScreen());

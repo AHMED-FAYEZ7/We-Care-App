@@ -125,3 +125,22 @@ class UserEmailConfirmationResponse extends BaseResponse {
   @override
   Map<String, dynamic> toJson() => _$UserEmailConfirmationResponseToJson(this);
 }
+
+/////////////////// user update info ///////////////////////
+@JsonSerializable()
+class UserUpdateInfoResponse extends BaseResponse {
+  @JsonKey(name: "data")
+  DataResponse? data;
+
+  UserUpdateInfoResponse(
+    super.status,
+    super.message,
+    this.data,
+  );
+
+  factory UserUpdateInfoResponse.fromJson(Map<String, dynamic> json) =>
+      _$UserUpdateInfoResponseFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() => _$UserUpdateInfoResponseToJson(this);
+}

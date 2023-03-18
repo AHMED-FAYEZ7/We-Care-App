@@ -64,3 +64,12 @@ class UserEmailConfirmation {
     this.message,
   );
 }
+
+/////////// user update info ///////////////////
+class UserUpdateInfo {
+  Data? data;
+
+  UserUpdateInfo(
+    this.data,
+  );
+}

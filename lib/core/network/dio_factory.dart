@@ -24,7 +24,8 @@ class DioFactory {
     Map<String, String> headers = {
       CONTENT_TYPE: APPLICATION_JSON,
       ACCEPT: APPLICATION_JSON,
-      AUTHORIZATION: "Bearer $token",
+      AUTHORIZATION:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MTYyNmZkMTdiYTc3ZDhjOWJkODQ3MiIsImlhdCI6MTY3OTE3MzQwNiwiZXhwIjoxNjg2OTQ5NDA2fQ.jbs-MjKimoRYwFJF-ubHtx-ea_Vfu90dwknMksar7tE",
       // DEFAULT_LANGUAGE: language
     };
 
