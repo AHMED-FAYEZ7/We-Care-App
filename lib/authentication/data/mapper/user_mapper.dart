@@ -40,8 +40,8 @@ extension UserDataResponseMapper on UserDataResponse? {
 extension UserForgetPasswordMapper on UserForgetPasswordResponse? {
   UserForgetPassword toDomain() {
     return UserForgetPassword(
-      this?.status?.orEmpty() ?? EMPTY,
-      this?.message?.orEmpty() ?? EMPTY,
+      this?.status?.orEmpty() ?? Constants.empty,
+      this?.message?.orEmpty() ?? Constants.empty,
     );
   }
 }
@@ -50,9 +50,9 @@ extension UserForgetPasswordMapper on UserForgetPasswordResponse? {
 extension UserUpdatePasswordMapper on UserUpdatePasswordResponse? {
   UserUpdatePassword toDomain() {
     return UserUpdatePassword(
-      this?.status?.orEmpty() ?? EMPTY,
-      this?.message?.orEmpty() ?? EMPTY,
-      this?.token?.orEmpty() ?? EMPTY,
+      this?.status?.orEmpty() ?? Constants.empty,
+      this?.message?.orEmpty() ?? Constants.empty,
+      this?.token?.orEmpty() ?? Constants.empty,
     );
   }
 }
@@ -61,8 +61,8 @@ extension UserUpdatePasswordMapper on UserUpdatePasswordResponse? {
 extension UserEmailConfirmationMapper on UserEmailConfirmationResponse? {
   UserEmailConfirmation toDomain() {
     return UserEmailConfirmation(
-      this?.status?.orEmpty() ?? EMPTY,
-      this?.message?.orEmpty() ?? EMPTY,
+      this?.status?.orEmpty() ?? Constants.empty,
+      this?.message?.orEmpty() ?? Constants.empty,
     );
   }
 }
