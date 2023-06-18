@@ -15,14 +15,14 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   Timer? _timer;
-  final AppPreferences _appPreferences = sl<AppPreferences>();
+  // final AppPreferences _appPreferences = sl<AppPreferences>();
 
   _startDelay() {
     _timer = Timer(const Duration(seconds: 2), _goNext);
   }
 
   _goNext() async {
-    Navigator.pushReplacementNamed(context, Routes.testRoute);
+    Navigator.pushReplacementNamed(context, Routes.doctorRegisterRoute);
     // _appPreferences.isDoctorLoggedIn().then((isDoctorLoggedIn) {
     //   if (isDoctorLoggedIn) {
     //     Navigator.pushReplacementNamed(context, Routes.doctorMainRoute);

@@ -47,7 +47,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const ToggleScreen());
       case Routes.doctorRegisterRoute:
         initDoctorSignUpModule();
-        return MaterialPageRoute(builder: (_) => const DoctorRegisterScreen());
+        return MaterialPageRoute(builder: (_) => DoctorRegisterScreen());
       case Routes.userLoginRoute:
         initUserModule();
         initUserLoginModule();

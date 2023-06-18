@@ -9,6 +9,7 @@ class ImageAssets {
   static const String onBoardingLogo2 = "$IMAGE_PATH/on_boarding_logo2.jpg";
   static const String onBoardingLogo3 = "$IMAGE_PATH/onboarding_logo3.svg";
   static const String onBoardingLogo4 = "$IMAGE_PATH/onboarding_logo4.svg";
+  static const String googleLogoIcon = "$IMAGE_PATH/google_logo_icon.png";
 
   static const String hollowCircle = "$IMAGE_PATH/hollow_circle_ic.svg";
   static const String solidCircle = "$IMAGE_PATH/solid_circle_ic.svg";

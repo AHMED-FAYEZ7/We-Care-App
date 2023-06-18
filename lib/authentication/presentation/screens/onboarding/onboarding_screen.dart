@@ -19,9 +19,9 @@ class OnBoardingScreen extends StatefulWidget {
 }
 
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
-  PatientSignUpUseCase useCase = sl<PatientSignUpUseCase>();
+  // PatientSignUpUseCase useCase = sl<PatientSignUpUseCase>();
 
-  DoctorSignUpUseCase doctor = sl<DoctorSignUpUseCase>();
+  // DoctorSignUpUseCase doctor = sl<DoctorSignUpUseCase>();
 
   final AppPreferences _appPreferences = sl<AppPreferences>();
 
@@ -179,7 +179,7 @@ class OnBoardingPage extends StatelessWidget {
       children: [
         Image(
           image: AssetImage(
-            '${_sliderObject.image}',
+            _sliderObject.image,
           ),
           fit: BoxFit.fitHeight,
           height: 250,
@@ -195,7 +195,7 @@ class OnBoardingPage extends StatelessWidget {
               _sliderObject.title,
               style: TextStyle(
                 fontSize: 40,
-                color: ColorManager.darkPurple,
+                color: ColorManager.darkPrimary,
                 fontWeight: FontWeight.bold,
               ),
             ),
