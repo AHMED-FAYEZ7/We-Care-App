@@ -7,7 +7,7 @@ import 'package:health_care/core/services/services_locator.dart';
 class TestPage extends StatelessWidget {
   TestPage({Key? key}) : super(key: key);
 
-  final DoctorSignUpUseCase _patientSignUpUseCase = sl<DoctorSignUpUseCase>();
+  final UserLoginUseCase _patientSignUpUseCase = sl<UserLoginUseCase>();
 
   @override
   Widget build(BuildContext context) {
@@ -21,12 +21,9 @@ class TestPage extends StatelessWidget {
           TextButton(
             onPressed: () async {
               (await _patientSignUpUseCase.call(
-                DoctorSignUpUseCaseInput(
-                  "doc3@gmail.com",
-                  "doc3",
+                UserLoginUseCaseInput(
+                  "pat3@gmail.com",
                   "55555",
-                  "55555",
-                  "Gynecologist",
                 ),
               ))
                   .fold((l) {

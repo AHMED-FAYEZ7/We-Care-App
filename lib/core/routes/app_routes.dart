@@ -11,9 +11,10 @@ import 'package:health_care/authentication/presentation/screens/user/user_update
 import 'package:health_care/authentication/presentation/screens/user/user_update_password_screen.dart';
 import 'package:health_care/core/global/resources/strings_manger.dart';
 import 'package:health_care/core/services/services_locator.dart';
-import 'package:health_care/doctor/presentation/screens/doctor_main_screen.dart';
-import 'package:health_care/patient/presentation/screens/patient_main_screen.dart';
 import 'package:health_care/test.dart';
+
+import '../../doctor/presentation/screens/doctor_layout/doctor_layout_screen.dart';
+import '../../patient/presentation/screens/patient_layout/patient_layout_screen.dart';
 
 class Routes {
   static const String splashRoute = "/";
@@ -28,8 +29,10 @@ class Routes {
   static const String doctorRegisterRoute = "/doctorRegister";
   static const String patientRegisterRoute = "/patientRegister";
   static const String forgotPasswordRoute = "/forgotPassword";
-  static const String doctorMainRoute = "/doctorMain";
-  static const String patientMainRoute = "/patientMain";
+  /////////////doctor//////////////
+  static const String doctorLayoutRoute = "/doctorLayout";
+  /////////////patient//////////////
+  static const String patientLayoutRoute = "/patientLayout";
 }
 
 class RouteGenerator {
@@ -76,10 +79,14 @@ class RouteGenerator {
       case Routes.patientRegisterRoute:
         initPatientSignUpModule();
         return MaterialPageRoute(builder: (_) => const PatientRegisterScreen());
-      case Routes.doctorMainRoute:
-        return MaterialPageRoute(builder: (_) => const DoctorMainScreen());
-      case Routes.patientMainRoute:
-        return MaterialPageRoute(builder: (_) => const PatientMainScreen());
+
+      /////////////doctor//////////////
+      case Routes.doctorLayoutRoute:
+        return MaterialPageRoute(builder: (_) => const DoctorLayoutScreen());
+      /////////////patient//////////////
+
+      case Routes.patientLayoutRoute:
+        return MaterialPageRoute(builder: (_) => const PatientLayoutScreen());
       default:
         return unDefinedRoute();
     }
