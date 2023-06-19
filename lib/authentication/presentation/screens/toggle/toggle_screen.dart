@@ -10,7 +10,7 @@ class ToggleScreen extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Center(
+          const Center(
             child: Text("Toggle Screen"),
           ),
           TextButton(

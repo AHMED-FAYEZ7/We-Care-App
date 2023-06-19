@@ -26,7 +26,7 @@ class ErrorHandler implements Exception {
   late Failure failure;
 
   ErrorHandler.handle(dynamic error) {
-    if (error is DioError) {
+    if (error is DioException) {
       // dio error so its error from response of the API
       failure = _handleError(error);
     } else {
@@ -35,21 +35,21 @@ class ErrorHandler implements Exception {
     }
   }
 
-  Failure _handleError(DioError error) {
+  Failure _handleError(DioException error) {
     switch (error.type) {
-      case DioErrorType.connectionTimeout:
+      case DioExceptionType.connectionTimeout:
         return DataSource.CONNECT_TIMEOUT
             .getFailure(message: error.response!.data['message']);
-      case DioErrorType.sendTimeout:
+      case DioExceptionType.sendTimeout:
         return DataSource.SEND_TIMEOUT
             .getFailure(message: error.response!.data['message']);
-      case DioErrorType.receiveTimeout:
+      case DioExceptionType.receiveTimeout:
         return DataSource.RECEIVE_TIMEOUT
             .getFailure(message: error.response!.data['message']);
-      case DioErrorType.badCertificate:
+      case DioExceptionType.badCertificate:
         return DataSource.BAD_CERTIFICATE
             .getFailure(message: error.response!.data['message']);
-      case DioErrorType.badResponse:
+      case DioExceptionType.badResponse:
         switch (error.response?.statusCode) {
           case ResponseCode.BAD_REQUEST:
             return DataSource.BAD_REQUEST.getFailure(
@@ -71,13 +71,13 @@ class ErrorHandler implements Exception {
           default:
             return DataSource.DEFAULT.getFailure();
         }
-      case DioErrorType.cancel:
+      case DioExceptionType.cancel:
         return DataSource.CANCEL
             .getFailure(message: error.response!.data['message']);
-      case DioErrorType.connectionError:
+      case DioExceptionType.connectionError:
         return DataSource.NO_INTERNET_CONNECTION
             .getFailure(message: error.response!.data['message']);
-      case DioErrorType.unknown:
+      case DioExceptionType.unknown:
         return DataSource.DEFAULT
             .getFailure(message: error.response!.data['message']);
     }
