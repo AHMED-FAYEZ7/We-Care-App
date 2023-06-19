@@ -1,13 +1,11 @@
-// ignore_for_file: constant_identifier_names, non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names
 
-const String EMPTY = "";
-const int ZERO = 0;
-const double ZERO_DOUBLE = 0;
+import 'package:health_care/core/utils/constants.dart';
 
 extension NonNullString on String? {
   String orEmpty() {
     if (this == null) {
-      return EMPTY;
+      return Constants.empty;
     } else {
       return this!;
     }
@@ -17,7 +15,7 @@ extension NonNullString on String? {
 extension NonNullInt on int? {
   int orZero() {
     if (this == null) {
-      return ZERO;
+      return Constants.zero;
     } else {
       return this!;
     }
@@ -27,31 +25,27 @@ extension NonNullInt on int? {
 extension NonNullDouble on double? {
   double orZeroDouble() {
     if (this == null) {
-      return ZERO_DOUBLE;
+      return Constants.zeroDouble;
     } else {
       return this!;
     }
   }
 }
-
-List<String> EMPTY_LIST = [];
 
 extension NonNullList on List<String>? {
   List<String> orEmptyList() {
     if (this == null) {
-      return EMPTY_LIST;
+      return Constants.emptyList;
     } else {
       return this!;
     }
   }
 }
 
-bool FALSE = false;
-
 extension NonNullBoll on bool? {
   bool orFalse() {
     if (this == null) {
-      return FALSE;
+      return Constants.FALSE;
     } else {
       return this!;
     }
