@@ -1,37 +1,53 @@
 //////////// user login ////////////
 class User {
+  String specialization;
+  String fees;
+  String timePerPatient;
+  List<String> scheduleTiming;
   List<String> appointments;
+  List<String> patients;
+  double? numberOfRating;
+  double? averageRating;
+  String? status;
   String id;
   String name;
   String email;
+  String profilePicture;
   bool confirmed;
+  bool active;
   String type;
+  List<String> address;
   String userName;
   int v;
 
   User(
+    this.specialization,
+    this.fees,
+    this.timePerPatient,
+    this.scheduleTiming,
     this.appointments,
+    this.patients,
+    this.numberOfRating,
+    this.averageRating,
+    this.status,
     this.id,
     this.name,
     this.email,
+    this.profilePicture,
     this.confirmed,
+    this.active,
     this.type,
+    this.address,
     this.userName,
     this.v,
   );
 }
 
-class Data {
-  User? user;
-
-  Data(this.user);
-}
-
 class UserData {
   String token;
-  Data? data;
+  User? user;
 
-  UserData(this.token, this.data);
+  UserData(this.token, this.user);
 }
 
 /////////// user forget password ///////////////////
@@ -67,9 +83,9 @@ class UserEmailConfirmation {
 
 /////////// user update info ///////////////////
 class UserUpdateInfo {
-  Data? data;
+  User? user;
 
   UserUpdateInfo(
-    this.data,
+    this.user,
   );
 }

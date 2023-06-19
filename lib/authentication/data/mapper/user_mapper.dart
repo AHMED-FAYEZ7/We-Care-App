@@ -6,22 +6,25 @@ import 'package:health_care/core/utils/extension.dart';
 extension UserResponseMapper on UserResponse? {
   User toDomain() {
     return User(
+      this?.specialization?.orEmpty() ?? EMPTY,
+      this?.fees?.orEmpty() ?? EMPTY,
+      this?.timePerPatient?.orEmpty() ?? EMPTY,
+      this?.scheduleTiming?.orEmptyList() ?? EMPTY_LIST,
       this?.appointments?.orEmptyList() ?? EMPTY_LIST,
+      this?.patients?.orEmptyList() ?? EMPTY_LIST,
+      this?.numberOfRating?.orZeroDouble() ?? ZERO_DOUBLE,
+      this?.averageRating?.orZeroDouble() ?? ZERO_DOUBLE,
+      this?.status?.orEmpty() ?? EMPTY,
       this?.id?.orEmpty() ?? EMPTY,
       this?.name?.orEmpty() ?? EMPTY,
       this?.email?.orEmpty() ?? EMPTY,
+      this?.profilePicture?.orEmpty() ?? EMPTY,
       this?.confirmed?.orFalse() ?? FALSE,
+      this?.active?.orFalse() ?? FALSE,
       this?.type?.orEmpty() ?? EMPTY,
+      this?.address?.orEmptyList() ?? EMPTY_LIST,
       this?.userName?.orEmpty() ?? EMPTY,
       this?.v?.orZero() ?? ZERO,
-    );
-  }
-}
-
-extension DataResponseMapper on DataResponse? {
-  Data toDomain() {
-    return Data(
-      this?.user?.toDomain(),
     );
   }
 }
@@ -30,7 +33,7 @@ extension UserDataResponseMapper on UserDataResponse? {
   UserData toDomain() {
     return UserData(
       this?.token?.orEmpty() ?? EMPTY,
-      this?.data?.toDomain(),
+      this?.user?.toDomain(),
     );
   }
 }
@@ -70,7 +73,7 @@ extension UserEmailConfirmationMapper on UserEmailConfirmationResponse? {
 extension UserUpdateInfoMapper on UserUpdateInfoResponse? {
   UserUpdateInfo toDomain() {
     return UserUpdateInfo(
-      this?.data?.toDomain(),
+      this?.user?.toDomain(),
     );
   }
 }

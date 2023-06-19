@@ -7,32 +7,66 @@ import '../../../../core/response/base_response.dart';
 part 'user_response.g.dart';
 
 /////////////////////// user login  ///////////////////////////
+
 @JsonSerializable()
 class UserResponse {
+  @JsonKey(name: "specialization")
+  String? specialization;
+  @JsonKey(name: "fees")
+  String? fees;
+  @JsonKey(name: "timePerPatient")
+  String? timePerPatient;
+  @JsonKey(name: "ScheduleTiming")
+  List<String>? scheduleTiming;
   @JsonKey(name: "appointments")
   List<String>? appointments;
+  @JsonKey(name: "patients")
+  List<String>? patients;
+  @JsonKey(name: "numberOfRating")
+  double? numberOfRating;
+  @JsonKey(name: "averageRating")
+  double? averageRating;
+  @JsonKey(name: "status")
+  String? status;
   @JsonKey(name: "_id")
   String? id;
   @JsonKey(name: "name")
   String? name;
   @JsonKey(name: "email")
   String? email;
+  @JsonKey(name: "profilePicture")
+  String? profilePicture;
   @JsonKey(name: "confirmed")
   bool? confirmed;
+  @JsonKey(name: "active")
+  bool? active;
   @JsonKey(name: "__t")
   String? type;
+  @JsonKey(name: "address")
+  List<String>? address;
   @JsonKey(name: "username")
   String? userName;
   @JsonKey(name: "__v")
   int? v;
 
   UserResponse(
+    this.specialization,
+    this.fees,
+    this.timePerPatient,
+    this.scheduleTiming,
     this.appointments,
+    this.patients,
+    this.numberOfRating,
+    this.averageRating,
+    this.status,
     this.id,
     this.name,
     this.email,
+    this.profilePicture,
     this.confirmed,
+    this.active,
     this.type,
+    this.address,
     this.userName,
     this.v,
   );
@@ -44,30 +78,17 @@ class UserResponse {
 }
 
 @JsonSerializable()
-class DataResponse {
-  @JsonKey(name: "user")
-  UserResponse? user;
-
-  DataResponse(this.user);
-
-  factory DataResponse.fromJson(Map<String, dynamic> json) =>
-      _$DataResponseFromJson(json);
-
-  Map<String, dynamic> toJson() => _$DataResponseToJson(this);
-}
-
-@JsonSerializable()
 class UserDataResponse extends BaseResponse {
   @JsonKey(name: "token")
   String? token;
-  @JsonKey(name: "data")
-  DataResponse? data;
+  @JsonKey(name: "user")
+  UserResponse? user;
 
   UserDataResponse(
     super.status,
     super.message,
     this.token,
-    this.data,
+    this.user,
   );
 
   factory UserDataResponse.fromJson(Map<String, dynamic> json) =>
@@ -130,12 +151,12 @@ class UserEmailConfirmationResponse extends BaseResponse {
 @JsonSerializable()
 class UserUpdateInfoResponse extends BaseResponse {
   @JsonKey(name: "data")
-  DataResponse? data;
+  UserResponse? user;
 
   UserUpdateInfoResponse(
     super.status,
     super.message,
-    this.data,
+    this.user,
   );
 
   factory UserUpdateInfoResponse.fromJson(Map<String, dynamic> json) =>

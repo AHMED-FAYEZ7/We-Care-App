@@ -7,39 +7,52 @@ part of 'user_response.dart';
 // **************************************************************************
 
 UserResponse _$UserResponseFromJson(Map<String, dynamic> json) => UserResponse(
+      json['specialization'] as String?,
+      json['fees'] as String?,
+      json['timePerPatient'] as String?,
+      (json['ScheduleTiming'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
       (json['appointments'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
+      (json['patients'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      (json['numberOfRating'] as num?)?.toDouble(),
+      (json['averageRating'] as num?)?.toDouble(),
+      json['status'] as String?,
       json['_id'] as String?,
       json['name'] as String?,
       json['email'] as String?,
+      json['profilePicture'] as String?,
       json['confirmed'] as bool?,
+      json['active'] as bool?,
       json['__t'] as String?,
+      (json['address'] as List<dynamic>?)?.map((e) => e as String).toList(),
       json['username'] as String?,
       json['__v'] as int?,
     );
 
 Map<String, dynamic> _$UserResponseToJson(UserResponse instance) =>
     <String, dynamic>{
+      'specialization': instance.specialization,
+      'fees': instance.fees,
+      'timePerPatient': instance.timePerPatient,
+      'ScheduleTiming': instance.scheduleTiming,
       'appointments': instance.appointments,
+      'patients': instance.patients,
+      'numberOfRating': instance.numberOfRating,
+      'averageRating': instance.averageRating,
+      'status': instance.status,
       '_id': instance.id,
       'name': instance.name,
       'email': instance.email,
+      'profilePicture': instance.profilePicture,
       'confirmed': instance.confirmed,
+      'active': instance.active,
       '__t': instance.type,
+      'address': instance.address,
       'username': instance.userName,
       '__v': instance.v,
-    };
-
-DataResponse _$DataResponseFromJson(Map<String, dynamic> json) => DataResponse(
-      json['user'] == null
-          ? null
-          : UserResponse.fromJson(json['user'] as Map<String, dynamic>),
-    );
-
-Map<String, dynamic> _$DataResponseToJson(DataResponse instance) =>
-    <String, dynamic>{
-      'user': instance.user,
     };
 
 UserDataResponse _$UserDataResponseFromJson(Map<String, dynamic> json) =>
@@ -47,9 +60,9 @@ UserDataResponse _$UserDataResponseFromJson(Map<String, dynamic> json) =>
       json['status'] as String?,
       json['message'] as String?,
       json['token'] as String?,
-      json['data'] == null
+      json['user'] == null
           ? null
-          : DataResponse.fromJson(json['data'] as Map<String, dynamic>),
+          : UserResponse.fromJson(json['user'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$UserDataResponseToJson(UserDataResponse instance) =>
@@ -57,7 +70,7 @@ Map<String, dynamic> _$UserDataResponseToJson(UserDataResponse instance) =>
       'status': instance.status,
       'message': instance.message,
       'token': instance.token,
-      'data': instance.data,
+      'user': instance.user,
     };
 
 UserForgetPasswordResponse _$UserForgetPasswordResponseFromJson(
@@ -111,7 +124,7 @@ UserUpdateInfoResponse _$UserUpdateInfoResponseFromJson(
       json['message'] as String?,
       json['data'] == null
           ? null
-          : DataResponse.fromJson(json['data'] as Map<String, dynamic>),
+          : UserResponse.fromJson(json['data'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$UserUpdateInfoResponseToJson(
@@ -119,5 +132,5 @@ Map<String, dynamic> _$UserUpdateInfoResponseToJson(
     <String, dynamic>{
       'status': instance.status,
       'message': instance.message,
-      'data': instance.data,
+      'data': instance.user,
     };

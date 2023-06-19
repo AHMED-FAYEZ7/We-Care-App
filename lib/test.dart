@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:health_care/authentication/domain/usecase/user_update_info_usecase.dart';
+import 'package:health_care/authentication/domain/usecase/patient_signup_usecase.dart';
+import 'package:health_care/authentication/domain/usecase/user_login_usecase.dart';
 import 'package:health_care/core/services/services_locator.dart';
 
 class TestPage extends StatelessWidget {
   TestPage({Key? key}) : super(key: key);
 
-  final UserUpdateInfoUseCase _userUpdateInfoUseCase =
-      sl<UserUpdateInfoUseCase>();
+  final UserLoginUseCase _patientSignUpUseCase = sl<UserLoginUseCase>();
 
   @override
   Widget build(BuildContext context) {
@@ -19,23 +19,23 @@ class TestPage extends StatelessWidget {
           ),
           TextButton(
             onPressed: () async {
-              (await _userUpdateInfoUseCase.call(
-                UserUpdateInfoUseCaseInput(
-                  true,
-                  "fazo",
-                  "fezo44",
-                  "zzz@gmail.com",
+              (await _patientSignUpUseCase.call(
+                UserLoginUseCaseInput(
+                  "doc@gmail.com",
+                  "55555",
                 ),
               ))
                   .fold((l) {
                 print(l.message.toString());
               }, (r) {
-                print(r.data!.user!.name);
-                print(r.data!.user!.userName);
+                print(r.user!.email);
+                print(r.user!.specialization);
+                print(r.user!.numberOfRating);
+                print(r.user!.status);
               });
             },
             child: const Text(
-              "Login Callllll",
+              "Login Call",
             ),
           ),
           // TextButton(

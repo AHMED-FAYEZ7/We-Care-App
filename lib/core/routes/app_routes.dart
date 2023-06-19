@@ -39,7 +39,9 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const SplashScreen());
       case Routes.testRoute:
         initUserModule();
-        initUserUpdateInfoModule();
+        // initPatientSignUpModule();
+        // initDoctorSignUpModule();
+        initUserLoginModule();
         return MaterialPageRoute(builder: (_) => TestPage());
       case Routes.onBoardingRoute:
         return MaterialPageRoute(builder: (_) => OnBoardingScreen());
