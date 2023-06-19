@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:health_care/authentication/data/data_source/patient/patient_remote_data_source.dart';
-import 'package:health_care/authentication/data/mapper/patient_mapper.dart';
+import 'package:health_care/authentication/data/data_source/patient/patient_auth_remote_data_source.dart';
+import 'package:health_care/authentication/data/mapper/patient_auth_mapper.dart';
 import 'package:health_care/authentication/data/request/patient_request.dart';
 import 'package:health_care/authentication/domain/model/patient_model.dart';
 import 'package:health_care/authentication/domain/repository/patient_auth_repository.dart';
@@ -10,11 +10,11 @@ import 'package:health_care/core/network/network_info.dart';
 import '../../../core/error/error_handler.dart';
 
 class PatientAuthRepositoryImpl extends BasePatientAuthRepository {
-  final PatientRemoteDataSource _patientRemoteDataSource;
+  final PatientAuthRemoteDataSource _patientAuthRemoteDataSource;
   final NetworkInfo _networkInfo;
 
   PatientAuthRepositoryImpl(
-    this._patientRemoteDataSource,
+    this._patientAuthRemoteDataSource,
     this._networkInfo,
   );
 
@@ -24,7 +24,7 @@ class PatientAuthRepositoryImpl extends BasePatientAuthRepository {
   ) async {
     if (await _networkInfo.isConnected) {
       try {
-        final response = await _patientRemoteDataSource.patientSignUp(
+        final response = await _patientAuthRemoteDataSource.patientSignUp(
           patientSignUpRequest,
         );
         if (response.status == ApiInternalStatus.SUCCESS) {

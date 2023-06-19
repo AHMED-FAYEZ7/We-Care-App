@@ -2,11 +2,11 @@
 
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
-import 'package:health_care/authentication/data/data_source/doctor/doctor_remote_data_source.dart';
-import 'package:health_care/authentication/data/data_source/patient/patient_remote_data_source.dart';
+import 'package:health_care/authentication/data/data_source/doctor/doctor_auth_remote_data_source.dart';
+import 'package:health_care/authentication/data/data_source/patient/patient_auth_remote_data_source.dart';
 import 'package:health_care/authentication/data/data_source/user/user_data_source.dart';
-import 'package:health_care/authentication/data/network/doctor_api/doctor_api.dart';
-import 'package:health_care/authentication/data/network/patient_api/patient_api.dart';
+import 'package:health_care/authentication/data/network/doctor_auth_api/doctor_auth_api.dart';
+import 'package:health_care/authentication/data/network/patient_auth_api/patient_auth_api.dart';
 import 'package:health_care/authentication/data/network/user_api/user_api.dart';
 import 'package:health_care/authentication/data/repository/doctor_repository_impl.dart';
 import 'package:health_care/authentication/data/repository/patient_repository_impl.dart';
@@ -50,9 +50,10 @@ Future<void> initAppModule() async {
 initPatientSignUpModule() async {
   if (!GetIt.I.isRegistered<PatientSignUpUseCase>()) {
     final dio = await sl<DioFactory>().getDio();
-    sl.registerFactory<PatientServiceClient>(() => PatientServiceClient(dio));
-    sl.registerFactory<PatientRemoteDataSource>(
-        () => PatientRemoteDataSourceImplementer(sl()));
+    sl.registerFactory<PatientAuthServiceClient>(
+        () => PatientAuthServiceClient(dio));
+    sl.registerFactory<PatientAuthRemoteDataSource>(
+        () => PatientAuthRemoteDataSourceImplementer(sl()));
     sl.registerFactory<BasePatientAuthRepository>(
         () => PatientAuthRepositoryImpl(sl(), sl()));
     sl.registerFactory<PatientSignUpUseCase>(() => PatientSignUpUseCase(sl()));
@@ -62,9 +63,10 @@ initPatientSignUpModule() async {
 initDoctorSignUpModule() async {
   if (!GetIt.I.isRegistered<DoctorSignUpUseCase>()) {
     final dio = await sl<DioFactory>().getDio();
-    sl.registerFactory<DoctorServiceClient>(() => DoctorServiceClient(dio));
-    sl.registerFactory<BaseDoctorRemoteDataSource>(
-        () => DoctorRemoteDataSourceImpl(sl()));
+    sl.registerFactory<DoctorAuthServiceClient>(
+        () => DoctorAuthServiceClient(dio));
+    sl.registerFactory<BaseDoctorAuthRemoteDataSource>(
+        () => DoctorAuthRemoteDataSourceImpl(sl()));
     sl.registerFactory<BaseDoctorAuthRepository>(
         () => DoctorAuthRepositoryImpl(sl(), sl()));
     sl.registerFactory<DoctorSignUpUseCase>(() => DoctorSignUpUseCase(sl()));

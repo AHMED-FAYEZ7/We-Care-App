@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:health_care/authentication/data/data_source/doctor/doctor_remote_data_source.dart';
-import 'package:health_care/authentication/data/mapper/doctor_mapper.dart';
+import 'package:health_care/authentication/data/data_source/doctor/doctor_auth_remote_data_source.dart';
+import 'package:health_care/authentication/data/mapper/doctor_auth_mapper.dart';
 import 'package:health_care/authentication/data/request/doctor_request.dart';
 import 'package:health_care/authentication/domain/model/doctor_model.dart';
 import 'package:health_care/authentication/domain/repository/doctor_auth_repository.dart';
@@ -9,10 +9,10 @@ import 'package:health_care/core/error/failure.dart';
 import 'package:health_care/core/network/network_info.dart';
 
 class DoctorAuthRepositoryImpl implements BaseDoctorAuthRepository {
-  final BaseDoctorRemoteDataSource baseDoctorRemoteDataSource;
+  final BaseDoctorAuthRemoteDataSource baseDoctorAuthRemoteDataSource;
   final NetworkInfo _networkInfo;
   DoctorAuthRepositoryImpl(
-    this.baseDoctorRemoteDataSource,
+    this.baseDoctorAuthRemoteDataSource,
     this._networkInfo,
   );
   @override
@@ -21,7 +21,7 @@ class DoctorAuthRepositoryImpl implements BaseDoctorAuthRepository {
   ) async {
     if (await _networkInfo.isConnected) {
       try {
-        final response = await baseDoctorRemoteDataSource.doctorSignUp(
+        final response = await baseDoctorAuthRemoteDataSource.doctorSignUp(
           doctorSignUpRequest,
         );
         if (response.status == ApiInternalStatus.SUCCESS) {
@@ -38,7 +38,7 @@ class DoctorAuthRepositoryImpl implements BaseDoctorAuthRepository {
     }
 
     // final result =
-    //     await baseDoctorRemoteDataSource.doctorSignUp(doctorSignUpRequest);
+    //     await baseDoctorAuthRemoteDataSource.doctorSignUp(doctorSignUpRequest);
     // try {
     //   return Right(result.toDomain());
     // } on ServerExceptions catch (failure) {

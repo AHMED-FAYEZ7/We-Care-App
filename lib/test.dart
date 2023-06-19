@@ -22,8 +22,8 @@ class TestPage extends StatelessWidget {
             onPressed: () async {
               (await _patientSignUpUseCase.call(
                 UserLoginUseCaseInput(
-                  "pat3@gmail.com",
-                  "55555",
+                  "sdfsd@youke1.com",
+                  "MOHAMMED-ELHOSSINY",
                 ),
               ))
                   .fold((l) {
@@ -33,6 +33,7 @@ class TestPage extends StatelessWidget {
                 print(r.user!.specialization);
                 print(r.user!.numberOfRating);
                 print(r.user!.status);
+                print(r.user!.type);
               });
             },
             child: const Text(

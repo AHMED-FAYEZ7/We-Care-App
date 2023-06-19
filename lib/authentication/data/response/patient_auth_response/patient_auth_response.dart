@@ -5,7 +5,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 import '../../../../core/response/base_response.dart';
 
-part 'patient_response.g.dart';
+part 'patient_auth_response.g.dart';
 
 @JsonSerializable()
 class PatientAuthResponse extends BaseResponse {

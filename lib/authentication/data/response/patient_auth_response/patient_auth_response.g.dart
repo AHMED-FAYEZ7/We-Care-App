@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'patient_response.dart';
+part of 'patient_auth_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

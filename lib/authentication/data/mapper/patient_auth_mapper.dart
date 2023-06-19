@@ -1,5 +1,5 @@
 import 'package:health_care/authentication/data/mapper/user_mapper.dart';
-import 'package:health_care/authentication/data/response/patient_response/patient_response.dart';
+import 'package:health_care/authentication/data/response/patient_auth_response/patient_auth_response.dart';
 import 'package:health_care/authentication/domain/model/patient_model.dart';
 import 'package:health_care/core/utils/constants.dart';
 import 'package:health_care/core/utils/extension.dart';

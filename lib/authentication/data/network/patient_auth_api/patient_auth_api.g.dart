@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'patient_api.dart';
+part of 'patient_auth_api.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'patient_api.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _PatientServiceClient implements PatientServiceClient {
-  _PatientServiceClient(
+class _PatientAuthServiceClient implements PatientAuthServiceClient {
+  _PatientAuthServiceClient(
     this._dio, {
     this.baseUrl,
   }) {

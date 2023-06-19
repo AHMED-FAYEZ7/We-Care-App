@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'doctor_response.dart';
+part of 'doctor_auth_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
