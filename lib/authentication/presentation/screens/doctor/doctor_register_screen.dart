@@ -188,7 +188,9 @@ class DoctorRegisterScreen extends StatelessWidget {
                       ),
                       onPressed: () {
                         Navigator.pushReplacementNamed(
-                            context, Routes.userLoginRoute,);
+                          context,
+                          Routes.userLoginRoute,
+                        );
                       },
                     )
                   ],
