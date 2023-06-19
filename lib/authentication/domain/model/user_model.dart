@@ -6,9 +6,9 @@ class User {
   List<String> scheduleTiming;
   List<String> appointments;
   List<String> patients;
-  double? numberOfRating;
-  double? averageRating;
-  String? status;
+  double numberOfRating;
+  double averageRating;
+  String status;
   String id;
   String name;
   String email;

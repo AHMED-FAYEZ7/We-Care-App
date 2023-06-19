@@ -21,7 +21,7 @@ class TestPage extends StatelessWidget {
             onPressed: () async {
               (await _patientSignUpUseCase.call(
                 UserLoginUseCaseInput(
-                  "doc@gmail.com",
+                  "pat@gmail.com",
                   "55555",
                 ),
               ))
