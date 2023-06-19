@@ -13,15 +13,15 @@ class UserResponse {
   @JsonKey(name: "specialization")
   String? specialization;
   @JsonKey(name: "fees")
-  String? fees;
+  int? fees;
   @JsonKey(name: "timePerPatient")
-  String? timePerPatient;
+  int? timePerPatient;
   @JsonKey(name: "ScheduleTiming")
   List<String>? scheduleTiming;
-  @JsonKey(name: "appointments")
-  List<String>? appointments;
   @JsonKey(name: "patients")
   List<String>? patients;
+  @JsonKey(name: "appointments")
+  List<String>? appointments;
   @JsonKey(name: "numberOfRating")
   double? numberOfRating;
   @JsonKey(name: "averageRating")
@@ -54,8 +54,8 @@ class UserResponse {
     this.fees,
     this.timePerPatient,
     this.scheduleTiming,
-    this.appointments,
     this.patients,
+    this.appointments,
     this.numberOfRating,
     this.averageRating,
     this.status,

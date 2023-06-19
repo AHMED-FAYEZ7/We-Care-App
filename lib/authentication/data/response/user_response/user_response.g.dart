@@ -8,15 +8,15 @@ part of 'user_response.dart';
 
 UserResponse _$UserResponseFromJson(Map<String, dynamic> json) => UserResponse(
       json['specialization'] as String?,
-      json['fees'] as String?,
-      json['timePerPatient'] as String?,
+      json['fees'] as int?,
+      json['timePerPatient'] as int?,
       (json['ScheduleTiming'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
+      (json['patients'] as List<dynamic>?)?.map((e) => e as String).toList(),
       (json['appointments'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
-      (json['patients'] as List<dynamic>?)?.map((e) => e as String).toList(),
       (json['numberOfRating'] as num?)?.toDouble(),
       (json['averageRating'] as num?)?.toDouble(),
       json['status'] as String?,
@@ -38,8 +38,8 @@ Map<String, dynamic> _$UserResponseToJson(UserResponse instance) =>
       'fees': instance.fees,
       'timePerPatient': instance.timePerPatient,
       'ScheduleTiming': instance.scheduleTiming,
-      'appointments': instance.appointments,
       'patients': instance.patients,
+      'appointments': instance.appointments,
       'numberOfRating': instance.numberOfRating,
       'averageRating': instance.averageRating,
       'status': instance.status,

@@ -1,11 +1,11 @@
 //////////// user login ////////////
 class User {
   String specialization;
-  String fees;
-  String timePerPatient;
+  int fees;
+  int timePerPatient;
   List<String> scheduleTiming;
-  List<String> appointments;
   List<String> patients;
+  List<String> appointments;
   double numberOfRating;
   double averageRating;
   String status;

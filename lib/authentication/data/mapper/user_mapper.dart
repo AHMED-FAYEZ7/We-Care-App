@@ -8,8 +8,8 @@ extension UserResponseMapper on UserResponse? {
   User toDomain() {
     return User(
       this?.specialization?.orEmpty() ?? Constants.empty,
-      this?.fees?.orEmpty() ?? Constants.empty,
-      this?.timePerPatient?.orEmpty() ?? Constants.empty,
+      this?.fees?.orZero() ?? Constants.zero,
+      this?.timePerPatient?.orZero() ?? Constants.zero,
       this?.scheduleTiming?.orEmptyList() ?? Constants.emptyList,
       this?.appointments?.orEmptyList() ?? Constants.emptyList,
       this?.patients?.orEmptyList() ?? Constants.emptyList,

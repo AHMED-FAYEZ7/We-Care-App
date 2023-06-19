@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_care/authentication/domain/usecase/doctor_sinup_usecase.dart';
 import 'package:health_care/authentication/domain/usecase/patient_signup_usecase.dart';
 import 'package:health_care/authentication/domain/usecase/user_login_usecase.dart';
 import 'package:health_care/core/services/services_locator.dart';
@@ -6,7 +7,7 @@ import 'package:health_care/core/services/services_locator.dart';
 class TestPage extends StatelessWidget {
   TestPage({Key? key}) : super(key: key);
 
-  final UserLoginUseCase _patientSignUpUseCase = sl<UserLoginUseCase>();
+  final DoctorSignUpUseCase _patientSignUpUseCase = sl<DoctorSignUpUseCase>();
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +21,12 @@ class TestPage extends StatelessWidget {
           TextButton(
             onPressed: () async {
               (await _patientSignUpUseCase.call(
-                UserLoginUseCaseInput(
-                  "pat@gmail.com",
+                DoctorSignUpUseCaseInput(
+                  "doc3@gmail.com",
+                  "doc3",
                   "55555",
+                  "55555",
+                  "Gynecologist",
                 ),
               ))
                   .fold((l) {
