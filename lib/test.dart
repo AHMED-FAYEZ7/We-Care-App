@@ -31,21 +31,21 @@ class TestPage extends StatelessWidget {
                 // print(r.allDoctorsData![4].averageRating);
                 print(r.allDoctorsData![5].timePerPatient);
               });
-              // (await _patientSignUpUseCase.call(
-              //   UserLoginUseCaseInput(
-              //     "sdfsd@youke1.com",
-              //     "MOHAMMED-ELHOSSINY",
-              //   ),
-              // ))
-              //     .fold((l) {
-              //   print(l.message.toString());
-              // }, (r) {
-              //   print(r.user!.email);
-              //   print(r.user!.specialization);
-              //   print(r.user!.numberOfRating);
-              //   print(r.user!.status);
-              //   print(r.user!.type);
-              // });
+              (await _patientSignUpUseCase.call(
+                UserLoginUseCaseInput(
+                  "sdfsd@youke1.com",
+                  "MOHAMMED-ELHOSSINY",
+                ),
+              ))
+                  .fold((l) {
+                print(l.message.toString());
+              }, (r) {
+                print(r.user!.email);
+                print(r.user!.specialization);
+                print(r.user!.numberOfRating);
+                print(r.user!.status);
+                print(r.user!.type);
+              });
             },
             child: const Text(
               "Login Call",

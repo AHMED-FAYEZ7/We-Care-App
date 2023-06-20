@@ -9,7 +9,7 @@ part of 'user_response.dart';
 UserResponse _$UserResponseFromJson(Map<String, dynamic> json) => UserResponse(
       json['specialization'] as String?,
       json['fees'] as int?,
-      json['timePerPatient'] as int?,
+      (json['timePerPatient'] as num?)?.toDouble(),
       (json['ScheduleTiming'] as List<dynamic>?)
           ?.map(
               (e) => ScheduleTimingResponse.fromJson(e as Map<String, dynamic>))
