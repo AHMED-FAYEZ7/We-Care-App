@@ -27,6 +27,7 @@ import 'package:health_care/patient/data/network/patient_api/patient_api.dart';
 import 'package:health_care/patient/data/repository/patient_repo_impl.dart';
 import 'package:health_care/patient/domain/repository/patient_repo.dart';
 import 'package:health_care/patient/domain/usecase/get_all_doctors_use_case.dart';
+import 'package:health_care/patient/presentation/controller/patient_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../network/dio_factory.dart';
@@ -138,5 +139,11 @@ initUserUpdateInfoModule() {
 initGetAllDoctorsModule() {
   if (!GetIt.I.isRegistered<GetAllDoctorsUseCase>()) {
     sl.registerFactory<GetAllDoctorsUseCase>(() => GetAllDoctorsUseCase(sl()));
+  }
+}
+
+initPatientCubitModule() {
+  if (!GetIt.I.isRegistered<PatientCubit>()) {
+    sl.registerFactory<PatientCubit>(() => PatientCubit());
   }
 }

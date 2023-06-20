@@ -61,4 +61,11 @@ class AppStrings {
   static const String doNotHaveAccount = "Does not have account ?";
   static const String haveAccount = "Already have an account ?";
   static const String or = "OR";
+
+  // layout
+
+  static const String home = "Home";
+  static const String appointment = "Appointment";
+  static const String history = "History";
+  static const String profile = "Profile";
 }

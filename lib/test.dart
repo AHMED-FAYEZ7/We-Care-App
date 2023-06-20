@@ -33,8 +33,8 @@ class TestPage extends StatelessWidget {
               });
               (await _patientSignUpUseCase.call(
                 UserLoginUseCaseInput(
-                  "sdfsd@youke1.com",
-                  "MOHAMMED-ELHOSSINY",
+                  "doc1@gmail.com",
+                  "55555",
                 ),
               ))
                   .fold((l) {
@@ -43,6 +43,7 @@ class TestPage extends StatelessWidget {
                 print(r.user!.email);
                 print(r.user!.specialization);
                 print(r.user!.numberOfRating);
+                print(r.user!.scheduleTiming[0].start);
                 print(r.user!.status);
                 print(r.user!.type);
               });

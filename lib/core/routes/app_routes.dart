@@ -85,6 +85,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const DoctorLayoutScreen());
       /////////////patient//////////////
       case Routes.patientLayoutRoute:
+        initPatientCubitModule();
         return MaterialPageRoute(builder: (_) => const PatientLayoutScreen());
       default:
         return unDefinedRoute();
