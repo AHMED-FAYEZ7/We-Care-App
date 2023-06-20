@@ -36,13 +36,5 @@ class DoctorAuthRepositoryImpl implements BaseDoctorAuthRepository {
       // internet
       return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
     }
-
-    // final result =
-    //     await baseDoctorAuthRemoteDataSource.doctorSignUp(doctorSignUpRequest);
-    // try {
-    //   return Right(result.toDomain());
-    // } on ServerExceptions catch (failure) {
-    //   return Left(ServerFailure(failure.errorMessageModel.message));
-    // }
   }
 }

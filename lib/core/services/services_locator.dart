@@ -8,7 +8,7 @@ import 'package:health_care/authentication/data/data_source/user/user_data_sourc
 import 'package:health_care/authentication/data/network/doctor_auth_api/doctor_auth_api.dart';
 import 'package:health_care/authentication/data/network/patient_auth_api/patient_auth_api.dart';
 import 'package:health_care/authentication/data/network/user_api/user_api.dart';
-import 'package:health_care/authentication/data/repository/doctor_repository_impl.dart';
+import 'package:health_care/authentication/data/repository/doctor_auth_repository_impl.dart';
 import 'package:health_care/authentication/data/repository/patient_repository_impl.dart';
 import 'package:health_care/authentication/data/repository/user_repository_impl.dart';
 import 'package:health_care/authentication/domain/repository/doctor_auth_repository.dart';
@@ -22,6 +22,11 @@ import 'package:health_care/authentication/domain/usecase/user_forget_password_u
 import 'package:health_care/authentication/domain/usecase/user_login_usecase.dart';
 import 'package:health_care/authentication/domain/usecase/user_update_info_usecase.dart';
 import 'package:health_care/authentication/domain/usecase/user_update_password_usecase.dart';
+import 'package:health_care/patient/data/data_source/patient_remote_data_source.dart';
+import 'package:health_care/patient/data/network/patient_api/patient_api.dart';
+import 'package:health_care/patient/data/repository/patient_repo_impl.dart';
+import 'package:health_care/patient/domain/repository/patient_repo.dart';
+import 'package:health_care/patient/domain/usecase/get_all_doctors_use_case.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../network/dio_factory.dart';
@@ -52,10 +57,14 @@ initPatientSignUpModule() async {
     final dio = await sl<DioFactory>().getDio();
     sl.registerFactory<PatientAuthServiceClient>(
         () => PatientAuthServiceClient(dio));
+    sl.registerFactory<PatientServiceClient>(() => PatientServiceClient(dio));
     sl.registerFactory<PatientAuthRemoteDataSource>(
         () => PatientAuthRemoteDataSourceImplementer(sl()));
+    sl.registerFactory<BasePatientRemoteDataSource>(
+        () => PatientRemoteDataSourceImpl(sl()));
     sl.registerFactory<BasePatientAuthRepository>(
         () => PatientAuthRepositoryImpl(sl(), sl()));
+    sl.registerFactory<BasePatientRepo>(() => PatientRepoImpl(sl(), sl()));
     sl.registerFactory<PatientSignUpUseCase>(() => PatientSignUpUseCase(sl()));
   }
 }
@@ -123,5 +132,11 @@ initUserUpdateInfoModule() {
   if (!GetIt.I.isRegistered<UserUpdateInfoUseCase>()) {
     sl.registerFactory<UserUpdateInfoUseCase>(
         () => UserUpdateInfoUseCase(sl()));
+  }
+}
+
+initGetAllDoctorsModule() {
+  if (!GetIt.I.isRegistered<GetAllDoctorsUseCase>()) {
+    sl.registerFactory<GetAllDoctorsUseCase>(() => GetAllDoctorsUseCase(sl()));
   }
 }

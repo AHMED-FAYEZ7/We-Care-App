@@ -1,6 +1,4 @@
-import 'package:health_care/authentication/data/mapper/doctor_auth_mapper.dart';
 import 'package:health_care/authentication/data/response/user_response/user_response.dart';
-import 'package:health_care/authentication/domain/model/doctor_model.dart';
 import 'package:health_care/authentication/domain/model/user_model.dart';
 import 'package:health_care/core/utils/constants.dart';
 import 'package:health_care/core/utils/extension.dart';
@@ -33,6 +31,7 @@ extension UserResponseMapper on UserResponse? {
       this?.address?.orEmptyList() ?? Constants.emptyList,
       this?.userName?.orEmpty() ?? Constants.empty,
       this?.v?.orZero() ?? Constants.zero,
+      this?.emailConfirm?.orEmpty() ?? Constants.empty,
     );
   }
 }

@@ -45,6 +45,7 @@ class RouteGenerator {
         initPatientSignUpModule();
         initDoctorSignUpModule();
         initUserLoginModule();
+        initGetAllDoctorsModule();
         return MaterialPageRoute(builder: (_) => TestPage());
       case Routes.onBoardingRoute:
         return MaterialPageRoute(builder: (_) => OnBoardingScreen());

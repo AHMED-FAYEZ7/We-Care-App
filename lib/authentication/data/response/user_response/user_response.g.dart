@@ -31,6 +31,7 @@ UserResponse _$UserResponseFromJson(Map<String, dynamic> json) => UserResponse(
       (json['address'] as List<dynamic>?)?.map((e) => e as String).toList(),
       json['username'] as String?,
       json['__v'] as int?,
+      json['emailConfirm'] as String?,
     );
 
 Map<String, dynamic> _$UserResponseToJson(UserResponse instance) =>
@@ -54,6 +55,7 @@ Map<String, dynamic> _$UserResponseToJson(UserResponse instance) =>
       'address': instance.address,
       'username': instance.userName,
       '__v': instance.v,
+      'emailConfirm': instance.emailConfirm,
     };
 
 UserDataResponse _$UserDataResponseFromJson(Map<String, dynamic> json) =>

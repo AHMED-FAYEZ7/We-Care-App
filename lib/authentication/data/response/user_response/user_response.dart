@@ -1,6 +1,5 @@
 // ignore_for_file: depend_on_referenced_packages
 
-import 'package:health_care/authentication/data/response/doctor_auth_response/doctor_auth_response.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../../../core/response/base_response.dart';
@@ -49,6 +48,8 @@ class UserResponse {
   String? userName;
   @JsonKey(name: "__v")
   int? v;
+  @JsonKey(name: "emailConfirm")
+  String? emailConfirm;
 
   UserResponse(
     this.specialization,
@@ -70,6 +71,7 @@ class UserResponse {
     this.address,
     this.userName,
     this.v,
+    this.emailConfirm,
   );
 
   factory UserResponse.fromJson(Map<String, dynamic> json) =>
