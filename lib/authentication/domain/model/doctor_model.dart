@@ -8,3 +8,15 @@ class DoctorAuth {
     this.user,
   );
 }
+
+class ScheduleTiming {
+  String start;
+  String end;
+  String id;
+
+  ScheduleTiming(
+    this.start,
+    this.end,
+    this.id,
+  );
+}

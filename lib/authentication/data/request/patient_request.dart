@@ -17,5 +17,9 @@ class PatientSignUpRequest extends Equatable {
       ];
 
   PatientSignUpRequest(
-      this.name, this.password, this.email, this.passwordConfirm);
+    this.name,
+    this.password,
+    this.email,
+    this.passwordConfirm,
+  );
 }

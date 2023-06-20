@@ -12,3 +12,13 @@ extension DoctorAuthResponseMapper on DoctorAuthResponse? {
     );
   }
 }
+
+extension ScheduleTimingResponseMapper on ScheduleTimingResponse? {
+  ScheduleTiming toDomain() {
+    return ScheduleTiming(
+      this?.start?.orEmpty() ?? Constants.empty,
+      this?.end?.orEmpty() ?? Constants.empty,
+      this?.id?.orEmpty() ?? Constants.empty,
+    );
+  }
+}

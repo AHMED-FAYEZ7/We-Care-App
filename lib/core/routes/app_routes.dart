@@ -79,12 +79,10 @@ class RouteGenerator {
       case Routes.patientRegisterRoute:
         initPatientSignUpModule();
         return MaterialPageRoute(builder: (_) => const PatientRegisterScreen());
-
       /////////////doctor//////////////
       case Routes.doctorLayoutRoute:
         return MaterialPageRoute(builder: (_) => const DoctorLayoutScreen());
       /////////////patient//////////////
-
       case Routes.patientLayoutRoute:
         return MaterialPageRoute(builder: (_) => const PatientLayoutScreen());
       default:

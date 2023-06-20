@@ -1,9 +1,11 @@
+import 'package:health_care/authentication/domain/model/doctor_model.dart';
+
 //////////// user login ////////////
 class User {
   String specialization;
   int fees;
   int timePerPatient;
-  List<String> scheduleTiming;
+  List<ScheduleTiming> scheduleTiming;
   List<String> patients;
   List<String> appointments;
   double numberOfRating;

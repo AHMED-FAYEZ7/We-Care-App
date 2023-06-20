@@ -6,6 +6,22 @@ part of 'doctor_auth_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+ScheduleTimingResponse _$ScheduleTimingResponseFromJson(
+        Map<String, dynamic> json) =>
+    ScheduleTimingResponse(
+      json['start'] as String?,
+      json['end'] as String?,
+      json['_id'] as String?,
+    );
+
+Map<String, dynamic> _$ScheduleTimingResponseToJson(
+        ScheduleTimingResponse instance) =>
+    <String, dynamic>{
+      'start': instance.start,
+      'end': instance.end,
+      '_id': instance.id,
+    };
+
 DoctorAuthResponse _$DoctorAuthResponseFromJson(Map<String, dynamic> json) =>
     DoctorAuthResponse(
       json['status'] as String?,

@@ -1,4 +1,6 @@
+import 'package:health_care/authentication/data/mapper/doctor_auth_mapper.dart';
 import 'package:health_care/authentication/data/response/user_response/user_response.dart';
+import 'package:health_care/authentication/domain/model/doctor_model.dart';
 import 'package:health_care/authentication/domain/model/user_model.dart';
 import 'package:health_care/core/utils/constants.dart';
 import 'package:health_care/core/utils/extension.dart';
@@ -10,7 +12,12 @@ extension UserResponseMapper on UserResponse? {
       this?.specialization?.orEmpty() ?? Constants.empty,
       this?.fees?.orZero() ?? Constants.zero,
       this?.timePerPatient?.orZero() ?? Constants.zero,
-      this?.scheduleTiming?.orEmptyList() ?? Constants.emptyList,
+      (this
+                  ?.scheduleTiming
+                  ?.map((scheduleTiming) => scheduleTiming.toDomain()) ??
+              const Iterable.empty())
+          .cast<ScheduleTiming>()
+          .toList(),
       this?.appointments?.orEmptyList() ?? Constants.emptyList,
       this?.patients?.orEmptyList() ?? Constants.emptyList,
       this?.numberOfRating?.orZeroDouble() ?? Constants.zeroDouble,

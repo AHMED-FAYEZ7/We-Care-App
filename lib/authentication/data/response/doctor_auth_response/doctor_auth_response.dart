@@ -9,6 +9,27 @@ import '../../../../core/response/base_response.dart';
 part 'doctor_auth_response.g.dart';
 
 @JsonSerializable()
+class ScheduleTimingResponse {
+  @JsonKey(name: "start")
+  String? start;
+  @JsonKey(name: "end")
+  String? end;
+  @JsonKey(name: "_id")
+  String? id;
+
+  ScheduleTimingResponse(
+    this.start,
+    this.end,
+    this.id,
+  );
+
+  factory ScheduleTimingResponse.fromJson(Map<String, dynamic> json) =>
+      _$ScheduleTimingResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ScheduleTimingResponseToJson(this);
+}
+
+@JsonSerializable()
 class DoctorAuthResponse extends BaseResponse {
   @JsonKey(name: "token")
   String? token;

@@ -11,7 +11,8 @@ UserResponse _$UserResponseFromJson(Map<String, dynamic> json) => UserResponse(
       json['fees'] as int?,
       json['timePerPatient'] as int?,
       (json['ScheduleTiming'] as List<dynamic>?)
-          ?.map((e) => e as String)
+          ?.map(
+              (e) => ScheduleTimingResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
       (json['patients'] as List<dynamic>?)?.map((e) => e as String).toList(),
       (json['appointments'] as List<dynamic>?)

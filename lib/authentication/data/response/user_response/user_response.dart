@@ -1,5 +1,6 @@
 // ignore_for_file: depend_on_referenced_packages
 
+import 'package:health_care/authentication/data/response/doctor_auth_response/doctor_auth_response.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../../../core/response/base_response.dart';
@@ -17,7 +18,7 @@ class UserResponse {
   @JsonKey(name: "timePerPatient")
   int? timePerPatient;
   @JsonKey(name: "ScheduleTiming")
-  List<String>? scheduleTiming;
+  List<ScheduleTimingResponse>? scheduleTiming;
   @JsonKey(name: "patients")
   List<String>? patients;
   @JsonKey(name: "appointments")
