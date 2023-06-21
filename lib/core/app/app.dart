@@ -3,9 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/core/app/app_prefs.dart';
+import 'package:health_care/core/global/theme/app_color/color_manager.dart';
 import 'package:health_care/core/routes/app_routes.dart';
 import 'package:health_care/core/services/services_locator.dart';
 import 'package:health_care/patient/presentation/controller/patient_cubit.dart';
+
+import '../global/theme/theme_data/theme_data_light.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp._internal();
@@ -35,7 +38,8 @@ class _MyAppState extends State<MyApp> {
           create: (BuildContext context) => sl<PatientCubit>(),
         ),
       ],
-      child: const MaterialApp(
+      child: MaterialApp(
+        theme: getThemeDataLight(),
         debugShowCheckedModeBanner: false,
         onGenerateRoute: RouteGenerator.getRoute,
         initialRoute: Routes.splashRoute,

@@ -5,8 +5,8 @@ class PatientHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('home'),
+    return Column(
+      children: [Text("data")],
     );
   }
 }
