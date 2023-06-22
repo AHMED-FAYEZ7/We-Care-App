@@ -25,3 +25,44 @@ class AllDoctorsResponse extends BaseResponse {
   @override
   Map<String, dynamic> toJson() => _$AllDoctorsResponseToJson(this);
 }
+
+@JsonSerializable()
+class TopDoctorsResponse extends AllDoctorsResponse {
+  TopDoctorsResponse(
+    super.status,
+    super.message,
+    super.results,
+    super.allDoctors,
+  );
+
+  factory TopDoctorsResponse.fromJson(Map<String, dynamic> json) =>
+      _$TopDoctorsResponseFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() => _$TopDoctorsResponseToJson(this);
+}
+
+@JsonSerializable()
+class DoctorsSpecializationResponse extends BaseResponse {
+  @JsonKey(name: "doctorsNum")
+  int? doctorsNum;
+  @JsonKey(name: "results")
+  int? results;
+
+  @JsonKey(name: "doctors")
+  List<UserResponse>? doctorsData;
+
+  DoctorsSpecializationResponse(
+    super.status,
+    super.message,
+    this.doctorsNum,
+    this.results,
+    this.doctorsData,
+  );
+
+  factory DoctorsSpecializationResponse.fromJson(Map<String, dynamic> json) =>
+      _$DoctorsSpecializationResponseFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() => _$DoctorsSpecializationResponseToJson(this);
+}

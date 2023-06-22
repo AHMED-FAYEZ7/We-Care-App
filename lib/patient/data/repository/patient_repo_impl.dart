@@ -34,4 +34,46 @@ class PatientRepoImpl implements BasePatientRepo {
       return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, TopDoctors>> getTopDoctors() async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final response = await _basePatientRemoteDataSource.getTopDoctors();
+
+        if (response.status == ApiInternalStatus.SUCCESS) {
+          print(" mmmmmmmmmmmm ${response.results}");
+          return Right(response.toDomain());
+        } else {
+          return Left(Failure(1, response.message!));
+        }
+      } catch (error) {
+        return Left((ErrorHandler.handle(error).failure));
+      }
+    } else {
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, DoctorsSpecialization>> getDoctorsSpecialization(
+      String specialization) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final response = await _basePatientRemoteDataSource
+            .doctorsSpecialization(specialization);
+
+        if (response.status == ApiInternalStatus.SUCCESS) {
+          print(" hhhhhhhhhhh hhhhhhhhhhhss ${response.results}");
+          return Right(response.toDomain());
+        } else {
+          return Left(Failure(1, response.message!));
+        }
+      } catch (error) {
+        return Left((ErrorHandler.handle(error).failure));
+      }
+    } else {
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
 }

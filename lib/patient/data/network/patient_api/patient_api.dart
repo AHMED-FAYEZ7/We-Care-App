@@ -12,4 +12,12 @@ abstract class PatientServiceClient {
 
   @GET("api/v1/doctors")
   Future<AllDoctorsResponse> getAllDoctors();
+
+  @GET("api/v1/doctors/topdoctors")
+  Future<TopDoctorsResponse> getTopDoctors();
+
+  @GET("api/v1/doctors/{specialization}")
+  Future<DoctorsSpecializationResponse> doctorsSpecialization(
+    @Path("specialization") String specialization,
+  );
 }
