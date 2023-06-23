@@ -14,10 +14,17 @@ extension AllDoctorsResponseMapper on AllDoctorsResponse? {
                 const Iterable.empty())
             .cast<User>()
             .toList();
+    List<User> doctorSearchDataResponse = (this
+                ?.doctorsSearchData
+                ?.map((doctorResponse) => doctorResponse.toDomain()) ??
+            const Iterable.empty())
+        .cast<User>()
+        .toList();
 
     return AllDoctors(
       result,
       allDoctorsResponse,
+      doctorSearchDataResponse,
     );
   }
 }
@@ -31,10 +38,17 @@ extension TopDoctorsResponseMapper on TopDoctorsResponse? {
                 const Iterable.empty())
             .cast<User>()
             .toList();
+    List<User> doctorSearchDataResponse = (this
+                ?.doctorsSearchData
+                ?.map((doctorResponse) => doctorResponse.toDomain()) ??
+            const Iterable.empty())
+        .cast<User>()
+        .toList();
 
     return TopDoctors(
       result,
       topDoctorsResponse,
+      doctorSearchDataResponse,
     );
   }
 }

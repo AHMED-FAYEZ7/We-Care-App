@@ -48,6 +48,8 @@ class RouteGenerator {
         initGetAllDoctorsModule();
         initGetGetDoctorsSpecializationModule();
         initGetTopDoctorsModule();
+        initGetDoctorByIdModule();
+        initGetDoctorSearchModule();
         return MaterialPageRoute(builder: (_) => TestPage());
       case Routes.onBoardingRoute:
         return MaterialPageRoute(builder: (_) => OnBoardingScreen());
