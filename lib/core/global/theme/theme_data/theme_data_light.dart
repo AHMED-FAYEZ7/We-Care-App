@@ -61,28 +61,28 @@ ThemeData getThemeDataLight() => ThemeData(
           fontSize: FontSize.s16,
         ),
         displayMedium: getRegularStyle(
-          color: ColorManager.white,
+          color: ColorManager.black,
           fontSize: FontSize.s16,
         ),
         displaySmall: getBoldStyle(
-          color: ColorManager.primary,
+          color: ColorManager.black,
           fontSize: FontSize.s16,
         ),
         headlineMedium: getRegularStyle(
-          color: ColorManager.primary,
+          color: ColorManager.black,
           fontSize: FontSize.s14,
         ),
         titleMedium: getMediumStyle(
-          color: ColorManager.lightGrey,
+          color: ColorManager.black,
           fontSize: FontSize.s14,
         ),
         titleSmall:
-            getMediumStyle(color: ColorManager.primary, fontSize: FontSize.s12),
+            getMediumStyle(color: ColorManager.black, fontSize: FontSize.s12),
         bodySmall: getRegularStyle(
-          color: ColorManager.grey1,
+          color: ColorManager.black,
         ),
         bodyLarge: getRegularStyle(
-          color: ColorManager.grey,
+          color: ColorManager.black,
         ),
         bodyMedium: getMediumStyle(color: ColorManager.black),
       ),

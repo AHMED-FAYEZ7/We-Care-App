@@ -11,6 +11,7 @@ import 'package:health_care/authentication/presentation/screens/user/user_update
 import 'package:health_care/authentication/presentation/screens/user/user_update_password_screen.dart';
 import 'package:health_care/core/global/resources/strings_manger.dart';
 import 'package:health_care/core/services/services_locator.dart';
+import 'package:health_care/patient/presentation/screens/patient_search/search_screen.dart';
 import 'package:health_care/test.dart';
 
 import '../../doctor/presentation/screens/doctor_layout/doctor_layout_screen.dart';
@@ -33,6 +34,7 @@ class Routes {
   static const String doctorLayoutRoute = "/doctorLayout";
   /////////////patient//////////////
   static const String patientLayoutRoute = "/patientLayout";
+  static const String patientSearchRoute = "/patientSearch";
 }
 
 class RouteGenerator {
@@ -87,6 +89,9 @@ class RouteGenerator {
       case Routes.patientLayoutRoute:
         initPatientCubitModule();
         return MaterialPageRoute(builder: (_) => const PatientLayoutScreen());
+      case Routes.patientSearchRoute:
+        // initPatientCubitModule();
+        return MaterialPageRoute(builder: (_) => PatientSearchScreen());
       default:
         return unDefinedRoute();
     }

@@ -3,6 +3,7 @@ import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/core/assets/app_assets.dart';
 import 'package:health_care/patient/presentation/controller/patient_cubit.dart';
+import 'package:health_care/patient/presentation/widgets/app_bar_widget.dart';
 
 import '../../../../core/global/resources/icons_manger.dart';
 import '../../../../core/global/resources/strings_manger.dart';
@@ -23,32 +24,7 @@ class _PatientLayoutScreenState extends State<PatientLayoutScreen> {
     return BlocConsumer<PatientCubit, PatientState>(
       builder: (context, state) {
         return Scaffold(
-          appBar: AppBar(
-            backgroundColor: ColorManager.white,
-            leading: Image.asset(
-              ImageAssets.splashLogo,
-              scale: 1.4,
-            ),
-            title: const Text(
-              'We Care',
-            ),
-            actions: [
-              IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  IconBroken.Notification,
-                  color: ColorManager.primary,
-                ),
-              ),
-              IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  IconBroken.Heart,
-                  color: ColorManager.primary,
-                ),
-              ),
-            ],
-          ),
+          appBar: AppBarWidget(),
           body: cubit.screens[cubit.currentIndex],
           bottomNavigationBar: Material(
             color: ColorManager.white,
