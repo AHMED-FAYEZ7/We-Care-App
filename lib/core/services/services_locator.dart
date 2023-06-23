@@ -27,6 +27,10 @@ import 'package:health_care/patient/data/network/patient_api/patient_api.dart';
 import 'package:health_care/patient/data/repository/patient_repo_impl.dart';
 import 'package:health_care/patient/domain/repository/patient_repo.dart';
 import 'package:health_care/patient/domain/usecase/get_all_doctors_use_case.dart';
+import 'package:health_care/patient/domain/usecase/get_docotrs_specialization_use_case.dart';
+import 'package:health_care/patient/domain/usecase/get_doctor_by_id_use_case.dart';
+import 'package:health_care/patient/domain/usecase/get_doctor_search_use_case.dart';
+import 'package:health_care/patient/domain/usecase/get_top_doctors_use_case.dart';
 import 'package:health_care/patient/presentation/controller/patient_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -139,6 +143,32 @@ initUserUpdateInfoModule() {
 initGetAllDoctorsModule() {
   if (!GetIt.I.isRegistered<GetAllDoctorsUseCase>()) {
     sl.registerFactory<GetAllDoctorsUseCase>(() => GetAllDoctorsUseCase(sl()));
+  }
+}
+
+initGetTopDoctorsModule() {
+  if (!GetIt.I.isRegistered<GetTopDoctorsUseCase>()) {
+    sl.registerFactory<GetTopDoctorsUseCase>(() => GetTopDoctorsUseCase(sl()));
+  }
+}
+
+initGetDoctorByIdModule() {
+  if (!GetIt.I.isRegistered<GetDoctorByIdUseCase>()) {
+    sl.registerFactory<GetDoctorByIdUseCase>(() => GetDoctorByIdUseCase(sl()));
+  }
+}
+
+initGetDoctorSearchModule() {
+  if (!GetIt.I.isRegistered<GetDoctorSearchUseCase>()) {
+    sl.registerFactory<GetDoctorSearchUseCase>(
+        () => GetDoctorSearchUseCase(sl()));
+  }
+}
+
+initGetGetDoctorsSpecializationModule() {
+  if (!GetIt.I.isRegistered<GetDoctorsSpecializationUseCase>()) {
+    sl.registerFactory<GetDoctorsSpecializationUseCase>(
+        () => GetDoctorsSpecializationUseCase(sl()));
   }
 }
 

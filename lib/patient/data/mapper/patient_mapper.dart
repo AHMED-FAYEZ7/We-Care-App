@@ -14,10 +14,62 @@ extension AllDoctorsResponseMapper on AllDoctorsResponse? {
                 const Iterable.empty())
             .cast<User>()
             .toList();
+    List<User> doctorSearchDataResponse = (this
+                ?.doctorsSearchData
+                ?.map((doctorResponse) => doctorResponse.toDomain()) ??
+            const Iterable.empty())
+        .cast<User>()
+        .toList();
 
     return AllDoctors(
       result,
       allDoctorsResponse,
+      doctorSearchDataResponse,
+    );
+  }
+}
+
+extension TopDoctorsResponseMapper on TopDoctorsResponse? {
+  TopDoctors toDomain() {
+    int result = this?.results?.orZero() ?? Constants.zero;
+
+    List<User> topDoctorsResponse =
+        (this?.allDoctors?.map((doctorResponse) => doctorResponse.toDomain()) ??
+                const Iterable.empty())
+            .cast<User>()
+            .toList();
+    List<User> doctorSearchDataResponse = (this
+                ?.doctorsSearchData
+                ?.map((doctorResponse) => doctorResponse.toDomain()) ??
+            const Iterable.empty())
+        .cast<User>()
+        .toList();
+
+    return TopDoctors(
+      result,
+      topDoctorsResponse,
+      doctorSearchDataResponse,
+    );
+  }
+}
+
+extension DoctorsSpecializationResponseMapper
+    on DoctorsSpecializationResponse? {
+  DoctorsSpecialization toDomain() {
+    int doctorsNum = this?.doctorsNum?.orZero() ?? Constants.zero;
+    int result = this?.results?.orZero() ?? Constants.zero;
+
+    List<User> doctorsData = (this
+                ?.doctorsData
+                ?.map((doctorResponse) => doctorResponse.toDomain()) ??
+            const Iterable.empty())
+        .cast<User>()
+        .toList();
+
+    return DoctorsSpecialization(
+      doctorsNum,
+      result,
+      doctorsData,
     );
   }
 }
