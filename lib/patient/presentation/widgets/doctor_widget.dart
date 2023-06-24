@@ -95,9 +95,6 @@ class DoctorWidget extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(
-              width: AppSize.s8,
-            ),
             IconButton(
               onPressed: () {},
               icon: const Icon(

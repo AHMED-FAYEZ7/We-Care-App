@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
@@ -16,19 +18,19 @@ class TopDoctorCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: AppSize.s140,
       height: AppSize.s180,
       child: Card(
         elevation: AppSize.s0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSize.s12),
-          side: BorderSide(color: Colors.grey, width: AppSize.s1),
+          side: const BorderSide(color: Colors.grey, width: AppSize.s1),
         ),
         child: Column(
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(AppSize.s12),
                 topLeft: Radius.circular(AppSize.s12),
               ),

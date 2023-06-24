@@ -12,6 +12,8 @@ import 'package:health_care/authentication/presentation/screens/user/user_update
 import 'package:health_care/core/global/resources/strings_manger.dart';
 import 'package:health_care/core/services/services_locator.dart';
 import 'package:health_care/patient/presentation/screens/patient_search/search_screen.dart';
+import 'package:health_care/patient/presentation/screens/patient_specialist_doctor/patient_specialist_doctor.dart';
+import 'package:health_care/patient/presentation/screens/patient_top_doctor/patient_top_doctor.dart';
 import 'package:health_care/test.dart';
 
 import '../../doctor/presentation/screens/doctor_layout/doctor_layout_screen.dart';
@@ -35,6 +37,8 @@ class Routes {
   /////////////patient//////////////
   static const String patientLayoutRoute = "/patientLayout";
   static const String patientSearchRoute = "/patientSearch";
+  static const String patientSpecialistDoctorRoute = "/patientSpecialistDoctor";
+  static const String patientTopDoctorRoute = "/patientTopDoctor";
 }
 
 class RouteGenerator {
@@ -94,8 +98,13 @@ class RouteGenerator {
         initPatientCubitModule();
         return MaterialPageRoute(builder: (_) => const PatientLayoutScreen());
       case Routes.patientSearchRoute:
-        // initPatientCubitModule();
-        return MaterialPageRoute(builder: (_) => PatientSearchScreen());
+        return MaterialPageRoute(builder: (_) => const PatientSearchScreen());
+      case Routes.patientSpecialistDoctorRoute:
+        return MaterialPageRoute(
+            builder: (_) => const PatientSpecialistDoctorScreen());
+      case Routes.patientTopDoctorRoute:
+        return MaterialPageRoute(
+            builder: (_) => const PatientTopDoctorScreen());
       default:
         return unDefinedRoute();
     }

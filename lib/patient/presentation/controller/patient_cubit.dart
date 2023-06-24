@@ -11,6 +11,13 @@ class PatientCubit extends Cubit<PatientState> {
   PatientCubit() : super(PatientInitial());
   static PatientCubit get(context) => BlocProvider.of(context);
 
+  List<String> titles = [
+    'We Care',
+    'My Appointments',
+    'History',
+    'profile',
+  ];
+
   List<Widget> screens = [
     const PatientHomeScreen(),
     const PatientAppointmentScreen(),

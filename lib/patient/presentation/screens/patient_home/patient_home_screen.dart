@@ -21,7 +21,7 @@ class PatientHomeScreen extends StatelessWidget {
             SearchBarWidget(
               readOnly: true,
               onTap: () {
-                Navigator.pushReplacementNamed(
+                Navigator.pushNamed(
                   context,
                   Routes.patientSearchRoute,
                 );
@@ -32,7 +32,12 @@ class PatientHomeScreen extends StatelessWidget {
             ),
             HintTextWidget(
               title: 'Specialist Doctor',
-              seeAll: () {},
+              seeAll: () {
+                Navigator.pushNamed(
+                  context,
+                  Routes.patientSpecialistDoctorRoute,
+                );
+              },
             ),
             Padding(
               padding: const EdgeInsets.only(
@@ -60,7 +65,12 @@ class PatientHomeScreen extends StatelessWidget {
             ),
             HintTextWidget(
               title: 'Top Doctor',
-              seeAll: () {},
+              seeAll: () {
+                Navigator.pushNamed(
+                  context,
+                  Routes.patientTopDoctorRoute,
+                );
+              },
             ),
             Padding(
               padding: const EdgeInsets.only(

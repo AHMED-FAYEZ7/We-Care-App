@@ -1,10 +1,17 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:health_care/core/assets/app_assets.dart';
 import 'package:health_care/core/global/resources/icons_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
-  const AppBarWidget({Key? key}) : super(key: key);
+  AppBarWidget({
+    required this.title,
+    Key? key,
+  }) : super(key: key);
+
+  String title;
 
   @override
   Size get preferredSize => const Size.fromHeight(75);
@@ -18,8 +25,8 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
         ImageAssets.splashLogo,
         scale: 1.4,
       ),
-      title: const Text(
-        'We Care',
+      title: Text(
+        title,
       ),
       actions: [
         IconButton(
