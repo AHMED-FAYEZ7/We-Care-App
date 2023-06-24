@@ -18,13 +18,13 @@ class PatientRepoImpl implements BasePatientRepo {
     this._networkInfo,
   );
   @override
-  Future<Either<Failure, AllDoctors>> getAllDoctors() async {
+  Future<Either<Failure, DoctorInfo>> getAllDoctors() async {
     if (await _networkInfo.isConnected) {
       try {
         final response = await _basePatientRemoteDataSource.getAllDoctors();
 
         if (response.status == ApiInternalStatus.SUCCESS) {
-          print(" ssssssssss ssssssssssss ${response.results}");
+          print(" ssssssssss ssssssssssss ${response.resultsResponse}");
           return Right(response.toDomain());
         } else {
           return Left(Failure(1, response.message!));
@@ -38,13 +38,13 @@ class PatientRepoImpl implements BasePatientRepo {
   }
 
   @override
-  Future<Either<Failure, TopDoctors>> getTopDoctors() async {
+  Future<Either<Failure, DoctorInfo>> getTopDoctors() async {
     if (await _networkInfo.isConnected) {
       try {
         final response = await _basePatientRemoteDataSource.getTopDoctors();
 
         if (response.status == ApiInternalStatus.SUCCESS) {
-          print(" mmmmmmmmmmmm ${response.results}");
+          print(" mmmmmmmmmmmm ${response.resultsResponse}");
           return Right(response.toDomain());
         } else {
           return Left(Failure(1, response.message!));
@@ -58,7 +58,7 @@ class PatientRepoImpl implements BasePatientRepo {
   }
 
   @override
-  Future<Either<Failure, DoctorsSpecialization>> getDoctorsSpecialization(
+  Future<Either<Failure, DoctorInfo>> getDoctorsSpecialization(
     String specialization,
   ) async {
     if (await _networkInfo.isConnected) {
@@ -69,7 +69,7 @@ class PatientRepoImpl implements BasePatientRepo {
         );
 
         if (response.status == ApiInternalStatus.SUCCESS) {
-          print(" hhhhhhhhhhh hhhhhhhhhhhss ${response.results}");
+          print(" hhhhhhhhhhh hhhhhhhhhhhss ${response.resultsResponse}");
           return Right(response.toDomain());
         } else {
           return Left(Failure(1, response.message!));
@@ -101,7 +101,7 @@ class PatientRepoImpl implements BasePatientRepo {
   }
 
   @override
-  Future<Either<Failure, AllDoctors>> getDoctorSearch(String query) async {
+  Future<Either<Failure, DoctorInfo>> getDoctorSearch(String query) async {
     if (await _networkInfo.isConnected) {
       try {
         final response = await _basePatientRemoteDataSource.getDoctorSearch(
@@ -109,8 +109,9 @@ class PatientRepoImpl implements BasePatientRepo {
         );
 
         if (response.status == ApiInternalStatus.SUCCESS) {
-          print(" ssssssssss ssssssssssss ${response.results}");
-          print(" ةةةة ssssssssssss ${response.doctorsSearchData!.length}");
+          print(" ssssssssss ssssssssssss ${response.resultsResponse}");
+          print(
+              " ةةةة ssssssssssss ${response.doctorsSearchDataResponse!.length}");
           // print(" cccccccccc ssssssssssss ${response.allDoctors!.length}");
           return Right(response.toDomain());
         } else {

@@ -21,13 +21,13 @@ class _PatientServiceClient implements PatientServiceClient {
   String? baseUrl;
 
   @override
-  Future<AllDoctorsResponse> getAllDoctors() async {
+  Future<DoctorInfResponse> getAllDoctors() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<AllDoctorsResponse>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<DoctorInfResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -39,18 +39,18 @@ class _PatientServiceClient implements PatientServiceClient {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = AllDoctorsResponse.fromJson(_result.data!);
+    final value = DoctorInfResponse.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<TopDoctorsResponse> getTopDoctors() async {
+  Future<DoctorInfResponse> getTopDoctors() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<TopDoctorsResponse>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<DoctorInfResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -62,19 +62,18 @@ class _PatientServiceClient implements PatientServiceClient {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = TopDoctorsResponse.fromJson(_result.data!);
+    final value = DoctorInfResponse.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<DoctorsSpecializationResponse> getDoctorsBySpecialization(
-      specialization) async {
+  Future<DoctorInfResponse> getDoctorsBySpecialization(specialization) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<DoctorsSpecializationResponse>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<DoctorInfResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -86,7 +85,7 @@ class _PatientServiceClient implements PatientServiceClient {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = DoctorsSpecializationResponse.fromJson(_result.data!);
+    final value = DoctorInfResponse.fromJson(_result.data!);
     return value;
   }
 
@@ -114,13 +113,13 @@ class _PatientServiceClient implements PatientServiceClient {
   }
 
   @override
-  Future<AllDoctorsResponse> getDoctorSearch(query) async {
+  Future<DoctorInfResponse> getDoctorSearch(query) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'keyword': query};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<AllDoctorsResponse>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<DoctorInfResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -132,7 +131,7 @@ class _PatientServiceClient implements PatientServiceClient {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = AllDoctorsResponse.fromJson(_result.data!);
+    final value = DoctorInfResponse.fromJson(_result.data!);
     return value;
   }
 
