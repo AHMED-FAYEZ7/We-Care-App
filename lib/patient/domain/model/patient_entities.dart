@@ -1,33 +1,19 @@
 import 'package:health_care/authentication/domain/model/user_model.dart';
 
-class AllDoctors {
+class DoctorInfo {
   int results;
-  List<User>? allDoctorsData;
-  List<User>? doctorSearchData;
-
-  AllDoctors(
-    this.results,
-    this.allDoctorsData,
-    this.doctorSearchData,
-  );
-}
-
-class TopDoctors extends AllDoctors {
-  TopDoctors(
-    super.results,
-    super.allDoctorsData,
-    super.doctorSearchData,
-  );
-}
-
-class DoctorsSpecialization {
   int doctorsNum;
-  int results;
-  List<User>? doctorsData;
+  List<User>? allDoctorsData;
+  List<User>? doctorsSearchData;
+  List<User>? topDoctorsData;
+  List<User>? doctorsSpecializationData;
 
-  DoctorsSpecialization(
-    this.doctorsNum,
+  DoctorInfo(
     this.results,
-    this.doctorsData,
+    this.doctorsNum,
+    this.allDoctorsData,
+    this.doctorsSearchData,
+    this.topDoctorsData,
+    this.doctorsSpecializationData,
   );
 }
