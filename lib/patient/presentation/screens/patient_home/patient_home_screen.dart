@@ -44,7 +44,7 @@ class PatientHomeScreen extends StatelessWidget {
                 left: AppPadding.p12,
               ),
               child: Container(
-                height: AppSize.s180,
+                height: MediaQuery.of(context).size.height * .25,
                 margin: const EdgeInsets.symmetric(vertical: AppMargin.m8),
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
@@ -77,7 +77,7 @@ class PatientHomeScreen extends StatelessWidget {
                 left: AppPadding.p12,
               ),
               child: Container(
-                height: AppSize.s180,
+                height: MediaQuery.of(context).size.height * .25,
                 margin: const EdgeInsets.symmetric(vertical: AppMargin.m8),
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
