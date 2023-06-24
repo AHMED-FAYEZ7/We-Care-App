@@ -27,10 +27,7 @@ ThemeData getThemeDataLight() => ThemeData(
       // appBar theme
       appBarTheme: AppBarTheme(
         systemOverlayStyle: SystemUiOverlayStyle(
-          // Status bar color
           statusBarColor: ColorManager.white,
-
-          // Status bar brightness (optional)
           statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
           statusBarBrightness: Brightness.light, // For iOS (dark icons)
         ),
