@@ -2,8 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:health_care/authentication/domain/usecase/doctor_sinup_usecase.dart';
-import 'package:health_care/authentication/domain/usecase/patient_signup_usecase.dart';
 import 'package:health_care/core/app/app_prefs.dart';
 import 'package:health_care/core/assets/app_assets.dart';
 import 'package:health_care/core/global/resources/strings_manger.dart';
@@ -146,6 +144,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     ),
                     onPressed: () {
                       if (isLast) {
+                        Navigator.pushReplacementNamed(
+                            context, Routes.userLoginRoute);
                       } else {
                         _pageController.nextPage(
                           duration: const Duration(

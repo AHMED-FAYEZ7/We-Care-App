@@ -15,7 +15,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   Timer? _timer;
-  // final AppPreferences _appPreferences = sl<AppPreferences>();
+  final AppPreferences _appPreferences = sl<AppPreferences>();
 
   _startDelay() {
     _timer = Timer(const Duration(seconds: 2), _goNext);
@@ -25,11 +25,11 @@ class _SplashScreenState extends State<SplashScreen> {
     Navigator.pushReplacementNamed(context, Routes.userLoginRoute);
     // _appPreferences.isDoctorLoggedIn().then((isDoctorLoggedIn) {
     //   if (isDoctorLoggedIn) {
-    //     Navigator.pushReplacementNamed(context, Routes.doctorMainRoute);
+    //     Navigator.pushReplacementNamed(context, Routes.doctorLayoutRoute);
     //   } else {
     //     _appPreferences.isPatientLoggedIn().then((isPatientLoggedIn) {
     //       if (isPatientLoggedIn) {
-    //         Navigator.pushReplacementNamed(context, Routes.patientMainRoute);
+    //         Navigator.pushReplacementNamed(context, Routes.patientLayoutRoute);
     //       } else {
     //         _appPreferences
     //             .isOnBoardingScreenViewed()
