@@ -17,6 +17,7 @@ class DefaultFormField extends StatelessWidget {
     this.suffix,
     this.prefix,
     this.suffixPressed,
+    this.prefixPressed,
     required this.validator,
   });
   Function(String)? onChanged;
@@ -28,6 +29,7 @@ class DefaultFormField extends StatelessWidget {
   TextEditingController controller;
   TextInputType? type;
   Function? suffixPressed;
+  Function? prefixPressed;
   String? Function(String? val)? validator;
   bool? obscureText;
 
@@ -79,10 +81,15 @@ class DefaultFormField extends StatelessWidget {
                   suffixPressed!();
                 },
               ),
-              prefixIcon: Icon(
-                prefix,
-                size: AppSize.s20,
-                color: ColorManager.darkGrey,
+              prefixIcon: IconButton(
+                icon: Icon(
+                  prefix,
+                  size: AppSize.s20,
+                  color: ColorManager.primary,
+                ),
+                onPressed: () {
+                  prefixPressed!();
+                },
               ),
               contentPadding: const EdgeInsets.symmetric(
                 vertical: AppPadding.p20,

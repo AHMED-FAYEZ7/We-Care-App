@@ -89,7 +89,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const UserUpdateInfoScreen());
       case Routes.patientRegisterRoute:
         initPatientSignUpModule();
-        return MaterialPageRoute(builder: (_) => const PatientRegisterScreen());
+        return MaterialPageRoute(builder: (_) => PatientRegisterScreen());
       /////////////doctor//////////////
       case Routes.doctorLayoutRoute:
         return MaterialPageRoute(builder: (_) => const DoctorLayoutScreen());

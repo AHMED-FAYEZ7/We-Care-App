@@ -19,6 +19,8 @@ class DoctorRegisterScreen extends StatelessWidget {
   final TextEditingController _emailEditingController = TextEditingController();
   final TextEditingController _passwordEditingController =
       TextEditingController();
+  final TextEditingController _confirmPasswordEditingController =
+      TextEditingController();
   final TextEditingController _specializationEditingController =
       TextEditingController();
 
@@ -100,6 +102,23 @@ class DoctorRegisterScreen extends StatelessWidget {
                   validator: (input) => input!.isValidPassword()
                       ? null
                       : AppStrings.passwordError,
+                  prefix: Icons.lock_outline_rounded,
+                ),
+                const SizedBox(
+                  height: AppSize.s12,
+                ),
+                DefaultFormField(
+                  headText: AppStrings.confirmPasswordHeadText,
+                  hintText: AppStrings.confirmPasswordHint,
+                  controller: _confirmPasswordEditingController,
+                  type: TextInputType.number,
+                  validator: (String? s) {
+                    if (_passwordEditingController.text !=
+                        _confirmPasswordEditingController.text) {
+                      return AppStrings.passwordConfirmationError;
+                    }
+                    return null;
+                  },
                   prefix: Icons.lock_outline_rounded,
                 ),
                 const SizedBox(
@@ -192,7 +211,7 @@ class DoctorRegisterScreen extends StatelessWidget {
                           Routes.userLoginRoute,
                         );
                       },
-                    )
+                    ),
                   ],
                 ),
               ],
