@@ -4,8 +4,8 @@ import 'package:health_care/patient/presentation/widgets/doctor_widget.dart';
 import 'package:health_care/patient/presentation/widgets/pop_navigator_app_bar_widget.dart';
 import 'package:health_care/patient/presentation/widgets/specialist_doctor_list_widget.dart';
 
-class PatientTopDoctorScreen extends StatelessWidget {
-  const PatientTopDoctorScreen({Key? key}) : super(key: key);
+class TopDoctorPatientScreen extends StatelessWidget {
+  const TopDoctorPatientScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

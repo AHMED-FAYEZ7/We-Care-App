@@ -8,8 +8,8 @@ import 'package:health_care/patient/presentation/widgets/search_bar_widget.dart'
 import 'package:health_care/patient/presentation/widgets/specialist_doctor_card_widget.dart';
 import 'package:health_care/patient/presentation/widgets/top_doctor_card_widget.dart';
 
-class PatientHomeScreen extends StatelessWidget {
-  const PatientHomeScreen({Key? key}) : super(key: key);
+class HomePatientScreen extends StatelessWidget {
+  const HomePatientScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class PatientHomeScreen extends StatelessWidget {
               onTap: () {
                 Navigator.pushNamed(
                   context,
-                  Routes.patientSearchRoute,
+                  Routes.searchPatientRoute,
                 );
               },
             ),
@@ -32,10 +32,12 @@ class PatientHomeScreen extends StatelessWidget {
             ),
             HintTextWidget(
               title: 'Specialist Doctor',
-              seeAll: () {
+              isSuffix: true,
+              onTapTitle: "See All",
+              onTap: () {
                 Navigator.pushNamed(
                   context,
-                  Routes.patientSpecialistDoctorRoute,
+                  Routes.specialistDoctorPatientRoute,
                 );
               },
             ),
@@ -65,10 +67,12 @@ class PatientHomeScreen extends StatelessWidget {
             ),
             HintTextWidget(
               title: 'Top Doctor',
-              seeAll: () {
+              isSuffix: true,
+              onTapTitle: "See All",
+              onTap: () {
                 Navigator.pushNamed(
                   context,
-                  Routes.patientTopDoctorRoute,
+                  Routes.topDoctorPatientRoute,
                 );
               },
             ),
@@ -97,7 +101,32 @@ class PatientHomeScreen extends StatelessWidget {
             ),
             HintTextWidget(
               title: 'Recommendation',
-              seeAll: () {},
+              isSuffix: true,
+              onTapTitle: "See All",
+              onTap: () {},
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                left: AppPadding.p12,
+              ),
+              child: Container(
+                height: MediaQuery.of(context).size.height * .25,
+                margin: const EdgeInsets.symmetric(vertical: AppMargin.m8),
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (BuildContext context, int index) =>
+                      TopDoctorCardWidget(
+                    doctorImage: 'assets/images/me1.jpg',
+                    doctorName: 'Dr. Ahmed Fayez',
+                    doctorSpecialist: "Dental",
+                  ),
+                  separatorBuilder: (BuildContext context, int index) =>
+                      const SizedBox(
+                    width: AppSize.s10,
+                  ),
+                  itemCount: 10,
+                ),
+              ),
             ),
           ],
         ),

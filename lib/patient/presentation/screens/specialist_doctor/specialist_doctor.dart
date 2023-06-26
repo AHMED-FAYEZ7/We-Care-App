@@ -5,8 +5,8 @@ import 'package:health_care/core/global/theme/app_color/color_manager.dart';
 import 'package:health_care/patient/presentation/widgets/pop_navigator_app_bar_widget.dart';
 import 'package:health_care/patient/presentation/widgets/specialist_doctor_card_widget.dart';
 
-class PatientSpecialistDoctorScreen extends StatelessWidget {
-  const PatientSpecialistDoctorScreen({Key? key}) : super(key: key);
+class SpecialistDoctorPatientScreen extends StatelessWidget {
+  const SpecialistDoctorPatientScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

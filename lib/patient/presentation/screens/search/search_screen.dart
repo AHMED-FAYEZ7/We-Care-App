@@ -6,14 +6,14 @@ import 'package:health_care/patient/presentation/widgets/doctor_widget.dart';
 import 'package:health_care/patient/presentation/widgets/pop_navigator_app_bar_widget.dart';
 import 'package:health_care/patient/presentation/widgets/specialist_doctor_list_widget.dart';
 
-class PatientSearchScreen extends StatefulWidget {
-  const PatientSearchScreen({Key? key}) : super(key: key);
+class SearchPatientScreen extends StatefulWidget {
+  const SearchPatientScreen({Key? key}) : super(key: key);
 
   @override
-  State<PatientSearchScreen> createState() => _PatientSearchScreenState();
+  State<SearchPatientScreen> createState() => _SearchPatientScreenState();
 }
 
-class _PatientSearchScreenState extends State<PatientSearchScreen> {
+class _SearchPatientScreenState extends State<SearchPatientScreen> {
   List<String> specialist = [
     "All",
     "Brain",

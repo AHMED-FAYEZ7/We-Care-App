@@ -9,14 +9,14 @@ import '../../../../core/global/resources/strings_manger.dart';
 import '../../../../core/global/resources/values_manger.dart';
 import '../../../../core/global/theme/app_color/color_manager.dart';
 
-class PatientLayoutScreen extends StatefulWidget {
-  const PatientLayoutScreen({Key? key}) : super(key: key);
+class LayoutPatientScreen extends StatefulWidget {
+  const LayoutPatientScreen({Key? key}) : super(key: key);
 
   @override
-  State<PatientLayoutScreen> createState() => _PatientLayoutScreenState();
+  State<LayoutPatientScreen> createState() => _LayoutPatientScreenState();
 }
 
-class _PatientLayoutScreenState extends State<PatientLayoutScreen> {
+class _LayoutPatientScreenState extends State<LayoutPatientScreen> {
   @override
   Widget build(BuildContext context) {
     var cubit = PatientCubit.get(context);

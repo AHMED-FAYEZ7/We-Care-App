@@ -5,11 +5,18 @@ import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
 
 class HintTextWidget extends StatelessWidget {
-  HintTextWidget({required this.title, required this.seeAll, Key? key})
-      : super(key: key);
+  HintTextWidget({
+    required this.title,
+    this.onTapTitle,
+    this.onTap,
+    this.isSuffix = false,
+    Key? key,
+  }) : super(key: key);
 
   String title;
-  VoidCallback seeAll;
+  String? onTapTitle;
+  VoidCallback? onTap;
+  bool isSuffix = false;
 
   @override
   Widget build(BuildContext context) {
@@ -22,15 +29,19 @@ class HintTextWidget extends StatelessWidget {
             style: Theme.of(context).textTheme.displayLarge,
           ),
           const Spacer(),
-          TextButton(
-            onPressed: seeAll,
-            child: Text(
-              'See all',
-              style: TextStyle(
-                color: ColorManager.primary,
+          if (isSuffix)
+            SizedBox(
+              height: AppSize.s30,
+              child: TextButton(
+                onPressed: onTap,
+                child: Text(
+                  onTapTitle!,
+                  style: TextStyle(
+                    color: ColorManager.primary,
+                  ),
+                ),
               ),
             ),
-          ),
         ],
       ),
     );

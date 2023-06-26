@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:health_care/patient/presentation/screens/patient_appointment/patient_appointment_screen.dart';
-import 'package:health_care/patient/presentation/screens/patient_history/patient_history_screen.dart';
-import 'package:health_care/patient/presentation/screens/patient_home/patient_home_screen.dart';
-import 'package:health_care/patient/presentation/screens/patient_profile/patient_profile_screen.dart';
+import 'package:health_care/patient/presentation/screens/appointment/appointment_screen.dart';
+import 'package:health_care/patient/presentation/screens/history/history_screen.dart';
+import 'package:health_care/patient/presentation/screens/home/home_screen.dart';
+import 'package:health_care/patient/presentation/screens/profile/profile_screen.dart';
 
 part 'patient_state.dart';
 
@@ -19,10 +19,10 @@ class PatientCubit extends Cubit<PatientState> {
   ];
 
   List<Widget> screens = [
-    const PatientHomeScreen(),
-    const PatientAppointmentScreen(),
-    const PatientHistoryScreen(),
-    const PatientProfileScreen(),
+    const HomePatientScreen(),
+    const AppointmentPatientScreen(),
+    const HistoryPatientScreen(),
+    const ProfilePatientScreen(),
   ];
 
   int currentIndex = 0;

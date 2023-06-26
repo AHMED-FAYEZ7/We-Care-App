@@ -17,6 +17,9 @@ ThemeData getThemeDataLight() => ThemeData(
           ColorScheme.fromSwatch().copyWith(secondary: ColorManager.grey),
       // splashColor: ColorManager.primaryOpacity70, // ripple color
 
+      iconTheme: IconThemeData(
+        color: ColorManager.primary,
+      ),
       // card view
       cardTheme: CardTheme(
         color: ColorManager.white,

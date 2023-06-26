@@ -11,13 +11,13 @@ import 'package:health_care/authentication/presentation/screens/user/user_update
 import 'package:health_care/authentication/presentation/screens/user/user_update_password_screen.dart';
 import 'package:health_care/core/global/resources/strings_manger.dart';
 import 'package:health_care/core/services/services_locator.dart';
-import 'package:health_care/patient/presentation/screens/patient_search/search_screen.dart';
-import 'package:health_care/patient/presentation/screens/patient_specialist_doctor/patient_specialist_doctor.dart';
-import 'package:health_care/patient/presentation/screens/patient_top_doctor/patient_top_doctor.dart';
+import 'package:health_care/doctor/presentation/screens/doctor_layout/doctor_layout_screen.dart';
+import 'package:health_care/patient/presentation/screens/doctor_profile/doctor_profile_screen.dart';
+import 'package:health_care/patient/presentation/screens/layout/layout_screen.dart';
+import 'package:health_care/patient/presentation/screens/search/search_screen.dart';
+import 'package:health_care/patient/presentation/screens/specialist_doctor/specialist_doctor.dart';
+import 'package:health_care/patient/presentation/screens/top_doctor/top_doctor.dart';
 import 'package:health_care/test.dart';
-
-import '../../doctor/presentation/screens/doctor_layout/doctor_layout_screen.dart';
-import '../../patient/presentation/screens/patient_layout/patient_layout_screen.dart';
 
 class Routes {
   static const String splashRoute = "/";
@@ -33,12 +33,13 @@ class Routes {
   static const String patientRegisterRoute = "/patientRegister";
   static const String forgotPasswordRoute = "/forgotPassword";
   /////////////doctor//////////////
-  static const String doctorLayoutRoute = "/doctorLayout";
+  static const String layoutDoctorRoute = "/layoutDoctor";
   /////////////patient//////////////
-  static const String patientLayoutRoute = "/patientLayout";
-  static const String patientSearchRoute = "/patientSearch";
-  static const String patientSpecialistDoctorRoute = "/patientSpecialistDoctor";
-  static const String patientTopDoctorRoute = "/patientTopDoctor";
+  static const String layoutPatientRoute = "/layoutPatient";
+  static const String searchPatientRoute = "/searchPatient";
+  static const String specialistDoctorPatientRoute = "/specialistDoctorPatient";
+  static const String topDoctorPatientRoute = "/topDoctorPatient";
+  static const String doctorProfilePatientRoute = "/doctorProfilePatient";
 }
 
 class RouteGenerator {
@@ -91,20 +92,23 @@ class RouteGenerator {
         initPatientSignUpModule();
         return MaterialPageRoute(builder: (_) => PatientRegisterScreen());
       /////////////doctor//////////////
-      case Routes.doctorLayoutRoute:
+      case Routes.layoutDoctorRoute:
         return MaterialPageRoute(builder: (_) => const DoctorLayoutScreen());
       /////////////patient//////////////
-      case Routes.patientLayoutRoute:
+      case Routes.layoutPatientRoute:
         initPatientCubitModule();
-        return MaterialPageRoute(builder: (_) => const PatientLayoutScreen());
-      case Routes.patientSearchRoute:
-        return MaterialPageRoute(builder: (_) => const PatientSearchScreen());
-      case Routes.patientSpecialistDoctorRoute:
+        return MaterialPageRoute(builder: (_) => const LayoutPatientScreen());
+      case Routes.searchPatientRoute:
+        return MaterialPageRoute(builder: (_) => const SearchPatientScreen());
+      case Routes.specialistDoctorPatientRoute:
         return MaterialPageRoute(
-            builder: (_) => const PatientSpecialistDoctorScreen());
-      case Routes.patientTopDoctorRoute:
+            builder: (_) => const SpecialistDoctorPatientScreen());
+      case Routes.topDoctorPatientRoute:
         return MaterialPageRoute(
-            builder: (_) => const PatientTopDoctorScreen());
+            builder: (_) => const TopDoctorPatientScreen());
+      case Routes.doctorProfilePatientRoute:
+        return MaterialPageRoute(
+            builder: (_) => const DoctorProfilePatientScreen());
       default:
         return unDefinedRoute();
     }
