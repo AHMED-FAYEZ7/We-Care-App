@@ -10,7 +10,6 @@ import 'package:health_care/authentication/presentation/screens/user/user_login_
 import 'package:health_care/authentication/presentation/screens/user/user_update_info_screen.dart';
 import 'package:health_care/authentication/presentation/screens/user/user_update_password_screen.dart';
 import 'package:health_care/core/global/resources/strings_manger.dart';
-import 'package:health_care/core/services/services_locator.dart';
 import 'package:health_care/doctor/presentation/screens/doctor_layout/doctor_layout_screen.dart';
 import 'package:health_care/patient/presentation/screens/doctor_profile/doctor_profile_screen.dart';
 import 'package:health_care/patient/presentation/screens/layout/layout_screen.dart';
@@ -48,63 +47,33 @@ class RouteGenerator {
       case Routes.splashRoute:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
       case Routes.testRoute:
-        initUserModule();
-        initPatientSignUpModule();
-        initDoctorSignUpModule();
-        initUserLoginModule();
-        initGetAllDoctorsModule();
-        initGetGetDoctorsSpecializationModule();
-        initGetTopDoctorsModule();
-        initGetDoctorByIdModule();
-        initGetDoctorSearchModule();
         return MaterialPageRoute(builder: (_) => TestPage());
       case Routes.onBoardingRoute:
         return MaterialPageRoute(builder: (_) => OnBoardingScreen());
       case Routes.toggleRoute:
         return MaterialPageRoute(builder: (_) => const ToggleScreen());
       case Routes.doctorRegisterRoute:
-        initDoctorSignUpModule();
         return MaterialPageRoute(builder: (_) => DoctorRegisterScreen());
       case Routes.userLoginRoute:
-        initAuthCubitModule();
-        initUserModule();
-        initUserLoginModule();
-        initPatientSignUpModule();
-        initDoctorSignUpModule();
-        initUserForgetPasswordModule();
-        initUserUpdatePasswordModule();
-        initUserDeleteMeModule();
-        initUserEmailConfirmationModule();
-        initUserUpdateInfoModule();
         return MaterialPageRoute(builder: (_) => UserLoginScreen());
       case Routes.userEmailConfirmationRoute:
-        initUserModule();
-        initUserEmailConfirmationModule();
         return MaterialPageRoute(
             builder: (_) => const UserEmailConfirmationScreen());
       case Routes.userForgetPasswordRoute:
-        initUserModule();
-        initUserForgetPasswordModule();
         return MaterialPageRoute(
             builder: (_) => const UserForgetPasswordScreen());
       case Routes.userUpdatePasswordRoute:
-        initUserModule();
-        initUserUpdatePasswordModule();
         return MaterialPageRoute(
             builder: (_) => const UserUpdatePasswordScreen());
       case Routes.userUpdateInfoRoute:
-        initUserModule();
-        initUserUpdateInfoModule();
         return MaterialPageRoute(builder: (_) => const UserUpdateInfoScreen());
       case Routes.patientRegisterRoute:
-        initPatientSignUpModule();
         return MaterialPageRoute(builder: (_) => PatientRegisterScreen());
       /////////////doctor//////////////
       case Routes.layoutDoctorRoute:
         return MaterialPageRoute(builder: (_) => const DoctorLayoutScreen());
       /////////////patient//////////////
       case Routes.layoutPatientRoute:
-        initPatientCubitModule();
         return MaterialPageRoute(builder: (_) => const LayoutPatientScreen());
       case Routes.searchPatientRoute:
         return MaterialPageRoute(builder: (_) => const SearchPatientScreen());

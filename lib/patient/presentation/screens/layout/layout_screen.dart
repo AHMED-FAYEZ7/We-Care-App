@@ -24,6 +24,7 @@ class _LayoutPatientScreenState extends State<LayoutPatientScreen> {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBarWidget(
+            isHome: true,
             title: cubit.titles[cubit.currentIndex],
           ),
           body: cubit.screens[cubit.currentIndex],

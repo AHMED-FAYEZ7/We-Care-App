@@ -56,138 +56,100 @@ Future<void> initAppModule() async {
 
   // dio factory
   sl.registerLazySingleton<DioFactory>(() => DioFactory(sl()));
-}
 
-initPatientSignUpModule() async {
-  if (!GetIt.I.isRegistered<PatientSignUpUseCase>()) {
-    final dio = await sl<DioFactory>().getDio();
-    sl.registerFactory<PatientAuthServiceClient>(
-        () => PatientAuthServiceClient(dio));
-    sl.registerFactory<PatientServiceClient>(() => PatientServiceClient(dio));
-    sl.registerFactory<PatientAuthRemoteDataSource>(
-        () => PatientAuthRemoteDataSourceImplementer(sl()));
-    sl.registerFactory<BasePatientRemoteDataSource>(
-        () => PatientRemoteDataSourceImpl(sl()));
-    sl.registerFactory<BasePatientAuthRepository>(
-        () => PatientAuthRepositoryImpl(sl(), sl()));
-    sl.registerFactory<BasePatientRepo>(() => PatientRepoImpl(sl(), sl()));
-    sl.registerFactory<PatientSignUpUseCase>(() => PatientSignUpUseCase(sl()));
-  }
-}
-
-initDoctorSignUpModule() async {
-  if (!GetIt.I.isRegistered<DoctorSignUpUseCase>()) {
-    final dio = await sl<DioFactory>().getDio();
-    sl.registerFactory<DoctorAuthServiceClient>(
-        () => DoctorAuthServiceClient(dio));
-    sl.registerFactory<BaseDoctorAuthRemoteDataSource>(
-        () => DoctorAuthRemoteDataSourceImpl(sl()));
-    sl.registerFactory<BaseDoctorAuthRepository>(
-        () => DoctorAuthRepositoryImpl(sl(), sl()));
-    sl.registerFactory<DoctorSignUpUseCase>(() => DoctorSignUpUseCase(sl()));
-  }
-}
-
-initUserModule() async {
+  // app  service client
   final dio = await sl<DioFactory>().getDio();
-  sl.registerFactory<UserServiceClient>(() => UserServiceClient(dio));
 
-  // user remote data source
-  sl.registerFactory<UserRemoteDataSource>(
+  sl.registerLazySingleton<PatientAuthServiceClient>(
+      () => PatientAuthServiceClient(dio));
+
+  sl.registerLazySingleton<PatientServiceClient>(
+      () => PatientServiceClient(dio));
+
+  sl.registerLazySingleton<DoctorAuthServiceClient>(
+      () => DoctorAuthServiceClient(dio));
+
+  sl.registerLazySingleton<UserServiceClient>(() => UserServiceClient(dio));
+
+  // remote data source
+
+  sl.registerLazySingleton<PatientAuthRemoteDataSource>(
+      () => PatientAuthRemoteDataSourceImplementer(sl()));
+
+  sl.registerLazySingleton<BasePatientRemoteDataSource>(
+      () => PatientRemoteDataSourceImpl(sl()));
+
+  sl.registerLazySingleton<BaseDoctorAuthRemoteDataSource>(
+      () => DoctorAuthRemoteDataSourceImpl(sl()));
+
+  sl.registerLazySingleton<UserRemoteDataSource>(
       () => UserRemoteDataSourceImplementer(sl()));
 
-  // user repository
-  sl.registerFactory<BaseUserRepository>(
+  // local data source
+
+  // repository
+
+  sl.registerLazySingleton<BasePatientAuthRepository>(
+      () => PatientAuthRepositoryImpl(sl(), sl()));
+
+  sl.registerLazySingleton<BasePatientRepo>(() => PatientRepoImpl(sl(), sl()));
+
+  sl.registerLazySingleton<BaseDoctorAuthRepository>(
+      () => DoctorAuthRepositoryImpl(sl(), sl()));
+
+  sl.registerLazySingleton<BaseUserRepository>(
       () => BaseUserRepositoryImpl(sl(), sl()));
-}
 
-initUserLoginModule() {
-  if (!GetIt.I.isRegistered<UserLoginUseCase>()) {
-    sl.registerFactory<UserLoginUseCase>(() => UserLoginUseCase(sl()));
-  }
-}
+  // useCase
 
-initUserForgetPasswordModule() {
-  if (!GetIt.I.isRegistered<UserForgetPasswordUseCase>()) {
-    sl.registerFactory<UserForgetPasswordUseCase>(
-        () => UserForgetPasswordUseCase(sl()));
-  }
-}
+  sl.registerLazySingleton<PatientSignUpUseCase>(
+      () => PatientSignUpUseCase(sl()));
 
-initUserUpdatePasswordModule() {
-  if (!GetIt.I.isRegistered<UserUpdatePasswordUseCase>()) {
-    sl.registerFactory<UserUpdatePasswordUseCase>(
-        () => UserUpdatePasswordUseCase(sl()));
-  }
-}
+  sl.registerLazySingleton<DoctorSignUpUseCase>(
+      () => DoctorSignUpUseCase(sl()));
 
-initUserDeleteMeModule() {
-  if (!GetIt.I.isRegistered<UserDeleteMeUseCase>()) {
-    sl.registerFactory<UserDeleteMeUseCase>(() => UserDeleteMeUseCase(sl()));
-  }
-}
+  sl.registerLazySingleton<UserLoginUseCase>(() => UserLoginUseCase(sl()));
 
-initUserEmailConfirmationModule() {
-  if (!GetIt.I.isRegistered<UserEmailConfirmationUseCase>()) {
-    sl.registerFactory<UserEmailConfirmationUseCase>(
-        () => UserEmailConfirmationUseCase(sl()));
-  }
-}
+  sl.registerLazySingleton<UserForgetPasswordUseCase>(
+      () => UserForgetPasswordUseCase(sl()));
 
-initUserUpdateInfoModule() {
-  if (!GetIt.I.isRegistered<UserUpdateInfoUseCase>()) {
-    sl.registerFactory<UserUpdateInfoUseCase>(
-        () => UserUpdateInfoUseCase(sl()));
-  }
-}
+  sl.registerLazySingleton<UserUpdatePasswordUseCase>(
+      () => UserUpdatePasswordUseCase(sl()));
 
-initGetAllDoctorsModule() {
-  if (!GetIt.I.isRegistered<GetAllDoctorsUseCase>()) {
-    sl.registerFactory<GetAllDoctorsUseCase>(() => GetAllDoctorsUseCase(sl()));
-  }
-}
+  sl.registerLazySingleton<UserDeleteMeUseCase>(
+      () => UserDeleteMeUseCase(sl()));
 
-initGetTopDoctorsModule() {
-  if (!GetIt.I.isRegistered<GetTopDoctorsUseCase>()) {
-    sl.registerFactory<GetTopDoctorsUseCase>(() => GetTopDoctorsUseCase(sl()));
-  }
-}
+  sl.registerLazySingleton<UserEmailConfirmationUseCase>(
+      () => UserEmailConfirmationUseCase(sl()));
 
-initGetDoctorByIdModule() {
-  if (!GetIt.I.isRegistered<GetDoctorByIdUseCase>()) {
-    sl.registerFactory<GetDoctorByIdUseCase>(() => GetDoctorByIdUseCase(sl()));
-  }
-}
+  sl.registerLazySingleton<UserUpdateInfoUseCase>(
+      () => UserUpdateInfoUseCase(sl()));
 
-initGetDoctorSearchModule() {
-  if (!GetIt.I.isRegistered<GetDoctorSearchUseCase>()) {
-    sl.registerFactory<GetDoctorSearchUseCase>(
-        () => GetDoctorSearchUseCase(sl()));
-  }
-}
+  sl.registerLazySingleton<GetAllDoctorsUseCase>(
+      () => GetAllDoctorsUseCase(sl()));
 
-initGetGetDoctorsSpecializationModule() {
-  if (!GetIt.I.isRegistered<GetDoctorsSpecializationUseCase>()) {
-    sl.registerFactory<GetDoctorsSpecializationUseCase>(
-        () => GetDoctorsSpecializationUseCase(sl()));
-  }
-}
+  sl.registerLazySingleton<GetTopDoctorsUseCase>(
+      () => GetTopDoctorsUseCase(sl()));
 
-initPatientCubitModule() {
-  if (!GetIt.I.isRegistered<PatientCubit>()) {
-    sl.registerFactory<PatientCubit>(() => PatientCubit());
-  }
-}
+  sl.registerLazySingleton<GetDoctorByIdUseCase>(
+      () => GetDoctorByIdUseCase(sl()));
 
-initAuthCubitModule() {
-  if (!GetIt.I.isRegistered<AuthCubit>()) {
-    sl.registerFactory<AuthCubit>(() => AuthCubit(
-          sl(),
-          sl(),
-          sl(),
-          sl(),
-          sl(),
-          sl(),
-        ));
-  }
+  sl.registerLazySingleton<GetDoctorSearchUseCase>(
+      () => GetDoctorSearchUseCase(sl()));
+
+  sl.registerLazySingleton<GetDoctorsSpecializationUseCase>(
+      () => GetDoctorsSpecializationUseCase(sl()));
+
+  // cubit
+
+  sl.registerFactory<AuthCubit>(() => AuthCubit(
+        sl(),
+        sl(),
+        sl(),
+        sl(),
+        sl(),
+        sl(),
+      ));
+
+  sl.registerFactory<PatientCubit>(() => PatientCubit());
 }

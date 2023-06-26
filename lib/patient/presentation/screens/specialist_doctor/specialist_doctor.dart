@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:health_care/core/assets/app_assets.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
-import 'package:health_care/patient/presentation/widgets/pop_navigator_app_bar_widget.dart';
+import 'package:health_care/patient/presentation/widgets/app_bar_widget.dart';
 import 'package:health_care/patient/presentation/widgets/specialist_doctor_card_widget.dart';
 
 class SpecialistDoctorPatientScreen extends StatelessWidget {
@@ -13,8 +13,9 @@ class SpecialistDoctorPatientScreen extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          PopNavigatorAppBarWidget(
+          AppBarWidget(
             title: 'Specialist Doctor',
+            isBack: true,
           ),
           Expanded(
             child: Padding(

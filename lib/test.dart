@@ -31,110 +31,110 @@ class TestPage extends StatelessWidget {
           ),
           TextButton(
             onPressed: () async {
-              (await _allDoctorsUseCase.call("")).fold((l) {
-                print(l.message.toString());
-              }, (r) {
-                print("results:${r.results}");
-                print("allDoctorsData:${r.allDoctorsData!.length}");
-                print("topDoctorsData:${r.topDoctorsData!.length}");
-                print("doctorsSearchData: ${r.doctorsSearchData!.length}");
-                print(
-                    "doctorsSpecializationData: ${r.doctorsSpecializationData!.length}");
-                // print(r.doctorsData![1].name);
-                // print(r.doctorsData![2].fees);
-                // print(r.doctorsData![4].averageRating);
-                // print(r.doctorsData![5].timePerPatient);
-              });
-              (await _getDoctorsSpecialization.call("heart")).fold((l) {
-                print(l.message.toString());
-              }, (r) {
-                // print(r.results);
-                // print(r.doctorsNum);
-                print("results:${r.results}");
-                print("allDoctorsData:${r.allDoctorsData!.length}");
-                print("topDoctorsData:${r.topDoctorsData!.length}");
-                print("doctorsSearchData: ${r.doctorsSearchData!.length}");
-                print(
-                    "doctorsSpecializationData: ${r.doctorsSpecializationData!.length}");
-
-                // print(r.doctorsData![1].name);
-                // print(r.doctorsData![2].fees);
-                // print(r.doctorsData![4].averageRating);
-                // print(r.doctorsData![5].timePerPatient);
-              });
-
-              // (await _byIdUseCase.call("641232eb33e617161aba77b2")).fold((l) {
+              // (await _allDoctorsUseCase.call("")).fold((l) {
               //   print(l.message.toString());
               // }, (r) {
-              //   print(r.user!.userName);
-              //   print(r.user!.name);
-              //   print(r.user!.specialization);
-              //   print(r.user!.fees);
-              //   print(r.user!.scheduleTiming.length);
-              //   print("sss${r.token}");
-
+              //   print("results:${r.results}");
+              //   print("allDoctorsData:${r.allDoctorsData!.length}");
+              //   print("topDoctorsData:${r.topDoctorsData!.length}");
+              //   print("doctorsSearchData: ${r.doctorsSearchData!.length}");
+              //   print(
+              //       "doctorsSpecializationData: ${r.doctorsSpecializationData!.length}");
+              //   // print(r.doctorsData![1].name);
+              //   // print(r.doctorsData![2].fees);
+              //   // print(r.doctorsData![4].averageRating);
+              //   // print(r.doctorsData![5].timePerPatient);
+              // });
+              // (await _getDoctorsSpecialization.call("heart")).fold((l) {
+              //   print(l.message.toString());
+              // }, (r) {
+              //   // print(r.results);
+              //   // print(r.doctorsNum);
+              //   print("results:${r.results}");
+              //   print("allDoctorsData:${r.allDoctorsData!.length}");
+              //   print("topDoctorsData:${r.topDoctorsData!.length}");
+              //   print("doctorsSearchData: ${r.doctorsSearchData!.length}");
+              //   print(
+              //       "doctorsSpecializationData: ${r.doctorsSpecializationData!.length}");
+              //
+              //   // print(r.doctorsData![1].name);
+              //   // print(r.doctorsData![2].fees);
+              //   // print(r.doctorsData![4].averageRating);
+              //   // print(r.doctorsData![5].timePerPatient);
+              // });
+              //
+              // // (await _byIdUseCase.call("641232eb33e617161aba77b2")).fold((l) {
+              // //   print(l.message.toString());
+              // // }, (r) {
+              // //   print(r.user!.userName);
+              // //   print(r.user!.name);
+              // //   print(r.user!.specialization);
+              // //   print(r.user!.fees);
+              // //   print(r.user!.scheduleTiming.length);
+              // //   print("sss${r.token}");
+              //
+              // //   // print(r.doctorsData![1].name);
+              // //   // print(r.doctorsData![2].fees);
+              // //   // print(r.doctorsData![4].averageRating);
+              // //   // print(r.doctorsData![5].timePerPatient);
+              // // });
+              //
+              // (await _searchUseCase.call("voltttt")).fold((l) {
+              //   print(l.message.toString());
+              // }, (r) {
+              //   print("results:${r.results}");
+              //   print("allDoctorsData:${r.allDoctorsData!.length}");
+              //   print("topDoctorsData:${r.topDoctorsData!.length}");
+              //   print("doctorsSearchData: ${r.doctorsSearchData!.length}");
+              //   print(
+              //       "doctorsSpecializationData: ${r.doctorsSpecializationData!.length}");
+              //
+              //   // print(r.results);
+              //   // print(r.allDoctorsData![2].userName);
+              //   // print(r.allDoctorsData![3].userName);
+              //
+              //   // print(r.doctorsData![1].name);
+              //   // print(r.doctorsData![2].fees);
+              //   // print(r.doctorsData![4].averageRating);
+              //   // print(r.doctorsData![5].timePerPatient);
+              // });
+              //
+              // (await _getTopDoctorsUseCase.call("")).fold((l) {
+              //   print(l.message.toString());
+              // }, (r) {
+              //   // print(r.results);
+              //   print("results:${r.results}");
+              //   print("allDoctorsData:${r.allDoctorsData!.length}");
+              //   print("topDoctorsData:${r.topDoctorsData!.length}");
+              //   print("doctorsSearchData: ${r.doctorsSearchData!.length}");
+              //   print(
+              //       "doctorsSpecializationData: ${r.doctorsSpecializationData!.length}");
+              //   // print(r.topDoctorsData![0].userName);
+              //   // print(r.allDoctorsData![1].userName);
+              //   // print(r.allDoctorsData![3].userName);
+              //
               //   // print(r.doctorsData![1].name);
               //   // print(r.doctorsData![2].fees);
               //   // print(r.doctorsData![4].averageRating);
               //   // print(r.doctorsData![5].timePerPatient);
               // });
 
-              (await _searchUseCase.call("voltttt")).fold((l) {
+              (await _userLoginUseCase.call(
+                UserLoginUseCaseInput(
+                  "pat1@gmail.com",
+                  "55555",
+                ),
+              ))
+                  .fold((l) {
                 print(l.message.toString());
               }, (r) {
-                print("results:${r.results}");
-                print("allDoctorsData:${r.allDoctorsData!.length}");
-                print("topDoctorsData:${r.topDoctorsData!.length}");
-                print("doctorsSearchData: ${r.doctorsSearchData!.length}");
-                print(
-                    "doctorsSpecializationData: ${r.doctorsSpecializationData!.length}");
-
-                // print(r.results);
-                // print(r.allDoctorsData![2].userName);
-                // print(r.allDoctorsData![3].userName);
-
-                // print(r.doctorsData![1].name);
-                // print(r.doctorsData![2].fees);
-                // print(r.doctorsData![4].averageRating);
-                // print(r.doctorsData![5].timePerPatient);
+                print(r.user!.email);
+                print(r.user!.specialization);
+                print(r.user!.numberOfRating);
+                // print(r.user!.scheduleTiming[0].start);
+                print(r.user!.id);
+                print(r.user!.type);
               });
-
-              (await _getTopDoctorsUseCase.call("")).fold((l) {
-                print(l.message.toString());
-              }, (r) {
-                // print(r.results);
-                print("results:${r.results}");
-                print("allDoctorsData:${r.allDoctorsData!.length}");
-                print("topDoctorsData:${r.topDoctorsData!.length}");
-                print("doctorsSearchData: ${r.doctorsSearchData!.length}");
-                print(
-                    "doctorsSpecializationData: ${r.doctorsSpecializationData!.length}");
-                // print(r.topDoctorsData![0].userName);
-                // print(r.allDoctorsData![1].userName);
-                // print(r.allDoctorsData![3].userName);
-
-                // print(r.doctorsData![1].name);
-                // print(r.doctorsData![2].fees);
-                // print(r.doctorsData![4].averageRating);
-                // print(r.doctorsData![5].timePerPatient);
-              });
-
-              // (await _patientSignUpUseCase.call(
-              //   UserLoginUseCaseInput(
-              //     "doc1@gmail.com",
-              //     "55555",
-              //   ),
-              // ))
-              //     .fold((l) {
-              //   print(l.message.toString());
-              // }, (r) {
-              //   print(r.user!.email);
-              //   print(r.user!.specialization);
-              //   print(r.user!.numberOfRating);
-              //   print(r.user!.scheduleTiming[0].start);
-              //   print(r.user!.id);
-              //   print(r.user!.type);
-              // });
             },
             child: const Text(
               "Login Call",

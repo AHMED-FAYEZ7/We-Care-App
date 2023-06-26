@@ -33,31 +33,31 @@ class UserLoginScreen extends StatelessWidget {
       child: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) async {
           if (state is AuthLogInSuccessState) {
-            if (state.userData.user!.confirmed == true) {
-              if (state.userData.user!.type == "Doctor") {
-                print("Doctor Login success");
-                // Navigator.pushNamed(
-                //   context,
-                //   Routes.doctorLayoutRoute,
-                // );
-                // await _appPreferences.setToken(state.userData.token);
-                // await _appPreferences.setIsDoctorLoggedIn();
-              } else if (state.userData.user!.type == "Patient") {
-                print("Patient Login success");
+            // if (state.userData.user!.confirmed == true) {
+            if (state.userData.user!.type == "Doctor") {
+              print("Doctor Login success");
+              // Navigator.pushNamed(
+              //   context,
+              //   Routes.doctorLayoutRoute,
+              // );
+              // await _appPreferences.setToken(state.userData.token);
+              // await _appPreferences.setIsDoctorLoggedIn();
+            } else if (state.userData.user!.type == "Patient") {
+              print("Patient Login success");
 
-                // Navigator.pushNamed(
-                //   context,
-                //   Routes.patientLayoutRoute,
-                // );
-                // await _appPreferences.setToken(state.userData.token);
-                // await _appPreferences.setIsPatientLoggedIn();
-              }
-            } else {
-              Navigator.pushNamed(
+              Navigator.pushReplacementNamed(
                 context,
-                Routes.userEmailConfirmationRoute,
+                Routes.layoutPatientRoute,
               );
+              await _appPreferences.setToken(state.userData.token);
+              await _appPreferences.setIsPatientLoggedIn();
             }
+            // } else {
+            //   Navigator.pushNamed(
+            //     context,
+            //     Routes.userEmailConfirmationRoute,
+            //   );
+            // }
           } else if (state is AuthLogInErrorState) {
             print("Doctor Login error");
 

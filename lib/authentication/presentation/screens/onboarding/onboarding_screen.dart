@@ -109,8 +109,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     onPressed: () {
                       Navigator.pushReplacementNamed(
                         context,
-                        Routes.toggleRoute,
+                        Routes.userLoginRoute,
                       );
+                      _appPreferences.setOnBoardingScreenViewed();
                     },
                     child: Text(
                       "skip",
@@ -145,7 +146,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     onPressed: () {
                       if (isLast) {
                         Navigator.pushReplacementNamed(
-                            context, Routes.userLoginRoute);
+                          context,
+                          Routes.userLoginRoute,
+                        );
+                        _appPreferences.setOnBoardingScreenViewed();
                       } else {
                         _pageController.nextPage(
                           duration: const Duration(

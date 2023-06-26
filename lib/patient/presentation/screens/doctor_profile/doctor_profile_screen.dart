@@ -4,9 +4,9 @@ import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
 import 'package:health_care/patient/presentation/screens/doctor_profile/widget/clendar.dart';
 import 'package:health_care/patient/presentation/screens/doctor_profile/widget/column_info.dart';
+import 'package:health_care/patient/presentation/widgets/app_bar_widget.dart';
 import 'package:health_care/patient/presentation/widgets/doctor_widget.dart';
 import 'package:health_care/patient/presentation/widgets/hint_text_widget.dart';
-import 'package:health_care/patient/presentation/widgets/pop_navigator_app_bar_widget.dart';
 
 class DoctorProfilePatientScreen extends StatelessWidget {
   const DoctorProfilePatientScreen({Key? key}) : super(key: key);
@@ -17,7 +17,7 @@ class DoctorProfilePatientScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            PopNavigatorAppBarWidget(
+            AppBarWidget(
               title: "Dr. Ahmed Fayez",
             ),
             DoctorWidget(

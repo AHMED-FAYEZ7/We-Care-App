@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
+import 'package:health_care/patient/presentation/widgets/app_bar_widget.dart';
 import 'package:health_care/patient/presentation/widgets/doctor_widget.dart';
-import 'package:health_care/patient/presentation/widgets/pop_navigator_app_bar_widget.dart';
 import 'package:health_care/patient/presentation/widgets/specialist_doctor_list_widget.dart';
 
 class TopDoctorPatientScreen extends StatelessWidget {
@@ -12,8 +12,9 @@ class TopDoctorPatientScreen extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          PopNavigatorAppBarWidget(
+          AppBarWidget(
             title: 'Top Doctor',
+            isBack: true,
           ),
           const SpecialistDoctorListWidget(),
           Expanded(
