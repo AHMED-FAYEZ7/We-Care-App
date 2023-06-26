@@ -22,6 +22,7 @@ import 'package:health_care/authentication/domain/usecase/user_forget_password_u
 import 'package:health_care/authentication/domain/usecase/user_login_usecase.dart';
 import 'package:health_care/authentication/domain/usecase/user_update_info_usecase.dart';
 import 'package:health_care/authentication/domain/usecase/user_update_password_usecase.dart';
+import 'package:health_care/authentication/presentation/controller/auth_cubit.dart';
 import 'package:health_care/patient/data/data_source/patient_remote_data_source.dart';
 import 'package:health_care/patient/data/network/patient_api/patient_api.dart';
 import 'package:health_care/patient/data/repository/patient_repo_impl.dart';
@@ -175,5 +176,18 @@ initGetGetDoctorsSpecializationModule() {
 initPatientCubitModule() {
   if (!GetIt.I.isRegistered<PatientCubit>()) {
     sl.registerFactory<PatientCubit>(() => PatientCubit());
+  }
+}
+
+initAuthCubitModule() {
+  if (!GetIt.I.isRegistered<AuthCubit>()) {
+    sl.registerFactory<AuthCubit>(() => AuthCubit(
+          sl(),
+          sl(),
+          sl(),
+          sl(),
+          sl(),
+          sl(),
+        ));
   }
 }

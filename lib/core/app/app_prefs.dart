@@ -43,4 +43,9 @@ class AppPreferences {
   Future<bool> isOnBoardingScreenViewed() async {
     return _sharedPreferences.getBool(PREFS_KEY_ON_BOARDING_SCREEN) ?? false;
   }
+
+  void clearSharedPreferences() async {
+    await _sharedPreferences.clear();
+    print('Shared Preferences cleared.');
+  }
 }

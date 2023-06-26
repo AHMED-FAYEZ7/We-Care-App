@@ -66,8 +66,16 @@ class RouteGenerator {
         initDoctorSignUpModule();
         return MaterialPageRoute(builder: (_) => DoctorRegisterScreen());
       case Routes.userLoginRoute:
+        initAuthCubitModule();
         initUserModule();
         initUserLoginModule();
+        initPatientSignUpModule();
+        initDoctorSignUpModule();
+        initUserForgetPasswordModule();
+        initUserUpdatePasswordModule();
+        initUserDeleteMeModule();
+        initUserEmailConfirmationModule();
+        initUserUpdateInfoModule();
         return MaterialPageRoute(builder: (_) => UserLoginScreen());
       case Routes.userEmailConfirmationRoute:
         initUserModule();
