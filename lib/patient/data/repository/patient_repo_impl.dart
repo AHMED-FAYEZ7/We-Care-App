@@ -6,6 +6,7 @@ import 'package:health_care/core/error/failure.dart';
 import 'package:health_care/core/network/network_info.dart';
 import 'package:health_care/patient/data/data_source/patient_remote_data_source.dart';
 import 'package:health_care/patient/data/mapper/patient_mapper.dart';
+import 'package:health_care/patient/domain/model/appointment_model.dart';
 import 'package:health_care/patient/domain/model/patient_entities.dart';
 import 'package:health_care/patient/domain/repository/patient_repo.dart';
 
@@ -38,10 +39,14 @@ class PatientRepoImpl implements BasePatientRepo {
   }
 
   @override
-  Future<Either<Failure, DoctorInfo>> getTopDoctors() async {
+  Future<Either<Failure, DoctorInfo>> getTopDoctors({
+    String? specialization,
+  }) async {
     if (await _networkInfo.isConnected) {
       try {
-        final response = await _basePatientRemoteDataSource.getTopDoctors();
+        final response = await _basePatientRemoteDataSource.getTopDoctors(
+          specialization: specialization,
+        );
 
         if (response.status == ApiInternalStatus.SUCCESS) {
           print(" mmmmmmmmmmmm ${response.resultsResponse}");
@@ -112,6 +117,64 @@ class PatientRepoImpl implements BasePatientRepo {
           print(" ssssssssss ssssssssssss ${response.resultsResponse}");
           print(
               " ةةةة ssssssssssss ${response.doctorsSearchDataResponse!.length}");
+          // print(" cccccccccc ssssssssssss ${response.allDoctors!.length}");
+          return Right(response.toDomain());
+        } else {
+          return Left(Failure(1, response.message!));
+        }
+      } catch (error) {
+        return Left((ErrorHandler.handle(error).failure));
+      }
+    } else {
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, AppointmentsInfo>> getDoctorAvailableAppointments(
+    String docID,
+  ) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final response =
+            await _basePatientRemoteDataSource.getDoctorAvailableAppointments(
+          docID,
+        );
+
+        if (response.status == ApiInternalStatus.SUCCESS) {
+          print(" ssssssssss ssssssssssss ${response.status}");
+          print(
+              " ةةةة ssssssssssss ${response.availableAppointmentsResponseData!.length}");
+          // print(" cccccccccc ssssssssssss ${response.allDoctors!.length}");
+          return Right(response.toDomain());
+        } else {
+          return Left(Failure(1, response.message!));
+        }
+      } catch (error) {
+        return Left((ErrorHandler.handle(error).failure));
+      }
+    } else {
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, AppointmentsInfo>> getAvailableAppointmentsByDay({
+    required String docID,
+    required String date,
+  }) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final response =
+            await _basePatientRemoteDataSource.getAvailableAppointmentsByDay(
+          docID,
+          date,
+        );
+
+        if (response.status == ApiInternalStatus.SUCCESS) {
+          print(" ssssssssss ssssssssssss ${response.status}");
+          print(
+              " ةةةة ssssssssssss ${response.availableAppointmentsResponseData!.length}");
           // print(" cccccccccc ssssssssssss ${response.allDoctors!.length}");
           return Right(response.toDomain());
         } else {

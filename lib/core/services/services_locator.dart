@@ -28,6 +28,8 @@ import 'package:health_care/patient/data/network/patient_api/patient_api.dart';
 import 'package:health_care/patient/data/repository/patient_repo_impl.dart';
 import 'package:health_care/patient/domain/repository/patient_repo.dart';
 import 'package:health_care/patient/domain/usecase/get_all_doctors_use_case.dart';
+import 'package:health_care/patient/domain/usecase/get_available_appointment_by_day_use_case.dart';
+import 'package:health_care/patient/domain/usecase/get_available_apponitments_for_doctor_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_docotrs_specialization_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_doctor_by_id_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_doctor_search_use_case.dart';
@@ -139,6 +141,14 @@ Future<void> initAppModule() async {
 
   sl.registerLazySingleton<GetDoctorsSpecializationUseCase>(
       () => GetDoctorsSpecializationUseCase(sl()));
+
+///////// Appointments ///////////
+
+  sl.registerLazySingleton<GetAvailableAppointmentsForDoctorUseCase>(
+      () => GetAvailableAppointmentsForDoctorUseCase(sl()));
+
+  sl.registerLazySingleton<GetAvailableAppointmentsByDay>(
+      () => GetAvailableAppointmentsByDay(sl()));
 
   // cubit
 
