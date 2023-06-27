@@ -64,7 +64,7 @@ class PatientCubit extends Cubit<PatientState> {
   getTopDoctor(String specialist) async {
     emit(GetTopDoctorLoadingState());
     topDoctor = [];
-    (await _getTopDoctorsUseCase.call(specialist)).fold(
+    (await _getTopDoctorsUseCase.call(input: specialist)).fold(
       (l) {
         emit(GetTopDoctorFailureState());
       },
