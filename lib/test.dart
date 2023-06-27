@@ -119,25 +119,32 @@ class TestPage extends StatelessWidget {
               });
               // String token = await _appPreferences.getToken();
               // print(token);
-              // (await _searchUseCase.call("voltttt")).fold((l) {
-              //   print(l.message.toString());
-              // }, (r) {
-              //   print("results:${r.results}");
-              //   print("allDoctorsData:${r.allDoctorsData!.length}");
-              //   print("topDoctorsData:${r.topDoctorsData!.length}");
-              //   print("doctorsSearchData: ${r.doctorsSearchData!.length}");
-              //   print(
-              //       "doctorsSpecializationData: ${r.doctorsSpecializationData!.length}");
-              //
-              //   // print(r.results);
-              //   // print(r.allDoctorsData![2].userName);
-              //   // print(r.allDoctorsData![3].userName);
-              //
-              //   // print(r.doctorsData![1].name);
-              //   // print(r.doctorsData![2].fees);
-              //   // print(r.doctorsData![4].averageRating);
-              //   // print(r.doctorsData![5].timePerPatient);
-              // });
+              (await _searchUseCase.call(
+                TwoParametersUseCase(
+                  "",
+                  "Heart",
+                ),
+              ))
+                  .fold((l) {
+                print(l.message.toString());
+              }, (r) {
+                print("results:${r.results}");
+                print("allDoctorsData:${r.allDoctorsData!.length}");
+                print("topDoctorsData:${r.topDoctorsData!.length}");
+                print("doctorsSearchData: ${r.doctorsSearchData!.length}");
+                print(
+                    "doctorsSpecializationData: ${r.doctorsSpecializationData!.length}");
+
+                // print(r.results);
+                print(r.doctorsSearchData![0].userName);
+                // print(r.doctorsSearchData![2].userName);
+                // print(r.doctorsSearchData![3].userName);
+
+                // print(r.doctorsData![1].name);
+                // print(r.doctorsData![2].fees);
+                // print(r.doctorsData![4].averageRating);
+                // print(r.doctorsData![5].timePerPatient);
+              });
               //
               // (await _getTopDoctorsUseCase.call(
               //         // input: "Heart",

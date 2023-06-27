@@ -31,8 +31,9 @@ abstract class PatientServiceClient {
 
   @GET("api/v1/doctors/search")
   Future<DoctorInfResponse> getDoctorSearch(
-    @Query("keyword") String query,
-  );
+    @Query("keyword") String query, {
+    @Query("specialization") String? specialization,
+  });
 
   ////////////// Appointment ////////////////
 

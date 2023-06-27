@@ -9,7 +9,10 @@ abstract class BasePatientRemoteDataSource {
     String specialization,
   );
   Future<DoctorByIdResponse> getDoctorById(String id);
-  Future<DoctorInfResponse> getDoctorSearch(String query);
+  Future<DoctorInfResponse> getDoctorSearch(
+    String query, {
+    String? specialization,
+  });
   Future<AppointmentInfoResponse> getDoctorAvailableAppointments(String docId);
   Future<AppointmentInfoResponse> getAvailableAppointmentsByDay(
     String docId,
@@ -48,8 +51,14 @@ class PatientRemoteDataSourceImpl implements BasePatientRemoteDataSource {
   }
 
   @override
-  Future<DoctorInfResponse> getDoctorSearch(String query) async {
-    return await _patientServiceClient.getDoctorSearch(query);
+  Future<DoctorInfResponse> getDoctorSearch(
+    String query, {
+    String? specialization,
+  }) async {
+    return await _patientServiceClient.getDoctorSearch(
+      query,
+      specialization: specialization,
+    );
   }
 
   @override
@@ -64,28 +73,9 @@ class PatientRemoteDataSourceImpl implements BasePatientRemoteDataSource {
     String docId,
     String date,
   ) async {
-    final data = await _patientServiceClient.getAvailableAppointmentsByDay(
+    return await _patientServiceClient.getAvailableAppointmentsByDay(
       docId,
       date,
     );
-    print(
-        " sssssssssssssnnnnnnnnnn${data.availableAppointmentsByDayResponseData![0].paid}");
-    print(
-        " sssssssssssssnnnnnnnnnn${data.availableAppointmentsByDayResponseData![0].appointmentId}");
-    print(
-        " sssssssssssssnnnnnnnnnn${data.availableAppointmentsByDayResponseData![0].type}");
-    print(
-        " sssssssssssssnnnnnnnnnn${data.availableAppointmentsByDayResponseData![0].status}");
-    print(
-        " sssssssssssssnnnnnnnnnn${data.availableAppointmentsByDayResponseData![0].doctorId}");
-    print(
-        " sssssssssssssnnnnnnnnnn${data.availableAppointmentsByDayResponseData![0].patientId}");
-    print(
-        " sssssssssssssnnnnnnnnnn${data.availableAppointmentsByDayResponseData![0].date}");
-    print(
-        " sssssssssssssnnnnnnnnnn${data.availableAppointmentsByDayResponseData![0].v}");
-    print(
-        " sssssssssssssnnnnnnnnnn${data.availableAppointmentsByDayResponseData![0].price}");
-    return data;
   }
 }

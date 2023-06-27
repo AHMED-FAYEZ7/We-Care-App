@@ -24,8 +24,8 @@ class PatientRepoImpl implements BasePatientRepo {
       try {
         final response = await _basePatientRemoteDataSource.getAllDoctors();
 
+        print(" ssssssssss ssssssssssss ${response.resultsResponse}");
         if (response.status == ApiInternalStatus.SUCCESS) {
-          print(" ssssssssss ssssssssssss ${response.resultsResponse}");
           return Right(response.toDomain());
         } else {
           return Left(Failure(1, response.message!));
@@ -48,8 +48,8 @@ class PatientRepoImpl implements BasePatientRepo {
           specialization: specialization,
         );
 
+        print(" mmmmmmmmmmmm ${response.resultsResponse}");
         if (response.status == ApiInternalStatus.SUCCESS) {
-          print(" mmmmmmmmmmmm ${response.resultsResponse}");
           return Right(response.toDomain());
         } else {
           return Left(Failure(1, response.message!));
@@ -73,8 +73,8 @@ class PatientRepoImpl implements BasePatientRepo {
           specialization,
         );
 
+        print(" hhhhhhhhhhh hhhhhhhhhhhss ${response.resultsResponse}");
         if (response.status == ApiInternalStatus.SUCCESS) {
-          print(" hhhhhhhhhhh hhhhhhhhhhhss ${response.resultsResponse}");
           return Right(response.toDomain());
         } else {
           return Left(Failure(1, response.message!));
@@ -106,18 +106,22 @@ class PatientRepoImpl implements BasePatientRepo {
   }
 
   @override
-  Future<Either<Failure, DoctorInfo>> getDoctorSearch(String query) async {
+  Future<Either<Failure, DoctorInfo>> getDoctorSearch(
+    String query, {
+    String? specialization,
+  }) async {
     if (await _networkInfo.isConnected) {
       try {
         final response = await _basePatientRemoteDataSource.getDoctorSearch(
           query,
+          specialization: specialization,
         );
 
+        print(" ssssssssss ssssssssssss ${response.resultsResponse}");
+        print(
+            " ةةةة ssssssssssss ${response.doctorsSearchDataResponse!.length}");
+        // print(" cccccccccc ssssssssssss ${response.allDoctors!.length}");
         if (response.status == ApiInternalStatus.SUCCESS) {
-          print(" ssssssssss ssssssssssss ${response.resultsResponse}");
-          print(
-              " ةةةة ssssssssssss ${response.doctorsSearchDataResponse!.length}");
-          // print(" cccccccccc ssssssssssss ${response.allDoctors!.length}");
           return Right(response.toDomain());
         } else {
           return Left(Failure(1, response.message!));
@@ -141,11 +145,11 @@ class PatientRepoImpl implements BasePatientRepo {
           docID,
         );
 
+        print(" ssssssssss ssssssssssss ${response.status}");
+        print(
+            " ةةةة ssssssssssss ${response.availableAppointmentsResponseData!.length}");
+        // print(" cccccccccc ssssssssssss ${response.allDoctors!.length}");
         if (response.status == ApiInternalStatus.SUCCESS) {
-          print(" ssssssssss ssssssssssss ${response.status}");
-          print(
-              " ةةةة ssssssssssss ${response.availableAppointmentsResponseData!.length}");
-          // print(" cccccccccc ssssssssssss ${response.allDoctors!.length}");
           return Right(response.toDomain());
         } else {
           return Left(Failure(1, response.message!));

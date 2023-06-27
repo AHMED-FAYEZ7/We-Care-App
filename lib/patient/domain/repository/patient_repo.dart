@@ -6,7 +6,10 @@ import 'package:health_care/patient/domain/model/patient_entities.dart';
 
 abstract class BasePatientRepo {
   Future<Either<Failure, DoctorInfo>> getAllDoctors();
-  Future<Either<Failure, DoctorInfo>> getDoctorSearch(String query);
+  Future<Either<Failure, DoctorInfo>> getDoctorSearch(
+    String query, {
+    String? specialization,
+  });
   Future<Either<Failure, DoctorInfo>> getTopDoctors({String? specialization});
   Future<Either<Failure, UserData>> getDoctorById(String id);
   Future<Either<Failure, DoctorInfo>> getDoctorsSpecialization(
