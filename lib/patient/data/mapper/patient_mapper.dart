@@ -2,7 +2,9 @@ import 'package:health_care/authentication/data/mapper/user_mapper.dart';
 import 'package:health_care/authentication/domain/model/user_model.dart';
 import 'package:health_care/core/utils/constants.dart';
 import 'package:health_care/core/utils/extension.dart';
+import 'package:health_care/patient/data/response/appointments_response.dart';
 import 'package:health_care/patient/data/response/patient_response.dart';
+import 'package:health_care/patient/domain/model/appointment_model.dart';
 import 'package:health_care/patient/domain/model/patient_entities.dart';
 
 extension DoctorInfoResponseMapper on DoctorInfResponse? {
@@ -49,47 +51,53 @@ extension DoctorInfoResponseMapper on DoctorInfResponse? {
   }
 }
 
-// extension TopDoctorsResponseMapper on TopDoctorsResponse? {
-//   TopDoctors toDomain() {
-//     int result = this?.results?.orZero() ?? Constants.zero;
+extension AppointmentResponseMapper on AppointmentResponse? {
+  Appointment toDomain() {
+    return Appointment(
+      this?.paid?.orFalse() ?? Constants.FALSE,
+      this?.appointmentId?.orEmpty() ?? Constants.empty,
+      this?.type?.orEmpty() ?? Constants.empty,
+      this?.status?.orEmpty() ?? Constants.empty,
+      this?.doctorId?.orEmpty() ?? Constants.empty,
+      this?.patientId?.orEmpty() ?? Constants.empty,
+      this?.date?.orEmpty() ?? Constants.empty,
+      this?.v?.orZero() ?? Constants.zero,
+      this?.price?.orZero() ?? Constants.zero,
+    );
+  }
+}
 
-//     List<User> topDoctorsResponse =
-//         (this?.allDoctors?.map((doctorResponse) => doctorResponse.toDomain()) ??
-//                 const Iterable.empty())
-//             .cast<User>()
-//             .toList();
-//     List<User> doctorSearchDataResponse = (this
-//                 ?.doctorsSearchData
-//                 ?.map((doctorResponse) => doctorResponse.toDomain()) ??
-//             const Iterable.empty())
-//         .cast<User>()
-//         .toList();
+extension AppointmentInfoResponseMapper on AppointmentInfoResponse? {
+  AppointmentsInfo toDomain() {
+    List<Appointment> allAppointmentsMapped =
+        (this?.allAppointmentsResponseData?.map(
+                      (appointments) => appointments.toDomain(),
+                    ) ??
+                const Iterable.empty())
+            .cast<Appointment>()
+            .toList();
 
-//     return TopDoctors(
-//       result,
-//       topDoctorsResponse,
-//       doctorSearchDataResponse,
-//     );
-//   }
-// }
+    List<Appointment> availableAppointmentsMapped = (this
+                ?.availableAppointmentsResponseData
+                ?.map((availableAppointments) =>
+                    availableAppointments.toDomain()) ??
+            const Iterable.empty())
+        .cast<Appointment>()
+        .toList();
 
-// extension DoctorsSpecializationResponseMapper
-//     on DoctorsSpecializationResponse? {
-//   DoctorsSpecialization toDomain() {
-//     int doctorsNum = this?.doctorsNum?.orZero() ?? Constants.zero;
-//     int result = this?.results?.orZero() ?? Constants.zero;
+    List<Appointment> availableAppointmentsByDayMapped =
+        (this?.availableAppointmentsByDayResponseData?.map(
+                      (availableAppointmentsByDay) =>
+                          availableAppointmentsByDay.toDomain(),
+                    ) ??
+                const Iterable.empty())
+            .cast<Appointment>()
+            .toList();
 
-//     List<User> doctorsData = (this
-//                 ?.doctorsData
-//                 ?.map((doctorResponse) => doctorResponse.toDomain()) ??
-//             const Iterable.empty())
-//         .cast<User>()
-//         .toList();
-
-//     return DoctorsSpecialization(
-//       doctorsNum,
-//       result,
-//       doctorsData,
-//     );
-//   }
-// }
+    return AppointmentsInfo(
+      allAppointmentsMapped,
+      availableAppointmentsMapped,
+      availableAppointmentsByDayMapped,
+    );
+  }
+}

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:health_care/core/network/api_constance.dart';
+import 'package:health_care/patient/data/response/appointments_response.dart';
 import 'package:health_care/patient/data/response/patient_response.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -14,7 +15,9 @@ abstract class PatientServiceClient {
   Future<DoctorInfResponse> getAllDoctors();
 
   @GET("api/v1/doctors/topdoctors")
-  Future<DoctorInfResponse> getTopDoctors();
+  Future<DoctorInfResponse> getTopDoctors({
+    @Query("specialization") String? specialization,
+  });
 
   @GET("api/v1/doctors/specialization/{specialization}")
   Future<DoctorInfResponse> getDoctorsBySpecialization(
@@ -25,8 +28,23 @@ abstract class PatientServiceClient {
   Future<DoctorByIdResponse> getDoctorById(
     @Path("id") String id,
   );
+
   @GET("api/v1/doctors/search")
   Future<DoctorInfResponse> getDoctorSearch(
-    @Query("keyword") String query,
+    @Query("keyword") String query, {
+    @Query("specialization") String? specialization,
+  });
+
+  ////////////// Appointment ////////////////
+
+  @GET("api/v1/appointments/available/{docId}")
+  Future<AppointmentInfoResponse> getDoctorAvailableAppointments(
+    @Path("docId") String docId,
+  );
+
+  @GET("api/v1/appointments/availableByday/{docId}")
+  Future<AppointmentInfoResponse> getAvailableAppointmentsByDay(
+    @Path("docId") String docId,
+    @Field("day") String date,
   );
 }
