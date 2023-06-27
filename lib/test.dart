@@ -74,33 +74,36 @@ class TestPage extends StatelessWidget {
               //   // print(r.doctorsData![5].timePerPatient);
               // });
               //
-              (await _getAvailableAppointmentsForDoctorUseCase
-                      .call("6491a45e0781cc8fbabc0035"))
-                  .fold((l) {
-                print(l.message.toString());
-              }, (r) {
-                // print(r.availableAppointmentsData![0].appointmentId);
-                print(r.availableAppointmentsData!.length);
-                // print(r.user!.name);
-                // print(r.user!.specialization);
-                // print(r.user!.fees);
-                // print(r.user!.scheduleTiming.length);
-                // print("sss${r.token}");
+              // (await _getAvailableAppointmentsForDoctorUseCase
+              //         .call("6491a45e0781cc8fbabc0035"))
+              //     .fold((l) {
+              //   print(l.message.toString());
+              // }, (r) {
+              //   // print(r.availableAppointmentsData![0].appointmentId);
+              //   print(r.availableAppointmentsData!.length);
+              //   print(r.availableAppointmentsByDayData!.length);
+              //   // print(r.user!.name);
+              //   // print(r.user!.specialization);
+              //   // print(r.user!.fees);
+              //   // print(r.user!.scheduleTiming.length);
+              //   // print("sss${r.token}");
 
-                // print(r.doctorsData![1].name);
-                // print(r.doctorsData![2].fees);
-                // print(r.doctorsData![4].averageRating);
-                // print(r.doctorsData![5].timePerPatient);
-              });
-              (await _availableAppointmentsByDay.call(TwoParametersUseCase(
-                "6491a45e0781cc8fbabc0035",
-                "2023-10-15",
-              )))
+              //   // print(r.doctorsData![1].name);
+              //   // print(r.doctorsData![2].fees);
+              //   // print(r.doctorsData![4].averageRating);
+              //   // print(r.doctorsData![5].timePerPatient);
+              // });
+              (await _availableAppointmentsByDay.call(
+                TwoParametersUseCase(
+                  "6491a45e0781cc8fbabc0035",
+                  "2023-10-05",
+                ),
+              ))
                   .fold((l) {
                 print(l.message.toString());
               }, (r) {
                 // print(r.availableAppointmentsByDayData![0].appointmentId);
-                // print(r.availableAppointmentsData!.length);
+                print(r.availableAppointmentsData!.length);
                 // print(r.);
                 print(r.availableAppointmentsByDayData!.length);
                 // print(r.user!.name);

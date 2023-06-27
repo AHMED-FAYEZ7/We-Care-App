@@ -171,11 +171,11 @@ class PatientRepoImpl implements BasePatientRepo {
           date,
         );
 
+        print(" ssssssssss ssssssssssss ${response.status}");
+        print(
+            " ةةةة ssssssssssss ${response.availableAppointmentsByDayResponseData!.length}");
+        // print(" cccccccccc ssssssssssss ${response.allDoctors!.length}");
         if (response.status == ApiInternalStatus.SUCCESS) {
-          print(" ssssssssss ssssssssssss ${response.status}");
-          print(
-              " ةةةة ssssssssssss ${response.availableAppointmentsResponseData!.length}");
-          // print(" cccccccccc ssssssssssss ${response.allDoctors!.length}");
           return Right(response.toDomain());
         } else {
           return Left(Failure(1, response.message!));
