@@ -1,21 +1,18 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:health_care/authentication/domain/model/user_model.dart';
 import 'package:health_care/core/global/resources/icons_manger.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
 
 class DoctorWidget extends StatelessWidget {
   DoctorWidget({
-    required this.doctorImage,
-    required this.doctorName,
-    required this.doctorSpecialist,
+    required this.model,
     Key? key,
   }) : super(key: key);
 
-  String doctorImage;
-  String doctorName;
-  String doctorSpecialist;
+  User model;
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +32,9 @@ class DoctorWidget extends StatelessWidget {
                 topLeft: Radius.circular(AppSize.s12),
                 bottomLeft: Radius.circular(AppSize.s12),
               ),
-              child: Image.asset(
-                doctorImage,
-                fit: BoxFit.fill,
+              child: Image.network(
+                "https://idsb.tmgrup.com.tr/ly/uploads/images/2022/12/19/247181.jpg",
+                fit: BoxFit.cover,
                 width: AppSize.s100,
                 height: AppSize.s100,
               ),
@@ -53,7 +50,7 @@ class DoctorWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    doctorName,
+                    model.name,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: ColorManager.black,
@@ -72,7 +69,7 @@ class DoctorWidget extends StatelessWidget {
                         size: AppSize.s16,
                       ),
                       Text(
-                        "4.7(4692 reviews)",
+                        "${model.numberOfRating}(4692 reviews)",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: ColorManager.black,
@@ -85,7 +82,7 @@ class DoctorWidget extends StatelessWidget {
                     height: AppSize.s5,
                   ),
                   Text(
-                    "$doctorSpecialist Specialist - Ramsay College Hospital",
+                    "${model.specialization} Specialist - Ramsay College Hospital",
                     maxLines: 2,
                     style: TextStyle(
                       color: ColorManager.black,

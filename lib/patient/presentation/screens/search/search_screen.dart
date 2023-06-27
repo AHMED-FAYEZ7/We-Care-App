@@ -36,13 +36,13 @@ class _SearchPatientScreenState extends State<SearchPatientScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBarWidget(
+        isBack: true,
+        isSearch: true,
+      ),
       body: Column(
         children: [
-          AppBarWidget(
-            isBack: true,
-            isSearch: true,
-          ),
-          const SpecialistDoctorListWidget(),
+          // SpecialistDoctorListWidget(),
           Expanded(
             child: ListView.separated(
               padding: const EdgeInsets.symmetric(
@@ -50,11 +50,9 @@ class _SearchPatientScreenState extends State<SearchPatientScreen> {
               ),
               scrollDirection: Axis.vertical,
               physics: const BouncingScrollPhysics(),
-              itemBuilder: (BuildContext context, int index) => DoctorWidget(
-                doctorImage: 'assets/images/me1.jpg',
-                doctorName: 'Dr. Ahmed Fayez',
-                doctorSpecialist: "Dental",
-              ),
+              itemBuilder: (BuildContext context, int index) =>
+                  //
+                  AppBarWidget(),
               separatorBuilder: (BuildContext context, int index) =>
                   const SizedBox(
                 width: AppSize.s10,

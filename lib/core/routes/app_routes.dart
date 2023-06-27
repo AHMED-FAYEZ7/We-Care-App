@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_care/authentication/domain/model/user_model.dart';
 import 'package:health_care/authentication/presentation/screens/doctor/doctor_register_screen.dart';
 import 'package:health_care/authentication/presentation/screens/onboarding/onboarding_screen.dart';
 import 'package:health_care/authentication/presentation/screens/patient/patient_register_screen.dart';
@@ -84,8 +85,11 @@ class RouteGenerator {
         return MaterialPageRoute(
             builder: (_) => const TopDoctorPatientScreen());
       case Routes.doctorProfilePatientRoute:
+        final User doctorModel = routeSettings.arguments as User;
         return MaterialPageRoute(
-            builder: (_) => const DoctorProfilePatientScreen());
+            builder: (_) => DoctorProfilePatientScreen(
+                  doctorModel: doctorModel,
+                ));
       default:
         return unDefinedRoute();
     }

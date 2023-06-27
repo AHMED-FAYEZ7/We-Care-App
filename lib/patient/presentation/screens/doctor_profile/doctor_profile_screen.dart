@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:health_care/authentication/domain/model/user_model.dart';
+import 'package:health_care/authentication/presentation/widgets/default_text_button.dart';
 import 'package:health_care/core/global/resources/icons_manger.dart';
+import 'package:health_care/core/global/resources/strings_manger.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
 import 'package:health_care/patient/presentation/screens/doctor_profile/widget/clendar.dart';
@@ -9,21 +12,25 @@ import 'package:health_care/patient/presentation/widgets/doctor_widget.dart';
 import 'package:health_care/patient/presentation/widgets/hint_text_widget.dart';
 
 class DoctorProfilePatientScreen extends StatelessWidget {
-  const DoctorProfilePatientScreen({Key? key}) : super(key: key);
+  DoctorProfilePatientScreen({
+    required this.doctorModel,
+    Key? key,
+  }) : super(key: key);
+
+  User doctorModel;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBarWidget(
+        isBack: true,
+        title: "Dr. Ahmed Fayez",
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            AppBarWidget(
-              title: "Dr. Ahmed Fayez",
-            ),
             DoctorWidget(
-              doctorImage: 'assets/images/me1.jpg',
-              doctorName: 'Dr. Ahmed Fayez',
-              doctorSpecialist: "Dental",
+              model: doctorModel,
             ),
             const SizedBox(
               height: AppSize.s5,
@@ -118,6 +125,22 @@ class DoctorProfilePatientScreen extends StatelessWidget {
               height: AppSize.s10,
             ),
             Calendar(),
+            const SizedBox(
+              height: AppSize.s10,
+            ),
+            DefaultTextButton(
+              icon: Container(
+                width: AppSize.s30,
+              ),
+              borderColor: ColorManager.primary,
+              backGroundColor: ColorManager.primary,
+              textColor: ColorManager.white,
+              width: AppSize.s330,
+              height: AppSize.s52,
+              text: "Book Appointment",
+              fontWeight: FontWeight.bold,
+              onTap: () async {},
+            ),
           ],
         ),
       ),

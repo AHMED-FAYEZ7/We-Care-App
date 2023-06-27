@@ -6,7 +6,7 @@ import 'package:health_care/core/app/app_prefs.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
 import 'package:health_care/core/routes/app_routes.dart';
 import 'package:health_care/core/services/services_locator.dart';
-import 'package:health_care/patient/presentation/controller/patient_cubit.dart';
+import 'package:health_care/patient/presentation/controller/Patient_cubit/patient_cubit.dart';
 
 import '../global/theme/theme_data/theme_data_light.dart';
 
@@ -24,18 +24,14 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   final AppPreferences _appPreferences = sl<AppPreferences>();
 
-  // @override
-  // void didChangeDependencies() {
-  //   _appPreferences.getLocal().then((local) => {context.setLocale(local)});
-  //   super.didChangeDependencies();
-  // }
-
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider<PatientCubit>(
-          create: (BuildContext context) => sl<PatientCubit>(),
+          create: (BuildContext context) => sl<PatientCubit>()
+            ..getTopDoctor('')
+            ..getAllDoctor(''),
         ),
       ],
       child: MaterialApp(

@@ -11,12 +11,12 @@ class SpecialistDoctorPatientScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBarWidget(
+        title: 'Specialist Doctor',
+        isBack: true,
+      ),
       body: Column(
         children: [
-          AppBarWidget(
-            title: 'Specialist Doctor',
-            isBack: true,
-          ),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: AppPadding.p12),

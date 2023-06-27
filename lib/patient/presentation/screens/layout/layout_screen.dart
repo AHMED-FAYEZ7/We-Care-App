@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:health_care/patient/presentation/controller/patient_cubit.dart';
+import 'package:health_care/core/services/services_locator.dart';
+import 'package:health_care/patient/presentation/controller/Patient_cubit/patient_cubit.dart';
 import 'package:health_care/patient/presentation/widgets/app_bar_widget.dart';
 
 import '../../../../core/global/resources/icons_manger.dart';
@@ -19,9 +20,9 @@ class LayoutPatientScreen extends StatefulWidget {
 class _LayoutPatientScreenState extends State<LayoutPatientScreen> {
   @override
   Widget build(BuildContext context) {
-    var cubit = PatientCubit.get(context);
     return BlocConsumer<PatientCubit, PatientState>(
       builder: (context, state) {
+        var cubit = PatientCubit.get(context);
         return Scaffold(
           appBar: AppBarWidget(
             isHome: true,

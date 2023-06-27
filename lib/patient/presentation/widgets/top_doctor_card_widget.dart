@@ -1,20 +1,18 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:health_care/authentication/domain/model/user_model.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
+import 'package:health_care/patient/domain/model/patient_entities.dart';
 
 class TopDoctorCardWidget extends StatelessWidget {
   TopDoctorCardWidget({
-    required this.doctorImage,
-    required this.doctorName,
-    required this.doctorSpecialist,
+    required this.model,
     Key? key,
   }) : super(key: key);
 
-  String doctorImage;
-  String doctorName;
-  String doctorSpecialist;
+  User model;
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +32,9 @@ class TopDoctorCardWidget extends StatelessWidget {
                 topRight: Radius.circular(AppSize.s12),
                 topLeft: Radius.circular(AppSize.s12),
               ),
-              child: Image.asset(
-                doctorImage,
-                fit: BoxFit.fill,
+              child: Image.network(
+                "https://idsb.tmgrup.com.tr/ly/uploads/images/2022/12/19/247181.jpg",
+                fit: BoxFit.cover,
                 width: AppSize.s150,
                 height: AppSize.s120,
               ),
@@ -45,7 +43,7 @@ class TopDoctorCardWidget extends StatelessWidget {
               height: AppSize.s8,
             ),
             Text(
-              doctorName,
+              model.name,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: ColorManager.black,
@@ -57,7 +55,7 @@ class TopDoctorCardWidget extends StatelessWidget {
               height: AppSize.s5,
             ),
             Text(
-              "$doctorSpecialist Specialist",
+              "${model.specialization} Specialist",
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: ColorManager.black,

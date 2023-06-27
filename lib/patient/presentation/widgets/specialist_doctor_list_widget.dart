@@ -5,8 +5,12 @@ import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
 
 class SpecialistDoctorListWidget extends StatefulWidget {
-  const SpecialistDoctorListWidget({Key? key}) : super(key: key);
+  SpecialistDoctorListWidget({
+    required this.onSpecialistSelected,
+    Key? key,
+  }) : super(key: key);
 
+  Function(String) onSpecialistSelected;
   @override
   State<SpecialistDoctorListWidget> createState() =>
       _SpecialistDoctorListWidgetState();
@@ -16,8 +20,8 @@ class _SpecialistDoctorListWidgetState
     extends State<SpecialistDoctorListWidget> {
   List<String> specialist = [
     "All",
-    "Brain",
-    "Cardio",
+    "Heart",
+    "Gynecologist",
     "Eye",
     "All",
     "Brain",
@@ -49,7 +53,7 @@ class _SpecialistDoctorListWidgetState
               itemBuilder: (BuildContext context, int index) => GestureDetector(
                 onTap: () {
                   selectSpecialist(index);
-                  print(specialist[index]);
+                  widget.onSpecialistSelected(specialist[index]);
                 },
                 child: Container(
                   decoration: BoxDecoration(

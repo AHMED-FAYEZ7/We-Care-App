@@ -32,7 +32,7 @@ import 'package:health_care/patient/domain/usecase/get_docotrs_specialization_us
 import 'package:health_care/patient/domain/usecase/get_doctor_by_id_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_doctor_search_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_top_doctors_use_case.dart';
-import 'package:health_care/patient/presentation/controller/patient_cubit.dart';
+import 'package:health_care/patient/presentation/controller/Patient_cubit/patient_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../network/dio_factory.dart';
@@ -151,5 +151,8 @@ Future<void> initAppModule() async {
         sl(),
       ));
 
-  sl.registerFactory<PatientCubit>(() => PatientCubit());
+  sl.registerFactory<PatientCubit>(() => PatientCubit(
+        sl(),
+        sl(),
+      ));
 }
