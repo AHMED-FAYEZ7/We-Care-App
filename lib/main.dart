@@ -6,10 +6,10 @@ import 'package:health_care/core/services/services_locator.dart';
 import 'bloc_observer.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await initAppModule();
   BlocOverrides.runZoned(
-    () {
+    () async {
+      WidgetsFlutterBinding.ensureInitialized();
+      await initAppModule();
       runApp(MyApp());
     },
     blocObserver: MyBlocObserver(),
