@@ -1,6 +1,6 @@
 // ignore_for_file: import_of_legacy_library_into_null_safe
 
-import 'package:data_connection_checker/data_connection_checker.dart';
+import 'package:data_connection_checker_nulls/data_connection_checker_nulls.dart';
 import 'package:get_it/get_it.dart';
 import 'package:health_care/authentication/data/data_source/doctor/doctor_auth_remote_data_source.dart';
 import 'package:health_care/authentication/data/data_source/patient/patient_auth_remote_data_source.dart';

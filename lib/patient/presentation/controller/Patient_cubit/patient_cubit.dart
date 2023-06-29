@@ -2,7 +2,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:health_care/authentication/domain/model/user_model.dart';
 import 'package:health_care/core/services/services_locator.dart';
-import 'package:health_care/patient/domain/model/patient_entities.dart';
 import 'package:health_care/patient/domain/usecase/get_all_doctors_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_top_doctors_use_case.dart';
 import 'package:health_care/patient/presentation/screens/appointment/appointment_screen.dart';
