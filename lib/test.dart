@@ -5,6 +5,7 @@ import 'package:health_care/authentication/domain/usecase/user_login_usecase.dar
 import 'package:health_care/core/app/app_prefs.dart';
 import 'package:health_care/core/services/services_locator.dart';
 import 'package:health_care/core/usecase/base_usecase.dart';
+import 'package:health_care/patient/domain/usecase/book_appointment_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_all_doctors_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_docotrs_specialization_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_doctor_by_id_use_case.dart';
@@ -30,6 +31,8 @@ class TestPage extends StatelessWidget {
       sl<GetAvailableAppointmentsForDoctorUseCase>();
   final GetAvailableAppointmentsByDay _availableAppointmentsByDay =
       sl<GetAvailableAppointmentsByDay>();
+  final BookAppointmentUseCase _bookAppointmentUseCase =
+      sl<BookAppointmentUseCase>();
 
   @override
   Widget build(BuildContext context) {
@@ -74,13 +77,40 @@ class TestPage extends StatelessWidget {
               //   // print(r.doctorsData![5].timePerPatient);
               // });
               //
-              // (await _getAvailableAppointmentsForDoctorUseCase
-              //         .call("6491a45e0781cc8fbabc0035"))
+              (await _bookAppointmentUseCase.call("6491b4946c272fc553e0292d"))
+                  .fold((l) {
+                print(l.message.toString());
+              }, (r) {
+                // print(r.availableAppointmentsData![0].appointmentId);
+                print(r.availableAppointmentsData!.length);
+                print(r.availableAppointmentsByDayData!.length);
+                print(r.bookedAppointmentData!.appointmentId);
+                print(r.bookedAppointmentData!.date);
+                print(r.bookedAppointmentData!.doctorId);
+                print(r.bookedAppointmentData!.patientId);
+                // print(r.user!.name);
+                // print(r.user!.specialization);
+                // print(r.user!.fees);
+                // print(r.user!.scheduleTiming.length);
+                // print("sss${r.token}");
+
+                // print(r.doctorsData![1].name);
+                // print(r.doctorsData![2].fees);
+                // print(r.doctorsData![4].averageRating);
+                // print(r.doctorsData![5].timePerPatient);
+              });
+              // (await _availableAppointmentsByDay.call(
+              //   TwoParametersUseCase(
+              //     "6491a45e0781cc8fbabc0035",
+              //     "2023-10-05",
+              //   ),
+              // ))
               //     .fold((l) {
               //   print(l.message.toString());
               // }, (r) {
-              //   // print(r.availableAppointmentsData![0].appointmentId);
+              //   // print(r.availableAppointmentsByDayData![0].appointmentId);
               //   print(r.availableAppointmentsData!.length);
+              //   // print(r.);
               //   print(r.availableAppointmentsByDayData!.length);
               //   // print(r.user!.name);
               //   // print(r.user!.specialization);
@@ -93,58 +123,34 @@ class TestPage extends StatelessWidget {
               //   // print(r.doctorsData![4].averageRating);
               //   // print(r.doctorsData![5].timePerPatient);
               // });
-              (await _availableAppointmentsByDay.call(
-                TwoParametersUseCase(
-                  "6491a45e0781cc8fbabc0035",
-                  "2023-10-05",
-                ),
-              ))
-                  .fold((l) {
-                print(l.message.toString());
-              }, (r) {
-                // print(r.availableAppointmentsByDayData![0].appointmentId);
-                print(r.availableAppointmentsData!.length);
-                // print(r.);
-                print(r.availableAppointmentsByDayData!.length);
-                // print(r.user!.name);
-                // print(r.user!.specialization);
-                // print(r.user!.fees);
-                // print(r.user!.scheduleTiming.length);
-                // print("sss${r.token}");
+              // // String token = await _appPreferences.getToken();
+              // // print(token);
+              // (await _searchUseCase.call(
+              //   TwoParametersUseCase(
+              //     "",
+              //     "Heart",
+              //   ),
+              // ))
+              //     .fold((l) {
+              //   print(l.message.toString());
+              // }, (r) {
+              //   print("results:${r.results}");
+              //   print("allDoctorsData:${r.allDoctorsData!.length}");
+              //   print("topDoctorsData:${r.topDoctorsData!.length}");
+              //   print("doctorsSearchData: ${r.doctorsSearchData!.length}");
+              //   print(
+              //       "doctorsSpecializationData: ${r.doctorsSpecializationData!.length}");
 
-                // print(r.doctorsData![1].name);
-                // print(r.doctorsData![2].fees);
-                // print(r.doctorsData![4].averageRating);
-                // print(r.doctorsData![5].timePerPatient);
-              });
-              // String token = await _appPreferences.getToken();
-              // print(token);
-              (await _searchUseCase.call(
-                TwoParametersUseCase(
-                  "",
-                  "Heart",
-                ),
-              ))
-                  .fold((l) {
-                print(l.message.toString());
-              }, (r) {
-                print("results:${r.results}");
-                print("allDoctorsData:${r.allDoctorsData!.length}");
-                print("topDoctorsData:${r.topDoctorsData!.length}");
-                print("doctorsSearchData: ${r.doctorsSearchData!.length}");
-                print(
-                    "doctorsSpecializationData: ${r.doctorsSpecializationData!.length}");
+              //   // print(r.results);
+              //   print(r.doctorsSearchData![0].userName);
+              //   // print(r.doctorsSearchData![2].userName);
+              //   // print(r.doctorsSearchData![3].userName);
 
-                // print(r.results);
-                print(r.doctorsSearchData![0].userName);
-                // print(r.doctorsSearchData![2].userName);
-                // print(r.doctorsSearchData![3].userName);
-
-                // print(r.doctorsData![1].name);
-                // print(r.doctorsData![2].fees);
-                // print(r.doctorsData![4].averageRating);
-                // print(r.doctorsData![5].timePerPatient);
-              });
+              //   // print(r.doctorsData![1].name);
+              //   // print(r.doctorsData![2].fees);
+              //   // print(r.doctorsData![4].averageRating);
+              //   // print(r.doctorsData![5].timePerPatient);
+              // });
               //
               // (await _getTopDoctorsUseCase.call(
               //         // input: "Heart",

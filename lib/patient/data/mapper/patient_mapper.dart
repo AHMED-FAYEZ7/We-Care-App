@@ -93,11 +93,14 @@ extension AppointmentInfoResponseMapper on AppointmentInfoResponse? {
                 const Iterable.empty())
             .cast<Appointment>()
             .toList();
+    // Appointment bookedAppointmentMapped =
+    //      this?.bookedAppointmentResponseData?.toDomain();
 
     return AppointmentsInfo(
       allAppointmentsMapped,
       availableAppointmentsMapped,
       availableAppointmentsByDayMapped,
+      this?.bookedAppointmentResponseData?.toDomain(),
     );
   }
 }

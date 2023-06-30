@@ -55,12 +55,17 @@ class AppointmentInfoResponse extends BaseResponse {
   @JsonKey(name: "availableAppointmentsByDay")
   List<AppointmentResponse>? availableAppointmentsByDayResponseData;
 
+  @JsonKey(name: "appointment")
+  AppointmentResponse? bookedAppointmentResponseData;
+
   factory AppointmentInfoResponse.fromJson(Map<String, dynamic> json) {
     if (json.containsKey('allAppointments')) {
       return _$AppointmentInfoResponseFromJson(json);
     } else if (json.containsKey('availableAppointments')) {
       return _$AppointmentInfoResponseFromJson(json);
     } else if (json.containsKey('availableAppointmentsByDay')) {
+      return _$AppointmentInfoResponseFromJson(json);
+    } else if (json.containsKey('appointment')) {
       return _$AppointmentInfoResponseFromJson(json);
     } else {
       throw ArgumentError('Invalid JSON structure for AllDoctorsResponse');
@@ -76,5 +81,6 @@ class AppointmentInfoResponse extends BaseResponse {
     this.allAppointmentsResponseData,
     this.availableAppointmentsResponseData,
     this.availableAppointmentsByDayResponseData,
+    this.bookedAppointmentResponseData,
   );
 }

@@ -18,6 +18,10 @@ abstract class BasePatientRemoteDataSource {
     String docId,
     String date,
   );
+
+  Future<AppointmentInfoResponse> bookAppointment({
+    required String appointmentID,
+  });
 }
 
 class PatientRemoteDataSourceImpl implements BasePatientRemoteDataSource {
@@ -76,6 +80,15 @@ class PatientRemoteDataSourceImpl implements BasePatientRemoteDataSource {
     return await _patientServiceClient.getAvailableAppointmentsByDay(
       docId,
       date,
+    );
+  }
+
+  @override
+  Future<AppointmentInfoResponse> bookAppointment({
+    required String appointmentID,
+  }) async {
+    return await _patientServiceClient.bookAppointment(
+      appointmentID,
     );
   }
 }

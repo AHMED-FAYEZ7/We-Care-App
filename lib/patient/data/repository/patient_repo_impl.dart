@@ -188,4 +188,33 @@ class PatientRepoImpl implements BasePatientRepo {
       return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, AppointmentsInfo>> bookAppointment({
+    required String appointmentID,
+  }) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final response = await _basePatientRemoteDataSource.bookAppointment(
+          appointmentID: appointmentID,
+        );
+
+        print(" ssssssssss ssssssssssss ${response.status}");
+        print(
+            " ةةةة ssssssssssss ${response.bookedAppointmentResponseData!.date}");
+        // print(" cccccccccc ssssssssssss ${response.allDoctors!.length}");
+        if (response.status == ApiInternalStatus.SUCCESS) {
+          return Right(response.toDomain());
+        } else {
+          print("error ${response.message!}");
+          return Left(Failure(1, response.message!));
+        }
+      } catch (error) {
+        print("errorsss ${error.toString()}");
+        return Left((ErrorHandler.handle(error).failure));
+      }
+    } else {
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
 }
