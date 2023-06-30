@@ -27,6 +27,7 @@ import 'package:health_care/patient/data/data_source/patient_remote_data_source.
 import 'package:health_care/patient/data/network/patient_api/patient_api.dart';
 import 'package:health_care/patient/data/repository/patient_repo_impl.dart';
 import 'package:health_care/patient/domain/repository/patient_repo.dart';
+import 'package:health_care/patient/domain/usecase/book_appointment_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_all_doctors_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_available_appointment_by_day_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_available_apponitments_for_doctor_use_case.dart';
@@ -149,6 +150,9 @@ Future<void> initAppModule() async {
 
   sl.registerLazySingleton<GetAvailableAppointmentsByDay>(
       () => GetAvailableAppointmentsByDay(sl()));
+
+  sl.registerLazySingleton<BookAppointmentUseCase>(
+      () => BookAppointmentUseCase(sl()));
 
   // cubit
 

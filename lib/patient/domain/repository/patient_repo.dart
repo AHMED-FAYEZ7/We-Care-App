@@ -22,4 +22,7 @@ abstract class BasePatientRepo {
     required String docID,
     required String date,
   });
+  Future<Either<Failure, AppointmentsInfo>> bookAppointment({
+    required String appointmentID,
+  });
 }

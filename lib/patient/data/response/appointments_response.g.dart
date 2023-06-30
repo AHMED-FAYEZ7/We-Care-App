@@ -47,6 +47,10 @@ AppointmentInfoResponse _$AppointmentInfoResponseFromJson(
       (json['availableAppointmentsByDay'] as List<dynamic>?)
           ?.map((e) => AppointmentResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
+      json['appointment'] == null
+          ? null
+          : AppointmentResponse.fromJson(
+              json['appointment'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$AppointmentInfoResponseToJson(
@@ -58,4 +62,5 @@ Map<String, dynamic> _$AppointmentInfoResponseToJson(
       'availableAppointments': instance.availableAppointmentsResponseData,
       'availableAppointmentsByDay':
           instance.availableAppointmentsByDayResponseData,
+      'appointment': instance.bookedAppointmentResponseData,
     };
