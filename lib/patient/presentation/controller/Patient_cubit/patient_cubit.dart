@@ -60,17 +60,32 @@ class PatientCubit extends Cubit<PatientState> {
 
 /////////////////////////////
   List<User> topDoctor = [];
-  getTopDoctor(String specialist) async {
+  List<User> specialistTopDoctor = [];
+  bool isAll = true;
+  getTopDoctor({String? specialist}) async {
     emit(GetTopDoctorLoadingState());
-    topDoctor = [];
-    (await _getTopDoctorsUseCase.call(input: specialist)).fold(
+    // topDoctor = [];
+    specialistTopDoctor = [];
+
+    final useCase = specialist != null
+        ? _getTopDoctorsUseCase.call(input: specialist)
+        : _getTopDoctorsUseCase.call();
+
+    (await useCase).fold(
       (l) {
         emit(GetTopDoctorFailureState());
       },
       (r) {
-        topDoctor = r.topDoctorsData!;
+        specialist != null
+            ? specialistTopDoctor = r.topDoctorsData!
+            : topDoctor = r.topDoctorsData!;
+
+        print(topDoctor.length);
+        print(specialistTopDoctor.length);
         emit(GetTopDoctorSuccessState());
       },
     );
   }
+
+  empty({String? specialist}) async {}
 }

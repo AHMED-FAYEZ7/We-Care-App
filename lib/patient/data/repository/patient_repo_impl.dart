@@ -24,7 +24,6 @@ class PatientRepoImpl implements BasePatientRepo {
       try {
         final response = await _basePatientRemoteDataSource.getAllDoctors();
 
-        print(" ssssssssss ssssssssssss ${response.resultsResponse}");
         if (response.status == ApiInternalStatus.SUCCESS) {
           return Right(response.toDomain());
         } else {
@@ -48,7 +47,6 @@ class PatientRepoImpl implements BasePatientRepo {
           specialization: specialization,
         );
 
-        print(" mmmmmmmmmmmm ${response.resultsResponse}");
         if (response.status == ApiInternalStatus.SUCCESS) {
           return Right(response.toDomain());
         } else {
@@ -73,7 +71,6 @@ class PatientRepoImpl implements BasePatientRepo {
           specialization,
         );
 
-        print(" hhhhhhhhhhh hhhhhhhhhhhss ${response.resultsResponse}");
         if (response.status == ApiInternalStatus.SUCCESS) {
           return Right(response.toDomain());
         } else {

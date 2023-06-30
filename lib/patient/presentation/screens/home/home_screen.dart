@@ -93,25 +93,39 @@ class HomePatientScreen extends StatelessWidget {
                   child: Container(
                     height: MediaQuery.of(context).size.height * .25,
                     margin: const EdgeInsets.symmetric(vertical: AppMargin.m8),
-                    child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (BuildContext context, int index) => InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(
-                            context,
-                            Routes.doctorProfilePatientRoute,
-                            arguments: cubit.topDoctor[index],
-                          );
-                        },
-                        child: TopDoctorCardWidget(
-                          model: cubit.topDoctor[index],
+                    child: ConditionalBuilder(
+                      condition: cubit.topDoctor.isNotEmpty,
+                      builder: (context) => ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (BuildContext context, int index) =>
+                            InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              Routes.doctorProfilePatientRoute,
+                              arguments: cubit.topDoctor[index],
+                            );
+                          },
+                          child: TopDoctorCardWidget(
+                            model: cubit.topDoctor[index],
+                          ),
                         ),
+                        separatorBuilder: (BuildContext context, int index) =>
+                            const SizedBox(
+                          width: AppSize.s10,
+                        ),
+                        itemCount: cubit.topDoctor.length,
                       ),
-                      separatorBuilder: (BuildContext context, int index) =>
-                          const SizedBox(
-                        width: AppSize.s10,
+                      fallback: (context) => ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (BuildContext context, int index) =>
+                            TopDoctorShimmerWidget(),
+                        separatorBuilder: (BuildContext context, int index) =>
+                            const SizedBox(
+                          width: AppSize.s10,
+                        ),
+                        itemCount: 5,
                       ),
-                      itemCount: cubit.topDoctor.length,
                     ),
                   ),
                 ),
@@ -129,15 +143,21 @@ class HomePatientScreen extends StatelessWidget {
                     height: MediaQuery.of(context).size.height * .25,
                     margin: const EdgeInsets.symmetric(vertical: AppMargin.m8),
                     child: ConditionalBuilder(
-                      condition: state is! GetAllDoctorLoadingState,
+                      condition: cubit.allDoctor.isNotEmpty,
                       builder: (context) => ListView.separated(
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (BuildContext context, int index) =>
                             InkWell(
-                          onTap: () {},
                           child: TopDoctorCardWidget(
                             model: cubit.allDoctor[index],
                           ),
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              Routes.doctorProfilePatientRoute,
+                              arguments: cubit.allDoctor[index],
+                            );
+                          },
                         ),
                         separatorBuilder: (BuildContext context, int index) =>
                             const SizedBox(

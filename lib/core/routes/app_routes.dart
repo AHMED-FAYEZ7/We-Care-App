@@ -82,8 +82,7 @@ class RouteGenerator {
         return MaterialPageRoute(
             builder: (_) => const SpecialistDoctorPatientScreen());
       case Routes.topDoctorPatientRoute:
-        return MaterialPageRoute(
-            builder: (_) => const TopDoctorPatientScreen());
+        return MaterialPageRoute(builder: (_) => TopDoctorPatientScreen());
       case Routes.doctorProfilePatientRoute:
         final User doctorModel = routeSettings.arguments as User;
         return MaterialPageRoute(

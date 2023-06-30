@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:health_care/authentication/domain/model/user_model.dart';
 import 'package:health_care/authentication/presentation/widgets/default_text_button.dart';
@@ -24,7 +26,7 @@ class DoctorProfilePatientScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBarWidget(
         isBack: true,
-        title: "Dr. Ahmed Fayez",
+        title: doctorModel.name,
       ),
       body: SingleChildScrollView(
         child: Column(

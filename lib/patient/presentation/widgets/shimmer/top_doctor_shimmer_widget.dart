@@ -44,7 +44,7 @@ class TopDoctorShimmerWidget extends StatelessWidget {
             ),
             ShimmerWidget(
               width: double.infinity,
-              height: AppSize.s10,
+              height: AppSize.s15,
             ),
           ],
         ),

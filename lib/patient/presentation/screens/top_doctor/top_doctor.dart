@@ -7,12 +7,13 @@ import 'package:health_care/patient/presentation/widgets/doctor_widget.dart';
 import 'package:health_care/patient/presentation/widgets/specialist_doctor_list_widget.dart';
 
 class TopDoctorPatientScreen extends StatelessWidget {
-  const TopDoctorPatientScreen({Key? key}) : super(key: key);
+  TopDoctorPatientScreen({Key? key}) : super(key: key);
 
-  void handleSpecialistSelected(String selectedValue) {
-    print(selectedValue);
-  }
+  // void handleSpecialistSelected({String? selectedValue}) {
+  //   print(selectedValue);
+  // }
 
+  bool isAll = false;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<PatientCubit, PatientState>(
@@ -27,7 +28,8 @@ class TopDoctorPatientScreen extends StatelessWidget {
           body: Column(
             children: [
               SpecialistDoctorListWidget(
-                onSpecialistSelected: cubit.getTopDoctor,
+                onSpecialistSelected: isAll ? cubit.empty : cubit.getTopDoctor,
+                isAll: isAll,
               ),
               Expanded(
                 child: ListView.separated(
@@ -38,13 +40,17 @@ class TopDoctorPatientScreen extends StatelessWidget {
                   physics: const BouncingScrollPhysics(),
                   itemBuilder: (BuildContext context, int index) =>
                       DoctorWidget(
-                    model: cubit.topDoctor[index],
+                    model: isAll
+                        ? cubit.topDoctor[index]
+                        : cubit.specialistTopDoctor[index],
                   ),
                   separatorBuilder: (BuildContext context, int index) =>
                       const SizedBox(
                     width: AppSize.s10,
                   ),
-                  itemCount: cubit.topDoctor.length,
+                  itemCount: isAll
+                      ? cubit.topDoctor.length
+                      : cubit.specialistTopDoctor.length,
                 ),
               ),
             ],

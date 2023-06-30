@@ -30,7 +30,7 @@ class _MyAppState extends State<MyApp> {
       providers: [
         BlocProvider<PatientCubit>(
           create: (BuildContext context) => sl<PatientCubit>()
-            ..getTopDoctor('')
+            ..getTopDoctor()
             ..getAllDoctor(''),
         ),
       ],
