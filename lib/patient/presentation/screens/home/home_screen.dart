@@ -1,3 +1,4 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/core/assets/app_assets.dart';
@@ -9,6 +10,7 @@ import 'package:health_care/patient/presentation/widgets/hint_text_widget.dart';
 import 'package:health_care/patient/presentation/widgets/search_bar_widget.dart';
 import 'package:health_care/patient/presentation/widgets/specialist_doctor_card_widget.dart';
 import 'package:health_care/patient/presentation/widgets/top_doctor_card_widget.dart';
+import 'package:health_care/patient/presentation/widgets/shimmer/top_doctor_shimmer_widget.dart';
 
 class HomePatientScreen extends StatelessWidget {
   const HomePatientScreen({Key? key}) : super(key: key);
@@ -126,19 +128,33 @@ class HomePatientScreen extends StatelessWidget {
                   child: Container(
                     height: MediaQuery.of(context).size.height * .25,
                     margin: const EdgeInsets.symmetric(vertical: AppMargin.m8),
-                    child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (BuildContext context, int index) => InkWell(
-                        onTap: () {},
-                        child: TopDoctorCardWidget(
-                          model: cubit.allDoctor[index],
+                    child: ConditionalBuilder(
+                      condition: state is! GetAllDoctorLoadingState,
+                      builder: (context) => ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (BuildContext context, int index) =>
+                            InkWell(
+                          onTap: () {},
+                          child: TopDoctorCardWidget(
+                            model: cubit.allDoctor[index],
+                          ),
                         ),
+                        separatorBuilder: (BuildContext context, int index) =>
+                            const SizedBox(
+                          width: AppSize.s10,
+                        ),
+                        itemCount: cubit.allDoctor.length,
                       ),
-                      separatorBuilder: (BuildContext context, int index) =>
-                          const SizedBox(
-                        width: AppSize.s10,
+                      fallback: (context) => ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (BuildContext context, int index) =>
+                            TopDoctorShimmerWidget(),
+                        separatorBuilder: (BuildContext context, int index) =>
+                            const SizedBox(
+                          width: AppSize.s10,
+                        ),
+                        itemCount: 5,
                       ),
-                      itemCount: cubit.allDoctor.length,
                     ),
                   ),
                 ),
