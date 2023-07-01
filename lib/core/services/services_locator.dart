@@ -34,6 +34,7 @@ import 'package:health_care/patient/domain/usecase/get_available_apponitments_fo
 import 'package:health_care/patient/domain/usecase/get_docotrs_specialization_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_doctor_by_id_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_doctor_search_use_case.dart';
+import 'package:health_care/patient/domain/usecase/get_rate_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_top_doctors_use_case.dart';
 import 'package:health_care/patient/presentation/controller/Patient_cubit/patient_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -153,6 +154,11 @@ Future<void> initAppModule() async {
 
   sl.registerLazySingleton<BookAppointmentUseCase>(
       () => BookAppointmentUseCase(sl()));
+
+///////// Rate &Reviews ///////////
+
+  sl.registerLazySingleton<GetDoctorRateUseCase>(
+      () => GetDoctorRateUseCase(sl()));
 
   // cubit
 

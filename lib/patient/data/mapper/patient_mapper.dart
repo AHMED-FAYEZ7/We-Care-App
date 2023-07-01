@@ -4,8 +4,10 @@ import 'package:health_care/core/utils/constants.dart';
 import 'package:health_care/core/utils/extension.dart';
 import 'package:health_care/patient/data/response/appointments_response.dart';
 import 'package:health_care/patient/data/response/patient_response.dart';
+import 'package:health_care/patient/data/response/rate_response.dart';
 import 'package:health_care/patient/domain/model/appointment_model.dart';
 import 'package:health_care/patient/domain/model/patient_entities.dart';
+import 'package:health_care/patient/domain/model/rarte_model.dart';
 
 extension DoctorInfoResponseMapper on DoctorInfResponse? {
   DoctorInfo toDomain() {
@@ -93,14 +95,47 @@ extension AppointmentInfoResponseMapper on AppointmentInfoResponse? {
                 const Iterable.empty())
             .cast<Appointment>()
             .toList();
-    // Appointment bookedAppointmentMapped =
-    //      this?.bookedAppointmentResponseData?.toDomain();
 
     return AppointmentsInfo(
       allAppointmentsMapped,
       availableAppointmentsMapped,
       availableAppointmentsByDayMapped,
       this?.bookedAppointmentResponseData?.toDomain(),
+    );
+  }
+}
+
+extension RateResponseMapper on RateResponse? {
+  Rate toDomain() {
+    return Rate(
+      this?.reviewId?.orEmpty() ?? Constants.empty,
+      this?.rating?.orZero() ?? Constants.zero,
+      this?.comment?.orEmpty() ?? Constants.empty,
+      this?.createdAt?.orEmpty() ?? Constants.empty,
+      this?.updatedAt?.orEmpty() ?? Constants.empty,
+      this?.v?.orZero() ?? Constants.zero,
+      this?.patient?.toDomain(),
+      this?.doctor?.toDomain(),
+    );
+  }
+}
+
+extension RateInfoResponseMapper on RateInfoResponse? {
+  RateInfo toDomain() {
+    int reviewsNum = this?.reviewsNum?.orZero() ?? Constants.zero;
+    int results = this?.results?.orZero() ?? Constants.zero;
+
+    List<Rate> reviewsMapped = (this?.reviews?.map(
+                  (reviews) => reviews.toDomain(),
+                ) ??
+            const Iterable.empty())
+        .cast<Rate>()
+        .toList();
+
+    return RateInfo(
+      reviewsNum,
+      results,
+      reviewsMapped,
     );
   }
 }
