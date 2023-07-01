@@ -92,12 +92,12 @@ class PatientCubit extends Cubit<PatientState> {
 
   /////////////searched doctor////////////////
   List<User> searchedDoctor = [];
-  bool isAllSearched = false;
+  bool isSearched = false;
 
   getSearchedDoctor({String? keyword, String? specialist}) async {
     emit(GetSearchedDoctorLoadingState());
     searchedDoctor = [];
-
+    isSearched = true;
     final useCase = specialist != null
         ? _getDoctorSearchUseCase.call(
             TwoParametersUseCase(keyword!, specialist),
@@ -108,14 +108,8 @@ class PatientCubit extends Cubit<PatientState> {
         emit(GetSearchedDoctorFailureState());
       },
       (r) {
-        if (specialist == null) {
-          searchedDoctor = r.doctorsSearchData!;
-        } else if (specialist == "All") {
-          isAllSearched = false;
-        } else {
-          searchedDoctor = r.doctorsSearchData!;
-          isAllSearched = true;
-        }
+        searchedDoctor = r.doctorsSearchData!;
+
         emit(GetSearchedDoctorSuccessState());
       },
     );

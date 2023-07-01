@@ -13,7 +13,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
     this.isSearch = false,
     this.isHome = false,
     this.controller,
-    this.onChanged,
+    this.onSearch,
     Key? key,
   }) : super(key: key);
 
@@ -22,7 +22,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   bool isSearch = false;
   bool isHome = false;
   TextEditingController? controller;
-  Function(String value)? onChanged;
+  VoidCallback? onSearch;
 
   @override
   Size get preferredSize => const Size.fromHeight(60);
@@ -53,7 +53,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                 readOnly: false,
                 onTap: () {},
                 controller: controller,
-                onChanged: onChanged,
+                onSearch: onSearch,
               ),
             )
           : Text(

@@ -8,14 +8,14 @@ import 'package:health_care/core/global/theme/app_color/color_manager.dart';
 class SearchBarWidget extends StatefulWidget {
   bool readOnly = false;
   Function onTap;
-  Function(String value)? onChanged;
+  VoidCallback? onSearch;
   TextEditingController? controller;
   String? initialValue;
 
   SearchBarWidget({
     required this.readOnly,
     required this.onTap,
-    this.onChanged,
+    this.onSearch,
     this.controller,
     this.initialValue,
     super.key,
@@ -34,14 +34,11 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
           padding: const EdgeInsets.symmetric(horizontal: AppSize.s12),
           child: SizedBox(
             height: AppSize.s40,
-            child: TextFormField(
+            child: TextField(
               controller: widget.controller,
               readOnly: widget.readOnly,
               onTap: () {
                 widget.onTap();
-              },
-              onFieldSubmitted: (value) {
-                widget.onChanged!(value);
               },
               decoration: InputDecoration(
                 hintText: 'Search...',
@@ -56,10 +53,18 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                   borderSide: BorderSide(color: ColorManager.white),
                   borderRadius: BorderRadius.circular(AppSize.s20),
                 ),
-                suffixIcon: Icon(
-                  IconBroken.Search,
-                  color: ColorManager.primary,
-                ),
+                suffixIcon: widget.readOnly
+                    ? Icon(
+                        IconBroken.Search,
+                        color: ColorManager.primary,
+                      )
+                    : IconButton(
+                        onPressed: widget.onSearch,
+                        icon: Icon(
+                          IconBroken.Search,
+                          color: ColorManager.primary,
+                        ),
+                      ),
               ),
             ),
           ),

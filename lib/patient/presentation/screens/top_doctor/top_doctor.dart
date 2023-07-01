@@ -5,6 +5,7 @@ import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/patient/presentation/controller/Patient_cubit/patient_cubit.dart';
 import 'package:health_care/patient/presentation/widgets/app_bar_widget.dart';
 import 'package:health_care/patient/presentation/widgets/doctor_widget.dart';
+import 'package:health_care/patient/presentation/widgets/empty_list_widget.dart';
 import 'package:health_care/patient/presentation/widgets/shimmer/doctor_shimmer_widget.dart';
 import 'package:health_care/patient/presentation/widgets/specialist_doctor_list_widget.dart';
 
@@ -53,20 +54,25 @@ class TopDoctorPatientScreen extends StatelessWidget {
                         )
                       : DoctorShimmerWidget(),
                   fallback: (context) => state is! GetTopDoctorLoadingState
-                      ? ListView.separated(
-                          scrollDirection: Axis.vertical,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: AppPadding.p12,
+                      ? ConditionalBuilder(
+                          condition: cubit.specialistTopDoctor.isNotEmpty,
+                          builder: (context) => ListView.separated(
+                            scrollDirection: Axis.vertical,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: AppPadding.p12,
+                            ),
+                            physics: const BouncingScrollPhysics(),
+                            itemBuilder: (BuildContext context, int index) =>
+                                DoctorWidget(
+                                    model: cubit.specialistTopDoctor[index]),
+                            separatorBuilder:
+                                (BuildContext context, int index) =>
+                                    const SizedBox(
+                              width: AppSize.s10,
+                            ),
+                            itemCount: cubit.specialistTopDoctor.length,
                           ),
-                          physics: const BouncingScrollPhysics(),
-                          itemBuilder: (BuildContext context, int index) =>
-                              DoctorWidget(
-                                  model: cubit.specialistTopDoctor[index]),
-                          separatorBuilder: (BuildContext context, int index) =>
-                              const SizedBox(
-                            width: AppSize.s10,
-                          ),
-                          itemCount: cubit.specialistTopDoctor.length,
+                          fallback: (context) => const EmptyListWidget(),
                         )
                       : DoctorShimmerWidget(),
                 ),
