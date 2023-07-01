@@ -3,6 +3,7 @@ import 'package:health_care/authentication/domain/model/user_model.dart';
 import 'package:health_care/core/error/failure.dart';
 import 'package:health_care/patient/domain/model/appointment_model.dart';
 import 'package:health_care/patient/domain/model/patient_entities.dart';
+import 'package:health_care/patient/domain/model/rarte_model.dart';
 
 abstract class BasePatientRepo {
   Future<Either<Failure, DoctorInfo>> getAllDoctors();
@@ -24,5 +25,8 @@ abstract class BasePatientRepo {
   });
   Future<Either<Failure, AppointmentsInfo>> bookAppointment({
     required String appointmentID,
+  });
+  Future<Either<Failure, RateInfo>> getDoctorReviews({
+    required String doctorId,
   });
 }

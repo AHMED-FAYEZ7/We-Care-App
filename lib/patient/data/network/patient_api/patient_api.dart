@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:health_care/core/network/api_constance.dart';
 import 'package:health_care/patient/data/response/appointments_response.dart';
 import 'package:health_care/patient/data/response/patient_response.dart';
+import 'package:health_care/patient/data/response/rate_response.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'patient_api.g.dart';
@@ -50,5 +51,10 @@ abstract class PatientServiceClient {
   @POST("api/v1/appointments/book")
   Future<AppointmentInfoResponse> bookAppointment(
     @Field("AppointmentID") String appointmentID,
+  );
+
+  @GET("api/v1/reviews/doctor/{docId}")
+  Future<RateInfoResponse> getDoctorReviews(
+    @Path("docId") String docId,
   );
 }

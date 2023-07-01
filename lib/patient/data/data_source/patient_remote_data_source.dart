@@ -1,6 +1,7 @@
 import 'package:health_care/patient/data/network/patient_api/patient_api.dart';
 import 'package:health_care/patient/data/response/appointments_response.dart';
 import 'package:health_care/patient/data/response/patient_response.dart';
+import 'package:health_care/patient/data/response/rate_response.dart';
 
 abstract class BasePatientRemoteDataSource {
   Future<DoctorInfResponse> getAllDoctors();
@@ -21,6 +22,10 @@ abstract class BasePatientRemoteDataSource {
 
   Future<AppointmentInfoResponse> bookAppointment({
     required String appointmentID,
+  });
+
+  Future<RateInfoResponse> getDoctorReviews({
+    required String docId,
   });
 }
 
@@ -89,6 +94,13 @@ class PatientRemoteDataSourceImpl implements BasePatientRemoteDataSource {
   }) async {
     return await _patientServiceClient.bookAppointment(
       appointmentID,
+    );
+  }
+
+  @override
+  Future<RateInfoResponse> getDoctorReviews({required String docId}) async {
+    return await _patientServiceClient.getDoctorReviews(
+      docId,
     );
   }
 }
