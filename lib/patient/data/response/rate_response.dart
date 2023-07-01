@@ -54,6 +54,9 @@ class RateInfoResponse extends BaseResponse {
   @JsonKey(name: "results")
   int? results;
 
+  @JsonKey(name: "msg")
+  String? successMessage;
+
   @JsonKey(name: "reviews")
   List<RateResponse>? reviews;
 
@@ -62,11 +65,19 @@ class RateInfoResponse extends BaseResponse {
     super.message,
     this.reviewsNum,
     this.results,
+    this.successMessage,
     this.reviews,
   );
 
-  factory RateInfoResponse.fromJson(Map<String, dynamic> json) =>
-      _$RateInfoResponseFromJson(json);
+  factory RateInfoResponse.fromJson(Map<String, dynamic> json) {
+    if (json.containsKey('reviews')) {
+      return _$RateInfoResponseFromJson(json);
+    } else if (json.containsKey('msg')) {
+      return _$RateInfoResponseFromJson(json);
+    } else {
+      throw ArgumentError('Invalid JSON structure for AllDoctorsResponse');
+    }
+  }
 
   @override
   Map<String, dynamic> toJson() => _$RateInfoResponseToJson(this);

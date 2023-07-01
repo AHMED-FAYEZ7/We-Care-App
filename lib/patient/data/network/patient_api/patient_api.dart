@@ -53,8 +53,29 @@ abstract class PatientServiceClient {
     @Field("AppointmentID") String appointmentID,
   );
 
+//////////////////// reviews ////////////
+
   @GET("api/v1/reviews/doctor/{docId}")
   Future<RateInfoResponse> getDoctorReviews(
+    @Path("docId") String docId,
+  );
+
+  @POST("api/v1/reviews/{docId}")
+  Future<RateInfoResponse> makeReview(
+    @Path("docId") String docId,
+    @Field("rating") int rating,
+    @Field("comment") String comment,
+  );
+
+  @PATCH("api/v1/reviews/{docId}")
+  Future<RateInfoResponse> updateReview(
+    @Path("docId") String docId,
+    @Field("rating") int rating,
+    @Field("comment") String comment,
+  );
+
+  @DELETE("api/v1/reviews/{docId}")
+  Future<RateInfoResponse> deleteReview(
     @Path("docId") String docId,
   );
 }

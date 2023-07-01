@@ -29,4 +29,18 @@ abstract class BasePatientRepo {
   Future<Either<Failure, RateInfo>> getDoctorReviews({
     required String doctorId,
   });
+
+  Future<Either<Failure, RateInfo>> makeDoctorReview({
+    required String docId,
+    required int rating,
+    required String comment,
+  });
+
+  Future<Either<Failure, RateInfo>> updateDoctorReview({
+    required String docId,
+    required int rating,
+    required String comment,
+  });
+
+  Future<Either<Failure, RateInfo>> deleteReview({required String docId});
 }

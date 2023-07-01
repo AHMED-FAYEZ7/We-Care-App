@@ -14,7 +14,10 @@ abstract class BasePatientRemoteDataSource {
     String query, {
     String? specialization,
   });
+  ///////////////// appointment ////////////////
+
   Future<AppointmentInfoResponse> getDoctorAvailableAppointments(String docId);
+
   Future<AppointmentInfoResponse> getAvailableAppointmentsByDay(
     String docId,
     String date,
@@ -24,9 +27,25 @@ abstract class BasePatientRemoteDataSource {
     required String appointmentID,
   });
 
+  ///////////////// reviews ////////////////
+
   Future<RateInfoResponse> getDoctorReviews({
     required String docId,
   });
+
+  Future<RateInfoResponse> makeDoctorReview({
+    required String docId,
+    required int rating,
+    required String comment,
+  });
+
+  Future<RateInfoResponse> updateDoctorReview({
+    required String docId,
+    required int rating,
+    required String comment,
+  });
+
+  Future<RateInfoResponse> deleteReview({required String docId});
 }
 
 class PatientRemoteDataSourceImpl implements BasePatientRemoteDataSource {
@@ -100,6 +119,45 @@ class PatientRemoteDataSourceImpl implements BasePatientRemoteDataSource {
   @override
   Future<RateInfoResponse> getDoctorReviews({required String docId}) async {
     return await _patientServiceClient.getDoctorReviews(
+      docId,
+    );
+  }
+
+  @override
+  Future<RateInfoResponse> makeDoctorReview({
+    required String docId,
+    required int rating,
+    required String comment,
+  }) async {
+    final data = await _patientServiceClient.makeReview(
+      docId,
+      rating,
+      comment,
+    );
+    print("data ${data.successMessage} ");
+    print("data1 ${data.results} ");
+    print("data2 ${data.reviews} ");
+    print("data3 ${data.reviewsNum} ");
+    print("data4 ${data.message} ");
+    return data;
+  }
+
+  @override
+  Future<RateInfoResponse> updateDoctorReview({
+    required String docId,
+    required int rating,
+    required String comment,
+  }) async {
+    return await _patientServiceClient.updateReview(
+      docId,
+      rating,
+      comment,
+    );
+  }
+
+  @override
+  Future<RateInfoResponse> deleteReview({required String docId}) async {
+    return await _patientServiceClient.deleteReview(
       docId,
     );
   }

@@ -246,4 +246,86 @@ class PatientRepoImpl implements BasePatientRepo {
       return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, RateInfo>> makeDoctorReview({
+    required String docId,
+    required int rating,
+    required String comment,
+  }) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final response = await _basePatientRemoteDataSource.makeDoctorReview(
+          docId: docId,
+          rating: rating,
+          comment: comment,
+        );
+
+        // print(" ssssssssss ssssssssssss ${response.status}");
+        // print(" ةةةة ssssssssssss ${response.reviews!.length}");
+        // print(" cccccccccc ssssssssssss ${response.allDoctors!.length}");
+        print(" eaefrara ${response.successMessage}");
+        final message = response.successMessage;
+        print(" hhhhhhhhhhh ${message}");
+        print(" ,,,,,, ${response.status}");
+
+        return Right(response.toDomain());
+      } catch (error) {
+        print("error ${error.toString()}");
+        return Left((ErrorHandler.handle(error).failure));
+      }
+    } else {
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, RateInfo>> updateDoctorReview({
+    required String docId,
+    required int rating,
+    required String comment,
+  }) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final response = await _basePatientRemoteDataSource.updateDoctorReview(
+          docId: docId,
+          rating: rating,
+          comment: comment,
+        );
+
+        // print(" ssssssssss ssssssssssss ${response.status}");
+        // print(" ةةةة ssssssssssss ${response.reviews!.length}");
+        // print(" cccccccccc ssssssssssss ${response.allDoctors!.length}");
+        return Right(response.toDomain());
+      } catch (error) {
+        print("error ${error.toString()}");
+        return Left((ErrorHandler.handle(error).failure));
+      }
+    } else {
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, RateInfo>> deleteReview({
+    required String docId,
+  }) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final response = await _basePatientRemoteDataSource.deleteReview(
+          docId: docId,
+        );
+
+        // print(" ssssssssss ssssssssssss ${response.status}");
+        // print(" ةةةة ssssssssssss ${response.reviews!.length}");
+        // print(" cccccccccc ssssssssssss ${response.allDoctors!.length}");
+        return Right(response.toDomain());
+      } catch (error) {
+        print("error ${error.toString()}");
+        return Left((ErrorHandler.handle(error).failure));
+      }
+    } else {
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
 }
