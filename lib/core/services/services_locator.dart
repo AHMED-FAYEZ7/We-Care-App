@@ -174,5 +174,6 @@ Future<void> initAppModule() async {
   sl.registerFactory<PatientCubit>(() => PatientCubit(
         sl(),
         sl(),
+        sl(),
       ));
 }

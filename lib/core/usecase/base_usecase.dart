@@ -12,11 +12,11 @@ abstract class OptionalBaseUseCase<In, Out> {
 
 class TwoParametersUseCase {
   String firstParam;
-  String secondParam;
+  String? secondParam;
   TwoParametersUseCase(
-    this.firstParam,
+    this.firstParam, [
     this.secondParam,
-  );
+  ]);
 }
 
 class NoParameters extends Equatable {

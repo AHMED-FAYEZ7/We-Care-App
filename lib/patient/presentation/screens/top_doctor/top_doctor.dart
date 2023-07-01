@@ -33,7 +33,7 @@ class TopDoctorPatientScreen extends StatelessWidget {
               ),
               Expanded(
                 child: ConditionalBuilder(
-                  condition: !cubit.isAll,
+                  condition: !cubit.isAllTop,
                   builder: (context) => state is! GetTopDoctorLoadingState
                       ? ListView.separated(
                           scrollDirection: Axis.vertical,

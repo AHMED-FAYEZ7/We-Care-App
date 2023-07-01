@@ -6,11 +6,13 @@ import 'package:health_care/core/global/theme/app_color/color_manager.dart';
 
 class SpecialistDoctorListWidget extends StatefulWidget {
   SpecialistDoctorListWidget({
+    // this.keyword,
     this.onSpecialistSelected,
     this.isAll = false,
     Key? key,
   }) : super(key: key);
 
+  // String? keyword;
   Function({String? specialist})? onSpecialistSelected;
   bool isAll = false;
   @override

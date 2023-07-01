@@ -16,7 +16,7 @@ class GetAvailableAppointmentsByDay
   ) async {
     return await _basePatientRepo.getAvailableAppointmentsByDay(
       docID: params.firstParam,
-      date: params.secondParam,
+      date: params.secondParam!,
     );
   }
 }

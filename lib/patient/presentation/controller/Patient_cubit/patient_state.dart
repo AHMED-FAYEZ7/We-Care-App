@@ -20,4 +20,11 @@ class GetAllDoctorLoadingState extends PatientState {}
 class GetAllDoctorSuccessState extends PatientState {}
 
 class GetAllDoctorFailureState extends PatientState {}
+
+////////////////////////////////////////////
+class GetSearchedDoctorLoadingState extends PatientState {}
+
+class GetSearchedDoctorSuccessState extends PatientState {}
+
+class GetSearchedDoctorFailureState extends PatientState {}
 ////////////////////////////////////////////
