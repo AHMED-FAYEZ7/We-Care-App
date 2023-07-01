@@ -25,11 +25,13 @@ class Rate {
 class RateInfo {
   int reviewsNum;
   int results;
+  String successMessage;
   List<Rate>? reviews;
 
   RateInfo(
     this.reviewsNum,
     this.results,
+    this.successMessage,
     this.reviews,
   );
 }

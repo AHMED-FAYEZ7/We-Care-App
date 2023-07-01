@@ -28,6 +28,7 @@ import 'package:health_care/patient/data/network/patient_api/patient_api.dart';
 import 'package:health_care/patient/data/repository/patient_repo_impl.dart';
 import 'package:health_care/patient/domain/repository/patient_repo.dart';
 import 'package:health_care/patient/domain/usecase/book_appointment_use_case.dart';
+import 'package:health_care/patient/domain/usecase/delete_review_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_all_doctors_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_available_appointment_by_day_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_available_apponitments_for_doctor_use_case.dart';
@@ -36,6 +37,8 @@ import 'package:health_care/patient/domain/usecase/get_doctor_by_id_use_case.dar
 import 'package:health_care/patient/domain/usecase/get_doctor_search_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_rate_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_top_doctors_use_case.dart';
+import 'package:health_care/patient/domain/usecase/make_doctor_review_use_case.dart';
+import 'package:health_care/patient/domain/usecase/update_doctor_review_use_case.dart';
 import 'package:health_care/patient/presentation/controller/Patient_cubit/patient_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -155,10 +158,19 @@ Future<void> initAppModule() async {
   sl.registerLazySingleton<BookAppointmentUseCase>(
       () => BookAppointmentUseCase(sl()));
 
-///////// Rate &Reviews ///////////
+///////// Rate & Reviews ///////////
 
   sl.registerLazySingleton<GetDoctorRateUseCase>(
       () => GetDoctorRateUseCase(sl()));
+
+  sl.registerLazySingleton<MakeDoctorReviewUseCase>(
+      () => MakeDoctorReviewUseCase(sl()));
+
+  sl.registerLazySingleton<UpdateDoctorReviewUseCase>(
+      () => UpdateDoctorReviewUseCase(sl()));
+
+  sl.registerLazySingleton<DeleteReviewUseCase>(
+      () => DeleteReviewUseCase(sl()));
 
   // cubit
 

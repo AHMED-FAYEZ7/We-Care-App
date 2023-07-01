@@ -124,7 +124,7 @@ extension RateInfoResponseMapper on RateInfoResponse? {
   RateInfo toDomain() {
     int reviewsNum = this?.reviewsNum?.orZero() ?? Constants.zero;
     int results = this?.results?.orZero() ?? Constants.zero;
-
+    String successMessage = this?.successMessage?.orEmpty() ?? Constants.empty;
     List<Rate> reviewsMapped = (this?.reviews?.map(
                   (reviews) => reviews.toDomain(),
                 ) ??
@@ -135,6 +135,7 @@ extension RateInfoResponseMapper on RateInfoResponse? {
     return RateInfo(
       reviewsNum,
       results,
+      successMessage,
       reviewsMapped,
     );
   }

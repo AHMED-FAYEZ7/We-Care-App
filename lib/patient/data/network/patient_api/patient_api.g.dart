@@ -240,6 +240,89 @@ class _PatientServiceClient implements PatientServiceClient {
     return value;
   }
 
+  @override
+  Future<RateInfoResponse> makeReview(
+    docId,
+    rating,
+    comment,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'rating': rating,
+      'comment': comment,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<RateInfoResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'api/v1/reviews/${docId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = RateInfoResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<RateInfoResponse> updateReview(
+    docId,
+    rating,
+    comment,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'rating': rating,
+      'comment': comment,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<RateInfoResponse>(Options(
+      method: 'PATCH',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'api/v1/reviews/${docId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = RateInfoResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<RateInfoResponse> deleteReview(docId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<RateInfoResponse>(Options(
+      method: 'DELETE',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'api/v1/reviews/${docId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = RateInfoResponse.fromJson(_result.data!);
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

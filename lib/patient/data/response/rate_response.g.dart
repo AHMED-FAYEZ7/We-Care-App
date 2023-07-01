@@ -39,6 +39,7 @@ RateInfoResponse _$RateInfoResponseFromJson(Map<String, dynamic> json) =>
       json['message'] as String?,
       json['reviewsNum'] as int?,
       json['results'] as int?,
+      json['msg'] as String?,
       (json['reviews'] as List<dynamic>?)
           ?.map((e) => RateResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -50,5 +51,6 @@ Map<String, dynamic> _$RateInfoResponseToJson(RateInfoResponse instance) =>
       'message': instance.message,
       'reviewsNum': instance.reviewsNum,
       'results': instance.results,
+      'msg': instance.successMessage,
       'reviews': instance.reviews,
     };
