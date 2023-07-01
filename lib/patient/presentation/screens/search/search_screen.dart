@@ -1,9 +1,10 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, must_be_immutable
 
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
+import 'package:health_care/core/routes/app_routes.dart';
 import 'package:health_care/patient/presentation/controller/Patient_cubit/patient_cubit.dart';
 import 'package:health_care/patient/presentation/widgets/app_bar_widget.dart';
 import 'package:health_care/patient/presentation/widgets/doctor_widget.dart';
@@ -81,9 +82,17 @@ class _SearchPatientScreenState extends State<SearchPatientScreen> {
                       horizontal: AppPadding.p12,
                     ),
                     physics: const BouncingScrollPhysics(),
-                    itemBuilder: (BuildContext context, int index) =>
-                        DoctorWidget(
-                      model: cubit.allDoctor[index],
+                    itemBuilder: (BuildContext context, int index) => InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          Routes.doctorProfilePatientRoute,
+                          arguments: cubit.allDoctor[index],
+                        );
+                      },
+                      child: DoctorWidget(
+                        model: cubit.allDoctor[index],
+                      ),
                     ),
                     separatorBuilder: (BuildContext context, int index) =>
                         const SizedBox(
@@ -101,8 +110,17 @@ class _SearchPatientScreenState extends State<SearchPatientScreen> {
                             ),
                             physics: const BouncingScrollPhysics(),
                             itemBuilder: (BuildContext context, int index) =>
-                                DoctorWidget(
-                              model: cubit.searchedDoctor[index],
+                                InkWell(
+                              onTap: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  Routes.doctorProfilePatientRoute,
+                                  arguments: cubit.searchedDoctor[index],
+                                );
+                              },
+                              child: DoctorWidget(
+                                model: cubit.searchedDoctor[index],
+                              ),
                             ),
                             separatorBuilder:
                                 (BuildContext context, int index) =>
@@ -111,7 +129,7 @@ class _SearchPatientScreenState extends State<SearchPatientScreen> {
                             ),
                             itemCount: cubit.searchedDoctor.length,
                           ),
-                          fallback: (context) => EmptyListWidget(),
+                          fallback: (context) => const EmptyListWidget(),
                         )
                       : DoctorShimmerWidget(),
                 ),

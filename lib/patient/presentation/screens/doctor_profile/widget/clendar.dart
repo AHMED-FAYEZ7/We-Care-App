@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print, library_private_types_in_public_api
-
 import 'package:flutter/material.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
@@ -12,11 +10,9 @@ class Calendar extends StatefulWidget {
 }
 
 class _CalendarState extends State<Calendar> {
-  DateTime selectedDate = DateTime.now(); // TO tracking date
-
-  int currentDateSelectedIndex = 0; //For Horizontal Date
-  ScrollController scrollController =
-      ScrollController(); //To Track Scroll of ListView
+  String selectedDate = DateTime.now()
+      .toString()
+      .substring(0, 10); // To track date (format: "2023-07-01")
 
   List<String> listOfMonths = [
     "Jan",
@@ -40,27 +36,23 @@ class _CalendarState extends State<Calendar> {
     return Column(
       children: [
         SizedBox(
-            height: AppSize.s100,
-            child: ListView.separated(
-              padding: const EdgeInsets.only(
-                left: AppPadding.p12,
-              ),
-              separatorBuilder: (BuildContext context, int index) {
-                return const SizedBox(
-                  width: AppSize.s10,
-                );
-              },
-              itemCount: 365,
-              controller: scrollController,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (BuildContext context, int index) {
-                return InkWell(
+          height: AppSize.s100,
+          child: ListView.builder(
+            padding: const EdgeInsets.only(left: AppPadding.p12),
+            itemCount: 365,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (BuildContext context, int index) {
+              final currentDate = DateTime.now().add(Duration(days: index));
+              final isSelected =
+                  currentDate.toString().substring(0, 10) == selectedDate;
+              return Padding(
+                padding: const EdgeInsets.only(right: AppPadding.p8),
+                child: InkWell(
                   onTap: () {
                     setState(() {
-                      currentDateSelectedIndex = index;
-                      selectedDate = DateTime.now().add(Duration(days: index));
+                      selectedDate = currentDate.toString().substring(0, 10);
                     });
-                    print(selectedDate.toString());
+                    print(selectedDate);
                   },
                   child: Container(
                     height: AppSize.s80,
@@ -69,7 +61,7 @@ class _CalendarState extends State<Calendar> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(AppSize.s8),
                       border: Border.all(color: ColorManager.primary),
-                      color: currentDateSelectedIndex == index
+                      color: isSelected
                           ? ColorManager.primary
                           : ColorManager.white,
                     ),
@@ -77,46 +69,31 @@ class _CalendarState extends State<Calendar> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          listOfMonths[DateTime.now()
-                                      .add(Duration(days: index))
-                                      .month -
-                                  1]
-                              .toString(),
+                          listOfMonths[currentDate.month - 1],
                           style: TextStyle(
                             fontSize: AppSize.s16,
-                            color: currentDateSelectedIndex == index
+                            color: isSelected
                                 ? ColorManager.white
                                 : ColorManager.black,
                           ),
                         ),
-                        const SizedBox(
-                          height: AppSize.s5,
-                        ),
+                        const SizedBox(height: AppSize.s5),
                         Text(
-                          DateTime.now()
-                              .add(Duration(days: index))
-                              .day
-                              .toString(),
+                          currentDate.day.toString(),
                           style: TextStyle(
                             fontSize: AppSize.s22,
                             fontWeight: FontWeight.w700,
-                            color: currentDateSelectedIndex == index
+                            color: isSelected
                                 ? ColorManager.white
                                 : ColorManager.black,
                           ),
                         ),
-                        const SizedBox(
-                          height: AppSize.s5,
-                        ),
+                        const SizedBox(height: AppSize.s5),
                         Text(
-                          listOfDays[DateTime.now()
-                                      .add(Duration(days: index))
-                                      .weekday -
-                                  1]
-                              .toString(),
+                          listOfDays[currentDate.weekday - 1],
                           style: TextStyle(
                             fontSize: AppSize.s16,
-                            color: currentDateSelectedIndex == index
+                            color: isSelected
                                 ? ColorManager.white
                                 : ColorManager.black,
                           ),
@@ -124,9 +101,11 @@ class _CalendarState extends State<Calendar> {
                       ],
                     ),
                   ),
-                );
-              },
-            )),
+                ),
+              );
+            },
+          ),
+        ),
       ],
     );
   }

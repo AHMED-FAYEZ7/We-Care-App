@@ -2,6 +2,7 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
+import 'package:health_care/core/routes/app_routes.dart';
 import 'package:health_care/patient/presentation/controller/Patient_cubit/patient_cubit.dart';
 import 'package:health_care/patient/presentation/widgets/app_bar_widget.dart';
 import 'package:health_care/patient/presentation/widgets/doctor_widget.dart';
@@ -43,8 +44,17 @@ class TopDoctorPatientScreen extends StatelessWidget {
                           ),
                           physics: const BouncingScrollPhysics(),
                           itemBuilder: (BuildContext context, int index) =>
-                              DoctorWidget(
-                            model: cubit.topDoctor[index],
+                              InkWell(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                context,
+                                Routes.doctorProfilePatientRoute,
+                                arguments: cubit.topDoctor[index],
+                              );
+                            },
+                            child: DoctorWidget(
+                              model: cubit.topDoctor[index],
+                            ),
                           ),
                           separatorBuilder: (BuildContext context, int index) =>
                               const SizedBox(
@@ -63,8 +73,17 @@ class TopDoctorPatientScreen extends StatelessWidget {
                             ),
                             physics: const BouncingScrollPhysics(),
                             itemBuilder: (BuildContext context, int index) =>
-                                DoctorWidget(
-                                    model: cubit.specialistTopDoctor[index]),
+                                InkWell(
+                              onTap: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  Routes.doctorProfilePatientRoute,
+                                  arguments: cubit.specialistTopDoctor[index],
+                                );
+                              },
+                              child: DoctorWidget(
+                                  model: cubit.specialistTopDoctor[index]),
+                            ),
                             separatorBuilder:
                                 (BuildContext context, int index) =>
                                     const SizedBox(

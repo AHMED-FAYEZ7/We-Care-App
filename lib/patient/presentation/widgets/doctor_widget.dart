@@ -69,7 +69,7 @@ class DoctorWidget extends StatelessWidget {
                         size: AppSize.s16,
                       ),
                       Text(
-                        "${model.numberOfRating}(4692 reviews)",
+                        "${model.averageRating}(${model.numberOfRating} reviews)",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: ColorManager.black,
