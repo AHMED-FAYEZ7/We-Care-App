@@ -59,10 +59,10 @@ class _SpecialistDoctorListWidgetState
                   setState(() {
                     if (specialist[index] == 'All') {
                       widget.isAll = true;
-                      print(specialist[index]);
+                      print(widget.isAll.toString());
                     } else {
                       widget.isAll = false;
-                      print(specialist[index]);
+                      print(widget.isAll.toString());
                     }
                   });
                 },

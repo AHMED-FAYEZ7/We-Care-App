@@ -8,9 +8,9 @@ import 'package:health_care/core/routes/app_routes.dart';
 import 'package:health_care/patient/presentation/controller/Patient_cubit/patient_cubit.dart';
 import 'package:health_care/patient/presentation/widgets/hint_text_widget.dart';
 import 'package:health_care/patient/presentation/widgets/search_bar_widget.dart';
+import 'package:health_care/patient/presentation/widgets/shimmer/top_doctor_card_shimmer_widget.dart';
 import 'package:health_care/patient/presentation/widgets/specialist_doctor_card_widget.dart';
 import 'package:health_care/patient/presentation/widgets/top_doctor_card_widget.dart';
-import 'package:health_care/patient/presentation/widgets/shimmer/top_doctor_shimmer_widget.dart';
 
 class HomePatientScreen extends StatelessWidget {
   const HomePatientScreen({Key? key}) : super(key: key);
@@ -116,16 +116,7 @@ class HomePatientScreen extends StatelessWidget {
                         ),
                         itemCount: cubit.topDoctor.length,
                       ),
-                      fallback: (context) => ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (BuildContext context, int index) =>
-                            TopDoctorShimmerWidget(),
-                        separatorBuilder: (BuildContext context, int index) =>
-                            const SizedBox(
-                          width: AppSize.s10,
-                        ),
-                        itemCount: 5,
-                      ),
+                      fallback: (context) => TopDoctorShimmerWidget(),
                     ),
                   ),
                 ),
@@ -165,16 +156,7 @@ class HomePatientScreen extends StatelessWidget {
                         ),
                         itemCount: cubit.allDoctor.length,
                       ),
-                      fallback: (context) => ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (BuildContext context, int index) =>
-                            TopDoctorShimmerWidget(),
-                        separatorBuilder: (BuildContext context, int index) =>
-                            const SizedBox(
-                          width: AppSize.s10,
-                        ),
-                        itemCount: 5,
-                      ),
+                      fallback: (context) => TopDoctorShimmerWidget(),
                     ),
                   ),
                 ),

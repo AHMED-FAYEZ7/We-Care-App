@@ -61,7 +61,7 @@ class PatientCubit extends Cubit<PatientState> {
 /////////////////////////////
   List<User> topDoctor = [];
   List<User> specialistTopDoctor = [];
-  bool isAll = true;
+  bool isAll = false;
   getTopDoctor({String? specialist}) async {
     emit(GetTopDoctorLoadingState());
     // topDoctor = [];
@@ -76,9 +76,14 @@ class PatientCubit extends Cubit<PatientState> {
         emit(GetTopDoctorFailureState());
       },
       (r) {
-        specialist != null
-            ? specialistTopDoctor = r.topDoctorsData!
-            : topDoctor = r.topDoctorsData!;
+        if (specialist == null) {
+          topDoctor = r.topDoctorsData!;
+        } else if (specialist == "All") {
+          isAll = false;
+        } else {
+          specialistTopDoctor = r.topDoctorsData!;
+          isAll = true;
+        }
 
         print(topDoctor.length);
         print(specialistTopDoctor.length);

@@ -1,9 +1,11 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/patient/presentation/controller/Patient_cubit/patient_cubit.dart';
 import 'package:health_care/patient/presentation/widgets/app_bar_widget.dart';
 import 'package:health_care/patient/presentation/widgets/doctor_widget.dart';
+import 'package:health_care/patient/presentation/widgets/shimmer/doctor_shimmer_widget.dart';
 import 'package:health_care/patient/presentation/widgets/specialist_doctor_list_widget.dart';
 
 class TopDoctorPatientScreen extends StatelessWidget {
@@ -13,7 +15,6 @@ class TopDoctorPatientScreen extends StatelessWidget {
   //   print(selectedValue);
   // }
 
-  bool isAll = false;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<PatientCubit, PatientState>(
@@ -28,29 +29,46 @@ class TopDoctorPatientScreen extends StatelessWidget {
           body: Column(
             children: [
               SpecialistDoctorListWidget(
-                onSpecialistSelected: isAll ? cubit.empty : cubit.getTopDoctor,
-                isAll: isAll,
+                onSpecialistSelected: cubit.getTopDoctor,
               ),
               Expanded(
-                child: ListView.separated(
-                  scrollDirection: Axis.vertical,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppPadding.p12,
-                  ),
-                  physics: const BouncingScrollPhysics(),
-                  itemBuilder: (BuildContext context, int index) =>
-                      DoctorWidget(
-                    model: isAll
-                        ? cubit.topDoctor[index]
-                        : cubit.specialistTopDoctor[index],
-                  ),
-                  separatorBuilder: (BuildContext context, int index) =>
-                      const SizedBox(
-                    width: AppSize.s10,
-                  ),
-                  itemCount: isAll
-                      ? cubit.topDoctor.length
-                      : cubit.specialistTopDoctor.length,
+                child: ConditionalBuilder(
+                  condition: !cubit.isAll,
+                  builder: (context) => state is! GetTopDoctorLoadingState
+                      ? ListView.separated(
+                          scrollDirection: Axis.vertical,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: AppPadding.p12,
+                          ),
+                          physics: const BouncingScrollPhysics(),
+                          itemBuilder: (BuildContext context, int index) =>
+                              DoctorWidget(
+                            model: cubit.topDoctor[index],
+                          ),
+                          separatorBuilder: (BuildContext context, int index) =>
+                              const SizedBox(
+                            width: AppSize.s10,
+                          ),
+                          itemCount: cubit.topDoctor.length,
+                        )
+                      : DoctorShimmerWidget(),
+                  fallback: (context) => state is! GetTopDoctorLoadingState
+                      ? ListView.separated(
+                          scrollDirection: Axis.vertical,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: AppPadding.p12,
+                          ),
+                          physics: const BouncingScrollPhysics(),
+                          itemBuilder: (BuildContext context, int index) =>
+                              DoctorWidget(
+                                  model: cubit.specialistTopDoctor[index]),
+                          separatorBuilder: (BuildContext context, int index) =>
+                              const SizedBox(
+                            width: AppSize.s10,
+                          ),
+                          itemCount: cubit.specialistTopDoctor.length,
+                        )
+                      : DoctorShimmerWidget(),
                 ),
               ),
             ],
