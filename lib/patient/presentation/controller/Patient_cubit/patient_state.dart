@@ -28,3 +28,10 @@ class GetSearchedDoctorSuccessState extends PatientState {}
 
 class GetSearchedDoctorFailureState extends PatientState {}
 ////////////////////////////////////////////
+
+class GetAvailableAppointmentByDayLoadingState extends PatientState {}
+
+class GetAvailableAppointmentByDaySuccessState extends PatientState {}
+
+class GetAvailableAppointmentByDayFailureState extends PatientState {}
+////////////////////////////////////////////

@@ -152,8 +152,8 @@ Future<void> initAppModule() async {
   sl.registerLazySingleton<GetAvailableAppointmentsForDoctorUseCase>(
       () => GetAvailableAppointmentsForDoctorUseCase(sl()));
 
-  sl.registerLazySingleton<GetAvailableAppointmentsByDay>(
-      () => GetAvailableAppointmentsByDay(sl()));
+  sl.registerLazySingleton<GetAvailableAppointmentsByDayUseCase>(
+      () => GetAvailableAppointmentsByDayUseCase(sl()));
 
   sl.registerLazySingleton<BookAppointmentUseCase>(
       () => BookAppointmentUseCase(sl()));
@@ -184,6 +184,7 @@ Future<void> initAppModule() async {
       ));
 
   sl.registerFactory<PatientCubit>(() => PatientCubit(
+        sl(),
         sl(),
         sl(),
         sl(),

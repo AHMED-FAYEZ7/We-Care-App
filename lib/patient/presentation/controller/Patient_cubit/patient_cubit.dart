@@ -1,9 +1,13 @@
+// ignore_for_file: prefer_final_fields
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:health_care/authentication/domain/model/user_model.dart';
 import 'package:health_care/core/services/services_locator.dart';
 import 'package:health_care/core/usecase/base_usecase.dart';
+import 'package:health_care/patient/domain/model/appointment_model.dart';
 import 'package:health_care/patient/domain/usecase/get_all_doctors_use_case.dart';
+import 'package:health_care/patient/domain/usecase/get_available_appointment_by_day_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_doctor_search_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_top_doctors_use_case.dart';
 import 'package:health_care/patient/presentation/screens/appointment/appointment_screen.dart';
@@ -18,10 +22,15 @@ class PatientCubit extends Cubit<PatientState> {
 
   GetAllDoctorsUseCase _allDoctorsUseCase = sl<GetAllDoctorsUseCase>();
   GetDoctorSearchUseCase _getDoctorSearchUseCase = sl<GetDoctorSearchUseCase>();
+  GetAvailableAppointmentsByDayUseCase _availableAppointmentsByDayUseCase =
+      sl<GetAvailableAppointmentsByDayUseCase>();
 
-  PatientCubit(this._getTopDoctorsUseCase, this._allDoctorsUseCase,
-      this._getDoctorSearchUseCase)
-      : super(PatientInitial());
+  PatientCubit(
+    this._getTopDoctorsUseCase,
+    this._allDoctorsUseCase,
+    this._getDoctorSearchUseCase,
+    this._availableAppointmentsByDayUseCase,
+  ) : super(PatientInitial());
   static PatientCubit get(context) => BlocProvider.of(context);
 
   List<String> titles = [
@@ -113,5 +122,25 @@ class PatientCubit extends Cubit<PatientState> {
         emit(GetSearchedDoctorSuccessState());
       },
     );
+  }
+
+/////////////available appointment by day////////////////
+  List<Appointment> availableAppointmentsByDayData = [];
+
+  getAvailableAppointmentByDay(String docId, String date) async {
+    emit(GetAvailableAppointmentByDayLoadingState());
+    availableAppointmentsByDayData = [];
+    (await _availableAppointmentsByDayUseCase.call(
+      TwoParametersUseCase(
+        docId,
+        date,
+      ),
+    ))
+        .fold((l) {
+      emit(GetAvailableAppointmentByDayFailureState());
+    }, (r) {
+      availableAppointmentsByDayData = r.availableAppointmentsByDayData!;
+      emit(GetAvailableAppointmentByDaySuccessState());
+    });
   }
 }

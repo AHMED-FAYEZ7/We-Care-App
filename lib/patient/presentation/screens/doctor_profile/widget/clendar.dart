@@ -3,7 +3,12 @@ import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
 
 class Calendar extends StatefulWidget {
-  const Calendar({super.key});
+  Calendar({
+    required this.selectedDate,
+    super.key,
+  });
+
+  Function(String date, String day) selectedDate;
 
   @override
   _CalendarState createState() => _CalendarState();
@@ -51,8 +56,10 @@ class _CalendarState extends State<Calendar> {
                   onTap: () {
                     setState(() {
                       selectedDate = currentDate.toString().substring(0, 10);
+
+                      String day = listOfDays[index];
+                      widget.selectedDate(selectedDate, day);
                     });
-                    print(selectedDate);
                   },
                   child: Container(
                     height: AppSize.s80,

@@ -4,11 +4,11 @@ import 'package:health_care/core/usecase/base_usecase.dart';
 import 'package:health_care/patient/domain/model/appointment_model.dart';
 import 'package:health_care/patient/domain/repository/patient_repo.dart';
 
-class GetAvailableAppointmentsByDay
+class GetAvailableAppointmentsByDayUseCase
     implements BaseUseCase<TwoParametersUseCase, AppointmentsInfo> {
   final BasePatientRepo _basePatientRepo;
 
-  GetAvailableAppointmentsByDay(this._basePatientRepo);
+  GetAvailableAppointmentsByDayUseCase(this._basePatientRepo);
 
   @override
   Future<Either<Failure, AppointmentsInfo>> call(

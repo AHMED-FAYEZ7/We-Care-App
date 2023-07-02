@@ -33,8 +33,8 @@ class TestPage extends StatelessWidget {
   final GetAvailableAppointmentsForDoctorUseCase
       _getAvailableAppointmentsForDoctorUseCase =
       sl<GetAvailableAppointmentsForDoctorUseCase>();
-  final GetAvailableAppointmentsByDay _availableAppointmentsByDay =
-      sl<GetAvailableAppointmentsByDay>();
+  final GetAvailableAppointmentsByDayUseCase _availableAppointmentsByDay =
+      sl<GetAvailableAppointmentsByDayUseCase>();
   final BookAppointmentUseCase _bookAppointmentUseCase =
       sl<BookAppointmentUseCase>();
   final GetDoctorRateUseCase _getDoctorRateUseCase = sl<GetDoctorRateUseCase>();

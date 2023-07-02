@@ -12,6 +12,8 @@ import 'package:health_care/authentication/presentation/screens/user/user_update
 import 'package:health_care/authentication/presentation/screens/user/user_update_password_screen.dart';
 import 'package:health_care/core/global/resources/strings_manger.dart';
 import 'package:health_care/doctor/presentation/screens/doctor_layout/doctor_layout_screen.dart';
+import 'package:health_care/patient/domain/model/appointment_model.dart';
+import 'package:health_care/patient/presentation/screens/book_appointment/book_appointment_screen.dart';
 import 'package:health_care/patient/presentation/screens/doctor_profile/doctor_profile_screen.dart';
 import 'package:health_care/patient/presentation/screens/layout/layout_screen.dart';
 import 'package:health_care/patient/presentation/screens/search/search_screen.dart';
@@ -40,6 +42,7 @@ class Routes {
   static const String specialistDoctorPatientRoute = "/specialistDoctorPatient";
   static const String topDoctorPatientRoute = "/topDoctorPatient";
   static const String doctorProfilePatientRoute = "/doctorProfilePatient";
+  static const String bookAppointmentRoute = "/bookAppointment";
 }
 
 class RouteGenerator {
@@ -88,6 +91,19 @@ class RouteGenerator {
         return MaterialPageRoute(
             builder: (_) => DoctorProfilePatientScreen(
                   doctorModel: doctorModel,
+                ));
+      case Routes.bookAppointmentRoute:
+        final Map<String, dynamic> arguments =
+            routeSettings.arguments as Map<String, dynamic>;
+        final List<Appointment> appointmentList =
+            arguments['appointmentList'] as List<Appointment>;
+        final String date = arguments['date'] as String;
+        final String day = arguments['day'] as String;
+        return MaterialPageRoute(
+            builder: (_) => BookAppointmentScreen(
+                  appointmentList: appointmentList,
+                  date: date,
+                  day: day,
                 ));
       default:
         return unDefinedRoute();
