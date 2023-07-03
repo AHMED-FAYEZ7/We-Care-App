@@ -29,6 +29,7 @@ class BookAppointmentScreen extends StatefulWidget {
 
 class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
   int selectedIndex = -1;
+  int selectedWay = -1;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +53,7 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
               ConditionalBuilder(
                 condition: cubit.availableAppointmentsByDayData.isNotEmpty,
                 builder: (context) => Container(
-                  height: MediaQuery.of(context).size.height * .7,
+                  height: MediaQuery.of(context).size.height * .4,
                   color: ColorManager.white,
                   child: SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),
@@ -73,8 +74,19 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                             onTap: () {
                               setState(() {
                                 selectedIndex = index;
-                                print(widget
-                                    .appointmentList[index].appointmentId);
+                                if (widget.appointmentList[index].type ==
+                                    'chat') {
+                                  selectedWay = 0;
+                                } else if (widget.appointmentList[index].type ==
+                                    'video call') {
+                                  selectedWay = 1;
+                                } else {
+                                  selectedWay = 2;
+                                }
+
+                                print(
+                                  widget.appointmentList[index].appointmentId,
+                                );
                               });
                             },
                             child: Container(
@@ -94,7 +106,8 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    "${DateFormat.Hm().format(DateTime.parse(widget.appointmentList[index].date))}PM",
+                                    DateFormat.jm().format(DateTime.parse(
+                                        widget.appointmentList[index].date)),
                                     style: TextStyle(
                                       fontSize: AppSize.s20,
                                       color: selectedIndex == index
@@ -131,11 +144,12 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
               const SizedBox(
                 height: AppSize.s8,
               ),
-
               const SizedBox(
                 height: AppSize.s8,
               ),
-              // SelectedFeeInfoWidget(),
+              SelectedFeeInfoWidget(
+                selectedIndex: selectedWay,
+              ),
               DefaultTextButton(
                 icon: Container(
                   width: AppSize.s30,

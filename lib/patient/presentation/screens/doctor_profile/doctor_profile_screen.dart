@@ -178,9 +178,14 @@ class DoctorProfilePatientScreen extends StatelessWidget {
                     text: "Book Appointment",
                     fontWeight: FontWeight.bold,
                     onTap: () async {
+                      // cubit.getAvailableAppointmentByDay(
+                      //   doctorModel.id,
+                      //   date ?? todayDate,
+                      // );
+
                       cubit.getAvailableAppointmentByDay(
-                        doctorModel.id,
-                        date ?? todayDate,
+                        "64564cc5061fd8d24c5ef612",
+                        "2023-10-05",
                       );
                       // print(date ?? todayDate);
                       // print(day ?? today);

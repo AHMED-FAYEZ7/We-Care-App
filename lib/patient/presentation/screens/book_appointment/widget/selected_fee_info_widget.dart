@@ -1,17 +1,23 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
-import 'package:health_care/core/global/resources/icons_manger.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
 
 class SelectedFeeInfoWidget extends StatefulWidget {
-  SelectedFeeInfoWidget({Key? key}) : super(key: key);
+  SelectedFeeInfoWidget({
+    required this.selectedIndex,
+    Key? key,
+  }) : super(key: key);
+
+  int selectedIndex = -1;
 
   @override
   State<SelectedFeeInfoWidget> createState() => _SelectedFeeInfoWidgetState();
 }
 
 class _SelectedFeeInfoWidgetState extends State<SelectedFeeInfoWidget> {
-  int selectedItem = -1;
+  // int selectedItem = -1;
 
   List<Item> feeList = [
     Item(
@@ -22,15 +28,15 @@ class _SelectedFeeInfoWidgetState extends State<SelectedFeeInfoWidget> {
     ),
     Item(
       Icons.phone,
-      'Voice Call',
-      'Can make a voice call with doctor',
-      '10',
+      'Video Call',
+      'Can make a video call with doctor',
+      '15',
     ),
     Item(
       Icons.videocam,
-      'Video Call',
-      'Can make a video call with doctor',
-      '20',
+      'Visit',
+      'Can visit the doctor',
+      '30',
     ),
   ];
 
@@ -46,93 +52,86 @@ class _SelectedFeeInfoWidgetState extends State<SelectedFeeInfoWidget> {
             height: AppSize.s255,
             child: ListView.separated(
               physics: const BouncingScrollPhysics(),
-              itemBuilder: (context, index) => InkWell(
-                onTap: () {
-                  setState(() {
-                    selectedItem = index;
-                  });
-                },
-                child: SizedBox(
-                  height: AppSize.s80,
-                  child: Card(
-                    elevation: AppSize.s0,
-                    color: selectedItem == index
-                        ? ColorManager.primary
-                        : ColorManager.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                        AppSize.s12,
-                      ),
-                      side: const BorderSide(
-                        color: Colors.grey,
-                        width: AppSize.s1,
-                      ),
+              itemBuilder: (context, index) => SizedBox(
+                height: AppSize.s80,
+                child: Card(
+                  elevation: AppSize.s0,
+                  color: widget.selectedIndex == index
+                      ? ColorManager.primary
+                      : ColorManager.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(
+                      AppSize.s12,
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: AppPadding.p20,
-                      ),
-                      child: Row(
-                        children: [
-                          Icon(
-                            feeList[index].icon,
-                            color: selectedItem == index
+                    side: const BorderSide(
+                      color: Colors.grey,
+                      width: AppSize.s1,
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppPadding.p20,
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          feeList[index].icon,
+                          color: widget.selectedIndex == index
+                              ? ColorManager.white
+                              : ColorManager.primary,
+                          size: AppSize.s30,
+                        ),
+                        const SizedBox(
+                          width: AppSize.s10,
+                        ),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * .6,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                feeList[index].title,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: widget.selectedIndex == index
+                                      ? ColorManager.white
+                                      : ColorManager.black,
+                                  fontSize: AppSize.s14,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: AppSize.s5,
+                              ),
+                              Text(
+                                feeList[index].message,
+                                maxLines: 1,
+                                style: TextStyle(
+                                  color: widget.selectedIndex == index
+                                      ? ColorManager.white
+                                      : ColorManager.grey,
+                                  fontSize: AppSize.s10,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Text(
+                          "${feeList[index].price}\$",
+                          style: TextStyle(
+                            color: widget.selectedIndex == index
                                 ? ColorManager.white
-                                : ColorManager.primary,
-                            size: AppSize.s30,
+                                : ColorManager.black,
+                            fontSize: AppSize.s15,
                           ),
-                          const SizedBox(
-                            width: AppSize.s10,
-                          ),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * .6,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  feeList[index].title,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: selectedItem == index
-                                        ? ColorManager.white
-                                        : ColorManager.black,
-                                    fontSize: AppSize.s14,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: AppSize.s5,
-                                ),
-                                Text(
-                                  feeList[index].message,
-                                  maxLines: 1,
-                                  style: TextStyle(
-                                    color: selectedItem == index
-                                        ? ColorManager.white
-                                        : ColorManager.grey,
-                                    fontSize: AppSize.s10,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Text(
-                            "${feeList[index].price}\$",
-                            style: TextStyle(
-                              color: selectedItem == index
-                                  ? ColorManager.white
-                                  : ColorManager.black,
-                              fontSize: AppSize.s15,
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
               ),
-              separatorBuilder: (context, index) => SizedBox(
+              separatorBuilder: (context, index) => const SizedBox(
                 width: AppSize.s5,
               ),
               itemCount: feeList.length,

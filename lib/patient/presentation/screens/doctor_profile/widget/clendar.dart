@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable, library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
@@ -31,10 +33,18 @@ class _CalendarState extends State<Calendar> {
     "Sep",
     "Oct",
     "Nov",
-    "Dec"
+    "Dec",
   ];
 
-  List<String> listOfDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  List<String> listOfDays = [
+    "Mon",
+    "Tue",
+    "Wed",
+    "Thu",
+    "Fri",
+    "Sat",
+    "Sun",
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +53,7 @@ class _CalendarState extends State<Calendar> {
         SizedBox(
           height: AppSize.s100,
           child: ListView.builder(
+            physics: const BouncingScrollPhysics(),
             padding: const EdgeInsets.only(left: AppPadding.p12),
             itemCount: 365,
             scrollDirection: Axis.horizontal,
@@ -50,14 +61,15 @@ class _CalendarState extends State<Calendar> {
               final currentDate = DateTime.now().add(Duration(days: index));
               final isSelected =
                   currentDate.toString().substring(0, 10) == selectedDate;
+              String day = index >= 7
+                  ? listOfDays[currentDate.weekday - 1]
+                  : listOfDays[index];
               return Padding(
                 padding: const EdgeInsets.only(right: AppPadding.p8),
                 child: InkWell(
                   onTap: () {
                     setState(() {
                       selectedDate = currentDate.toString().substring(0, 10);
-
-                      String day = listOfDays[index];
                       widget.selectedDate(selectedDate, day);
                     });
                   },
