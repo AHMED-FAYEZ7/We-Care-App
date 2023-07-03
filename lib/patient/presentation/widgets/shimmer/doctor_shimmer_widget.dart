@@ -47,10 +47,10 @@ class DoctorShimmerWidget extends StatelessWidget {
               SizedBox(
                 width: MediaQuery.of(context).size.width * .46,
                 height: AppSize.s100,
-                child: const Column(
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+                  children: const [
                     ShimmerWidget(
                       width: double.infinity,
                       height: AppSize.s10,
