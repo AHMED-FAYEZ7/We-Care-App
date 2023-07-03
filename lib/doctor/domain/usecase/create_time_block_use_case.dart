@@ -14,7 +14,7 @@ class CreateTimeBlockUseCase
   Future<Either<Failure, TimeBlock>> call(
     CreateTimeBlockUseCaseInput input,
   ) async {
-    return await _baseDoctorRepo.createTimeBloc(
+    return await _baseDoctorRepo.createTimeBlocK(
       period: input.period,
       startTime: input.startTime,
       callType: input.callType,

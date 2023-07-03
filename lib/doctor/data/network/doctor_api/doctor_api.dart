@@ -13,6 +13,6 @@ abstract class DoctorServiceClient {
   Future<TimeBlockResponse> createTimeBlock(
     @Field("period") int period,
     @Field("startTime") String startTime,
-    @Field("callType") String callType,
+    @Field("type") String callType,
   );
 }

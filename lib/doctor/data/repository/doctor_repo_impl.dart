@@ -17,7 +17,7 @@ class DoctorRepoImpl implements BaseDoctorRepo {
   );
 
   @override
-  Future<Either<Failure, TimeBlock>> createTimeBloc({
+  Future<Either<Failure, TimeBlock>> createTimeBlocK({
     required int period,
     required String startTime,
     required String callType,

@@ -32,7 +32,7 @@ class _DoctorServiceClient implements DoctorServiceClient {
     final _data = {
       'period': period,
       'startTime': startTime,
-      'callType': callType,
+      'type': callType,
     };
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<TimeBlockResponse>(Options(
