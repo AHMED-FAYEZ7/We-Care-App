@@ -23,6 +23,11 @@ import 'package:health_care/authentication/domain/usecase/user_login_usecase.dar
 import 'package:health_care/authentication/domain/usecase/user_update_info_usecase.dart';
 import 'package:health_care/authentication/domain/usecase/user_update_password_usecase.dart';
 import 'package:health_care/authentication/presentation/controller/auth_cubit.dart';
+import 'package:health_care/doctor/data/data_source/doctor_remote_data_source.dart';
+import 'package:health_care/doctor/data/network/doctor_api/doctor_api.dart';
+import 'package:health_care/doctor/data/repository/doctor_repo_impl.dart';
+import 'package:health_care/doctor/domain/repository/doctor_repo.dart';
+import 'package:health_care/doctor/domain/usecase/create_time_block_use_case.dart';
 import 'package:health_care/patient/data/data_source/patient_remote_data_source.dart';
 import 'package:health_care/patient/data/network/patient_api/patient_api.dart';
 import 'package:health_care/patient/data/repository/patient_repo_impl.dart';
@@ -76,6 +81,8 @@ Future<void> initAppModule() async {
   sl.registerLazySingleton<DoctorAuthServiceClient>(
       () => DoctorAuthServiceClient(dio));
 
+  sl.registerLazySingleton<DoctorServiceClient>(() => DoctorServiceClient(dio));
+
   sl.registerLazySingleton<UserServiceClient>(() => UserServiceClient(dio));
 
   // remote data source
@@ -88,6 +95,9 @@ Future<void> initAppModule() async {
 
   sl.registerLazySingleton<BaseDoctorAuthRemoteDataSource>(
       () => DoctorAuthRemoteDataSourceImpl(sl()));
+
+  sl.registerLazySingleton<BaseDoctorRemoteDataSource>(
+      () => DoctorRemoteDataSourceImpl(sl()));
 
   sl.registerLazySingleton<UserRemoteDataSource>(
       () => UserRemoteDataSourceImplementer(sl()));
@@ -103,6 +113,8 @@ Future<void> initAppModule() async {
 
   sl.registerLazySingleton<BaseDoctorAuthRepository>(
       () => DoctorAuthRepositoryImpl(sl(), sl()));
+
+  sl.registerLazySingleton<BaseDoctorRepo>(() => DoctorRepoImpl(sl(), sl()));
 
   sl.registerLazySingleton<BaseUserRepository>(
       () => BaseUserRepositoryImpl(sl(), sl()));
@@ -172,6 +184,10 @@ Future<void> initAppModule() async {
   sl.registerLazySingleton<DeleteReviewUseCase>(
       () => DeleteReviewUseCase(sl()));
 
+  //  // // // // DOCTOR  //  // // // //
+
+  sl.registerLazySingleton<CreateTimeBlockUseCase>(
+      () => CreateTimeBlockUseCase(sl()));
   // cubit
 
   sl.registerFactory<AuthCubit>(() => AuthCubit(

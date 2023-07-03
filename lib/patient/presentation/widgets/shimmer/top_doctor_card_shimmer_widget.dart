@@ -22,8 +22,8 @@ class TopDoctorShimmerWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(AppSize.s12),
             side: const BorderSide(color: Colors.grey, width: AppSize.s1),
           ),
-          child: const Column(
-            children: [
+          child: Column(
+            children: const [
               ClipRRect(
                 borderRadius: BorderRadius.only(
                   topRight: Radius.circular(AppSize.s12),
