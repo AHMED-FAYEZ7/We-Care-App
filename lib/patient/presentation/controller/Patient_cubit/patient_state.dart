@@ -34,4 +34,18 @@ class GetAvailableAppointmentByDayLoadingState extends PatientState {}
 class GetAvailableAppointmentByDaySuccessState extends PatientState {}
 
 class GetAvailableAppointmentByDayFailureState extends PatientState {}
+
+////////////////////////////////////////////
+class BookAppointmentByIdLoadingState extends PatientState {}
+
+class BookAppointmentByIdSuccessState extends PatientState {}
+
+class BookAppointmentByIdFailureState extends PatientState {}
+
+////////////////////////////////////////////
+class GetDoctorRateLoadingState extends PatientState {}
+
+class GetDoctorRateSuccessState extends PatientState {}
+
+class GetDoctorRateFailureState extends PatientState {}
 ////////////////////////////////////////////

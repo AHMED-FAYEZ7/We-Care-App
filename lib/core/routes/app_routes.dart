@@ -13,9 +13,11 @@ import 'package:health_care/authentication/presentation/screens/user/user_update
 import 'package:health_care/core/global/resources/strings_manger.dart';
 import 'package:health_care/doctor/presentation/screens/doctor_layout/doctor_layout_screen.dart';
 import 'package:health_care/patient/domain/model/appointment_model.dart';
+import 'package:health_care/patient/domain/model/rarte_model.dart';
 import 'package:health_care/patient/presentation/screens/book_appointment/book_appointment_screen.dart';
 import 'package:health_care/patient/presentation/screens/doctor_profile/doctor_profile_screen.dart';
 import 'package:health_care/patient/presentation/screens/layout/layout_screen.dart';
+import 'package:health_care/patient/presentation/screens/reviews/reviews_screen.dart';
 import 'package:health_care/patient/presentation/screens/search/search_screen.dart';
 import 'package:health_care/patient/presentation/screens/specialist_doctor/specialist_doctor.dart';
 import 'package:health_care/patient/presentation/screens/top_doctor/top_doctor.dart';
@@ -43,6 +45,7 @@ class Routes {
   static const String topDoctorPatientRoute = "/topDoctorPatient";
   static const String doctorProfilePatientRoute = "/doctorProfilePatient";
   static const String bookAppointmentRoute = "/bookAppointment";
+  static const String reviewsRoute = "/reviews";
 }
 
 class RouteGenerator {
@@ -104,6 +107,12 @@ class RouteGenerator {
                   appointmentList: appointmentList,
                   date: date,
                   day: day,
+                ));
+      case Routes.reviewsRoute:
+        final List<Rate> reviews = routeSettings.arguments as List<Rate>;
+        return MaterialPageRoute(
+            builder: (_) => ReviewsScreen(
+                  reviews: reviews,
                 ));
       default:
         return unDefinedRoute();

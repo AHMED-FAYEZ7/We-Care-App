@@ -30,6 +30,7 @@ class BookAppointmentScreen extends StatefulWidget {
 class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
   int selectedIndex = -1;
   int selectedWay = -1;
+  String? appointmentId;
 
   @override
   Widget build(BuildContext context) {
@@ -42,89 +43,90 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
             title: 'Book Appointment',
             isBack: true,
           ),
-          body: Column(
-            children: [
-              HintTextWidget(
-                title: "${widget.day}, ${widget.date}",
-              ),
-              const SizedBox(
-                height: AppSize.s8,
-              ),
-              ConditionalBuilder(
-                condition: cubit.availableAppointmentsByDayData.isNotEmpty,
-                builder: (context) => Container(
-                  height: MediaQuery.of(context).size.height * .4,
-                  color: ColorManager.white,
-                  child: SingleChildScrollView(
-                    physics: const BouncingScrollPhysics(),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: AppPadding.p12,
-                      ),
-                      child: GridView.count(
-                        shrinkWrap: true,
-                        physics: const BouncingScrollPhysics(),
-                        mainAxisSpacing: 10,
-                        crossAxisSpacing: 10,
-                        crossAxisCount: 2,
-                        childAspectRatio: 3 / 1,
-                        children: List.generate(
-                          widget.appointmentList.length,
-                          (index) => InkWell(
-                            onTap: () {
-                              setState(() {
-                                selectedIndex = index;
-                                if (widget.appointmentList[index].type ==
-                                    'chat') {
-                                  selectedWay = 0;
-                                } else if (widget.appointmentList[index].type ==
-                                    'video call') {
-                                  selectedWay = 1;
-                                } else {
-                                  selectedWay = 2;
-                                }
-
-                                print(
-                                  widget.appointmentList[index].appointmentId,
-                                );
-                              });
-                            },
-                            child: Container(
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(
-                                  AppSize.s8,
-                                ),
-                                border: Border.all(
-                                  color: ColorManager.primary,
-                                ),
-                                color: selectedIndex == index
-                                    ? ColorManager.primary
-                                    : ColorManager.lightGrey,
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    DateFormat.jm().format(DateTime.parse(
-                                        widget.appointmentList[index].date)),
-                                    style: TextStyle(
-                                      fontSize: AppSize.s20,
-                                      color: selectedIndex == index
-                                          ? ColorManager.white
-                                          : ColorManager.primary,
-                                    ),
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                HintTextWidget(
+                  title: "${widget.day}, ${widget.date}",
+                ),
+                const SizedBox(
+                  height: AppSize.s8,
+                ),
+                ConditionalBuilder(
+                  condition: cubit.availableAppointmentsByDayData.isNotEmpty,
+                  builder: (context) => Container(
+                    height: MediaQuery.of(context).size.height * .4,
+                    color: ColorManager.white,
+                    child: SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: AppPadding.p12,
+                        ),
+                        child: GridView.count(
+                          shrinkWrap: true,
+                          physics: const BouncingScrollPhysics(),
+                          mainAxisSpacing: 10,
+                          crossAxisSpacing: 10,
+                          crossAxisCount: 2,
+                          childAspectRatio: 3 / 1,
+                          children: List.generate(
+                            widget.appointmentList.length,
+                            (index) => InkWell(
+                              onTap: () {
+                                setState(() {
+                                  selectedIndex = index;
+                                  if (widget.appointmentList[index].type ==
+                                      'chat') {
+                                    selectedWay = 0;
+                                  } else if (widget
+                                          .appointmentList[index].type ==
+                                      'video call') {
+                                    selectedWay = 1;
+                                  } else {
+                                    selectedWay = 2;
+                                  }
+                                  appointmentId = widget
+                                      .appointmentList[index].appointmentId;
+                                });
+                              },
+                              child: Container(
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(
+                                    AppSize.s8,
                                   ),
-                                  Text(
-                                    widget.appointmentList[index].type,
-                                    style: TextStyle(
-                                      fontSize: AppSize.s18,
-                                      color: selectedIndex == index
-                                          ? ColorManager.white
-                                          : ColorManager.primary,
-                                    ),
+                                  border: Border.all(
+                                    color: ColorManager.primary,
                                   ),
-                                ],
+                                  color: selectedIndex == index
+                                      ? ColorManager.primary
+                                      : ColorManager.lightGrey,
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      DateFormat.jm().format(DateTime.parse(
+                                          widget.appointmentList[index].date)),
+                                      style: TextStyle(
+                                        fontSize: AppSize.s20,
+                                        color: selectedIndex == index
+                                            ? ColorManager.white
+                                            : ColorManager.primary,
+                                      ),
+                                    ),
+                                    Text(
+                                      widget.appointmentList[index].type,
+                                      style: TextStyle(
+                                        fontSize: AppSize.s18,
+                                        color: selectedIndex == index
+                                            ? ColorManager.white
+                                            : ColorManager.primary,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
@@ -132,38 +134,55 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                       ),
                     ),
                   ),
-                ),
-                fallback: (context) => Container(
-                  height: MediaQuery.of(context).size.height * .7,
-                  child: Center(
-                    child: Text(
-                        "No available appointment in ${widget.day}, ${widget.date}"),
+                  fallback: (context) => Container(
+                    height: MediaQuery.of(context).size.height * .4,
+                    child: Center(
+                      child: Text(
+                          "No available appointment in ${widget.day}, ${widget.date}"),
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: AppSize.s8,
-              ),
-              const SizedBox(
-                height: AppSize.s8,
-              ),
-              SelectedFeeInfoWidget(
-                selectedIndex: selectedWay,
-              ),
-              DefaultTextButton(
-                icon: Container(
-                  width: AppSize.s30,
+                const SizedBox(
+                  height: AppSize.s8,
                 ),
-                borderColor: ColorManager.primary,
-                backGroundColor: ColorManager.primary,
-                textColor: ColorManager.white,
-                width: AppSize.s330,
-                height: AppSize.s52,
-                text: "Next",
-                fontWeight: FontWeight.bold,
-                onTap: () async {},
-              ),
-            ],
+                const SizedBox(
+                  height: AppSize.s8,
+                ),
+                SelectedFeeInfoWidget(
+                  selectedIndex: selectedWay,
+                ),
+                ConditionalBuilder(
+                  condition: state is! BookAppointmentByIdLoadingState,
+                  builder: (context) => DefaultTextButton(
+                    icon: Container(
+                      width: AppSize.s30,
+                    ),
+                    borderColor: appointmentId == null
+                        ? ColorManager.lightGrey
+                        : ColorManager.primary,
+                    backGroundColor: appointmentId == null
+                        ? ColorManager.lightGrey
+                        : ColorManager.primary,
+                    textColor: ColorManager.white,
+                    width: AppSize.s330,
+                    height: AppSize.s52,
+                    text: "Next",
+                    fontWeight: FontWeight.bold,
+                    onTap: appointmentId == null
+                        ? () async {}
+                        : () async {
+                            cubit.bookAppointment(appointmentId!);
+                            print(
+                              appointmentId,
+                            );
+                          },
+                  ),
+                  fallback: (context) => CircularProgressIndicator(
+                    color: ColorManager.primary,
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },

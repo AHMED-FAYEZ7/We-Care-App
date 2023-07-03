@@ -52,6 +52,13 @@ class DoctorProfilePatientScreen extends StatelessWidget {
             },
           );
         }
+        if (state is GetDoctorRateSuccessState) {
+          Navigator.pushNamed(
+            context,
+            Routes.reviewsRoute,
+            arguments: cubit.rateList,
+          );
+        }
       },
       builder: (context, state) {
         return Scaffold(
@@ -147,7 +154,10 @@ class DoctorProfilePatientScreen extends StatelessWidget {
                   title: 'Reviews',
                   isSuffix: true,
                   onTapTitle: 'See Reviews',
-                  onTap: () {},
+                  onTap: () {
+                    // cubit.getDoctorRate(doctorModel.id);
+                    cubit.getDoctorRate("649593403f0633e0bc1cb0c8");
+                  },
                 ),
                 const SizedBox(
                   height: AppSize.s10,
@@ -178,15 +188,15 @@ class DoctorProfilePatientScreen extends StatelessWidget {
                     text: "Book Appointment",
                     fontWeight: FontWeight.bold,
                     onTap: () async {
-                      // cubit.getAvailableAppointmentByDay(
-                      //   doctorModel.id,
-                      //   date ?? todayDate,
-                      // );
-
                       cubit.getAvailableAppointmentByDay(
-                        "64564cc5061fd8d24c5ef612",
-                        "2023-10-05",
+                        doctorModel.id,
+                        date ?? todayDate,
                       );
+
+                      // cubit.getAvailableAppointmentByDay(
+                      //   "64564cc5061fd8d24c5ef612",
+                      //   "2023-10-05",
+                      // );
                       // print(date ?? todayDate);
                       // print(day ?? today);
                     },
