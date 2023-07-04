@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:health_care/core/services/services_locator.dart';
 import 'package:health_care/patient/presentation/controller/Patient_cubit/patient_cubit.dart';
 import 'package:health_care/patient/presentation/widgets/app_bar_widget.dart';
 
@@ -55,13 +54,14 @@ class _LayoutPatientScreenState extends State<LayoutPatientScreen> {
                       activeColor: ColorManager.primary,
                       inactiveColor: ColorManager.primary),
                   BottomNavyBarItem(
+                    icon: const Icon(Icons.dynamic_feed),
+                    title: const Text(AppStrings.feeds),
+                    activeColor: ColorManager.primary,
+                    inactiveColor: ColorManager.primary,
+                  ),
+                  BottomNavyBarItem(
                       icon: const Icon(Icons.date_range_outlined),
                       title: const Text(AppStrings.appointment),
-                      activeColor: ColorManager.primary,
-                      inactiveColor: ColorManager.primary),
-                  BottomNavyBarItem(
-                      icon: const Icon(Icons.history),
-                      title: const Text(AppStrings.history),
                       activeColor: ColorManager.primary,
                       inactiveColor: ColorManager.primary),
                   BottomNavyBarItem(

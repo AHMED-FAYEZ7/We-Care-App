@@ -15,8 +15,8 @@ import 'package:health_care/patient/domain/usecase/get_rate_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_top_doctors_use_case.dart';
 import 'package:health_care/patient/domain/usecase/make_doctor_review_use_case.dart';
 import 'package:health_care/patient/presentation/screens/appointment/appointment_screen.dart';
-import 'package:health_care/patient/presentation/screens/history/history_screen.dart';
 import 'package:health_care/patient/presentation/screens/home/home_screen.dart';
+import 'package:health_care/patient/presentation/screens/posts/posts_screen.dart';
 import 'package:health_care/patient/presentation/screens/profile/profile_screen.dart';
 
 part 'patient_state.dart';
@@ -46,15 +46,15 @@ class PatientCubit extends Cubit<PatientState> {
 
   List<String> titles = [
     'We Care',
+    'Feeds',
     'My Appointments',
-    'History',
     'profile',
   ];
 
   List<Widget> screens = [
     const HomePatientScreen(),
+    const PostsScreen(),
     const AppointmentPatientScreen(),
-    const HistoryPatientScreen(),
     const ProfilePatientScreen(),
   ];
 

@@ -75,6 +75,6 @@ class AppStrings {
 
   static const String home = "Home";
   static const String appointment = "Appointment";
-  static const String history = "History";
+  static const String feeds = "Feeds";
   static const String profile = "Profile";
 }
