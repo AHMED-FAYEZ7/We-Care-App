@@ -48,4 +48,11 @@ class GetDoctorRateLoadingState extends PatientState {}
 class GetDoctorRateSuccessState extends PatientState {}
 
 class GetDoctorRateFailureState extends PatientState {}
+
+////////////////////////////////////////////
+class MakeDoctorReviewLoadingState extends PatientState {}
+
+class MakeDoctorReviewSuccessState extends PatientState {}
+
+class MakeDoctorReviewFailureState extends PatientState {}
 ////////////////////////////////////////////

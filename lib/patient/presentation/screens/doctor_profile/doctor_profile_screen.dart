@@ -14,6 +14,7 @@ import 'package:health_care/patient/presentation/screens/doctor_profile/widget/c
 import 'package:health_care/patient/presentation/widgets/app_bar_widget.dart';
 import 'package:health_care/patient/presentation/widgets/doctor_widget.dart';
 import 'package:health_care/patient/presentation/widgets/hint_text_widget.dart';
+import 'package:health_care/patient/presentation/widgets/loading_widget.dart';
 import 'package:jiffy/jiffy.dart';
 
 class DoctorProfilePatientScreen extends StatelessWidget {
@@ -197,9 +198,7 @@ class DoctorProfilePatientScreen extends StatelessWidget {
                       );
                     },
                   ),
-                  fallback: (context) => CircularProgressIndicator(
-                    color: ColorManager.primary,
-                  ),
+                  fallback: (context) => const LoadingWidget(),
                 ),
               ],
             ),

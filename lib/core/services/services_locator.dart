@@ -206,5 +206,6 @@ Future<void> initAppModule() async {
         sl(),
         sl(),
         sl(),
+        sl(),
       ));
 }
