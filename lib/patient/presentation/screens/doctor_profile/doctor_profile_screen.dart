@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/authentication/domain/model/user_model.dart';
 import 'package:health_care/authentication/presentation/widgets/default_text_button.dart';
-import 'package:health_care/core/global/resources/icons_manger.dart';
-import 'package:health_care/core/global/resources/strings_manger.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
 import 'package:health_care/core/routes/app_routes.dart';
@@ -188,17 +186,15 @@ class DoctorProfilePatientScreen extends StatelessWidget {
                     text: "Book Appointment",
                     fontWeight: FontWeight.bold,
                     onTap: () async {
-                      cubit.getAvailableAppointmentByDay(
-                        doctorModel.id,
-                        date ?? todayDate,
-                      );
-
                       // cubit.getAvailableAppointmentByDay(
-                      //   "64564cc5061fd8d24c5ef612",
-                      //   "2023-10-05",
+                      //   doctorModel.id,
+                      //   date ?? todayDate,
                       // );
-                      // print(date ?? todayDate);
-                      // print(day ?? today);
+
+                      cubit.getAvailableAppointmentByDay(
+                        "64564cc5061fd8d24c5ef612",
+                        "2023-10-05",
+                      );
                     },
                   ),
                   fallback: (context) => CircularProgressIndicator(

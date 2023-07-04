@@ -30,6 +30,7 @@ dependencies:
   conditional_builder_null_safety: ^0.0.6
   jiffy: ^5.0.0
   intl: ^0.17.0
+  flutter_rating_bar: ^4.0.1
 
 dev_dependencies:
   flutter_test:
@@ -49,7 +50,6 @@ flutter:
     - assets/images/splash_logo.png
     - assets/images/on_boarding_logo1.jpg
     - assets/images/on_boarding_logo2.jpg
-    - assets/images/me1.jpg
     - assets/images/google_logo_icon.png
     - assets/images/person_photo.png
 

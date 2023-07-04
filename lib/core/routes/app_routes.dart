@@ -21,6 +21,7 @@ import 'package:health_care/patient/presentation/screens/reviews/reviews_screen.
 import 'package:health_care/patient/presentation/screens/search/search_screen.dart';
 import 'package:health_care/patient/presentation/screens/specialist_doctor/specialist_doctor.dart';
 import 'package:health_care/patient/presentation/screens/top_doctor/top_doctor.dart';
+import 'package:health_care/patient/presentation/screens/write_review/rate_review_screen.dart';
 import 'package:health_care/test.dart';
 
 class Routes {
@@ -46,6 +47,7 @@ class Routes {
   static const String doctorProfilePatientRoute = "/doctorProfilePatient";
   static const String bookAppointmentRoute = "/bookAppointment";
   static const String reviewsRoute = "/reviews";
+  static const String writeReviewRoute = "/writeReview";
 }
 
 class RouteGenerator {
@@ -114,6 +116,8 @@ class RouteGenerator {
             builder: (_) => ReviewsScreen(
                   reviews: reviews,
                 ));
+      case Routes.writeReviewRoute:
+        return MaterialPageRoute(builder: (_) => WriteReviewScreen());
       default:
         return unDefinedRoute();
     }
