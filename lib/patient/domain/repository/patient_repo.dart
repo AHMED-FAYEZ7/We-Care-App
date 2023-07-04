@@ -19,6 +19,9 @@ abstract class BasePatientRepo {
   Future<Either<Failure, AppointmentsInfo>> getDoctorAvailableAppointments(
     String docID,
   );
+
+  Future<Either<Failure, AppointmentsInfo>> getMyAppointments();
+
   Future<Either<Failure, AppointmentsInfo>> getAvailableAppointmentsByDay({
     required String docID,
     required String date,

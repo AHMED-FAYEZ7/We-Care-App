@@ -40,6 +40,7 @@ import 'package:health_care/patient/domain/usecase/get_available_apponitments_fo
 import 'package:health_care/patient/domain/usecase/get_docotrs_specialization_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_doctor_by_id_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_doctor_search_use_case.dart';
+import 'package:health_care/patient/domain/usecase/get_my_appointments_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_rate_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_top_doctors_use_case.dart';
 import 'package:health_care/patient/domain/usecase/make_doctor_review_use_case.dart';
@@ -166,6 +167,9 @@ Future<void> initAppModule() async {
 
   sl.registerLazySingleton<GetAvailableAppointmentsByDayUseCase>(
       () => GetAvailableAppointmentsByDayUseCase(sl()));
+
+  sl.registerLazySingleton<GetMyAppointmentsUseCase>(
+      () => GetMyAppointmentsUseCase(sl()));
 
   sl.registerLazySingleton<BookAppointmentUseCase>(
       () => BookAppointmentUseCase(sl()));

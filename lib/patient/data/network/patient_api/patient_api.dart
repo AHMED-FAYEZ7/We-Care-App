@@ -48,6 +48,10 @@ abstract class PatientServiceClient {
     @Path("docId") String docId,
     @Field("day") String date,
   );
+
+  @GET("api/v1/patients/appointments")
+  Future<AppointmentInfoResponse> getMyAppointments();
+
   @POST("api/v1/appointments/book")
   Future<AppointmentInfoResponse> bookAppointment(
     @Field("AppointmentID") String appointmentID,
