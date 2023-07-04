@@ -12,6 +12,7 @@ import 'package:health_care/patient/domain/usecase/get_all_doctors_use_case.dart
 import 'package:health_care/patient/domain/usecase/get_docotrs_specialization_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_doctor_by_id_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_doctor_search_use_case.dart';
+import 'package:health_care/patient/domain/usecase/get_my_appointments_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_rate_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_top_doctors_use_case.dart';
 import 'package:health_care/patient/domain/usecase/make_doctor_review_use_case.dart';
@@ -47,6 +48,8 @@ class TestPage extends StatelessWidget {
 
   final CreateTimeBlockUseCase _createTimeBlockUseCase =
       sl<CreateTimeBlockUseCase>();
+  final GetMyAppointmentsUseCase _getMyAppointmentsUseCase =
+      sl<GetMyAppointmentsUseCase>();
 
   @override
   Widget build(BuildContext context) {
@@ -59,22 +62,17 @@ class TestPage extends StatelessWidget {
           ),
           TextButton(
             onPressed: () async {
-              (await _createTimeBlockUseCase.call(
-                CreateTimeBlockUseCaseInput(
-                  period: 5,
-                  startTime: "2023-10-05T01:30:00.000Z",
-                  callType: "visit",
-                ),
-              ))
-                  .fold((l) {
+              (await _getMyAppointmentsUseCase.call(const NoParameters())).fold(
+                  (l) {
                 print(l.message.toString());
               }, (r) {
                 // print(r.availableAppointmentsData![0].appointmentId);
                 // print(r.reviews!.length);
 
-                print(r.period);
-                print(r.doctorId);
-                print(r.type);
+                print(r.upcomingAppointmentsData!.length);
+                print(r.upcomingAppointmentsData![0].appointmentId);
+                print(r.upcomingAppointmentsData![1].doctorId);
+
                 // print(r.user!.specialization);
                 // print(r.user!.fees);
                 // print(r.user!.scheduleTiming.length);
@@ -85,6 +83,32 @@ class TestPage extends StatelessWidget {
                 // print(r.doctorsData![4].averageRating);
                 // print(r.doctorsData![5].timePerPatient);
               });
+              // (await _createTimeBlockUseCase.call(
+              //   CreateTimeBlockUseCaseInput(
+              //     period: 5,
+              //     startTime: "2023-10-05T01:30:00.000Z",
+              //     callType: "visit",
+              //   ),
+              // ))
+              //     .fold((l) {
+              //   print(l.message.toString());
+              // }, (r) {
+              //   // print(r.availableAppointmentsData![0].appointmentId);
+              //   // print(r.reviews!.length);
+
+              //   print(r.period);
+              //   print(r.doctorId);
+              //   print(r.type);
+              //   // print(r.user!.specialization);
+              //   // print(r.user!.fees);
+              //   // print(r.user!.scheduleTiming.length);
+              //   // print("sss${r.token}");
+
+              //   // print(r.doctorsData![1].name);
+              //   // print(r.doctorsData![2].fees);
+              //   // print(r.doctorsData![4].averageRating);
+              //   // print(r.doctorsData![5].timePerPatient);
+              // });
               // (await _deleteReviewUseCase.call("649593403f0633e0bc1cb0c8"))
               //     .fold((l) {
               //   print(l.message.toString());

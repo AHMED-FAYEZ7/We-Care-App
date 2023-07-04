@@ -23,6 +23,8 @@ abstract class BasePatientRemoteDataSource {
     String date,
   );
 
+  Future<AppointmentInfoResponse> getMyAppointments();
+
   Future<AppointmentInfoResponse> bookAppointment({
     required String appointmentID,
   });
@@ -108,6 +110,11 @@ class PatientRemoteDataSourceImpl implements BasePatientRemoteDataSource {
   }
 
   @override
+  Future<AppointmentInfoResponse> getMyAppointments() async {
+    return await _patientServiceClient.getMyAppointments();
+  }
+
+  @override
   Future<AppointmentInfoResponse> bookAppointment({
     required String appointmentID,
   }) async {
@@ -129,17 +136,11 @@ class PatientRemoteDataSourceImpl implements BasePatientRemoteDataSource {
     required int rating,
     required String comment,
   }) async {
-    final data = await _patientServiceClient.makeReview(
+    return await _patientServiceClient.makeReview(
       docId,
       rating,
       comment,
     );
-    print("data ${data.successMessage} ");
-    print("data1 ${data.results} ");
-    print("data2 ${data.reviews} ");
-    print("data3 ${data.reviewsNum} ");
-    print("data4 ${data.message} ");
-    return data;
   }
 
   @override

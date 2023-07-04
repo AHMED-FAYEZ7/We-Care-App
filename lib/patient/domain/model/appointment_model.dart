@@ -26,6 +26,7 @@ class AppointmentsInfo {
   List<Appointment>? allAppointmentsData;
   List<Appointment>? availableAppointmentsData;
   List<Appointment>? availableAppointmentsByDayData;
+  List<Appointment>? upcomingAppointmentsData;
   Appointment? bookedAppointmentData;
 
   AppointmentsInfo(
@@ -33,5 +34,6 @@ class AppointmentsInfo {
     this.availableAppointmentsData,
     this.availableAppointmentsByDayData,
     this.bookedAppointmentData,
+    this.upcomingAppointmentsData,
   );
 }
