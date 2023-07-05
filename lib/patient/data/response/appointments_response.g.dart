@@ -12,7 +12,9 @@ AppointmentResponse _$AppointmentResponseFromJson(Map<String, dynamic> json) =>
       json['_id'] as String?,
       json['type'] as String?,
       json['status'] as String?,
-      json['doctor'] as String?,
+      json['doctor'] == null
+          ? null
+          : UserResponse.fromJson(json['doctor'] as Map<String, dynamic>),
       json['patient'] as String?,
       json['date'] as String?,
       json['__v'] as int?,
@@ -26,7 +28,7 @@ Map<String, dynamic> _$AppointmentResponseToJson(
       '_id': instance.appointmentId,
       'type': instance.type,
       'status': instance.status,
-      'doctor': instance.doctorId,
+      'doctor': instance.doctorInfo,
       'patient': instance.patientId,
       'date': instance.date,
       '__v': instance.v,
@@ -51,6 +53,9 @@ AppointmentInfoResponse _$AppointmentInfoResponseFromJson(
           ? null
           : AppointmentResponse.fromJson(
               json['appointment'] as Map<String, dynamic>),
+      (json['pastAppointment'] as List<dynamic>?)
+          ?.map((e) => AppointmentResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
       (json['upcomingApointments'] as List<dynamic>?)
           ?.map((e) => AppointmentResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -66,5 +71,6 @@ Map<String, dynamic> _$AppointmentInfoResponseToJson(
       'availableAppointmentsByDay':
           instance.availableAppointmentsByDayResponseData,
       'appointment': instance.bookedAppointmentResponseData,
+      'pastAppointment': instance.pastAppointment,
       'upcomingApointments': instance.upcomingAppointments,
     };

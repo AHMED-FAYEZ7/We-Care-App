@@ -107,12 +107,12 @@ class WriteReviewScreen extends StatelessWidget {
                 const SizedBox(
                   height: AppSize.s20,
                 ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(
+                Padding(
+                  padding: const EdgeInsets.symmetric(
                     horizontal: AppPadding.p12,
                   ),
                   child: Row(
-                    children: [
+                    children: const [
                       Text(
                         "Write a comment",
                         style: TextStyle(

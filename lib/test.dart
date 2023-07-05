@@ -70,8 +70,10 @@ class TestPage extends StatelessWidget {
                 // print(r.reviews!.length);
 
                 print(r.upcomingAppointmentsData!.length);
+                print(r.pastAppointment!.length);
                 print(r.upcomingAppointmentsData![0].appointmentId);
-                print(r.upcomingAppointmentsData![1].doctorId);
+                print(
+                    r.upcomingAppointmentsData![0].doctorInfo!.profilePicture);
 
                 // print(r.user!.specialization);
                 // print(r.user!.fees);
