@@ -41,6 +41,13 @@ class BookAppointmentByIdLoadingState extends PatientState {}
 class BookAppointmentByIdSuccessState extends PatientState {}
 
 class BookAppointmentByIdFailureState extends PatientState {}
+////////////////////////////////////////////
+
+class GetMyAppointmentsLoadingState extends PatientState {}
+
+class GetMyAppointmentsSuccessState extends PatientState {}
+
+class GetMyAppointmentsFailureState extends PatientState {}
 
 ////////////////////////////////////////////
 class GetDoctorRateLoadingState extends PatientState {}

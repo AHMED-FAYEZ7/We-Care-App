@@ -1,19 +1,16 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:flutter/material.dart';
-import 'package:health_care/authentication/domain/model/user_model.dart';
 import 'package:health_care/core/global/resources/icons_manger.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
+import 'package:health_care/patient/domain/model/appointment_model.dart';
 
-class DoctorWidget extends StatelessWidget {
-  DoctorWidget({
+class AppointmentWidget extends StatelessWidget {
+  AppointmentWidget({
     required this.model,
     Key? key,
   }) : super(key: key);
 
-  User model;
-
+  Appointment model;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -50,7 +47,7 @@ class DoctorWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    model.name,
+                    "Leo Messi",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: ColorManager.black,
@@ -61,28 +58,29 @@ class DoctorWidget extends StatelessWidget {
                   const SizedBox(
                     height: AppSize.s5,
                   ),
-                  Row(
-                    children: [
-                      Icon(
-                        IconBroken.Star,
-                        color: ColorManager.primary,
-                        size: AppSize.s16,
+                  RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                      style: const TextStyle(
+                        fontSize: AppSize.s14,
+                        color: Colors.black, // Default color for the text
                       ),
-                      Text(
-                        "${model.averageRating}(${model.numberOfRating} reviews)",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: ColorManager.black,
-                          fontSize: AppSize.s10,
+                      children: [
+                        const TextSpan(text: 'Chat - '),
+                        TextSpan(
+                          text: 'Schedule',
+                          style: TextStyle(
+                            color: ColorManager.primary,
+                          ), // Blue color for "Dr. Leo Messi"
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   const SizedBox(
                     height: AppSize.s5,
                   ),
                   Text(
-                    "${model.specialization} Specialist - Ramsay College Hospital",
+                    "10:30 march 25 2022",
                     maxLines: 2,
                     style: TextStyle(
                       color: ColorManager.black,

@@ -11,6 +11,7 @@ import 'package:health_care/patient/domain/usecase/book_appointment_use_case.dar
 import 'package:health_care/patient/domain/usecase/get_all_doctors_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_available_appointment_by_day_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_doctor_search_use_case.dart';
+import 'package:health_care/patient/domain/usecase/get_my_appointments_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_rate_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_top_doctors_use_case.dart';
 import 'package:health_care/patient/domain/usecase/make_doctor_review_use_case.dart';
@@ -33,6 +34,9 @@ class PatientCubit extends Cubit<PatientState> {
   MakeDoctorReviewUseCase _makeDoctorReviewUseCase =
       sl<MakeDoctorReviewUseCase>();
 
+  GetMyAppointmentsUseCase _getMyAppointmentsUseCase =
+      sl<GetMyAppointmentsUseCase>();
+
   PatientCubit(
     this._getTopDoctorsUseCase,
     this._allDoctorsUseCase,
@@ -41,6 +45,7 @@ class PatientCubit extends Cubit<PatientState> {
     this._bookAppointmentUseCase,
     this._getDoctorRateUseCase,
     this._makeDoctorReviewUseCase,
+    this._getMyAppointmentsUseCase,
   ) : super(PatientInitial());
   static PatientCubit get(context) => BlocProvider.of(context);
 
@@ -169,6 +174,24 @@ class PatientCubit extends Cubit<PatientState> {
       },
       (r) {
         emit(BookAppointmentByIdSuccessState());
+      },
+    );
+  }
+
+  /////////////get my appointment////////////////
+  List<Appointment> upcomingAppointments = [];
+  List<Appointment> pastAppointments = [];
+  getMyAppointments(
+    NoParameters params,
+  ) async {
+    emit(GetMyAppointmentsLoadingState());
+    (await _getMyAppointmentsUseCase.call(params)).fold(
+      (l) {
+        emit(GetMyAppointmentsFailureState());
+      },
+      (r) {
+        upcomingAppointments = r.upcomingAppointmentsData!;
+        emit(GetMyAppointmentsSuccessState());
       },
     );
   }
