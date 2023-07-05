@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:health_care/authentication/data/response/user_response/user_response.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'package:health_care/core/response/base_response.dart';
@@ -16,7 +17,7 @@ class AppointmentResponse {
   @JsonKey(name: "status")
   String? status;
   @JsonKey(name: "doctor")
-  String? doctorId;
+  UserResponse? doctorInfo;
   @JsonKey(name: "patient")
   String? patientId;
   @JsonKey(name: "date")
@@ -31,7 +32,7 @@ class AppointmentResponse {
     this.appointmentId,
     this.type,
     this.status,
-    this.doctorId,
+    this.doctorInfo,
     this.patientId,
     this.date,
     this.v,
@@ -57,6 +58,10 @@ class AppointmentInfoResponse extends BaseResponse {
 
   @JsonKey(name: "appointment")
   AppointmentResponse? bookedAppointmentResponseData;
+
+  @JsonKey(name: "pastAppointment")
+  List<AppointmentResponse>? pastAppointment;
+
   @JsonKey(name: "upcomingApointments")
   List<AppointmentResponse>? upcomingAppointments;
 
@@ -86,6 +91,7 @@ class AppointmentInfoResponse extends BaseResponse {
     this.availableAppointmentsResponseData,
     this.availableAppointmentsByDayResponseData,
     this.bookedAppointmentResponseData,
+    this.pastAppointment,
     this.upcomingAppointments,
   );
 }

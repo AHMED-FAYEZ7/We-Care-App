@@ -60,7 +60,7 @@ extension AppointmentResponseMapper on AppointmentResponse? {
       this?.appointmentId?.orEmpty() ?? Constants.empty,
       this?.type?.orEmpty() ?? Constants.empty,
       this?.status?.orEmpty() ?? Constants.empty,
-      this?.doctorId?.orEmpty() ?? Constants.empty,
+      this?.doctorInfo?.toDomain(),
       this?.patientId?.orEmpty() ?? Constants.empty,
       this?.date?.orEmpty() ?? Constants.empty,
       this?.v?.orZero() ?? Constants.zero,
@@ -96,6 +96,12 @@ extension AppointmentInfoResponseMapper on AppointmentInfoResponse? {
             .cast<Appointment>()
             .toList();
 
+    List<Appointment> pastAppointment = (this?.pastAppointment?.map(
+                  (pastAppointmentData) => pastAppointmentData.toDomain(),
+                ) ??
+            const Iterable.empty())
+        .cast<Appointment>()
+        .toList();
     List<Appointment> upcomingAppointmentsDataMapped =
         (this?.upcomingAppointments?.map(
                       (upcomingAppointmentsData) =>
@@ -110,6 +116,7 @@ extension AppointmentInfoResponseMapper on AppointmentInfoResponse? {
       availableAppointmentsMapped,
       availableAppointmentsByDayMapped,
       this?.bookedAppointmentResponseData?.toDomain(),
+      pastAppointment,
       upcomingAppointmentsDataMapped,
     );
   }
