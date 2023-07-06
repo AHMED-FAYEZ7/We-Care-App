@@ -77,7 +77,7 @@ class PatientCubit extends Cubit<PatientState> {
     allDoctor = [];
     (await _allDoctorsUseCase.call(specialist)).fold(
       (l) {
-        emit(GetTopDoctorFailureState());
+        emit(GetAllDoctorFailureState());
       },
       (r) {
         allDoctor = r.allDoctorsData!;
