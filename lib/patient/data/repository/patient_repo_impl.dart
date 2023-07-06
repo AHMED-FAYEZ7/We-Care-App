@@ -115,10 +115,6 @@ class PatientRepoImpl implements BasePatientRepo {
           specialization: specialization,
         );
 
-        print(" ssssssssss ssssssssssss ${response.resultsResponse}");
-        print(
-            " ةةةة ssssssssssss ${response.doctorsSearchDataResponse!.length}");
-        // print(" cccccccccc ssssssssssss ${response.allDoctors!.length}");
         if (response.status == ApiInternalStatus.SUCCESS) {
           return Right(response.toDomain());
         } else {
@@ -143,10 +139,6 @@ class PatientRepoImpl implements BasePatientRepo {
           docID,
         );
 
-        print(" ssssssssss ssssssssssss ${response.status}");
-        print(
-            " ةةةة ssssssssssss ${response.availableAppointmentsResponseData!.length}");
-        // print(" cccccccccc ssssssssssss ${response.allDoctors!.length}");
         if (response.status == ApiInternalStatus.SUCCESS) {
           return Right(response.toDomain());
         } else {
@@ -173,10 +165,6 @@ class PatientRepoImpl implements BasePatientRepo {
           date,
         );
 
-        print(" ssssssssss ssssssssssss ${response.status}");
-        print(
-            " ةةةة ssssssssssss ${response.availableAppointmentsByDayResponseData!.length}");
-        // print(" cccccccccc ssssssssssss ${response.allDoctors!.length}");
         if (response.status == ApiInternalStatus.SUCCESS) {
           return Right(response.toDomain());
         } else {
@@ -251,9 +239,6 @@ class PatientRepoImpl implements BasePatientRepo {
           docId: doctorId,
         );
 
-        print(" ssssssssss ssssssssssss ${response.status}");
-        print(" ةةةة ssssssssssss ${response.reviews!.length}");
-        // print(" cccccccccc ssssssssssss ${response.allDoctors!.length}");
         if (response.status == ApiInternalStatus.SUCCESS) {
           return Right(response.toDomain());
         } else {
@@ -283,14 +268,6 @@ class PatientRepoImpl implements BasePatientRepo {
           comment: comment,
         );
 
-        // print(" ssssssssss ssssssssssss ${response.status}");
-        // print(" ةةةة ssssssssssss ${response.reviews!.length}");
-        // print(" cccccccccc ssssssssssss ${response.allDoctors!.length}");
-        print(" eaefrara ${response.successMessage}");
-        final message = response.successMessage;
-        print(" hhhhhhhhhhh ${message}");
-        print(" ,,,,,, ${response.status}");
-
         return Right(response.toDomain());
       } catch (error) {
         print("error ${error.toString()}");
@@ -315,9 +292,6 @@ class PatientRepoImpl implements BasePatientRepo {
           comment: comment,
         );
 
-        // print(" ssssssssss ssssssssssss ${response.status}");
-        // print(" ةةةة ssssssssssss ${response.reviews!.length}");
-        // print(" cccccccccc ssssssssssss ${response.allDoctors!.length}");
         return Right(response.toDomain());
       } catch (error) {
         print("error ${error.toString()}");
@@ -338,9 +312,6 @@ class PatientRepoImpl implements BasePatientRepo {
           docId: docId,
         );
 
-        // print(" ssssssssss ssssssssssss ${response.status}");
-        // print(" ةةةة ssssssssssss ${response.reviews!.length}");
-        // print(" cccccccccc ssssssssssss ${response.allDoctors!.length}");
         return Right(response.toDomain());
       } catch (error) {
         print("error ${error.toString()}");

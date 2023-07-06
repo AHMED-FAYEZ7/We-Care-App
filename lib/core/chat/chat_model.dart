@@ -1,20 +1,38 @@
-class Chat {
+import 'package:health_care/authentication/domain/model/user_model.dart';
+
+class BaseChat {
+  String success;
+  String roomId;
+  BaseChat(
+    this.success,
+    this.roomId,
+  );
+}
+
+class Chats {
   String conversationId;
-  List<String> membersList;
+  List<User> membersList;
   String createdAt;
   String updatedAt;
   int v;
-  Chat(
+  String lastMSG;
+
+  Chats(
     this.conversationId,
     this.membersList,
     this.createdAt,
     this.updatedAt,
     this.v,
+    this.lastMSG,
   );
 }
 
-class ChatInfo {
-  Chat? chatInfo;
+class ChatsInfo {
+  String results;
+  List<Chats>? chatInfo;
 
-  ChatInfo(this.chatInfo);
+  ChatsInfo(
+    this.results,
+    this.chatInfo,
+  );
 }

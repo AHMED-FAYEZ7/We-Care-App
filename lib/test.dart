@@ -85,6 +85,52 @@ class TestPage extends StatelessWidget {
                 // print(r.doctorsData![4].averageRating);
                 // print(r.doctorsData![5].timePerPatient);
               });
+              (await _availableAppointmentsByDay.call(TwoParametersUseCase(
+                      "643498a42f6d65c1915ab52e", "2023-10-05")))
+                  .fold((l) {
+                print(l.message.toString());
+              }, (r) {
+                // print(r.availableAppointmentsData![0].appointmentId);
+                // print(r.reviews!.length);
+
+                print(r.availableAppointmentsByDayData!.length);
+                // print(r.pastAppointment!.length);
+                // print(r.upcomingAppointmentsData![0].appointmentId);
+                // print(
+                //     r.upcomingAppointmentsData![0].doctorInfo!.profilePicture);
+
+                // print(r.user!.specialization);
+                // print(r.user!.fees);
+                // print(r.user!.scheduleTiming.length);
+                // print("sss${r.token}");
+
+                // print(r.doctorsData![1].name);
+                // print(r.doctorsData![2].fees);
+                // print(r.doctorsData![4].averageRating);
+                // print(r.doctorsData![5].timePerPatient);
+              });
+              (await _allDoctorsUseCase.call("")).fold((l) {
+                print(l.message.toString());
+              }, (r) {
+                // print(r.availableAppointmentsData![0].appointmentId);
+                // print(r.reviews!.length);
+
+                print(r.allDoctorsData!.length);
+                print(r.allDoctorsData![0].name);
+                // print(r.upcomingAppointmentsData![0].appointmentId);
+                // print(
+                //     r.upcomingAppointmentsData![0].doctorInfo!.profilePicture);
+
+                // print(r.user!.specialization);
+                // print(r.user!.fees);
+                // print(r.user!.scheduleTiming.length);
+                // print("sss${r.token}");
+
+                // print(r.doctorsData![1].name);
+                // print(r.doctorsData![2].fees);
+                // print(r.doctorsData![4].averageRating);
+                // print(r.doctorsData![5].timePerPatient);
+              });
               // (await _createTimeBlockUseCase.call(
               //   CreateTimeBlockUseCaseInput(
               //     period: 5,

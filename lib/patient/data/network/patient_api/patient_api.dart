@@ -82,4 +82,9 @@ abstract class PatientServiceClient {
   Future<RateInfoResponse> deleteReview(
     @Path("docId") String docId,
   );
+
+  // @DELETE("api/v1/reviews/{docId}")
+  // Future<RateInfoResponse> createChatRoom(
+  //   @Path("docId") String docId,
+  // );
 }
