@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:health_care/core/global/resources/icons_manger.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
@@ -11,6 +13,16 @@ class AppointmentWidget extends StatelessWidget {
   }) : super(key: key);
 
   Appointment model;
+  late String text;
+  late IconData icon;
+
+  getType(String type) {
+    if (type == 'chat') {
+      text = 'Chat';
+      icon = Icons.chat;
+    } else if (type == 'video call') {}
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -47,7 +59,7 @@ class AppointmentWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Leo Messi",
+                    model.doctorInfo!.name,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: ColorManager.black,
@@ -66,7 +78,9 @@ class AppointmentWidget extends StatelessWidget {
                         color: Colors.black, // Default color for the text
                       ),
                       children: [
-                        const TextSpan(text: 'Chat - '),
+                        const TextSpan(
+                          text: '',
+                        ),
                         TextSpan(
                           text: 'Schedule',
                           style: TextStyle(
