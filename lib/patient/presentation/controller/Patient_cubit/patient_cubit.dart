@@ -59,7 +59,7 @@ class PatientCubit extends Cubit<PatientState> {
   List<Widget> screens = [
     const HomePatientScreen(),
     const PostsScreen(),
-     AppointmentPatientScreen(),
+    AppointmentPatientScreen(),
     const ProfilePatientScreen(),
   ];
 
@@ -181,12 +181,11 @@ class PatientCubit extends Cubit<PatientState> {
   /////////////get my appointment////////////////
   List<Appointment> upcomingAppointments = [];
   List<Appointment> pastAppointments = [];
-  getMyAppointments(
-  ) async {
+  getMyAppointments(NoParameters params) async {
     emit(GetMyAppointmentsLoadingState());
     upcomingAppointments = [];
     pastAppointments = [];
-    (await _getMyAppointmentsUseCase.call(null)).fold(
+    (await _getMyAppointmentsUseCase.call(params)).fold(
       (l) {
         emit(GetMyAppointmentsFailureState());
       },

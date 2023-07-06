@@ -24,6 +24,7 @@ class PatientRepoImpl implements BasePatientRepo {
     if (await _networkInfo.isConnected) {
       try {
         final response = await _basePatientRemoteDataSource.getAllDoctors();
+        print("ssssssssssssssssssssssssss${response.status}");
 
         if (response.status == ApiInternalStatus.SUCCESS) {
           return Right(response.toDomain());
@@ -31,6 +32,7 @@ class PatientRepoImpl implements BasePatientRepo {
           return Left(Failure(1, response.message!));
         }
       } catch (error) {
+        print(error.toString());
         return Left((ErrorHandler.handle(error).failure));
       }
     } else {
