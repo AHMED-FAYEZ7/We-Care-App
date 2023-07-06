@@ -59,7 +59,7 @@ class PatientCubit extends Cubit<PatientState> {
   List<Widget> screens = [
     const HomePatientScreen(),
     const PostsScreen(),
-    const AppointmentPatientScreen(),
+     AppointmentPatientScreen(),
     const ProfilePatientScreen(),
   ];
 
@@ -77,7 +77,7 @@ class PatientCubit extends Cubit<PatientState> {
     allDoctor = [];
     (await _allDoctorsUseCase.call(specialist)).fold(
       (l) {
-        emit(GetTopDoctorFailureState());
+        emit(GetAllDoctorFailureState());
       },
       (r) {
         allDoctor = r.allDoctorsData!;
@@ -182,15 +182,17 @@ class PatientCubit extends Cubit<PatientState> {
   List<Appointment> upcomingAppointments = [];
   List<Appointment> pastAppointments = [];
   getMyAppointments(
-    NoParameters params,
   ) async {
     emit(GetMyAppointmentsLoadingState());
-    (await _getMyAppointmentsUseCase.call(params)).fold(
+    upcomingAppointments = [];
+    pastAppointments = [];
+    (await _getMyAppointmentsUseCase.call(null)).fold(
       (l) {
         emit(GetMyAppointmentsFailureState());
       },
       (r) {
         upcomingAppointments = r.upcomingAppointmentsData!;
+        pastAppointments = r.pastAppointment!;
         emit(GetMyAppointmentsSuccessState());
       },
     );

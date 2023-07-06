@@ -129,7 +129,7 @@ class _SearchPatientScreenState extends State<SearchPatientScreen> {
                             ),
                             itemCount: cubit.searchedDoctor.length,
                           ),
-                          fallback: (context) => const EmptyListWidget(),
+                          fallback: (context) =>  EmptyListWidget(text: 'No Doctors Here',),
                         )
                       : DoctorShimmerWidget(),
                 ),

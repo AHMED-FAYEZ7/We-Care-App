@@ -91,7 +91,7 @@ class TopDoctorPatientScreen extends StatelessWidget {
                             ),
                             itemCount: cubit.specialistTopDoctor.length,
                           ),
-                          fallback: (context) => const EmptyListWidget(),
+                          fallback: (context) =>  EmptyListWidget(text: 'No Doctors Here',),
                         )
                       : DoctorShimmerWidget(),
                 ),

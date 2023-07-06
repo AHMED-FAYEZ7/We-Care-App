@@ -5,22 +5,42 @@ import 'package:health_care/core/global/resources/icons_manger.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
 import 'package:health_care/patient/domain/model/appointment_model.dart';
+import 'package:intl/intl.dart';
 
-class AppointmentWidget extends StatelessWidget {
+class AppointmentWidget extends StatefulWidget {
   AppointmentWidget({
     required this.model,
     Key? key,
   }) : super(key: key);
 
   Appointment model;
+
+  @override
+  State<AppointmentWidget> createState() => _AppointmentWidgetState();
+}
+
+class _AppointmentWidgetState extends State<AppointmentWidget> {
+
+  @override
+  void initState() {
+    super.initState();
+    getType(widget.model.type);
+  }
   late String text;
+
   late IconData icon;
 
   getType(String type) {
     if (type == 'chat') {
       text = 'Chat';
       icon = Icons.chat;
-    } else if (type == 'video call') {}
+    } else if (type == 'video call') {
+      text = 'Video Call';
+      icon = Icons.videocam;
+    }else{
+      text = 'Visit';
+      icon = Icons.offline_bolt_outlined;
+    }
   }
 
   @override
@@ -59,7 +79,7 @@ class AppointmentWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    model.doctorInfo!.name,
+                    widget.model.doctorInfo!.name,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: ColorManager.black,
@@ -73,16 +93,16 @@ class AppointmentWidget extends StatelessWidget {
                   RichText(
                     textAlign: TextAlign.center,
                     text: TextSpan(
-                      style: const TextStyle(
+                      style:  const TextStyle(
                         fontSize: AppSize.s14,
                         color: Colors.black, // Default color for the text
                       ),
                       children: [
-                        const TextSpan(
-                          text: '',
+                         TextSpan(
+                          text: text,
                         ),
                         TextSpan(
-                          text: 'Schedule',
+                          text: ' - Schedule',
                           style: TextStyle(
                             color: ColorManager.primary,
                           ), // Blue color for "Dr. Leo Messi"
@@ -94,7 +114,8 @@ class AppointmentWidget extends StatelessWidget {
                     height: AppSize.s5,
                   ),
                   Text(
-                    "10:30 march 25 2022",
+                    DateFormat.jm().format(DateTime.parse(
+                        widget.model.date)),
                     maxLines: 2,
                     style: TextStyle(
                       color: ColorManager.black,
@@ -106,8 +127,8 @@ class AppointmentWidget extends StatelessWidget {
             ),
             IconButton(
               onPressed: () {},
-              icon: const Icon(
-                IconBroken.Heart,
+              icon:  Icon(
+               icon,
               ),
             ),
           ],

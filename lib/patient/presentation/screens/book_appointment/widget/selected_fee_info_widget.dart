@@ -27,13 +27,13 @@ class _SelectedFeeInfoWidgetState extends State<SelectedFeeInfoWidget> {
       '5',
     ),
     Item(
-      Icons.phone,
+      Icons.videocam,
       'Video Call',
       'Can make a video call with doctor',
       '15',
     ),
     Item(
-      Icons.videocam,
+      Icons.offline_bolt_outlined,
       'Visit',
       'Can visit the doctor',
       '30',

@@ -62,18 +62,18 @@ class TestPage extends StatelessWidget {
           ),
           TextButton(
             onPressed: () async {
-              (await _getMyAppointmentsUseCase.call(const NoParameters())).fold(
+              (await _getTopDoctorsUseCase.call()).fold(
                   (l) {
                 print(l.message.toString());
               }, (r) {
                 // print(r.availableAppointmentsData![0].appointmentId);
                 // print(r.reviews!.length);
 
-                print(r.upcomingAppointmentsData!.length);
-                print(r.pastAppointment!.length);
-                print(r.upcomingAppointmentsData![0].appointmentId);
-                print(
-                    r.upcomingAppointmentsData![0].doctorInfo!.profilePicture);
+                print(r.topDoctorsData);
+                // print(r.pastAppointment!.length);
+                // print(r.upcomingAppointmentsData![0].appointmentId);
+                // print(
+                //     r.upcomingAppointmentsData![0].doctorInfo!.profilePicture);
 
                 // print(r.user!.specialization);
                 // print(r.user!.fees);
