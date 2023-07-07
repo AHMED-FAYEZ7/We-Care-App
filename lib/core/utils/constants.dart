@@ -16,6 +16,7 @@ class Constants {
   static const List<String> emptyList = [];
   static const bool FALSE = false;
   // static const int apiTimeOut = 60000;
+  static bool isLogout = false;
 }
 
 

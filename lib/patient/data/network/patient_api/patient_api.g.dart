@@ -208,7 +208,7 @@ class _PatientServiceClient implements PatientServiceClient {
     )
             .compose(
               _dio.options,
-              'api/v1/patients/appointments',
+              'api/v1/appointments',
               queryParameters: queryParameters,
               data: _data,
             )
