@@ -6,8 +6,8 @@ class User {
   int fees;
   List<ScheduleTiming> scheduleTiming;
   double timePerPatient;
-  List<String> patients;
-  List<String> appointments;
+  List<String?> patients;
+  List<String?> appointments;
   double numberOfRating;
   double averageRating;
   String status;
@@ -18,7 +18,7 @@ class User {
   bool confirmed;
   bool active;
   String type;
-  List<String> address;
+  List<String?> address;
   String userName;
   int v;
   String emailConfirm;

@@ -1,5 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
+
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 const String PREFS_KEY_LANG = "PREFS_KEY_LANG";
@@ -19,6 +21,7 @@ class AppPreferences {
   Future<String> getToken() async {
     return _sharedPreferences.getString(PREFS_KEY_TOKEN) ?? "NO TOKEN SAVED";
   }
+
 
   Future<void> setIsDoctorLoggedIn() async {
     _sharedPreferences.setBool(PREFS_KEY_IS_DOCTOR_LOGGED_IN, true);
@@ -44,8 +47,10 @@ class AppPreferences {
     return _sharedPreferences.getBool(PREFS_KEY_ON_BOARDING_SCREEN) ?? false;
   }
 
-  void clearSharedPreferences() async {
-    await _sharedPreferences.clear();
-    print('Shared Preferences cleared.');
+
+
+  Future<void> logout() async {
+    _sharedPreferences.remove(PREFS_KEY_IS_PATIENT_LOGGED_IN);
+    _sharedPreferences.remove(PREFS_KEY_IS_DOCTOR_LOGGED_IN);
   }
 }

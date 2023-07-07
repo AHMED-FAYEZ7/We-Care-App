@@ -1,5 +1,9 @@
 // ignore_for_file: constant_identifier_names
 
+import 'package:health_care/authentication/domain/model/user_model.dart';
+import 'package:health_care/core/app/app_prefs.dart';
+import 'package:health_care/core/services/services_locator.dart';
+
 class Constants {
   // static const String baseUrl = "http://minafarid246.mocklab.io";
   // static const String empty = "";
@@ -12,4 +16,8 @@ class Constants {
   static const List<String> emptyList = [];
   static const bool FALSE = false;
   // static const int apiTimeOut = 60000;
+  static bool isLogout = false;
 }
+
+
+

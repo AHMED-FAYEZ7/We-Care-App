@@ -5,6 +5,7 @@ import 'package:health_care/core/app/app_prefs.dart';
 import 'package:health_care/core/assets/app_assets.dart';
 import 'package:health_care/core/routes/app_routes.dart';
 import 'package:health_care/core/services/services_locator.dart';
+import 'package:health_care/core/utils/constants.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -49,12 +50,13 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    _startDelay();
+    if(Constants.isLogout == false){    _startDelay();
+    }
   }
 
   @override
   void dispose() {
-    _timer!.cancel();
+    if(Constants.isLogout == false){_timer!.cancel();}
     super.dispose();
   }
 

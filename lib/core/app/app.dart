@@ -2,10 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:health_care/core/app/app_prefs.dart';
-import 'package:health_care/core/global/theme/app_color/color_manager.dart';
+import 'package:health_care/authentication/presentation/controller/auth_cubit.dart';
 import 'package:health_care/core/routes/app_routes.dart';
 import 'package:health_care/core/services/services_locator.dart';
+import 'package:health_care/core/utils/constants.dart';
 import 'package:health_care/patient/presentation/controller/Patient_cubit/patient_cubit.dart';
 
 import '../global/theme/theme_data/theme_data_light.dart';
@@ -22,12 +22,13 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final AppPreferences _appPreferences = sl<AppPreferences>();
-
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider<AuthCubit>(
+          create: (BuildContext context) => sl<AuthCubit>(),
+        ),
         BlocProvider<PatientCubit>(
           create: (BuildContext context) => sl<PatientCubit>()
             ..getTopDoctor()
@@ -38,7 +39,8 @@ class _MyAppState extends State<MyApp> {
         theme: getThemeDataLight(),
         debugShowCheckedModeBanner: false,
         onGenerateRoute: RouteGenerator.getRoute,
-        initialRoute: Routes.splashRoute,
+        initialRoute:
+            Constants.isLogout ? Routes.userLoginRoute : Routes.splashRoute,
       ),
     );
   }

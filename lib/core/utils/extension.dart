@@ -32,8 +32,8 @@ extension NonNullDouble on double? {
   }
 }
 
-extension NonNullList on List<String>? {
-  List<String> orEmptyList() {
+extension NonNullList on List<String?>? {
+  List<String?> orEmptyList() {
     if (this == null) {
       return Constants.emptyList;
     } else {

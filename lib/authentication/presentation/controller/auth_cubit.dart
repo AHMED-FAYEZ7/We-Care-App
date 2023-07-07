@@ -40,12 +40,10 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthLogInLoadingState());
     (await _userLoginUseCase.call(loginUseCaseInput)).fold((l) {
       emit(AuthLogInErrorState(error: l.message!));
-    }, (r) {
+    }, (r)  {
+       _appPreferences.setToken(r.token);
       emit(AuthLogInSuccessState(userData: r));
     });
   }
 
-  Future<void> clear() async {
-    _appPreferences.clearSharedPreferences();
-  }
 }

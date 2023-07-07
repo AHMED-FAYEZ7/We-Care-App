@@ -60,7 +60,7 @@ class PatientCubit extends Cubit<PatientState> {
     const HomePatientScreen(),
     const PostsScreen(),
     AppointmentPatientScreen(),
-    const ProfilePatientScreen(),
+      ProfilePatientScreen(),
   ];
 
   int currentIndex = 0;

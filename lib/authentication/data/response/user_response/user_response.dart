@@ -20,9 +20,9 @@ class UserResponse {
   @JsonKey(name: "ScheduleTiming")
   List<ScheduleTimingResponse>? scheduleTiming;
   @JsonKey(name: "patients")
-  List<String>? patients;
+  List<String?>? patients;
   @JsonKey(name: "appointments")
-  List<String>? appointments;
+  List<String?>? appointments;
   @JsonKey(name: "numberOfRating")
   double? numberOfRating;
   @JsonKey(name: "averageRating")
@@ -44,7 +44,7 @@ class UserResponse {
   @JsonKey(name: "__t")
   String? type;
   @JsonKey(name: "address")
-  List<String>? address;
+  List<String?>? address;
   @JsonKey(name: "username")
   String? userName;
   @JsonKey(name: "__v")
