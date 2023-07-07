@@ -56,9 +56,7 @@ class PatientRemoteDataSourceImpl implements BasePatientRemoteDataSource {
   PatientRemoteDataSourceImpl(this._patientServiceClient);
   @override
   Future<DoctorInfResponse> getAllDoctors() async {
-    final data = await _patientServiceClient.getAllDoctors();
-    print("sssssssssssssssssss${data.allDoctorsResponse!.length}");
-    return data;
+    return await _patientServiceClient.getAllDoctors();
   }
 
   @override

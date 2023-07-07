@@ -24,7 +24,6 @@ class PatientRepoImpl implements BasePatientRepo {
     if (await _networkInfo.isConnected) {
       try {
         final response = await _basePatientRemoteDataSource.getAllDoctors();
-        print("ssssssssssssssssssssssssss${response.status}");
 
         if (response.status == ApiInternalStatus.SUCCESS) {
           return Right(response.toDomain());
@@ -186,7 +185,6 @@ class PatientRepoImpl implements BasePatientRepo {
       try {
         final response = await _basePatientRemoteDataSource.getMyAppointments();
 
-        // print(" cccccccccc ssssssssssss ${response.allDoctors!.length}");
         if (response.status == ApiInternalStatus.SUCCESS) {
           return Right(response.toDomain());
         } else {
@@ -212,10 +210,6 @@ class PatientRepoImpl implements BasePatientRepo {
           appointmentID: appointmentID,
         );
 
-        print(" ssssssssss ssssssssssss ${response.status}");
-        print(
-            " ةةةة ssssssssssss ${response.bookedAppointmentResponseData!.date}");
-        // print(" cccccccccc ssssssssssss ${response.allDoctors!.length}");
         if (response.status == ApiInternalStatus.SUCCESS) {
           return Right(response.toDomain());
         } else {

@@ -1,7 +1,7 @@
 import 'package:health_care/authentication/data/mapper/user_mapper.dart';
 import 'package:health_care/authentication/domain/model/user_model.dart';
-import 'package:health_care/core/chat/chat_model.dart';
-import 'package:health_care/core/chat/chat_response.dart';
+import 'package:health_care/chat/data/response/chat_response/chat_response.dart';
+import 'package:health_care/chat/domain/model/chat_model.dart';
 import 'package:health_care/core/utils/constants.dart';
 import 'package:health_care/core/utils/extension.dart';
 
