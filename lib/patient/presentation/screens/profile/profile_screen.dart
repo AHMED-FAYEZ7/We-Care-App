@@ -1,131 +1,140 @@
+// ignore_for_file: avoid_print
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
-import 'package:health_care/authentication/presentation/screens/user/user_login_screen.dart';
-import 'package:health_care/core/app/app.dart';
 import 'package:health_care/core/app/app_prefs.dart';
 import 'package:health_care/core/global/resources/icons_manger.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
-import 'package:health_care/core/routes/app_routes.dart';
 import 'package:health_care/core/services/services_locator.dart';
 import 'package:health_care/core/utils/constants.dart';
+import 'package:health_care/patient/presentation/controller/Patient_cubit/patient_cubit.dart';
 import 'package:health_care/patient/presentation/screens/profile/widget/divider.dart';
 import 'package:health_care/patient/presentation/screens/profile/widget/profile_item_widget.dart';
 
 class ProfilePatientScreen extends StatelessWidget {
-    ProfilePatientScreen({Key? key}) : super(key: key);
-
-
+  const ProfilePatientScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(AppSize.s12,),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              const CircleAvatar(
-                radius: AppSize.s40,
-                backgroundImage: NetworkImage(
-                  "https://idsb.tmgrup.com.tr/ly/uploads/images/2022/12/19/247181.jpg",
+    return BlocConsumer<PatientCubit, PatientState>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        var cubit = PatientCubit.get(context);
+        return Scaffold(
+          body: Padding(
+            padding: const EdgeInsets.all(
+              AppSize.s12,
+            ),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    const CircleAvatar(
+                      radius: AppSize.s40,
+                      backgroundImage: NetworkImage(
+                        "https://idsb.tmgrup.com.tr/ly/uploads/images/2022/12/19/247181.jpg",
+                      ),
+                    ),
+                    const SizedBox(
+                      width: AppSize.s20,
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          cubit.patientData!.name,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: ColorManager.black,
+                            fontSize: AppSize.s16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: AppSize.s5,
+                        ),
+                        Text(
+                          cubit.patientData!.email,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: ColorManager.black,
+                            fontSize: AppSize.s14,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: AppSize.s5,
+                        ),
+                        Text(
+                          "alex",
+                          maxLines: 2,
+                          style: TextStyle(
+                            color: ColorManager.black,
+                            fontSize: AppSize.s14,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Spacer(),
+                    IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        IconBroken.Edit,
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-             const SizedBox(width: AppSize.s20,),
-             Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "userdata!.name",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: ColorManager.black,
-                      fontSize: AppSize.s16,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: AppSize.s5,
-                  ),
-                  Text(
-                    "userdata!.email",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: ColorManager.black,
-                      fontSize: AppSize.s14,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: AppSize.s5,
-                  ),
-                  Text(
-                    "alex",
-                    maxLines: 2,
-                    style: TextStyle(
-                      color: ColorManager.black,
-                      fontSize: AppSize.s14,
-                    ),
-                  ),
-                ],
-              ),
-              Spacer(),
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  IconBroken.Edit,
+                const MyDivider(),
+                ProfileItemWidget(
+                  icon: IconBroken.Notification,
+                  text: 'Notification',
+                  onTap: () {},
                 ),
-              ),
-            ],
+                const MyDivider(),
+                ProfileItemWidget(
+                  icon: IconBroken.Lock,
+                  text: 'Security',
+                  onTap: () {},
+                ),
+                const MyDivider(),
+                ProfileItemWidget(
+                  icon: Icons.remove_red_eye_outlined,
+                  text: 'Appearance',
+                  onTap: () {},
+                ),
+                const MyDivider(),
+                ProfileItemWidget(
+                  icon: Icons.help_outline_outlined,
+                  text: 'Help',
+                  onTap: () {},
+                ),
+                const MyDivider(),
+                ProfileItemWidget(
+                  icon: Icons.people_outline,
+                  text: 'Invite Friends',
+                  onTap: () {},
+                ),
+                const MyDivider(),
+                ProfileItemWidget(
+                  icon: IconBroken.Logout,
+                  text: 'Logout',
+                  onTap: () {
+                    BottomDialog().showBottomDialog(context);
+                  },
+                ),
+              ],
+            ),
           ),
-          const MyDivider(),
-          ProfileItemWidget(
-            icon: IconBroken.Notification,
-            text: 'Notification',
-            onTap: (){},
-          ),
-          const MyDivider(),
-          ProfileItemWidget(
-            icon: IconBroken.Lock,
-            text: 'Security',
-            onTap: (){},
-          ),
-          const MyDivider(),
-          ProfileItemWidget(
-            icon: Icons.remove_red_eye_outlined,
-            text: 'Appearance',
-            onTap: (){},
-          ),
-          const MyDivider(),
-          ProfileItemWidget(
-            icon: Icons.help_outline_outlined,
-            text: 'Help',
-            onTap: (){},
-          ),
-          const MyDivider(),
-          ProfileItemWidget(
-            icon: Icons.people_outline,
-            text: 'Invite Friends',
-            onTap: (){},
-          ),
-          const MyDivider(),
-          ProfileItemWidget(
-            icon: IconBroken.Logout,
-            text: 'Logout',
-            onTap: (){
-              BottomDialog().showBottomDialog(context);
-            },
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
 
 class BottomDialog {
   final AppPreferences _appPreferences = sl<AppPreferences>();
-
 
   void showBottomDialog(BuildContext context) {
     showGeneralDialog(
@@ -137,7 +146,7 @@ class BottomDialog {
       pageBuilder: (context, _, __) {
         return Align(
           alignment: Alignment.bottomCenter,
-          child: _buildDialogContent( context),
+          child: _buildDialogContent(context),
         );
       },
       transitionBuilder: (_, animation1, __, child) {
@@ -173,7 +182,6 @@ class BottomDialog {
               const SizedBox(height: 16),
               _buildButtons(context),
               const SizedBox(height: 16),
-
             ],
           ),
         ),
@@ -185,7 +193,10 @@ class BottomDialog {
     const icon = IconBroken.Logout;
     return const SizedBox(
       height: 88,
-      child: Icon(icon,size: 50,),
+      child: Icon(
+        icon,
+        size: 50,
+      ),
     );
   }
 
@@ -200,14 +211,14 @@ class BottomDialog {
   }
 
   Widget _buildButtons(BuildContext context) {
-    return  Row(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(
           width: AppSize.s130,
           height: AppSize.s40,
           child: OutlinedButton(
-            onPressed: (){
+            onPressed: () {
               Navigator.pop(context);
             },
             style: ButtonStyle(
@@ -222,23 +233,28 @@ class BottomDialog {
                   borderRadius: BorderRadius.circular(AppSize.s16),
                 ),
               ),
-            ), child: Text('Cancel',style: TextStyle(
-            color: ColorManager.primary,
-            fontSize: AppSize.s16,
-          ),),
+            ),
+            child: Text(
+              'Cancel',
+              style: TextStyle(
+                color: ColorManager.primary,
+                fontSize: AppSize.s16,
+              ),
+            ),
           ),
         ),
-        const SizedBox(width: AppSize.s30,),
+        const SizedBox(
+          width: AppSize.s30,
+        ),
         SizedBox(
           width: AppSize.s130,
           height: AppSize.s40,
           child: OutlinedButton(
-            onPressed: (){
-               _appPreferences.logout();
-               Constants.isLogout = true;
+            onPressed: () {
+              _appPreferences.logout();
+              Constants.isLogout = true;
               Phoenix.rebirth(context);
               print("logeddddddddddddddddddddddd out");
-
             },
             style: ButtonStyle(
               side: MaterialStateProperty.all(
@@ -252,14 +268,17 @@ class BottomDialog {
                   borderRadius: BorderRadius.circular(AppSize.s16),
                 ),
               ),
-            ), child: Text('Yes, Logout',style: TextStyle(
-            color: ColorManager.white,
-            fontSize: AppSize.s16,
-          ),),
+            ),
+            child: Text(
+              'Yes, Logout',
+              style: TextStyle(
+                color: ColorManager.white,
+                fontSize: AppSize.s16,
+              ),
+            ),
           ),
         ),
       ],
     );
   }
-
 }

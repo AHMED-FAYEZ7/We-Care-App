@@ -6,6 +6,12 @@ abstract class PatientState {}
 class PatientInitial extends PatientState {}
 
 class AppChangeBottomNavState extends PatientState {}
+//////////////////////////////////////
+class GetPatientDataLoadingState extends PatientState {}
+
+class GetPatientDataSuccessState extends PatientState {}
+
+class GetPatientDataFailureState extends PatientState {}
 
 //////////////////////////////////////
 class GetTopDoctorLoadingState extends PatientState {}

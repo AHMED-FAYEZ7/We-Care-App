@@ -12,6 +12,7 @@ import 'package:health_care/patient/domain/usecase/get_all_doctors_use_case.dart
 import 'package:health_care/patient/domain/usecase/get_available_appointment_by_day_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_doctor_search_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_my_appointments_use_case.dart';
+import 'package:health_care/patient/domain/usecase/get_patient_data_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_rate_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_top_doctors_use_case.dart';
 import 'package:health_care/patient/domain/usecase/make_doctor_review_use_case.dart';
@@ -37,6 +38,8 @@ class PatientCubit extends Cubit<PatientState> {
   GetMyAppointmentsUseCase _getMyAppointmentsUseCase =
       sl<GetMyAppointmentsUseCase>();
 
+  GetPatientDataUseCase _getPatientDataUseCase = sl<GetPatientDataUseCase>();
+
   PatientCubit(
     this._getTopDoctorsUseCase,
     this._allDoctorsUseCase,
@@ -46,6 +49,7 @@ class PatientCubit extends Cubit<PatientState> {
     this._getDoctorRateUseCase,
     this._makeDoctorReviewUseCase,
     this._getMyAppointmentsUseCase,
+    this._getPatientDataUseCase,
   ) : super(PatientInitial());
   static PatientCubit get(context) => BlocProvider.of(context);
 
@@ -60,13 +64,28 @@ class PatientCubit extends Cubit<PatientState> {
     const HomePatientScreen(),
     const PostsScreen(),
     AppointmentPatientScreen(),
-      ProfilePatientScreen(),
+    const ProfilePatientScreen(),
   ];
 
   int currentIndex = 0;
   void changeBottomNav(int index) {
     currentIndex = index;
     emit(AppChangeBottomNavState());
+  }
+
+  /////////////user data////////////////
+  User? patientData;
+  getPatientData(NoParameters params) async {
+    emit(GetPatientDataLoadingState());
+    (await _getPatientDataUseCase.call(params)).fold(
+      (l) {
+        emit(GetPatientDataFailureState());
+      },
+      (r) {
+        patientData = r.user;
+        emit(GetPatientDataSuccessState());
+      },
+    );
   }
 
   /////////////all doctor////////////////
