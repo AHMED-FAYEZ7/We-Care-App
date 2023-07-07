@@ -23,6 +23,10 @@ import 'package:health_care/authentication/domain/usecase/user_login_usecase.dar
 import 'package:health_care/authentication/domain/usecase/user_update_info_usecase.dart';
 import 'package:health_care/authentication/domain/usecase/user_update_password_usecase.dart';
 import 'package:health_care/authentication/presentation/controller/auth_cubit.dart';
+import 'package:health_care/chat/data/data_source/chat_remote_data_source.dart';
+import 'package:health_care/chat/data/repository/doctor_repo_impl.dart';
+import 'package:health_care/chat/domain/repository/chat_repository.dart';
+import 'package:health_care/chat/domain/usecase/conncet_to_socket_use_case.dart';
 import 'package:health_care/doctor/data/data_source/doctor_remote_data_source.dart';
 import 'package:health_care/doctor/data/network/doctor_api/doctor_api.dart';
 import 'package:health_care/doctor/data/repository/doctor_repo_impl.dart';
@@ -47,6 +51,7 @@ import 'package:health_care/patient/domain/usecase/make_doctor_review_use_case.d
 import 'package:health_care/patient/domain/usecase/update_doctor_review_use_case.dart';
 import 'package:health_care/patient/presentation/controller/Patient_cubit/patient_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:socket_io_client/socket_io_client.dart' as io;
 
 import '../network/dio_factory.dart';
 import '../network/network_info.dart';
@@ -103,6 +108,10 @@ Future<void> initAppModule() async {
   sl.registerLazySingleton<UserRemoteDataSource>(
       () => UserRemoteDataSourceImplementer(sl()));
 
+/////////// chat /////////////
+  sl.registerLazySingleton<BaseChatRemoteDataSource>(
+      () => ChatRemoteDataSourceImpl());
+
   // local data source
 
   // repository
@@ -119,6 +128,8 @@ Future<void> initAppModule() async {
 
   sl.registerLazySingleton<BaseUserRepository>(
       () => BaseUserRepositoryImpl(sl(), sl()));
+
+  sl.registerLazySingleton<BaseChatRepository>(() => ChatRepoImpl(sl(), sl()));
 
   // useCase
 
@@ -192,6 +203,11 @@ Future<void> initAppModule() async {
 
   sl.registerLazySingleton<CreateTimeBlockUseCase>(
       () => CreateTimeBlockUseCase(sl()));
+
+  // ////////////// chat////////////
+
+  sl.registerLazySingleton<ConnectToSocketUseCase>(
+      () => ConnectToSocketUseCase(sl()));
   // cubit
 
   sl.registerFactory<AuthCubit>(() => AuthCubit(

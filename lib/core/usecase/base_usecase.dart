@@ -6,6 +6,10 @@ abstract class BaseUseCase<In, Out> {
   Future<Either<Failure, Out>> call(In input);
 }
 
+abstract class TestUseCase<In, Out> {
+  Future<Out> call(In input);
+}
+
 abstract class OptionalBaseUseCase<In, Out> {
   Future<Either<Failure, Out>> call({In? input});
 }
