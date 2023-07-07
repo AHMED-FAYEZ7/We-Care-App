@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:health_care/core/app/app.dart';
 import 'package:health_care/core/services/services_locator.dart';
 
@@ -10,7 +11,7 @@ void main() async {
     () async {
       WidgetsFlutterBinding.ensureInitialized();
       await initAppModule();
-      runApp(MyApp());
+      runApp(Phoenix(child: MyApp(),));
     },
     blocObserver: MyBlocObserver(),
   );

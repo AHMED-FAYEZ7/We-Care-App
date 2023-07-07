@@ -114,8 +114,8 @@ class _AppointmentWidgetState extends State<AppointmentWidget> {
                     height: AppSize.s5,
                   ),
                   Text(
-                    DateFormat.jm().format(DateTime.parse(
-                        widget.model.date)),
+                    "${DateFormat.jm().format(DateTime.parse(
+                    widget.model.date))}  5${DateFormat('EEEE d, yyyy').format(DateTime.parse(widget.model.date))}",
                     maxLines: 2,
                     style: TextStyle(
                       color: ColorManager.black,

@@ -14,9 +14,9 @@ UserResponse _$UserResponseFromJson(Map<String, dynamic> json) => UserResponse(
           ?.map(
               (e) => ScheduleTimingResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
-      (json['patients'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      (json['patients'] as List<dynamic>?)?.map((e) => e as String?).toList(),
       (json['appointments'] as List<dynamic>?)
-          ?.map((e) => e as String)
+          ?.map((e) => e as String?)
           .toList(),
       (json['numberOfRating'] as num?)?.toDouble(),
       (json['averageRating'] as num?)?.toDouble(),
@@ -28,7 +28,7 @@ UserResponse _$UserResponseFromJson(Map<String, dynamic> json) => UserResponse(
       json['confirmed'] as bool?,
       json['active'] as bool?,
       json['__t'] as String?,
-      (json['address'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      (json['address'] as List<dynamic>?)?.map((e) => e as String?).toList(),
       json['username'] as String?,
       json['__v'] as int?,
       json['emailConfirm'] as String?,

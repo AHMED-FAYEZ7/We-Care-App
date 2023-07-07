@@ -9,6 +9,7 @@ import 'package:health_care/core/global/theme/app_color/color_manager.dart';
 import 'package:health_care/core/routes/app_routes.dart';
 import 'package:health_care/core/utils/constants.dart';
 import 'package:health_care/core/utils/functions.dart';
+import 'package:health_care/patient/presentation/widgets/app_bar_widget.dart';
 
 class PatientRegisterScreen extends StatelessWidget {
   PatientRegisterScreen({Key? key}) : super(key: key);
@@ -25,6 +26,8 @@ class PatientRegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBarWidget(isBack:  true,title: '',),
+
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -34,9 +37,6 @@ class PatientRegisterScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(
-                  height: AppSize.s65,
-                ),
                 const Image(
                   fit: BoxFit.fitHeight,
                   height: AppSize.s150,

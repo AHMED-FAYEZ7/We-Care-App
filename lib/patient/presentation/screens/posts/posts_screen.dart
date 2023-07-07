@@ -9,7 +9,7 @@ class PostsScreen extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          // PostWidget(),
+          PostWidget(),
         ],
       ),
     );

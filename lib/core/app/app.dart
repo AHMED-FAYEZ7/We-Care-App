@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:health_care/authentication/presentation/controller/auth_cubit.dart';
 import 'package:health_care/core/app/app_prefs.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
 import 'package:health_care/core/routes/app_routes.dart';
@@ -28,6 +29,9 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider<AuthCubit>(
+          create: (BuildContext context) => sl<AuthCubit>(),
+        ),
         BlocProvider<PatientCubit>(
           create: (BuildContext context) => sl<PatientCubit>()
             ..getTopDoctor()

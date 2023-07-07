@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,29 +30,28 @@ class UserLoginScreen extends StatelessWidget {
       TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => sl<AuthCubit>(),
-      child: BlocConsumer<AuthCubit, AuthState>(
+    return BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) async {
           if (state is AuthLogInSuccessState) {
             // if (state.userData.user!.confirmed == true) {
             if (state.userData.user!.type == "Doctor") {
               print("Doctor Login success");
+              await _appPreferences.setIsDoctorLoggedIn();
+              await resetModules();
               // Navigator.pushNamed(
               //   context,
               //   Routes.doctorLayoutRoute,
               // );
-              // await _appPreferences.setToken(state.userData.token);
-              // await _appPreferences.setIsDoctorLoggedIn();
+
             } else if (state.userData.user!.type == "Patient") {
               print("Patient Login success");
-
+              await _appPreferences.setIsPatientLoggedIn();
+              await resetModules();
               Navigator.pushReplacementNamed(
                 context,
                 Routes.layoutPatientRoute,
               );
-              await _appPreferences.setToken(state.userData.token);
-              await _appPreferences.setIsPatientLoggedIn();
+
             }
             // } else {
             //   Navigator.pushNamed(
@@ -234,7 +235,7 @@ class UserLoginScreen extends StatelessWidget {
                               ),
                             ),
                             onPressed: () {
-                              Navigator.pushReplacementNamed(
+                              Navigator.pushNamed(
                                 context,
                                 Routes.toggleRoute,
                               );
@@ -249,7 +250,7 @@ class UserLoginScreen extends StatelessWidget {
             ),
           );
         },
-      ),
+
     );
   }
 }

@@ -214,3 +214,8 @@ Future<void> initAppModule() async {
         sl(),
       ));
 }
+
+resetModules() {
+  sl.reset(dispose: false);
+  initAppModule();
+}
