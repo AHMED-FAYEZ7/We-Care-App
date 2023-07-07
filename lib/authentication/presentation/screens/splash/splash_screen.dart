@@ -50,13 +50,16 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    if(Constants.isLogout == false){    _startDelay();
+    if (Constants.isLogout == false) {
+      _startDelay();
     }
   }
 
   @override
   void dispose() {
-    if(Constants.isLogout == false){_timer!.cancel();}
+    if (Constants.isLogout == false) {
+      _timer!.cancel();
+    }
     super.dispose();
   }
 
