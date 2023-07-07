@@ -49,7 +49,7 @@ abstract class PatientServiceClient {
     @Field("day") String date,
   );
 
-  @GET("api/v1/patients/appointments")
+  @GET("api/v1/appointments")
   Future<AppointmentInfoResponse> getMyAppointments();
 
   @POST("api/v1/appointments/book")

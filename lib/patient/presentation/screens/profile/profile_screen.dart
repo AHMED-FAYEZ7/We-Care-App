@@ -235,6 +235,7 @@ class BottomDialog {
           child: OutlinedButton(
             onPressed: (){
                _appPreferences.logout();
+               Constants.isLogout = true;
               Phoenix.rebirth(context);
               print("logeddddddddddddddddddddddd out");
 
