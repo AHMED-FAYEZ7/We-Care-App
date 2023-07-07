@@ -14,6 +14,7 @@ import 'package:health_care/patient/domain/usecase/get_docotrs_specialization_us
 import 'package:health_care/patient/domain/usecase/get_doctor_by_id_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_doctor_search_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_my_appointments_use_case.dart';
+import 'package:health_care/patient/domain/usecase/get_patient_data_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_rate_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_top_doctors_use_case.dart';
 import 'package:health_care/patient/domain/usecase/make_doctor_review_use_case.dart';
@@ -55,6 +56,9 @@ class TestPage extends StatelessWidget {
   final ConnectToSocketUseCase _connectToSocketUseCase =
       sl<ConnectToSocketUseCase>();
 
+  final GetPatientDataUseCase _getPatientDataUseCase =
+      sl<GetPatientDataUseCase>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,7 +93,7 @@ class TestPage extends StatelessWidget {
               //   // print(r.doctorsData![4].averageRating);
               //   // print(r.doctorsData![5].timePerPatient);
               // });
-              (await _connectToSocketUseCase.call(const NoParameters()));
+              // (await _connectToSocketUseCase.call(const NoParameters()));
               // (await _availableAppointmentsByDay.call(TwoParametersUseCase(
               //         "643498a42f6d65c1915ab52e", "2023-10-05")))
               //     .fold((l) {
@@ -114,6 +118,30 @@ class TestPage extends StatelessWidget {
               //   // print(r.doctorsData![4].averageRating);
               //   // print(r.doctorsData![5].timePerPatient);
               // });
+              (await _getPatientDataUseCase.call(const NoParameters())).fold(
+                  (l) {
+                print(l.message.toString());
+              }, (r) {
+                // print(r.availableAppointmentsData![0].appointmentId);
+                // print(r.reviews!.length);
+
+                print(r.user!.name);
+                print(r.user!.id);
+                // print(r.pastAppointment!.length);
+                // print(r.upcomingAppointmentsData![0].appointmentId);
+                // print(
+                //     r.upcomingAppointmentsData![0].doctorInfo!.profilePicture);
+
+                // print(r.user!.specialization);
+                // print(r.user!.fees);
+                // print(r.user!.scheduleTiming.length);
+                // print("sss${r.token}");
+
+                // print(r.doctorsData![1].name);
+                // print(r.doctorsData![2].fees);
+                // print(r.doctorsData![4].averageRating);
+                // print(r.doctorsData![5].timePerPatient);
+              });
               // (await _allDoctorsUseCase.call("")).fold((l) {
               //   print(l.message.toString());
               // }, (r) {

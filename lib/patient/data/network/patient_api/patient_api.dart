@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:health_care/authentication/data/response/patient_auth_response/patient_auth_response.dart';
+import 'package:health_care/authentication/data/response/user_response/user_response.dart';
 import 'package:health_care/core/network/api_constance.dart';
 import 'package:health_care/patient/data/response/appointments_response.dart';
 import 'package:health_care/patient/data/response/patient_response.dart';
@@ -35,6 +37,9 @@ abstract class PatientServiceClient {
     @Query("keyword") String query, {
     @Query("specialization") String? specialization,
   });
+
+  @GET("api/v1/patients/mydata")
+  Future<PatientAuthResponse> getPatientData();
 
   ////////////// Appointment ////////////////
 
@@ -82,9 +87,4 @@ abstract class PatientServiceClient {
   Future<RateInfoResponse> deleteReview(
     @Path("docId") String docId,
   );
-
-  // @DELETE("api/v1/reviews/{docId}")
-  // Future<RateInfoResponse> createChatRoom(
-  //   @Path("docId") String docId,
-  // );
 }

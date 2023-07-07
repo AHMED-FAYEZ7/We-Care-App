@@ -1,5 +1,7 @@
 import 'package:dartz/dartz.dart';
+import 'package:health_care/authentication/data/mapper/patient_auth_mapper.dart';
 import 'package:health_care/authentication/data/mapper/user_mapper.dart';
+import 'package:health_care/authentication/domain/model/patient_model.dart';
 import 'package:health_care/authentication/domain/model/user_model.dart';
 import 'package:health_care/core/error/error_handler.dart';
 import 'package:health_care/core/error/failure.dart';
@@ -116,6 +118,24 @@ class PatientRepoImpl implements BasePatientRepo {
           specialization: specialization,
         );
 
+        if (response.status == ApiInternalStatus.SUCCESS) {
+          return Right(response.toDomain());
+        } else {
+          return Left(Failure(1, response.message!));
+        }
+      } catch (error) {
+        return Left((ErrorHandler.handle(error).failure));
+      }
+    } else {
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, PatientAuth>> getPatientData() async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final response = await _basePatientRemoteDataSource.getPatientData();
         if (response.status == ApiInternalStatus.SUCCESS) {
           return Right(response.toDomain());
         } else {
