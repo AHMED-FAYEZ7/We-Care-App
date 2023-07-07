@@ -6,9 +6,11 @@ class MyDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      children: [
-        SizedBox(height: AppSize.s10,),
+    return Column(
+      children: const [
+        SizedBox(
+          height: AppSize.s10,
+        ),
         Divider(),
       ],
     );

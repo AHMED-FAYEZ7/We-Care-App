@@ -146,6 +146,29 @@ class _PatientServiceClient implements PatientServiceClient {
   }
 
   @override
+  Future<PatientAuthResponse> getPatientData() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<PatientAuthResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'api/v1/patients/mydata',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = PatientAuthResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<AppointmentInfoResponse> getDoctorAvailableAppointments(docId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

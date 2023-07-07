@@ -1,3 +1,4 @@
+import 'package:health_care/authentication/data/response/patient_auth_response/patient_auth_response.dart';
 import 'package:health_care/patient/data/network/patient_api/patient_api.dart';
 import 'package:health_care/patient/data/response/appointments_response.dart';
 import 'package:health_care/patient/data/response/patient_response.dart';
@@ -14,6 +15,8 @@ abstract class BasePatientRemoteDataSource {
     String query, {
     String? specialization,
   });
+  Future<PatientAuthResponse> getPatientData();
+
   ///////////////// appointment ////////////////
 
   Future<AppointmentInfoResponse> getDoctorAvailableAppointments(String docId);
@@ -89,6 +92,11 @@ class PatientRemoteDataSourceImpl implements BasePatientRemoteDataSource {
       query,
       specialization: specialization,
     );
+  }
+
+  @override
+  Future<PatientAuthResponse> getPatientData() async {
+    return await _patientServiceClient.getPatientData();
   }
 
   @override

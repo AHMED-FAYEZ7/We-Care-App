@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:health_care/authentication/domain/model/patient_model.dart';
 import 'package:health_care/authentication/domain/model/user_model.dart';
 import 'package:health_care/core/error/failure.dart';
 import 'package:health_care/patient/domain/model/appointment_model.dart';
@@ -16,6 +17,8 @@ abstract class BasePatientRepo {
   Future<Either<Failure, DoctorInfo>> getDoctorsSpecialization(
     String specialization,
   );
+  Future<Either<Failure, PatientAuth>> getPatientData();
+
   Future<Either<Failure, AppointmentsInfo>> getDoctorAvailableAppointments(
     String docID,
   );
