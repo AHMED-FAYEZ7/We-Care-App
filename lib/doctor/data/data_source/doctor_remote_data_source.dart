@@ -1,5 +1,6 @@
 import 'package:health_care/doctor/data/network/doctor_api/doctor_api.dart';
-import 'package:health_care/doctor/data/response/time_block_response.dart';
+import 'package:health_care/doctor/data/response/blog/blog_response.dart';
+import 'package:health_care/doctor/data/response/time_block/time_block_response.dart';
 
 abstract class BaseDoctorRemoteDataSource {
   Future<TimeBlockResponse> createTimeBlock({
@@ -7,6 +8,14 @@ abstract class BaseDoctorRemoteDataSource {
     required String startTime,
     required String callType,
   });
+  // ////////////// blog ///////////////
+  Future<BlogInfoResponse> createBlog(
+    String postDescription,
+    String postTitle, {
+    String? postImage,
+  });
+
+  Future<BlogInfoResponse> getAllBlogs();
 }
 
 class DoctorRemoteDataSourceImpl implements BaseDoctorRemoteDataSource {
@@ -25,5 +34,23 @@ class DoctorRemoteDataSourceImpl implements BaseDoctorRemoteDataSource {
       startTime,
       callType,
     );
+  }
+
+  @override
+  Future<BlogInfoResponse> createBlog(
+    String postDescription,
+    String postTitle, {
+    String? postImage,
+  }) async {
+    return await _doctorServiceClient.createBlog(
+      postDescription,
+      postTitle,
+      blogImage: postImage,
+    );
+  }
+
+  @override
+  Future<BlogInfoResponse> getAllBlogs() async {
+    return await _doctorServiceClient.getAllBlogs();
   }
 }
