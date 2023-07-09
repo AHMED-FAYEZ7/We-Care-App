@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors
+// ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
@@ -22,7 +22,7 @@ class TopDoctorShimmerWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(AppSize.s12),
           ),
           child: Column(
-            children: const [
+            children: [
               ClipRRect(
                 borderRadius: BorderRadius.only(
                   topRight: Radius.circular(AppSize.s12),
@@ -55,6 +55,18 @@ class TopDoctorShimmerWidget extends StatelessWidget {
                 child: ShimmerWidget(
                   width: double.infinity,
                   height: AppSize.s15,
+                ),
+              ),
+              SizedBox(
+                height: AppSize.s5,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: AppPadding.p14,
+                ),
+                child: ShimmerWidget(
+                  width: double.infinity,
+                  height: AppSize.s10,
                 ),
               ),
             ],

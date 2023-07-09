@@ -1,22 +1,29 @@
-// ignore_for_file: avoid_print, must_be_immutable
+// ignore_for_file: avoid_print, must_be_immutable, prefer_const_constructors
 
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:health_care/authentication/presentation/widgets/text_button_widget.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
 import 'package:health_care/patient/presentation/controller/Patient_cubit/patient_cubit.dart';
 import 'package:health_care/patient/presentation/widgets/app_bar_widget.dart';
 import 'package:health_care/core/widgets/loading_widget.dart';
+import 'package:health_care/patient/presentation/widgets/rate_widget.dart';
 
 class WriteReviewScreen extends StatelessWidget {
-  WriteReviewScreen({Key? key}) : super(key: key);
+  WriteReviewScreen({
+    this.rate = 3,
+    Key? key,
+  }) : super(key: key);
 
-  int rate = 3;
+  int? rate;
 
   final TextEditingController _textarea = TextEditingController();
+
+  handleRateSelected({int? selectedRate}) {
+    rate = selectedRate!;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,34 +73,10 @@ class WriteReviewScreen extends StatelessWidget {
                 const SizedBox(
                   height: AppSize.s20,
                 ),
-                RatingBar.builder(
-                  initialRating: 3,
-                  unratedColor: ColorManager.lightGrey,
-                  itemCount: 5,
-                  itemBuilder: (context, index) {
-                    List<IconData> icons = [
-                      Icons.sentiment_very_dissatisfied,
-                      Icons.sentiment_dissatisfied,
-                      Icons.sentiment_neutral,
-                      Icons.sentiment_satisfied,
-                      Icons.sentiment_very_satisfied,
-                    ];
-                    List<Color> colors = [
-                      Colors.red,
-                      Colors.redAccent,
-                      Colors.amber,
-                      Colors.lightGreen,
-                      Colors.green,
-                    ];
-
-                    return Icon(
-                      icons[index],
-                      color: colors[index],
-                    );
-                  },
-                  onRatingUpdate: (rating) {
-                    rate = rating.toInt();
-                  },
+                RateWidget(
+                  itemSize: 40,
+                  itemPadding: 4,
+                  onRateSelected: handleRateSelected,
                 ),
                 const SizedBox(
                   height: AppSize.s20,
@@ -186,13 +169,13 @@ class WriteReviewScreen extends StatelessWidget {
                     text: "Submit Review",
                     fontWeight: FontWeight.bold,
                     onTap: () async {
-                      print(rate);
-                      print(_textarea.text);
-                      cubit.makeDoctorReview(
-                        "doctorId",
-                        rate,
-                        _textarea.text,
-                      );
+                      print(rate!);
+                      // print(_textarea.text);
+                      // cubit.makeDoctorReview(
+                      //   "doctorId",
+                      //   rate!,
+                      //   _textarea.text,
+                      // );
                     },
                   ),
                   fallback: (context) => const LoadingWidget(),

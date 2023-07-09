@@ -5,6 +5,7 @@ import 'package:health_care/authentication/domain/model/user_model.dart';
 import 'package:health_care/core/global/resources/icons_manger.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
+import 'package:health_care/patient/presentation/widgets/rate_widget.dart';
 
 class DoctorWidget extends StatelessWidget {
   DoctorWidget({
@@ -62,13 +63,12 @@ class DoctorWidget extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      Icon(
-                        IconBroken.Star,
-                        color: ColorManager.primary,
-                        size: AppSize.s16,
+                      RateWidget(
+                        ignoreGestures: true,
+                        rate: model.averageRating,
                       ),
                       Text(
-                        "${model.averageRating}(${model.numberOfRating} reviews)",
+                        "(${model.numberOfRating} reviews)",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: ColorManager.black,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:health_care/authentication/domain/model/user_model.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
+import 'package:health_care/patient/presentation/widgets/rate_widget.dart';
 
 class TopDoctorCardWidget extends StatelessWidget {
   TopDoctorCardWidget({
@@ -15,7 +16,7 @@ class TopDoctorCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
         width: AppSize.s140,
-        height: AppSize.s180,
+        height: AppSize.s250,
         child: Card(
           elevation: AppSize.s3,
           shape: RoundedRectangleBorder(
@@ -57,6 +58,10 @@ class TopDoctorCardWidget extends StatelessWidget {
                   color: ColorManager.black,
                   fontSize: AppSize.s10,
                 ),
+              ),
+              RateWidget(
+                ignoreGestures: true,
+                rate: model.averageRating,
               ),
             ],
           ),

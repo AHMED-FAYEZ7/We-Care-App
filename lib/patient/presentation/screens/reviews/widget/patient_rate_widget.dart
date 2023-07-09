@@ -6,6 +6,7 @@ import 'package:health_care/core/global/resources/icons_manger.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
 import 'package:health_care/patient/domain/model/rarte_model.dart';
+import 'package:health_care/patient/presentation/widgets/rate_widget.dart';
 import 'package:intl/intl.dart';
 
 class PatientRateWidget extends StatelessWidget {
@@ -94,30 +95,9 @@ class PatientRateWidget extends StatelessWidget {
                 ],
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    IconBroken.Star,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    right: AppPadding.p8,
-                  ),
-                  child: Text(
-                    model.rating.toString(),
-                    maxLines: 1,
-                    style: TextStyle(
-                      color: ColorManager.black,
-                      fontSize: AppSize.s14,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-              ],
+            RateWidget(
+              ignoreGestures: true,
+              rate: model.rating.toDouble(),
             ),
           ],
         ),
