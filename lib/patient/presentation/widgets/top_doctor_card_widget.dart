@@ -17,10 +17,9 @@ class TopDoctorCardWidget extends StatelessWidget {
         width: AppSize.s140,
         height: AppSize.s180,
         child: Card(
-          elevation: AppSize.s0,
+          elevation: AppSize.s3,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppSize.s12),
-            side: const BorderSide(color: Colors.grey, width: AppSize.s1),
           ),
           child: Column(
             children: [

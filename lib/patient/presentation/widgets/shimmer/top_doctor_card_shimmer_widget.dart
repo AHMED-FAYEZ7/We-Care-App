@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors_in_immutables
+// ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
@@ -17,10 +17,9 @@ class TopDoctorShimmerWidget extends StatelessWidget {
         width: AppSize.s140,
         height: AppSize.s180,
         child: Card(
-          elevation: AppSize.s0,
+          elevation: AppSize.s3,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppSize.s12),
-            side: const BorderSide(color: Colors.grey, width: AppSize.s1),
           ),
           child: Column(
             children: const [

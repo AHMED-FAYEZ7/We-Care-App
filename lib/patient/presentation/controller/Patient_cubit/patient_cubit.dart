@@ -38,7 +38,7 @@ class PatientCubit extends Cubit<PatientState> {
   GetMyAppointmentsUseCase _getMyAppointmentsUseCase =
       sl<GetMyAppointmentsUseCase>();
 
-  GetPatientDataUseCase _getPatientDataUseCase = sl<GetPatientDataUseCase>();
+  GetUserDataUseCase _getUserDataUseCase = sl<GetUserDataUseCase>();
 
   PatientCubit(
     this._getTopDoctorsUseCase,
@@ -49,8 +49,9 @@ class PatientCubit extends Cubit<PatientState> {
     this._getDoctorRateUseCase,
     this._makeDoctorReviewUseCase,
     this._getMyAppointmentsUseCase,
-    this._getPatientDataUseCase,
+    this._getUserDataUseCase,
   ) : super(PatientInitial());
+
   static PatientCubit get(context) => BlocProvider.of(context);
 
   List<String> titles = [
@@ -62,12 +63,13 @@ class PatientCubit extends Cubit<PatientState> {
 
   List<Widget> screens = [
     const HomePatientScreen(),
-    const PostsScreen(),
+    const PostsPatientScreen(),
     AppointmentPatientScreen(),
     const ProfilePatientScreen(),
   ];
 
   int currentIndex = 0;
+
   void changeBottomNav(int index) {
     currentIndex = index;
     emit(AppChangeBottomNavState());
@@ -75,9 +77,10 @@ class PatientCubit extends Cubit<PatientState> {
 
   /////////////user data////////////////
   User? patientData;
+
   getPatientData(NoParameters params) async {
     emit(GetPatientDataLoadingState());
-    (await _getPatientDataUseCase.call(params)).fold(
+    (await _getUserDataUseCase.call(params)).fold(
       (l) {
         emit(GetPatientDataFailureState());
       },
@@ -91,6 +94,7 @@ class PatientCubit extends Cubit<PatientState> {
   /////////////all doctor////////////////
 
   List<User> allDoctor = [];
+
   getAllDoctor(String specialist) async {
     emit(GetAllDoctorLoadingState());
     allDoctor = [];
@@ -110,6 +114,7 @@ class PatientCubit extends Cubit<PatientState> {
   List<User> topDoctor = [];
   List<User> specialistTopDoctor = [];
   bool isAllTop = false;
+
   getTopDoctor({String? specialist}) async {
     emit(GetTopDoctorLoadingState());
     specialistTopDoctor = [];
@@ -200,6 +205,7 @@ class PatientCubit extends Cubit<PatientState> {
   /////////////get my appointment////////////////
   List<Appointment> upcomingAppointments = [];
   List<Appointment> pastAppointments = [];
+
   getMyAppointments(NoParameters params) async {
     emit(GetMyAppointmentsLoadingState());
     upcomingAppointments = [];

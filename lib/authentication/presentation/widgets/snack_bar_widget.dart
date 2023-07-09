@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:health_care/core/utils/constants.dart';
 
-class DefaultSnackBar extends SnackBar {
+class SnackBarWidget extends SnackBar {
   final Color? backGroundColor;
   final Widget? text;
-  DefaultSnackBar({
+
+  SnackBarWidget({
     Key? key,
     required this.text,
     required this.backGroundColor,

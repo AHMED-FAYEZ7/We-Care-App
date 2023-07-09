@@ -20,10 +20,9 @@ class DoctorWidget extends StatelessWidget {
       width: MediaQuery.of(context).size.width * .95,
       height: AppSize.s100,
       child: Card(
-        elevation: AppSize.s0,
+        elevation: AppSize.s3,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSize.s12),
-          side: const BorderSide(color: Colors.grey, width: AppSize.s1),
         ),
         child: Row(
           children: [

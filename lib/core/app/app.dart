@@ -3,10 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/authentication/presentation/controller/auth_cubit.dart';
+import 'package:health_care/core/app/app_prefs.dart';
 import 'package:health_care/core/routes/app_routes.dart';
 import 'package:health_care/core/services/services_locator.dart';
 import 'package:health_care/core/usecase/base_usecase.dart';
 import 'package:health_care/core/utils/constants.dart';
+import 'package:health_care/doctor/presentation/controller/doctor_cubit/doctor_cubit.dart';
 import 'package:health_care/patient/presentation/controller/Patient_cubit/patient_cubit.dart';
 
 import '../global/theme/theme_data/theme_data_light.dart';
@@ -23,6 +25,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -31,9 +35,15 @@ class _MyAppState extends State<MyApp> {
           create: (BuildContext context) => sl<AuthCubit>(),
         ),
         BlocProvider<PatientCubit>(
-          create: (BuildContext context) => sl<PatientCubit>()
+          create: (BuildContext context) =>
+          sl<PatientCubit>()
             ..getTopDoctor()
-            ..getAllDoctor('')..getPatientData(const NoParameters()),
+            ..getAllDoctor('')
+            ..getPatientData(const NoParameters()),
+        ),
+        BlocProvider<DoctorCubit>(
+          create: (BuildContext context) =>
+              sl<DoctorCubit>(),
         ),
       ],
       child: MaterialApp(
@@ -41,7 +51,7 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         onGenerateRoute: RouteGenerator.getRoute,
         initialRoute:
-            Constants.isLogout ? Routes.userLoginRoute : Routes.splashRoute,
+        Constants.isLogout ? Routes.userLoginRoute : Routes.splashRoute,
       ),
     );
   }

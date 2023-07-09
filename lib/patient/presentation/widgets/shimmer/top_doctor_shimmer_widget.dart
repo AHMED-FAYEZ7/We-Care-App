@@ -15,10 +15,9 @@ class TopDoctorShimmerWidget extends StatelessWidget {
       width: AppSize.s140,
       height: AppSize.s180,
       child: Card(
-        elevation: AppSize.s0,
+        elevation: AppSize.s3,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSize.s12),
-          side: const BorderSide(color: Colors.white, width: AppSize.s0),
         ),
         child: Column(
           children: const [

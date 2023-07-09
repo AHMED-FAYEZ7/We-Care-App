@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
 
-class DefaultFormField extends StatelessWidget {
-  DefaultFormField({
+class FormFieldWidget extends StatelessWidget {
+  FormFieldWidget({
     super.key,
     this.hintText,
     this.labelText,
@@ -20,6 +20,7 @@ class DefaultFormField extends StatelessWidget {
     this.prefixPressed,
     required this.validator,
   });
+
   Function(String)? onChanged;
   String? hintText;
   String? labelText;

@@ -38,8 +38,8 @@ abstract class PatientServiceClient {
     @Query("specialization") String? specialization,
   });
 
-  @GET("api/v1/patients/mydata")
-  Future<PatientAuthResponse> getPatientData();
+  @GET("api/v1/users/mydata")
+  Future<UserDataResponse> getUserData();
 
   ////////////// Appointment ////////////////
 

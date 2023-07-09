@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 
-class DefaultTextButton extends StatelessWidget {
-  DefaultTextButton({
+class TextButtonWidget extends StatelessWidget {
+  TextButtonWidget({
     Key? key,
     required this.text,
     required this.textColor,
@@ -25,6 +25,7 @@ class DefaultTextButton extends StatelessWidget {
   Color backGroundColor;
   Color borderColor;
   FontWeight? fontWeight;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(

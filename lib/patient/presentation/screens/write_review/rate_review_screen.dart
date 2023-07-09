@@ -4,12 +4,12 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:health_care/authentication/presentation/widgets/default_text_button.dart';
+import 'package:health_care/authentication/presentation/widgets/text_button_widget.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
 import 'package:health_care/patient/presentation/controller/Patient_cubit/patient_cubit.dart';
 import 'package:health_care/patient/presentation/widgets/app_bar_widget.dart';
-import 'package:health_care/patient/presentation/widgets/loading_widget.dart';
+import 'package:health_care/core/widgets/loading_widget.dart';
 
 class WriteReviewScreen extends StatelessWidget {
   WriteReviewScreen({Key? key}) : super(key: key);
@@ -139,8 +139,8 @@ class WriteReviewScreen extends StatelessWidget {
                     controller: _textarea,
                     textInputAction: TextInputAction.newline,
                     keyboardType: TextInputType.multiline,
-                    maxLines:
-                        6, // Remove the maxLines property to allow unlimited lines
+                    maxLines: 6,
+                    // Remove the maxLines property to allow unlimited lines
                     decoration: InputDecoration(
                       hintText: "Tell people about your experience",
                       hintStyle: TextStyle(
@@ -167,7 +167,7 @@ class WriteReviewScreen extends StatelessWidget {
                 ),
                 ConditionalBuilder(
                   condition: state is! MakeDoctorReviewLoadingState,
-                  builder: (context) => DefaultTextButton(
+                  builder: (context) => TextButtonWidget(
                     icon: Container(
                       width: AppSize.s30,
                     ),

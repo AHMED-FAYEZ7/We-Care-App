@@ -8,16 +8,21 @@ import 'package:health_care/patient/domain/model/rarte_model.dart';
 
 abstract class BasePatientRepo {
   Future<Either<Failure, DoctorInfo>> getAllDoctors();
+
   Future<Either<Failure, DoctorInfo>> getDoctorSearch(
     String query, {
     String? specialization,
   });
+
   Future<Either<Failure, DoctorInfo>> getTopDoctors({String? specialization});
+
   Future<Either<Failure, UserData>> getDoctorById(String id);
+
   Future<Either<Failure, DoctorInfo>> getDoctorsSpecialization(
     String specialization,
   );
-  Future<Either<Failure, PatientAuth>> getPatientData();
+
+  Future<Either<Failure, UserData>> getUserData();
 
   Future<Either<Failure, AppointmentsInfo>> getDoctorAvailableAppointments(
     String docID,
@@ -29,9 +34,11 @@ abstract class BasePatientRepo {
     required String docID,
     required String date,
   });
+
   Future<Either<Failure, AppointmentsInfo>> bookAppointment({
     required String appointmentID,
   });
+
   Future<Either<Failure, RateInfo>> getDoctorReviews({
     required String doctorId,
   });

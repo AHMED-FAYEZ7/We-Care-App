@@ -3,7 +3,7 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:health_care/authentication/presentation/widgets/default_text_button.dart';
+import 'package:health_care/authentication/presentation/widgets/text_button_widget.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
 import 'package:health_care/core/routes/app_routes.dart';
@@ -12,7 +12,7 @@ import 'package:health_care/patient/presentation/controller/Patient_cubit/patien
 import 'package:health_care/patient/presentation/screens/book_appointment/widget/selected_fee_info_widget.dart';
 import 'package:health_care/patient/presentation/widgets/app_bar_widget.dart';
 import 'package:health_care/patient/presentation/widgets/hint_text_widget.dart';
-import 'package:health_care/patient/presentation/widgets/loading_widget.dart';
+import 'package:health_care/core/widgets/loading_widget.dart';
 import 'package:intl/intl.dart';
 
 class BookAppointmentScreen extends StatefulWidget {
@@ -157,7 +157,7 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                 ),
                 ConditionalBuilder(
                   condition: state is! BookAppointmentByIdLoadingState,
-                  builder: (context) => DefaultTextButton(
+                  builder: (context) => TextButtonWidget(
                     icon: Container(
                       width: AppSize.s30,
                     ),

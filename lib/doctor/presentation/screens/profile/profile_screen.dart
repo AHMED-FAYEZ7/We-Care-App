@@ -1,24 +1,22 @@
-// ignore_for_file: avoid_print
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/core/global/resources/icons_manger.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
+import 'package:health_care/core/widgets/divider_widget.dart';
 import 'package:health_care/core/widgets/logout_widget.dart';
 import 'package:health_care/core/widgets/profile_item_widget.dart';
-import 'package:health_care/patient/presentation/controller/Patient_cubit/patient_cubit.dart';
-import 'package:health_care/core/widgets/divider_widget.dart';
+import 'package:health_care/doctor/presentation/controller/doctor_cubit/doctor_cubit.dart';
 
-class ProfilePatientScreen extends StatelessWidget {
-  const ProfilePatientScreen({Key? key}) : super(key: key);
+class ProfileDoctorScreen extends StatelessWidget {
+  const ProfileDoctorScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<PatientCubit, PatientState>(
+    return BlocConsumer<DoctorCubit, DoctorState>(
       listener: (context, state) {},
       builder: (context, state) {
-        var cubit = PatientCubit.get(context);
+        var cubit = DoctorCubit.get(context);
         return Scaffold(
           body: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
@@ -44,7 +42,7 @@ class ProfilePatientScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            cubit.patientData?.name ?? '',
+                            cubit.doctorData!.name,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: ColorManager.black,
@@ -56,7 +54,7 @@ class ProfilePatientScreen extends StatelessWidget {
                             height: AppSize.s5,
                           ),
                           Text(
-                            cubit.patientData?.email ?? '',
+                            cubit.doctorData!.email,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: ColorManager.black,
@@ -129,6 +127,11 @@ class ProfilePatientScreen extends StatelessWidget {
           ),
         );
       },
+    );
+    return const Center(
+      child: Text(
+        "ProfileDoctorScreen",
+      ),
     );
   }
 }

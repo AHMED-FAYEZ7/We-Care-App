@@ -32,6 +32,7 @@ import 'package:health_care/doctor/data/network/doctor_api/doctor_api.dart';
 import 'package:health_care/doctor/data/repository/doctor_repo_impl.dart';
 import 'package:health_care/doctor/domain/repository/doctor_repo.dart';
 import 'package:health_care/doctor/domain/usecase/create_time_block_use_case.dart';
+import 'package:health_care/doctor/presentation/controller/doctor_cubit/doctor_cubit.dart';
 import 'package:health_care/patient/data/data_source/patient_remote_data_source.dart';
 import 'package:health_care/patient/data/network/patient_api/patient_api.dart';
 import 'package:health_care/patient/data/repository/patient_repo_impl.dart';
@@ -172,8 +173,7 @@ Future<void> initAppModule() async {
   sl.registerLazySingleton<GetDoctorsSpecializationUseCase>(
       () => GetDoctorsSpecializationUseCase(sl()));
 
-  sl.registerLazySingleton<GetPatientDataUseCase>(
-      () => GetPatientDataUseCase(sl()));
+  sl.registerLazySingleton<GetUserDataUseCase>(() => GetUserDataUseCase(sl()));
 
 ///////// Appointments ///////////
 
@@ -232,6 +232,10 @@ Future<void> initAppModule() async {
         sl(),
         sl(),
         sl(),
+        sl(),
+      ));
+
+  sl.registerFactory<DoctorCubit>(() => DoctorCubit(
         sl(),
       ));
 }

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
 
-class HorizontalOrLine extends StatelessWidget {
-  const HorizontalOrLine({
+class HorizontalOrLineWidget extends StatelessWidget {
+  const HorizontalOrLineWidget({
     super.key,
     required this.label,
     required this.height,

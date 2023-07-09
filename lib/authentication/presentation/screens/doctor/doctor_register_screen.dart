@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:health_care/authentication/presentation/widgets/default_form_field.dart';
-import 'package:health_care/authentication/presentation/widgets/default_text_button.dart';
-import 'package:health_care/authentication/presentation/widgets/horizontal_or_line.dart';
+import 'package:health_care/authentication/presentation/widgets/form_field_widget.dart';
+import 'package:health_care/authentication/presentation/widgets/text_button_widget.dart';
+import 'package:health_care/authentication/presentation/widgets/horizontal_or_line_widget.dart';
 import 'package:health_care/core/assets/app_assets.dart';
 import 'package:health_care/core/global/resources/strings_manger.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
@@ -28,7 +28,10 @@ class DoctorRegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     appBar: AppBarWidget(isBack:  true,title: '',),
+      appBar: AppBarWidget(
+        isBack: true,
+        title: '',
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -65,7 +68,7 @@ class DoctorRegisterScreen extends StatelessWidget {
                     color: ColorManager.grey,
                   ),
                 ),
-                DefaultFormField(
+                FormFieldWidget(
                   headText: AppStrings.userNameHeadText,
                   hintText: AppStrings.userNameHint,
                   controller: _userNameEditingController,
@@ -81,7 +84,7 @@ class DoctorRegisterScreen extends StatelessWidget {
                 const SizedBox(
                   height: AppSize.s12,
                 ),
-                DefaultFormField(
+                FormFieldWidget(
                   headText: AppStrings.emailHeadText,
                   hintText: AppStrings.emailHint,
                   controller: _emailEditingController,
@@ -93,7 +96,7 @@ class DoctorRegisterScreen extends StatelessWidget {
                 const SizedBox(
                   height: AppSize.s12,
                 ),
-                DefaultFormField(
+                FormFieldWidget(
                   headText: AppStrings.passwordHeadText,
                   hintText: AppStrings.passwordHint,
                   controller: _passwordEditingController,
@@ -106,7 +109,7 @@ class DoctorRegisterScreen extends StatelessWidget {
                 const SizedBox(
                   height: AppSize.s12,
                 ),
-                DefaultFormField(
+                FormFieldWidget(
                   headText: AppStrings.confirmPasswordHeadText,
                   hintText: AppStrings.confirmPasswordHint,
                   controller: _confirmPasswordEditingController,
@@ -123,7 +126,7 @@ class DoctorRegisterScreen extends StatelessWidget {
                 const SizedBox(
                   height: AppSize.s12,
                 ),
-                DefaultFormField(
+                FormFieldWidget(
                   headText: AppStrings.specializationHeadText,
                   hintText: AppStrings.specializationHint,
                   controller: _specializationEditingController,
@@ -139,7 +142,7 @@ class DoctorRegisterScreen extends StatelessWidget {
                 const SizedBox(
                   height: AppSize.s12,
                 ),
-                DefaultFormField(
+                FormFieldWidget(
                   headText: AppStrings.phoneNumberHeadText,
                   hintText: AppStrings.phoneNumberHint,
                   controller: _passwordEditingController,
@@ -151,7 +154,7 @@ class DoctorRegisterScreen extends StatelessWidget {
                 const SizedBox(
                   height: AppSize.s12,
                 ),
-                DefaultTextButton(
+                TextButtonWidget(
                   icon: Container(
                     width: AppSize.s30,
                   ),
@@ -166,11 +169,11 @@ class DoctorRegisterScreen extends StatelessWidget {
                     if (_formKey.currentState!.validate()) {}
                   },
                 ),
-                const HorizontalOrLine(
+                const HorizontalOrLineWidget(
                   label: AppStrings.or,
                   height: AppSize.s60,
                 ),
-                DefaultTextButton(
+                TextButtonWidget(
                   borderColor: ColorManager.grey,
                   backGroundColor: ColorManager.white,
                   textColor: ColorManager.black,

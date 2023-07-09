@@ -31,33 +31,31 @@ class TestPage extends StatelessWidget {
   final GetAllDoctorsUseCase _allDoctorsUseCase = sl<GetAllDoctorsUseCase>();
   final GetTopDoctorsUseCase _getTopDoctorsUseCase = sl<GetTopDoctorsUseCase>();
   final GetDoctorsSpecializationUseCase _getDoctorsSpecialization =
-      sl<GetDoctorsSpecializationUseCase>();
+  sl<GetDoctorsSpecializationUseCase>();
   final GetDoctorByIdUseCase _byIdUseCase = sl<GetDoctorByIdUseCase>();
   final GetDoctorSearchUseCase _searchUseCase = sl<GetDoctorSearchUseCase>();
   final GetAvailableAppointmentsForDoctorUseCase
-      _getAvailableAppointmentsForDoctorUseCase =
-      sl<GetAvailableAppointmentsForDoctorUseCase>();
+  _getAvailableAppointmentsForDoctorUseCase =
+  sl<GetAvailableAppointmentsForDoctorUseCase>();
   final GetAvailableAppointmentsByDayUseCase _availableAppointmentsByDay =
-      sl<GetAvailableAppointmentsByDayUseCase>();
+  sl<GetAvailableAppointmentsByDayUseCase>();
   final BookAppointmentUseCase _bookAppointmentUseCase =
-      sl<BookAppointmentUseCase>();
+  sl<BookAppointmentUseCase>();
   final GetDoctorRateUseCase _getDoctorRateUseCase = sl<GetDoctorRateUseCase>();
   final MakeDoctorReviewUseCase _makeDoctorReviewUseCase =
-      sl<MakeDoctorReviewUseCase>();
+  sl<MakeDoctorReviewUseCase>();
   final UpdateDoctorReviewUseCase _updateDoctorReviewUseCase =
-      sl<UpdateDoctorReviewUseCase>();
+  sl<UpdateDoctorReviewUseCase>();
   final DeleteReviewUseCase _deleteReviewUseCase = sl<DeleteReviewUseCase>();
 
   final CreateTimeBlockUseCase _createTimeBlockUseCase =
-      sl<CreateTimeBlockUseCase>();
+  sl<CreateTimeBlockUseCase>();
   final GetMyAppointmentsUseCase _getMyAppointmentsUseCase =
-      sl<GetMyAppointmentsUseCase>();
+  sl<GetMyAppointmentsUseCase>();
 
   final ConnectToSocketUseCase _connectToSocketUseCase =
-      sl<ConnectToSocketUseCase>();
+  sl<ConnectToSocketUseCase>();
 
-  final GetPatientDataUseCase _getPatientDataUseCase =
-      sl<GetPatientDataUseCase>();
 
   @override
   Widget build(BuildContext context) {
@@ -118,30 +116,26 @@ class TestPage extends StatelessWidget {
               //   // print(r.doctorsData![4].averageRating);
               //   // print(r.doctorsData![5].timePerPatient);
               // });
-              (await _getPatientDataUseCase.call(const NoParameters())).fold(
-                  (l) {
-                print(l.message.toString());
-              }, (r) {
-                // print(r.availableAppointmentsData![0].appointmentId);
-                // print(r.reviews!.length);
 
-                print(r.user!.name);
-                print(r.user!.id);
-                // print(r.pastAppointment!.length);
-                // print(r.upcomingAppointmentsData![0].appointmentId);
-                // print(
-                //     r.upcomingAppointmentsData![0].doctorInfo!.profilePicture);
+              // print(r.availableAppointmentsData![0].appointmentId);
+              // print(r.reviews!.length);
 
-                // print(r.user!.specialization);
-                // print(r.user!.fees);
-                // print(r.user!.scheduleTiming.length);
-                // print("sss${r.token}");
 
-                // print(r.doctorsData![1].name);
-                // print(r.doctorsData![2].fees);
-                // print(r.doctorsData![4].averageRating);
-                // print(r.doctorsData![5].timePerPatient);
-              });
+              // print(r.pastAppointment!.length);
+              // print(r.upcomingAppointmentsData![0].appointmentId);
+              // print(
+              //     r.upcomingAppointmentsData![0].doctorInfo!.profilePicture);
+
+              // print(r.user!.specialization);
+              // print(r.user!.fees);
+              // print(r.user!.scheduleTiming.length);
+              // print("sss${r.token}");
+
+              // print(r.doctorsData![1].name);
+              // print(r.doctorsData![2].fees);
+              // print(r.doctorsData![4].averageRating);
+              // print(r.doctorsData![5].timePerPatient);
+
               // (await _allDoctorsUseCase.call("")).fold((l) {
               //   print(l.message.toString());
               // }, (r) {

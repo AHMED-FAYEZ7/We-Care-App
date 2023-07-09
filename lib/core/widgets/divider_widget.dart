@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 
-class MyDivider extends StatelessWidget {
-  const MyDivider({Key? key}) : super(key: key);
+class MyDividerWidget extends StatelessWidget {
+  const MyDividerWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

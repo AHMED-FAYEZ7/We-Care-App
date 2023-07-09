@@ -25,6 +25,7 @@ class AuthCubit extends Cubit<AuthState> {
   final UserForgetPasswordUseCase _userForgetPasswordUseCase;
   final UserEmailConfirmationUseCase _userEmailConfirmationUseCase;
   final UserUpdatePasswordUseCase _userUpdatePasswordUseCase;
+
   AuthCubit(
     this._doctorSignUpUseCase,
     this._patientSignUpUseCase,
@@ -40,10 +41,10 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthLogInLoadingState());
     (await _userLoginUseCase.call(loginUseCaseInput)).fold((l) {
       emit(AuthLogInErrorState(error: l.message!));
-    }, (r)  {
-       _appPreferences.setToken(r.token);
+    }, (r) {
+      _appPreferences.setToken(r.token);
+      _appPreferences.setDoctorId(r.user!.id);
       emit(AuthLogInSuccessState(userData: r));
     });
   }
-
 }

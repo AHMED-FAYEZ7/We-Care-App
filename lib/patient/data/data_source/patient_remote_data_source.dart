@@ -1,4 +1,5 @@
 import 'package:health_care/authentication/data/response/patient_auth_response/patient_auth_response.dart';
+import 'package:health_care/authentication/data/response/user_response/user_response.dart';
 import 'package:health_care/patient/data/network/patient_api/patient_api.dart';
 import 'package:health_care/patient/data/response/appointments_response.dart';
 import 'package:health_care/patient/data/response/patient_response.dart';
@@ -6,16 +7,21 @@ import 'package:health_care/patient/data/response/rate_response.dart';
 
 abstract class BasePatientRemoteDataSource {
   Future<DoctorInfResponse> getAllDoctors();
+
   Future<DoctorInfResponse> getTopDoctors({String? specialization});
+
   Future<DoctorInfResponse> getDoctorsBySpecialization(
     String specialization,
   );
+
   Future<DoctorByIdResponse> getDoctorById(String id);
+
   Future<DoctorInfResponse> getDoctorSearch(
     String query, {
     String? specialization,
   });
-  Future<PatientAuthResponse> getPatientData();
+
+  Future<UserDataResponse> getUserData();
 
   ///////////////// appointment ////////////////
 
@@ -57,6 +63,7 @@ class PatientRemoteDataSourceImpl implements BasePatientRemoteDataSource {
   final PatientServiceClient _patientServiceClient;
 
   PatientRemoteDataSourceImpl(this._patientServiceClient);
+
   @override
   Future<DoctorInfResponse> getAllDoctors() async {
     return await _patientServiceClient.getAllDoctors();
@@ -95,8 +102,8 @@ class PatientRemoteDataSourceImpl implements BasePatientRemoteDataSource {
   }
 
   @override
-  Future<PatientAuthResponse> getPatientData() async {
-    return await _patientServiceClient.getPatientData();
+  Future<UserDataResponse> getUserData() async {
+    return await _patientServiceClient.getUserData();
   }
 
   @override

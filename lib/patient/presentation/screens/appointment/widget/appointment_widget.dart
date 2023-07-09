@@ -20,12 +20,12 @@ class AppointmentWidget extends StatefulWidget {
 }
 
 class _AppointmentWidgetState extends State<AppointmentWidget> {
-
   @override
   void initState() {
     super.initState();
     getType(widget.model.type);
   }
+
   late String text;
 
   late IconData icon;
@@ -36,8 +36,8 @@ class _AppointmentWidgetState extends State<AppointmentWidget> {
       icon = Icons.chat;
     } else if (type == 'video call') {
       text = 'Video Call';
-      icon = Icons.videocam;
-    }else{
+      icon = Icons.videocam_outlined;
+    } else {
       text = 'Visit';
       icon = Icons.offline_bolt_outlined;
     }
@@ -49,10 +49,9 @@ class _AppointmentWidgetState extends State<AppointmentWidget> {
       width: MediaQuery.of(context).size.width * .95,
       height: AppSize.s100,
       child: Card(
-        elevation: AppSize.s0,
+        elevation: AppSize.s3,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSize.s12),
-          side: const BorderSide(color: Colors.grey, width: AppSize.s1),
         ),
         child: Row(
           children: [
@@ -93,12 +92,12 @@ class _AppointmentWidgetState extends State<AppointmentWidget> {
                   RichText(
                     textAlign: TextAlign.center,
                     text: TextSpan(
-                      style:  const TextStyle(
+                      style: const TextStyle(
                         fontSize: AppSize.s14,
                         color: Colors.black, // Default color for the text
                       ),
                       children: [
-                         TextSpan(
+                        TextSpan(
                           text: text,
                         ),
                         TextSpan(
@@ -114,8 +113,7 @@ class _AppointmentWidgetState extends State<AppointmentWidget> {
                     height: AppSize.s5,
                   ),
                   Text(
-                    "${DateFormat.jm().format(DateTime.parse(
-                    widget.model.date))}  5${DateFormat('EEEE d, yyyy').format(DateTime.parse(widget.model.date))}",
+                    "${DateFormat.jm().format(DateTime.parse(widget.model.date))}  5${DateFormat('EEEE d, yyyy').format(DateTime.parse(widget.model.date))}",
                     maxLines: 2,
                     style: TextStyle(
                       color: ColorManager.black,
@@ -127,8 +125,8 @@ class _AppointmentWidgetState extends State<AppointmentWidget> {
             ),
             IconButton(
               onPressed: () {},
-              icon:  Icon(
-               icon,
+              icon: Icon(
+                icon,
               ),
             ),
           ],

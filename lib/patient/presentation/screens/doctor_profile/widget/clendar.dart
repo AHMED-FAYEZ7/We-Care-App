@@ -73,51 +73,52 @@ class _CalendarState extends State<Calendar> {
                       widget.selectedDate(selectedDate, day);
                     });
                   },
-                  child: Container(
+                  child: SizedBox(
                     height: AppSize.s80,
-                    width: AppSize.s60,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(AppSize.s8),
-                      border: Border.all(color: ColorManager.primary),
+                    width: AppSize.s70,
+                    child: Card(
+                      elevation: AppSize.s3,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(AppSize.s12),
+                      ),
                       color: isSelected
                           ? ColorManager.primary
                           : ColorManager.white,
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          listOfMonths[currentDate.month - 1],
-                          style: TextStyle(
-                            fontSize: AppSize.s16,
-                            color: isSelected
-                                ? ColorManager.white
-                                : ColorManager.black,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            listOfMonths[currentDate.month - 1],
+                            style: TextStyle(
+                              fontSize: AppSize.s16,
+                              color: isSelected
+                                  ? ColorManager.white
+                                  : ColorManager.black,
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: AppSize.s5),
-                        Text(
-                          currentDate.day.toString(),
-                          style: TextStyle(
-                            fontSize: AppSize.s22,
-                            fontWeight: FontWeight.w700,
-                            color: isSelected
-                                ? ColorManager.white
-                                : ColorManager.black,
+                          const SizedBox(height: AppSize.s5),
+                          Text(
+                            currentDate.day.toString(),
+                            style: TextStyle(
+                              fontSize: AppSize.s22,
+                              fontWeight: FontWeight.w700,
+                              color: isSelected
+                                  ? ColorManager.white
+                                  : ColorManager.black,
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: AppSize.s5),
-                        Text(
-                          listOfDays[currentDate.weekday - 1],
-                          style: TextStyle(
-                            fontSize: AppSize.s16,
-                            color: isSelected
-                                ? ColorManager.white
-                                : ColorManager.black,
+                          const SizedBox(height: AppSize.s5),
+                          Text(
+                            listOfDays[currentDate.weekday - 1],
+                            style: TextStyle(
+                              fontSize: AppSize.s16,
+                              color: isSelected
+                                  ? ColorManager.white
+                                  : ColorManager.black,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),

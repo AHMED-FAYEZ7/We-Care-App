@@ -21,6 +21,7 @@ class PatientRepoImpl implements BasePatientRepo {
     this._basePatientRemoteDataSource,
     this._networkInfo,
   );
+
   @override
   Future<Either<Failure, DoctorInfo>> getAllDoctors() async {
     if (await _networkInfo.isConnected) {
@@ -132,10 +133,10 @@ class PatientRepoImpl implements BasePatientRepo {
   }
 
   @override
-  Future<Either<Failure, PatientAuth>> getPatientData() async {
+  Future<Either<Failure, UserData>> getUserData() async {
     if (await _networkInfo.isConnected) {
       try {
-        final response = await _basePatientRemoteDataSource.getPatientData();
+        final response = await _basePatientRemoteDataSource.getUserData();
         if (response.status == ApiInternalStatus.SUCCESS) {
           return Right(response.toDomain());
         } else {
