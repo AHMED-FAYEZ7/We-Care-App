@@ -4,14 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 
 class MyDividerWidget extends StatelessWidget {
-  const MyDividerWidget({Key? key}) : super(key: key);
+  MyDividerWidget({
+    required this.height,
+    Key? key,
+  }) : super(key: key);
+  double height;
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: const [
+      children: [
         SizedBox(
-          height: AppSize.s10,
+          height: height,
         ),
         Divider(),
       ],

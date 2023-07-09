@@ -83,37 +83,49 @@ class ProfileDoctorScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const MyDividerWidget(),
+                  MyDividerWidget(
+                    height: AppSize.s10,
+                  ),
                   ProfileItemWidget(
                     icon: IconBroken.Notification,
                     text: 'Notification',
                     onTap: () {},
                   ),
-                  const MyDividerWidget(),
+                  MyDividerWidget(
+                    height: AppSize.s10,
+                  ),
                   ProfileItemWidget(
                     icon: IconBroken.Lock,
                     text: 'Security',
                     onTap: () {},
                   ),
-                  const MyDividerWidget(),
+                  MyDividerWidget(
+                    height: AppSize.s10,
+                  ),
                   ProfileItemWidget(
                     icon: Icons.remove_red_eye_outlined,
                     text: 'Appearance',
                     onTap: () {},
                   ),
-                  const MyDividerWidget(),
+                  MyDividerWidget(
+                    height: AppSize.s10,
+                  ),
                   ProfileItemWidget(
                     icon: Icons.help_outline_outlined,
                     text: 'Help',
                     onTap: () {},
                   ),
-                  const MyDividerWidget(),
+                  MyDividerWidget(
+                    height: AppSize.s10,
+                  ),
                   ProfileItemWidget(
                     icon: Icons.people_outline,
                     text: 'Invite Friends',
                     onTap: () {},
                   ),
-                  const MyDividerWidget(),
+                  MyDividerWidget(
+                    height: AppSize.s10,
+                  ),
                   ProfileItemWidget(
                     icon: IconBroken.Logout,
                     text: 'Logout',

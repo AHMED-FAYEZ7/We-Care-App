@@ -1,17 +1,66 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:health_care/core/global/resources/values_manger.dart';
+import 'package:health_care/core/usecase/base_usecase.dart';
+import 'package:health_care/patient/presentation/controller/Patient_cubit/patient_cubit.dart';
 import 'package:health_care/patient/presentation/screens/posts/widget/post_widget.dart';
+import 'package:health_care/patient/presentation/widgets/empty_list_widget.dart';
+import 'package:health_care/patient/presentation/widgets/shimmer/post_shimmer.dart';
 
-class PostsPatientScreen extends StatelessWidget {
+class PostsPatientScreen extends StatefulWidget {
   const PostsPatientScreen({Key? key}) : super(key: key);
 
   @override
+  State<PostsPatientScreen> createState() => _PostsPatientScreenState();
+}
+
+class _PostsPatientScreenState extends State<PostsPatientScreen> {
+  @override
+  void initState() {
+    super.initState();
+    PatientCubit.get(context).getAllBlogs(const NoParameters());
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          PostWidget(),
-        ],
-      ),
+    return BlocConsumer<PatientCubit, PatientState>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        var cubit = PatientCubit.get(context);
+        return Scaffold(
+          body: Column(
+            children: [
+              Expanded(
+                child: ConditionalBuilder(
+                  condition: state is! GetAllBlogsLoadingState,
+                  builder: (context) => cubit.allBlogs.isNotEmpty
+                      ? ListView.separated(
+                          scrollDirection: Axis.vertical,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: AppPadding.p12,
+                          ),
+                          physics: const BouncingScrollPhysics(),
+                          itemBuilder: (BuildContext context, int index) =>
+                              PostWidget(
+                            model: cubit.allBlogs[index],
+                          ),
+                          separatorBuilder: (BuildContext context, int index) =>
+                              const SizedBox(
+                            width: AppSize.s10,
+                          ),
+                          itemCount: cubit.allBlogs.length,
+                        )
+                      : EmptyListWidget(
+                          text: 'No Posts Loaded',
+                        ),
+                  fallback: (context) => PostsShimmerWidget(),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

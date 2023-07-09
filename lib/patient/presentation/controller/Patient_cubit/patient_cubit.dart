@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:health_care/authentication/domain/model/user_model.dart';
 import 'package:health_care/core/services/services_locator.dart';
 import 'package:health_care/core/usecase/base_usecase.dart';
+import 'package:health_care/doctor/domain/model/blog_model.dart';
+import 'package:health_care/doctor/domain/usecase/get_all_blogs_use_case.dart';
 import 'package:health_care/patient/domain/model/appointment_model.dart';
 import 'package:health_care/patient/domain/model/rarte_model.dart';
 import 'package:health_care/patient/domain/usecase/book_appointment_use_case.dart';
@@ -29,28 +31,28 @@ class PatientCubit extends Cubit<PatientState> {
   GetAllDoctorsUseCase _allDoctorsUseCase = sl<GetAllDoctorsUseCase>();
   GetDoctorSearchUseCase _getDoctorSearchUseCase = sl<GetDoctorSearchUseCase>();
   GetAvailableAppointmentsByDayUseCase _availableAppointmentsByDayUseCase =
-      sl<GetAvailableAppointmentsByDayUseCase>();
+  sl<GetAvailableAppointmentsByDayUseCase>();
   BookAppointmentUseCase _bookAppointmentUseCase = sl<BookAppointmentUseCase>();
   GetDoctorRateUseCase _getDoctorRateUseCase = sl<GetDoctorRateUseCase>();
   MakeDoctorReviewUseCase _makeDoctorReviewUseCase =
-      sl<MakeDoctorReviewUseCase>();
+  sl<MakeDoctorReviewUseCase>();
 
   GetMyAppointmentsUseCase _getMyAppointmentsUseCase =
-      sl<GetMyAppointmentsUseCase>();
+  sl<GetMyAppointmentsUseCase>();
 
   GetUserDataUseCase _getUserDataUseCase = sl<GetUserDataUseCase>();
+  GetAllBlogsUseCase _getAllBlogsUseCase = sl<GetAllBlogsUseCase>();
 
-  PatientCubit(
-    this._getTopDoctorsUseCase,
-    this._allDoctorsUseCase,
-    this._getDoctorSearchUseCase,
-    this._availableAppointmentsByDayUseCase,
-    this._bookAppointmentUseCase,
-    this._getDoctorRateUseCase,
-    this._makeDoctorReviewUseCase,
-    this._getMyAppointmentsUseCase,
-    this._getUserDataUseCase,
-  ) : super(PatientInitial());
+  PatientCubit(this._getTopDoctorsUseCase,
+      this._allDoctorsUseCase,
+      this._getDoctorSearchUseCase,
+      this._availableAppointmentsByDayUseCase,
+      this._bookAppointmentUseCase,
+      this._getDoctorRateUseCase,
+      this._makeDoctorReviewUseCase,
+      this._getMyAppointmentsUseCase,
+      this._getUserDataUseCase,
+      this._getAllBlogsUseCase,) : super(PatientInitial());
 
   static PatientCubit get(context) => BlocProvider.of(context);
 
@@ -81,10 +83,10 @@ class PatientCubit extends Cubit<PatientState> {
   getPatientData(NoParameters params) async {
     emit(GetPatientDataLoadingState());
     (await _getUserDataUseCase.call(params)).fold(
-      (l) {
+          (l) {
         emit(GetPatientDataFailureState());
       },
-      (r) {
+          (r) {
         patientData = r.user;
         emit(GetPatientDataSuccessState());
       },
@@ -99,10 +101,10 @@ class PatientCubit extends Cubit<PatientState> {
     emit(GetAllDoctorLoadingState());
     allDoctor = [];
     (await _allDoctorsUseCase.call(specialist)).fold(
-      (l) {
+          (l) {
         emit(GetAllDoctorFailureState());
       },
-      (r) {
+          (r) {
         allDoctor = r.allDoctorsData!;
         emit(GetAllDoctorSuccessState());
       },
@@ -124,10 +126,10 @@ class PatientCubit extends Cubit<PatientState> {
         : _getTopDoctorsUseCase.call();
 
     (await useCase).fold(
-      (l) {
+          (l) {
         emit(GetTopDoctorFailureState());
       },
-      (r) {
+          (r) {
         if (specialist == null) {
           topDoctor = r.topDoctorsData!;
         } else if (specialist == "All") {
@@ -152,14 +154,14 @@ class PatientCubit extends Cubit<PatientState> {
     isSearched = true;
     final useCase = specialist != null
         ? _getDoctorSearchUseCase.call(
-            TwoParametersUseCase(keyword!, specialist),
-          )
+      TwoParametersUseCase(keyword!, specialist),
+    )
         : _getDoctorSearchUseCase.call(TwoParametersUseCase(keyword!));
     (await useCase).fold(
-      (l) {
+          (l) {
         emit(GetSearchedDoctorFailureState());
       },
-      (r) {
+          (r) {
         searchedDoctor = r.doctorsSearchData!;
 
         emit(GetSearchedDoctorSuccessState());
@@ -193,10 +195,10 @@ class PatientCubit extends Cubit<PatientState> {
   bookAppointment(String appointmentId) async {
     emit(BookAppointmentByIdLoadingState());
     (await _bookAppointmentUseCase.call(appointmentId)).fold(
-      (l) {
+          (l) {
         emit(BookAppointmentByIdFailureState());
       },
-      (r) {
+          (r) {
         emit(BookAppointmentByIdSuccessState());
       },
     );
@@ -211,10 +213,10 @@ class PatientCubit extends Cubit<PatientState> {
     upcomingAppointments = [];
     pastAppointments = [];
     (await _getMyAppointmentsUseCase.call(params)).fold(
-      (l) {
+          (l) {
         emit(GetMyAppointmentsFailureState());
       },
-      (r) {
+          (r) {
         upcomingAppointments = r.upcomingAppointmentsData!;
         pastAppointments = r.pastAppointment!;
         emit(GetMyAppointmentsSuccessState());
@@ -230,10 +232,10 @@ class PatientCubit extends Cubit<PatientState> {
     emit(GetDoctorRateLoadingState());
     rateList = [];
     (await _getDoctorRateUseCase.call(doctorId)).fold(
-      (l) {
+          (l) {
         emit(GetDoctorRateFailureState());
       },
-      (r) {
+          (r) {
         rateList = r.reviews!;
         emit(GetDoctorRateSuccessState());
       },
@@ -242,11 +244,9 @@ class PatientCubit extends Cubit<PatientState> {
 
 /////////////post reviews////////////////
 
-  makeDoctorReview(
-    String doctorId,
-    int rating,
-    String comment,
-  ) async {
+  makeDoctorReview(String doctorId,
+      int rating,
+      String comment,) async {
     emit(MakeDoctorReviewLoadingState());
     (await _makeDoctorReviewUseCase.call(
       MakeRateInputUseCase(
@@ -256,14 +256,27 @@ class PatientCubit extends Cubit<PatientState> {
       ),
     ))
         .fold(
-      (l) {
+          (l) {
         emit(MakeDoctorReviewFailureState());
       },
-      (r) {
+          (r) {
         emit(MakeDoctorReviewSuccessState());
       },
     );
   }
 
-/////////////post reviews////////////////
+/////////////get all blogs////////////////
+
+  List<Blog> allBlogs = [];
+
+  getAllBlogs(NoParameters params) async {
+    emit(GetAllBlogsLoadingState());
+    allBlogs = [];
+    (await _getAllBlogsUseCase.call(params)).fold((l) {
+      emit(GetAllBlogsFailureState());
+    }, (r) {
+      allBlogs = r.allBlogsData!;
+      emit(GetAllBlogsSuccessState());
+    });
+  }
 }

@@ -45,7 +45,10 @@ class _AppointmentWidgetState extends State<AppointmentWidget> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width * .95,
+      width: MediaQuery
+          .of(context)
+          .size
+          .width * .95,
       height: AppSize.s100,
       child: Card(
         elevation: AppSize.s3,
@@ -70,7 +73,10 @@ class _AppointmentWidgetState extends State<AppointmentWidget> {
               width: AppSize.s10,
             ),
             SizedBox(
-              width: MediaQuery.of(context).size.width * .46,
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width * .46,
               height: AppSize.s100,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -111,8 +117,13 @@ class _AppointmentWidgetState extends State<AppointmentWidget> {
                   const SizedBox(
                     height: AppSize.s5,
                   ),
+
+
                   Text(
-                    "${DateFormat.jm().format(DateTime.parse(widget.model.date))}  5${DateFormat('EEEE d, yyyy').format(DateTime.parse(widget.model.date))}",
+                    "${DateFormat.jm().format(
+                        DateTime.parse(widget.model.date))}  ${DateFormat
+                        .yMMMMd('en_US').format(
+                        DateTime.parse(widget.model.date))}",
                     maxLines: 2,
                     style: TextStyle(
                       color: ColorManager.black,

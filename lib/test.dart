@@ -56,9 +56,6 @@ class TestPage extends StatelessWidget {
   final ConnectToSocketUseCase _connectToSocketUseCase =
       sl<ConnectToSocketUseCase>();
 
-  final GetPatientDataUseCase _getPatientDataUseCase =
-      sl<GetPatientDataUseCase>();
-
   final CreateBlogUseCase _createBlogUseCase = sl<CreateBlogUseCase>();
   final GetAllBlogsUseCase _getAllBlogsUseCase = sl<GetAllBlogsUseCase>();
 
