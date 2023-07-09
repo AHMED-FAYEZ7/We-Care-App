@@ -32,7 +32,8 @@ abstract class BasePatientRepo {
 
   Future<Either<Failure, AppointmentsInfo>> getAvailableAppointmentsByDay({
     required String docID,
-    required String date,
+    required String dayDate,
+    String? visitType,
   });
 
   Future<Either<Failure, AppointmentsInfo>> bookAppointment({

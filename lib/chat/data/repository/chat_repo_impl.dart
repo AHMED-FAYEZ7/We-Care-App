@@ -1,4 +1,5 @@
 import 'package:health_care/chat/data/data_source/chat_remote_data_source.dart';
+import 'package:health_care/chat/data/mapper/chat_mapper.dart';
 import 'package:health_care/chat/domain/model/chat_model.dart';
 import 'package:health_care/chat/domain/repository/chat_repository.dart';
 import 'package:health_care/core/error/error_handler.dart';
@@ -15,21 +16,35 @@ class ChatRepoImpl implements BaseChatRepository {
     this._networkInfo,
   );
 
-  @override
-  Future<void> connectToSocket() async {
-    _baseChatRemoteDataSource.connectToSocket();
-  }
+  // @override
+  // Future<void> connectToSocket() async {
+  //   _baseChatRemoteDataSource.connectToSocket();
+  // }
+
+  // @override
+  // Future<void> disconnectSocket() {
+  //   // TODO: implement disconnectSocket
+  //   throw UnimplementedError();
+  // }
 
   @override
-  Future<void> disconnectSocket() {
-    // TODO: implement disconnectSocket
-    throw UnimplementedError();
-  }
+  Future<Either<Failure, BaseChat>> userCreateChat({
+    required String receiverId,
+  }) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final response = await _baseChatRemoteDataSource.userCreateChat(
+          receiverId: receiverId,
+        );
 
-  @override
-  Future<Either<Failure, BaseChat>> userCreateChat(String senderId) {
-    // TODO: implement userCreateChat
-    throw UnimplementedError();
+        return Right(response.toDomain());
+      } catch (error) {
+        print("catch error ${error.toString()}");
+        return Left((ErrorHandler.handle(error).failure));
+      }
+    } else {
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
   }
 
   @override

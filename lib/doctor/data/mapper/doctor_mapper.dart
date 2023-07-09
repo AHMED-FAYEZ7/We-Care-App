@@ -2,8 +2,10 @@ import 'package:health_care/authentication/data/mapper/user_mapper.dart';
 import 'package:health_care/core/utils/constants.dart';
 import 'package:health_care/core/utils/extension.dart';
 import 'package:health_care/doctor/data/response/blog/blog_response.dart';
+import 'package:health_care/doctor/data/response/comments_likes/comments_likes_response.dart';
 import 'package:health_care/doctor/data/response/time_block/time_block_response.dart';
 import 'package:health_care/doctor/domain/model/blog_model.dart';
+import 'package:health_care/doctor/domain/model/comments_likes_model.dart';
 import 'package:health_care/doctor/domain/model/time_block_model.dart';
 
 extension TimeBlockResponseMapper on TimeBlockResponse? {
@@ -54,6 +56,62 @@ extension BlogInfoResponseMapper on BlogInfoResponse? {
       (this?.allBlogsResponse?.map((blog) => blog.toDomain()) ??
               const Iterable.empty())
           .cast<Blog>()
+          .toList(),
+    );
+  }
+}
+////////////////////// comments & likes /////////////
+
+extension BaseCommentMapper on BaseCommentResponse? {
+  BaseComment toDomain() {
+    return BaseComment(
+      this?.blogId?.orEmpty() ?? Constants.empty,
+      this?.commentContent?.orEmpty() ?? Constants.empty,
+      this?.commentId?.orEmpty() ?? Constants.empty,
+      this?.createdAt?.orEmpty() ?? Constants.empty,
+      this?.updatedAt?.orEmpty() ?? Constants.empty,
+      this?.v?.orZero() ?? Constants.zero,
+    );
+  }
+}
+
+extension CommentMapper on CommentResponse? {
+  Comment toDomain() {
+    return Comment(
+      this?.userId?.orEmpty() ?? Constants.empty,
+      this?.blogId?.orEmpty() ?? Constants.empty,
+      this?.commentContent?.orEmpty() ?? Constants.empty,
+      this?.commentId?.orEmpty() ?? Constants.empty,
+      this?.createdAt?.orEmpty() ?? Constants.empty,
+      this?.updatedAt?.orEmpty() ?? Constants.empty,
+      this?.v?.orZero() ?? Constants.zero,
+    );
+  }
+}
+
+extension CommentsMapper on CommentsResponse? {
+  Comments toDomain() {
+    return Comments(
+      this?.userInfo?.toDomain(),
+      this?.blogId?.orEmpty() ?? Constants.empty,
+      this?.commentContent?.orEmpty() ?? Constants.empty,
+      this?.commentId?.orEmpty() ?? Constants.empty,
+      this?.createdAt?.orEmpty() ?? Constants.empty,
+      this?.updatedAt?.orEmpty() ?? Constants.empty,
+      this?.v?.orZero() ?? Constants.zero,
+    );
+  }
+}
+
+extension CommentInfoMapper on CommentInfoResponse? {
+  CommentInfo toDomain() {
+    return CommentInfo(
+      this?.commentResponse?.toDomain(),
+      (this?.blogCommentsResponse?.map(
+                    (blogComment) => blogComment.toDomain(),
+                  ) ??
+              const Iterable.empty())
+          .cast<Comments>()
           .toList(),
     );
   }

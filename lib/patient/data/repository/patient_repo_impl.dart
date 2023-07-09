@@ -177,14 +177,16 @@ class PatientRepoImpl implements BasePatientRepo {
   @override
   Future<Either<Failure, AppointmentsInfo>> getAvailableAppointmentsByDay({
     required String docID,
-    required String date,
+    required String dayDate,
+    String? visitType,
   }) async {
     if (await _networkInfo.isConnected) {
       try {
         final response =
             await _basePatientRemoteDataSource.getAvailableAppointmentsByDay(
-          docID,
-          date,
+          docId: docID,
+          dayDate: dayDate,
+          visitType: visitType,
         );
 
         return Right(response.toDomain());
@@ -203,11 +205,7 @@ class PatientRepoImpl implements BasePatientRepo {
       try {
         final response = await _basePatientRemoteDataSource.getMyAppointments();
 
-        if (response.status == ApiInternalStatus.SUCCESS) {
-          return Right(response.toDomain());
-        } else {
-          return Left(Failure(1, response.message!));
-        }
+        return Right(response.toDomain());
       } catch (error) {
         print("errorsss ${error.toString()}");
 

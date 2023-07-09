@@ -194,12 +194,17 @@ class _PatientServiceClient implements PatientServiceClient {
   @override
   Future<AppointmentInfoResponse> getAvailableAppointmentsByDay(
     docId,
-    date,
-  ) async {
+    dayDate, {
+    visitType,
+  }) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'day': dayDate,
+      r'type': visitType,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    final _data = {'day': date};
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<AppointmentInfoResponse>(Options(
       method: 'GET',

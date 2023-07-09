@@ -27,10 +27,11 @@ abstract class BasePatientRemoteDataSource {
 
   Future<AppointmentInfoResponse> getDoctorAvailableAppointments(String docId);
 
-  Future<AppointmentInfoResponse> getAvailableAppointmentsByDay(
-    String docId,
-    String date,
-  );
+  Future<AppointmentInfoResponse> getAvailableAppointmentsByDay({
+    required String docId,
+    required String dayDate,
+    String? visitType,
+  });
 
   Future<AppointmentInfoResponse> getMyAppointments();
 
@@ -114,13 +115,15 @@ class PatientRemoteDataSourceImpl implements BasePatientRemoteDataSource {
   }
 
   @override
-  Future<AppointmentInfoResponse> getAvailableAppointmentsByDay(
-    String docId,
-    String date,
-  ) async {
+  Future<AppointmentInfoResponse> getAvailableAppointmentsByDay({
+    required String docId,
+    required String dayDate,
+    String? visitType,
+  }) async {
     return await _patientServiceClient.getAvailableAppointmentsByDay(
       docId,
-      date,
+      dayDate,
+      visitType: visitType,
     );
   }
 
