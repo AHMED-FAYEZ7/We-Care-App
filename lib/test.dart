@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:health_care/authentication/domain/usecase/doctor_sinup_usecase.dart';
-import 'package:health_care/authentication/domain/usecase/patient_signup_usecase.dart';
 import 'package:health_care/authentication/domain/usecase/user_login_usecase.dart';
 import 'package:health_care/chat/domain/usecase/conncet_to_socket_use_case.dart';
 import 'package:health_care/core/app/app_prefs.dart';
 import 'package:health_care/core/services/services_locator.dart';
 import 'package:health_care/core/usecase/base_usecase.dart';
+import 'package:health_care/doctor/domain/usecase/create_blog_use_case.dart';
 import 'package:health_care/doctor/domain/usecase/create_time_block_use_case.dart';
+import 'package:health_care/doctor/domain/usecase/get_all_blogs_use_case.dart';
 import 'package:health_care/patient/domain/usecase/book_appointment_use_case.dart';
 import 'package:health_care/patient/domain/usecase/delete_review_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_all_doctors_use_case.dart';
@@ -31,31 +31,36 @@ class TestPage extends StatelessWidget {
   final GetAllDoctorsUseCase _allDoctorsUseCase = sl<GetAllDoctorsUseCase>();
   final GetTopDoctorsUseCase _getTopDoctorsUseCase = sl<GetTopDoctorsUseCase>();
   final GetDoctorsSpecializationUseCase _getDoctorsSpecialization =
-  sl<GetDoctorsSpecializationUseCase>();
+      sl<GetDoctorsSpecializationUseCase>();
   final GetDoctorByIdUseCase _byIdUseCase = sl<GetDoctorByIdUseCase>();
   final GetDoctorSearchUseCase _searchUseCase = sl<GetDoctorSearchUseCase>();
   final GetAvailableAppointmentsForDoctorUseCase
-  _getAvailableAppointmentsForDoctorUseCase =
-  sl<GetAvailableAppointmentsForDoctorUseCase>();
+      _getAvailableAppointmentsForDoctorUseCase =
+      sl<GetAvailableAppointmentsForDoctorUseCase>();
   final GetAvailableAppointmentsByDayUseCase _availableAppointmentsByDay =
-  sl<GetAvailableAppointmentsByDayUseCase>();
+      sl<GetAvailableAppointmentsByDayUseCase>();
   final BookAppointmentUseCase _bookAppointmentUseCase =
-  sl<BookAppointmentUseCase>();
+      sl<BookAppointmentUseCase>();
   final GetDoctorRateUseCase _getDoctorRateUseCase = sl<GetDoctorRateUseCase>();
   final MakeDoctorReviewUseCase _makeDoctorReviewUseCase =
-  sl<MakeDoctorReviewUseCase>();
+      sl<MakeDoctorReviewUseCase>();
   final UpdateDoctorReviewUseCase _updateDoctorReviewUseCase =
-  sl<UpdateDoctorReviewUseCase>();
+      sl<UpdateDoctorReviewUseCase>();
   final DeleteReviewUseCase _deleteReviewUseCase = sl<DeleteReviewUseCase>();
 
   final CreateTimeBlockUseCase _createTimeBlockUseCase =
-  sl<CreateTimeBlockUseCase>();
+      sl<CreateTimeBlockUseCase>();
   final GetMyAppointmentsUseCase _getMyAppointmentsUseCase =
-  sl<GetMyAppointmentsUseCase>();
+      sl<GetMyAppointmentsUseCase>();
 
   final ConnectToSocketUseCase _connectToSocketUseCase =
-  sl<ConnectToSocketUseCase>();
+      sl<ConnectToSocketUseCase>();
 
+  final GetPatientDataUseCase _getPatientDataUseCase =
+      sl<GetPatientDataUseCase>();
+
+  final CreateBlogUseCase _createBlogUseCase = sl<CreateBlogUseCase>();
+  final GetAllBlogsUseCase _getAllBlogsUseCase = sl<GetAllBlogsUseCase>();
 
   @override
   Widget build(BuildContext context) {
@@ -68,32 +73,13 @@ class TestPage extends StatelessWidget {
           ),
           TextButton(
             onPressed: () async {
-              // (await _getTopDoctorsUseCase.call()).fold(
-              //     (l) {
-              //   print(l.message.toString());
-              // }, (r) {
-              //   // print(r.availableAppointmentsData![0].appointmentId);
-              //   // print(r.reviews!.length);
-
-              //   print(r.topDoctorsData);
-              //   // print(r.pastAppointment!.length);
-              //   // print(r.upcomingAppointmentsData![0].appointmentId);
-              //   // print(
-              //   //     r.upcomingAppointmentsData![0].doctorInfo!.profilePicture);
-
-              //   // print(r.user!.specialization);
-              //   // print(r.user!.fees);
-              //   // print(r.user!.scheduleTiming.length);
-              //   // print("sss${r.token}");
-
-              //   // print(r.doctorsData![1].name);
-              //   // print(r.doctorsData![2].fees);
-              //   // print(r.doctorsData![4].averageRating);
-              //   // print(r.doctorsData![5].timePerPatient);
-              // });
               // (await _connectToSocketUseCase.call(const NoParameters()));
-              // (await _availableAppointmentsByDay.call(TwoParametersUseCase(
-              //         "643498a42f6d65c1915ab52e", "2023-10-05")))
+              // (await _availableAppointmentsByDay.call(
+              //   TwoParametersUseCase(
+              //     "64564cc5061fd8d24c5ef612",
+              //     "2025-10-05",
+              //   ),
+              // ))
               //     .fold((l) {
               //   print(l.message.toString());
               // }, (r) {
@@ -116,25 +102,77 @@ class TestPage extends StatelessWidget {
               //   // print(r.doctorsData![4].averageRating);
               //   // print(r.doctorsData![5].timePerPatient);
               // });
+              // (await _createBlogUseCase.call(
+              //   CreateBlogUseCaseInput(
+              //     postDescription: "this post 4 ",
+              //     postTitle: "4 post",
+              //     postImage:
+              //         "data:image/jpeg;base64,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",
+              //   ),
+              // ))
+              //     .fold((l) {
+              //   print(l.message.toString());
+              // }, (r) {
+              //   // print(r.availableAppointmentsData![0].appointmentId);
+              //   // print(r.reviews!.length);
 
-              // print(r.availableAppointmentsData![0].appointmentId);
-              // print(r.reviews!.length);
+              //   print(" message of create ${r.message}");
+              //   print("create ${r.blogDataInfo!.blogDescription}");
+              //   print("create ${r.blogDataInfo!.blogId}");
+              //   print("create ${r.blogDataInfo!.blogId}");
+              //   // print("all ${r.allBlogsData![0].blogId}");
+              // });
+              (await _getAllBlogsUseCase.call(const NoParameters())).fold((l) {
+                print(l.message.toString());
+              }, (r) {
+                // print(r.availableAppointmentsData![0].appointmentId);
+                // print(r.reviews!.length);
 
+                // print("message of get all ${r.message}");
+                // print(
+                //     "test one blog of get all ${r.blogDataInfo!.blogDescription}");
+                // print("test one blog of get all ${r.blogDataInfo!.blogId}");
+                print("all blogs ${r.allBlogsData![0].blogId}");
+                // print(r.pastAppointment!.length);
+                // print(r.upcomingAppointmentsData![0].appointmentId);
+                // print(
+                //     r.upcomingAppointmentsData![0].doctorInfo!.profilePicture);
 
-              // print(r.pastAppointment!.length);
-              // print(r.upcomingAppointmentsData![0].appointmentId);
-              // print(
-              //     r.upcomingAppointmentsData![0].doctorInfo!.profilePicture);
+                // print(r.user!.specialization);
+                // print(r.user!.fees);
+                // print(r.user!.scheduleTiming.length);
+                // print("sss${r.token}");
 
-              // print(r.user!.specialization);
-              // print(r.user!.fees);
-              // print(r.user!.scheduleTiming.length);
-              // print("sss${r.token}");
+                // print(r.doctorsData![1].name);
+                // print(r.doctorsData![2].fees);
+                // print(r.doctorsData![4].averageRating);
+                // print(r.doctorsData![5].timePerPatient);
+              });
 
-              // print(r.doctorsData![1].name);
-              // print(r.doctorsData![2].fees);
-              // print(r.doctorsData![4].averageRating);
-              // print(r.doctorsData![5].timePerPatient);
+              // (await _getPatientDataUseCase.call(const NoParameters())).fold(
+              //     (l) {
+              //   print(l.message.toString());
+              // }, (r) {
+              //   // print(r.availableAppointmentsData![0].appointmentId);
+              //   // print(r.reviews!.length);
+
+              //   print(r.user!.name);
+              //   print(r.user!.id);
+              //   // print(r.pastAppointment!.length);
+              //   // print(r.upcomingAppointmentsData![0].appointmentId);
+              //   // print(
+              //   //     r.upcomingAppointmentsData![0].doctorInfo!.profilePicture);
+
+              //   // print(r.user!.specialization);
+              //   // print(r.user!.fees);
+              //   // print(r.user!.scheduleTiming.length);
+              //   // print("sss${r.token}");
+
+              //   // print(r.doctorsData![1].name);
+              //   // print(r.doctorsData![2].fees);
+              //   // print(r.doctorsData![4].averageRating);
+              //   // print(r.doctorsData![5].timePerPatient);
+              // });
 
               // (await _allDoctorsUseCase.call("")).fold((l) {
               //   print(l.message.toString());
@@ -158,52 +196,9 @@ class TestPage extends StatelessWidget {
               //   // print(r.doctorsData![4].averageRating);
               //   // print(r.doctorsData![5].timePerPatient);
               // });
-              // (await _createTimeBlockUseCase.call(
-              //   CreateTimeBlockUseCaseInput(
-              //     period: 5,
-              //     startTime: "2023-10-05T01:30:00.000Z",
-              //     callType: "visit",
-              //   ),
-              // ))
-              //     .fold((l) {
-              //   print(l.message.toString());
-              // }, (r) {
-              //   // print(r.availableAppointmentsData![0].appointmentId);
-              //   // print(r.reviews!.length);
 
-              //   print(r.period);
-              //   print(r.doctorId);
-              //   print(r.type);
-              //   // print(r.user!.specialization);
-              //   // print(r.user!.fees);
-              //   // print(r.user!.scheduleTiming.length);
-              //   // print("sss${r.token}");
-
-              //   // print(r.doctorsData![1].name);
-              //   // print(r.doctorsData![2].fees);
-              //   // print(r.doctorsData![4].averageRating);
-              //   // print(r.doctorsData![5].timePerPatient);
-              // });
-              // (await _deleteReviewUseCase.call("649593403f0633e0bc1cb0c8"))
-              //     .fold((l) {
-              //   print(l.message.toString());
-              // }, (r) {
-              //   // print(r.availableAppointmentsData![0].appointmentId);
-              //   // print(r.reviews!.length);
-              //   print(" hello  ${r.successMessage}");
-
-              //   // print(r.user!.name);
-              //   // print(r.user!.specialization);
-              //   // print(r.user!.fees);
-              //   // print(r.user!.scheduleTiming.length);
-              //   // print("sss${r.token}");
-
-              //   // print(r.doctorsData![1].name);
-              //   // print(r.doctorsData![2].fees);
-              //   // print(r.doctorsData![4].averageRating);
-              //   // print(r.doctorsData![5].timePerPatient);
-              // });
               // _appPreferences.clearSharedPreferences();
+
               // (await _userLoginUseCase.call(
               //   UserLoginUseCaseInput(
               //     "patient@gmail.com",

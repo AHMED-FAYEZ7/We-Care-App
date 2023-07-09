@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:health_care/core/network/api_constance.dart';
-import 'package:health_care/doctor/data/response/time_block_response.dart';
+import 'package:health_care/doctor/data/response/blog/blog_response.dart';
+import 'package:health_care/doctor/data/response/time_block/time_block_response.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'doctor_api.g.dart';
@@ -15,4 +16,14 @@ abstract class DoctorServiceClient {
     @Field("startTime") String startTime,
     @Field("type") String callType,
   );
+
+  @POST("api/v1/blog")
+  Future<BlogInfoResponse> createBlog(
+    @Field("des") String blogDescription,
+    @Field("title") String blogTitle, {
+    @Field("image") String? blogImage,
+  });
+
+  @GET("api/v1/blog")
+  Future<BlogInfoResponse> getAllBlogs();
 }

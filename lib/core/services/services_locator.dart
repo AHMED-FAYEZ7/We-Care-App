@@ -31,8 +31,10 @@ import 'package:health_care/doctor/data/data_source/doctor_remote_data_source.da
 import 'package:health_care/doctor/data/network/doctor_api/doctor_api.dart';
 import 'package:health_care/doctor/data/repository/doctor_repo_impl.dart';
 import 'package:health_care/doctor/domain/repository/doctor_repo.dart';
+import 'package:health_care/doctor/domain/usecase/create_blog_use_case.dart';
 import 'package:health_care/doctor/domain/usecase/create_time_block_use_case.dart';
 import 'package:health_care/doctor/presentation/controller/doctor_cubit/doctor_cubit.dart';
+import 'package:health_care/doctor/domain/usecase/get_all_blogs_use_case.dart';
 import 'package:health_care/patient/data/data_source/patient_remote_data_source.dart';
 import 'package:health_care/patient/data/network/patient_api/patient_api.dart';
 import 'package:health_care/patient/data/repository/patient_repo_impl.dart';
@@ -212,6 +214,12 @@ Future<void> initAppModule() async {
 
   sl.registerLazySingleton<ConnectToSocketUseCase>(
       () => ConnectToSocketUseCase(sl()));
+
+// /////////////////////// blog /////////////
+
+  sl.registerLazySingleton<CreateBlogUseCase>(() => CreateBlogUseCase(sl()));
+  sl.registerLazySingleton<GetAllBlogsUseCase>(() => GetAllBlogsUseCase(sl()));
+
   // cubit
 
   sl.registerFactory<AuthCubit>(() => AuthCubit(

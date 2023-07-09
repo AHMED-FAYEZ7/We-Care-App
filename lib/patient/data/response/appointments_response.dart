@@ -18,6 +18,10 @@ class AppointmentResponse {
   String? status;
   @JsonKey(name: "doctor")
   UserResponse? doctorInfo;
+  // @JsonKey(name: "doctor")
+  // String? doctorId;
+  // @JsonKey(name: "patient")
+  // UserResponse? patientInfo;
   @JsonKey(name: "patient")
   String? patientId;
   @JsonKey(name: "date")
@@ -33,6 +37,8 @@ class AppointmentResponse {
     this.type,
     this.status,
     this.doctorInfo,
+    // this.doctorId,
+    // this.patientInfo,
     this.patientId,
     this.date,
     this.v,

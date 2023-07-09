@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:health_care/core/network/network_info.dart';
 import 'package:health_care/doctor/data/data_source/doctor_remote_data_source.dart';
 import 'package:health_care/doctor/data/mapper/doctor_mapper.dart';
+import 'package:health_care/doctor/domain/model/blog_model.dart';
 import 'package:health_care/doctor/domain/model/time_block_model.dart';
 import 'package:health_care/doctor/domain/repository/doctor_repo.dart';
 
@@ -30,9 +31,46 @@ class DoctorRepoImpl implements BaseDoctorRepo {
           callType: callType,
         );
 
-        // print(" ssssssssss ssssssssssss ${response.status}");
-        // print(" ةةةة ssssssssssss ${response.reviews!.length}");
-        // print(" cccccccccc ssssssssssss ${response.allDoctors!.length}");
+        return Right(response.toDomain());
+      } catch (error) {
+        print("error ${error.toString()}");
+        return Left((ErrorHandler.handle(error).failure));
+      }
+    } else {
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, BlogInfo>> createBlog(
+    String postDescription,
+    String postTitle, {
+    String? blogImage,
+  }) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final response = await _baseDoctorRemoteDataSource.createBlog(
+          postDescription,
+          postTitle,
+          postImage: blogImage,
+        );
+
+        return Right(response.toDomain());
+      } catch (error) {
+        print("error ${error.toString()}");
+        return Left((ErrorHandler.handle(error).failure));
+      }
+    } else {
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, BlogInfo>> getAllBlogs() async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final response = await _baseDoctorRemoteDataSource.getAllBlogs();
+
         return Right(response.toDomain());
       } catch (error) {
         print("error ${error.toString()}");

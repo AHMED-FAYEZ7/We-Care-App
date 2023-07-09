@@ -187,12 +187,9 @@ class PatientRepoImpl implements BasePatientRepo {
           date,
         );
 
-        if (response.status == ApiInternalStatus.SUCCESS) {
-          return Right(response.toDomain());
-        } else {
-          return Left(Failure(1, response.message!));
-        }
+        return Right(response.toDomain());
       } catch (error) {
+        print("catch error ${error.toString()}");
         return Left((ErrorHandler.handle(error).failure));
       }
     } else {
