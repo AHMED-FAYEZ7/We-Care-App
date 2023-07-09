@@ -16,7 +16,6 @@ class TopDoctorCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
         width: AppSize.s140,
-        height: AppSize.s250,
         child: Card(
           elevation: AppSize.s3,
           shape: RoundedRectangleBorder(
@@ -58,6 +57,9 @@ class TopDoctorCardWidget extends StatelessWidget {
                   color: ColorManager.black,
                   fontSize: AppSize.s10,
                 ),
+              ),
+              const SizedBox(
+                height: AppSize.s5,
               ),
               RateWidget(
                 ignoreGestures: true,
