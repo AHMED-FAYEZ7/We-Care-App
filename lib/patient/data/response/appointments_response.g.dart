@@ -75,12 +75,12 @@ MyAppointmentsResponse _$MyAppointmentsResponseFromJson(
     MyAppointmentsResponse(
       json['results'] as int?,
       (json['pastAppointment'] as List<dynamic>?)
-          ?.map(
-              (e) => MyAppointmentsResponse.fromJson(e as Map<String, dynamic>))
+          ?.map((e) =>
+              UserMyAppointmentsResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
       (json['upcomingApointments'] as List<dynamic>?)
-          ?.map(
-              (e) => MyAppointmentsResponse.fromJson(e as Map<String, dynamic>))
+          ?.map((e) =>
+              UserMyAppointmentsResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
       json['status'] as String?,
       json['message'] as String?,

@@ -87,10 +87,10 @@ class MyAppointmentsResponse extends BaseResponse {
   int? results;
 
   @JsonKey(name: "pastAppointment")
-  List<MyAppointmentsResponse>? pastAppointmentInfo;
+  List<UserMyAppointmentsResponse>? pastAppointmentInfo;
 
   @JsonKey(name: "upcomingApointments")
-  List<MyAppointmentsResponse>? upcomingAppointmentsInfo;
+  List<UserMyAppointmentsResponse>? upcomingAppointmentsInfo;
 
   MyAppointmentsResponse(
     this.results,
