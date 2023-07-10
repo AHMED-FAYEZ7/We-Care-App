@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/patient/domain/model/rarte_model.dart';
 import 'package:health_care/patient/presentation/screens/reviews/widget/patient_rate_widget.dart';
-import 'package:health_care/patient/presentation/widgets/app_bar_widget.dart';
+import 'package:health_care/core/widgets/app_bar_widget.dart';
 
 class ReviewsScreen extends StatelessWidget {
   ReviewsScreen({

@@ -7,7 +7,7 @@ import 'package:health_care/authentication/presentation/widgets/text_button_widg
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
 import 'package:health_care/patient/presentation/controller/Patient_cubit/patient_cubit.dart';
-import 'package:health_care/patient/presentation/widgets/app_bar_widget.dart';
+import 'package:health_care/core/widgets/app_bar_widget.dart';
 import 'package:health_care/core/widgets/loading_widget.dart';
 import 'package:health_care/patient/presentation/widgets/rate_widget.dart';
 

@@ -6,7 +6,7 @@ import 'package:health_care/core/global/resources/strings_manger.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
 import 'package:health_care/doctor/presentation/controller/doctor_cubit/doctor_cubit.dart';
-import 'package:health_care/patient/presentation/widgets/app_bar_widget.dart';
+import 'package:health_care/core/widgets/app_bar_widget.dart';
 
 class DoctorLayoutScreen extends StatefulWidget {
   const DoctorLayoutScreen({Key? key}) : super(key: key);

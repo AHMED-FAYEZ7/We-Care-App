@@ -9,7 +9,7 @@ import 'package:health_care/core/global/theme/app_color/color_manager.dart';
 import 'package:health_care/core/routes/app_routes.dart';
 import 'package:health_care/core/utils/constants.dart';
 import 'package:health_care/core/utils/functions.dart';
-import 'package:health_care/patient/presentation/widgets/app_bar_widget.dart';
+import 'package:health_care/core/widgets/app_bar_widget.dart';
 
 class DoctorRegisterScreen extends StatelessWidget {
   DoctorRegisterScreen({Key? key}) : super(key: key);

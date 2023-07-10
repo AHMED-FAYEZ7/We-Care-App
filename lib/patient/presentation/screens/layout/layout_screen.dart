@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/patient/presentation/controller/Patient_cubit/patient_cubit.dart';
-import 'package:health_care/patient/presentation/widgets/app_bar_widget.dart';
+import 'package:health_care/core/widgets/app_bar_widget.dart';
 
 import '../../../../core/global/resources/icons_manger.dart';
 import '../../../../core/global/resources/strings_manger.dart';
@@ -41,7 +41,8 @@ class _LayoutPatientScreenState extends State<LayoutPatientScreen> {
               child: BottomNavyBar(
                 backgroundColor: ColorManager.white,
                 selectedIndex: cubit.currentIndex,
-                showElevation: false, // use this to remove appBar's elevation
+                showElevation: false,
+                // use this to remove appBar's elevation
                 onItemSelected: (index) {
                   setState(() {
                     cubit.changeBottomNav(index);

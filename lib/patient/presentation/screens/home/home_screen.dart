@@ -28,6 +28,7 @@ class HomePatientScreen extends StatelessWidget {
               children: [
                 SearchBarWidget(
                   readOnly: true,
+                  hintText: 'search...',
                   onTap: () {
                     Navigator.pushNamed(
                       context,

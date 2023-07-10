@@ -12,3 +12,19 @@ class GetDoctorDataLoadingState extends DoctorState {}
 class GetDoctorDataSuccessState extends DoctorState {}
 
 class GetDoctorDataFailureState extends DoctorState {}
+////////////////////////////////////////////
+
+class GetAllBlogsLoadingState extends DoctorState {}
+
+class GetAllBlogsSuccessState extends DoctorState {}
+
+class GetAllBlogsFailureState extends DoctorState {}
+
+////////////////////////////////////////////
+class CreatePostLoadingState extends DoctorState {}
+
+class CreatePostSuccessState extends DoctorState {}
+
+class CreatePostFailureState extends DoctorState {}
+
+////////////////////////////////////////////

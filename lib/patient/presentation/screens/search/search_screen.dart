@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/routes/app_routes.dart';
 import 'package:health_care/patient/presentation/controller/Patient_cubit/patient_cubit.dart';
-import 'package:health_care/patient/presentation/widgets/app_bar_widget.dart';
+import 'package:health_care/core/widgets/app_bar_widget.dart';
 import 'package:health_care/patient/presentation/widgets/doctor_widget.dart';
 import 'package:health_care/patient/presentation/widgets/empty_list_widget.dart';
 import 'package:health_care/patient/presentation/widgets/shimmer/doctor_shimmer_widget.dart';
@@ -22,6 +22,7 @@ class SearchPatientScreen extends StatefulWidget {
   String? specialist;
   String? keyword;
   TextEditingController? controller = TextEditingController();
+
   @override
   State<SearchPatientScreen> createState() => _SearchPatientScreenState();
 }
@@ -129,7 +130,9 @@ class _SearchPatientScreenState extends State<SearchPatientScreen> {
                             ),
                             itemCount: cubit.searchedDoctor.length,
                           ),
-                          fallback: (context) =>  EmptyListWidget(text: 'No Doctors Here',),
+                          fallback: (context) => EmptyListWidget(
+                            text: 'No Doctors Here',
+                          ),
                         )
                       : DoctorShimmerWidget(),
                 ),

@@ -10,16 +10,17 @@ class SearchBarWidget extends StatefulWidget {
   Function onTap;
   VoidCallback? onSearch;
   TextEditingController? controller;
-  String? initialValue;
+  String? hintText;
 
   SearchBarWidget({
     required this.readOnly,
     required this.onTap,
     this.onSearch,
     this.controller,
-    this.initialValue,
+    this.hintText,
     super.key,
   });
+
   @override
   _SearchBarWidgetState createState() => _SearchBarWidgetState();
 }
@@ -41,7 +42,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                 widget.onTap();
               },
               decoration: InputDecoration(
-                hintText: 'Search...',
+                hintText: widget.hintText ?? '',
                 filled: true,
                 fillColor: ColorManager.lightGrey,
                 border: InputBorder.none,

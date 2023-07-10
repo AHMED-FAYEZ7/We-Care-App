@@ -52,6 +52,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
               child: SearchBarWidget(
                 readOnly: false,
                 onTap: () {},
+                hintText: 'search...',
                 controller: controller,
                 onSearch: onSearch,
               ),

@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/usecase/base_usecase.dart';
 import 'package:health_care/patient/presentation/controller/Patient_cubit/patient_cubit.dart';
-import 'package:health_care/patient/presentation/screens/posts/widget/post_widget.dart';
+import 'package:health_care/core/widgets/post_widget.dart';
 import 'package:health_care/patient/presentation/widgets/empty_list_widget.dart';
 import 'package:health_care/patient/presentation/widgets/shimmer/post_shimmer.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';

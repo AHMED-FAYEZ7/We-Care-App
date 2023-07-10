@@ -42,7 +42,7 @@ class ProfileDoctorScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            cubit.doctorData!.name,
+                            cubit.doctorData?.name ?? '',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: ColorManager.black,
@@ -54,7 +54,7 @@ class ProfileDoctorScreen extends StatelessWidget {
                             height: AppSize.s5,
                           ),
                           Text(
-                            cubit.doctorData!.email,
+                            cubit.doctorData?.email ?? '',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: ColorManager.black,

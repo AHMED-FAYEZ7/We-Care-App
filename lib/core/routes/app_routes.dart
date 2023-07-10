@@ -11,6 +11,7 @@ import 'package:health_care/authentication/presentation/screens/user/user_login_
 import 'package:health_care/authentication/presentation/screens/user/user_update_info_screen.dart';
 import 'package:health_care/authentication/presentation/screens/user/user_update_password_screen.dart';
 import 'package:health_care/core/global/resources/strings_manger.dart';
+import 'package:health_care/doctor/presentation/screens/create_post/create_post_screen.dart';
 import 'package:health_care/doctor/presentation/screens/doctor_layout/doctor_layout_screen.dart';
 import 'package:health_care/patient/domain/model/appointment_model.dart';
 import 'package:health_care/patient/domain/model/rarte_model.dart';
@@ -37,8 +38,11 @@ class Routes {
   static const String doctorRegisterRoute = "/doctorRegister";
   static const String patientRegisterRoute = "/patientRegister";
   static const String forgotPasswordRoute = "/forgotPassword";
+
   /////////////doctor//////////////
   static const String layoutDoctorRoute = "/layoutDoctor";
+  static const String createPostRoute = "/createPost";
+
   /////////////patient//////////////
   static const String layoutPatientRoute = "/layoutPatient";
   static const String searchPatientRoute = "/searchPatient";
@@ -81,6 +85,8 @@ class RouteGenerator {
       /////////////doctor//////////////
       case Routes.layoutDoctorRoute:
         return MaterialPageRoute(builder: (_) => const DoctorLayoutScreen());
+      case Routes.createPostRoute:
+        return MaterialPageRoute(builder: (_) => const CreatePostScreen());
       /////////////patient//////////////
       case Routes.layoutPatientRoute:
         return MaterialPageRoute(builder: (_) => const LayoutPatientScreen());

@@ -3,6 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/authentication/domain/model/user_model.dart';
 import 'package:health_care/core/services/services_locator.dart';
 import 'package:health_care/core/usecase/base_usecase.dart';
+import 'package:health_care/doctor/domain/model/blog_model.dart';
+import 'package:health_care/doctor/domain/usecase/create_blog_use_case.dart';
+import 'package:health_care/doctor/domain/usecase/get_all_blogs_use_case.dart';
 import 'package:health_care/doctor/presentation/screens/appointments/appointment_screen.dart';
 import 'package:health_care/doctor/presentation/screens/home/home_screen.dart';
 import 'package:health_care/doctor/presentation/screens/posts/posts_sceen.dart';
@@ -13,9 +16,13 @@ part 'doctor_state.dart';
 
 class DoctorCubit extends Cubit<DoctorState> {
   GetUserDataUseCase _getUserDataUseCase = sl<GetUserDataUseCase>();
+  GetAllBlogsUseCase _getAllBlogsUseCase = sl<GetAllBlogsUseCase>();
+  CreateBlogUseCase _createBlogUseCase = sl<CreateBlogUseCase>();
 
   DoctorCubit(
     this._getUserDataUseCase,
+    this._getAllBlogsUseCase,
+    this._createBlogUseCase,
   ) : super(DoctorInitial());
 
   static DoctorCubit get(context) => BlocProvider.of(context);
@@ -28,8 +35,8 @@ class DoctorCubit extends Cubit<DoctorState> {
   ];
 
   List<Widget> screens = [
-    HomeDoctorScreen(),
-    const PostsDoctorScreen(),
+    const HomeDoctorScreen(),
+    PostsDoctorScreen(),
     const AppointmentDoctorScreen(),
     const ProfileDoctorScreen(),
   ];
@@ -55,5 +62,38 @@ class DoctorCubit extends Cubit<DoctorState> {
         emit(GetDoctorDataSuccessState());
       },
     );
+  }
+
+  /////////////get all blogs////////////////
+
+  List<Blog> allBlogs = [];
+
+  getAllBlogs(NoParameters params) async {
+    emit(GetAllBlogsLoadingState());
+
+    (await _getAllBlogsUseCase.call(params)).fold((l) {
+      emit(GetAllBlogsFailureState());
+    }, (r) {
+      allBlogs = [];
+      allBlogs = r.allBlogsData!;
+      emit(GetAllBlogsSuccessState());
+    });
+  }
+
+  /////////////get all blogs////////////////
+
+  createPost(String title, String des, String imageUrl) async {
+    emit(CreatePostLoadingState());
+
+    (await _createBlogUseCase.call(CreateBlogUseCaseInput(
+      postDescription: des,
+      postTitle: title,
+      postImage: imageUrl,
+    )))
+        .fold((l) {
+      emit(CreatePostFailureState());
+    }, (r) {
+      emit(CreatePostSuccessState());
+    });
   }
 }
