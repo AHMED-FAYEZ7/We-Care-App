@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:health_care/authentication/domain/usecase/user_login_usecase.dart';
 import 'package:health_care/chat/domain/usecase/conncet_to_socket_use_case.dart';
+import 'package:health_care/chat/domain/usecase/user_create_chat_use_case.dart';
 import 'package:health_care/core/app/app_prefs.dart';
 import 'package:health_care/core/services/services_locator.dart';
-import 'package:health_care/core/usecase/base_usecase.dart';
 import 'package:health_care/doctor/domain/usecase/create_blog_use_case.dart';
+import 'package:health_care/doctor/domain/usecase/create_comment_use_case.dart';
+import 'package:health_care/doctor/domain/usecase/create_dislike_use_case.dart';
+import 'package:health_care/doctor/domain/usecase/create_like_use_case.dart';
 import 'package:health_care/doctor/domain/usecase/create_time_block_use_case.dart';
 import 'package:health_care/doctor/domain/usecase/get_all_blogs_use_case.dart';
+import 'package:health_care/doctor/domain/usecase/get_blogs_comments_use_case.dart';
 import 'package:health_care/patient/domain/usecase/book_appointment_use_case.dart';
 import 'package:health_care/patient/domain/usecase/delete_review_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_all_doctors_use_case.dart';
@@ -53,12 +57,17 @@ class TestPage extends StatelessWidget {
   final GetMyAppointmentsUseCase _getMyAppointmentsUseCase =
       sl<GetMyAppointmentsUseCase>();
 
-  final ConnectToSocketUseCase _connectToSocketUseCase =
-      sl<ConnectToSocketUseCase>();
+  final UserCreateChatUseCase _userCreateChatUseCase =
+      sl<UserCreateChatUseCase>();
 
   final CreateBlogUseCase _createBlogUseCase = sl<CreateBlogUseCase>();
   final GetAllBlogsUseCase _getAllBlogsUseCase = sl<GetAllBlogsUseCase>();
-
+  final GetUserDataUseCase _getUserDataUseCase = sl<GetUserDataUseCase>();
+  final CreateCommentUseCase _createCommentUseCase = sl<CreateCommentUseCase>();
+  final GetBlogsCommentsUseCase _getBlogsCommentsUseCase =
+      sl<GetBlogsCommentsUseCase>();
+  final CreateLikeUseCase _createLikeUseCase = sl<CreateLikeUseCase>();
+  final CreateDisLikeUseCase _createDisLikeUseCase = sl<CreateDisLikeUseCase>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,21 +92,83 @@ class TestPage extends StatelessWidget {
               //   // print(r.availableAppointmentsData![0].appointmentId);
               //   // print(r.reviews!.length);
 
+              // });
+              // (await _availableAppointmentsByDay.call(
+              //   AvailableAppointmentsByDayInputUseCase(
+              //     doctorId: "64564cc5061fd8d24c5ef612",
+              //     dayDate: "2025-10-05",
+              //   ),
+              // ))
+              //     .fold((l) {
+              //   print(l.message.toString());
+              // }, (r) {
               //   print(r.availableAppointmentsByDayData!.length);
-              //   // print(r.pastAppointment!.length);
-              //   // print(r.upcomingAppointmentsData![0].appointmentId);
-              //   // print(
-              //   //     r.upcomingAppointmentsData![0].doctorInfo!.profilePicture);
+              // });
+              // (await _createCommentUseCase.call(
+              //   CreateCommentUseCaseInput(
+              //     blogId: "643b4534a9b2cec52f141877",
+              //     commentContent: "production comment",
+              //   ),
+              // ))
+              //     .fold((l) {
+              //   print(l.message.toString());
+              // }, (r) {
+              //   print(r.commentData!.commentContent);
+              // });
+              // (await _getBlogsCommentsUseCase.call("643b4534a9b2cec52f141877"))
+              //     .fold((l) {
+              //   print(l.message.toString());
+              // }, (r) {
+              //   // print("test ${r.commentData!.commentContent}");
+              //   print("comment ${r.blogComments![0].commentId}");
+              //   print("comment ${r.blogComments![1].commentId}");
+              //   print("comment ${r.blogComments![2].commentId}");
+              //   print("comment ${r.blogComments![3].commentId}");
+              //   print("comment ${r.blogComments![4].commentId}");
+              // });
+              // (await _createLikeUseCase.call("643b4534a9b2cec52f141877")).fold(
+              //     (l) {
+              //   print(l.message.toString());
+              // }, (r) {
+              //   print("test $r");
+              // });
+              (await _createDisLikeUseCase.call("643b4534a9b2cec52f141877"))
+                  .fold((l) {
+                print(l.message.toString());
+              }, (r) {
+                print("test $r");
+              });
+              // (await _userCreateChatUseCase.call("64564cc5061fd8d24c5ef612"))
+              //     .fold((l) {
+              //   print(l.message.toString());
+              // }, (r) {
+              //   // print(r.availableAppointmentsData![0].appointmentId);
+              //   print(r.roomId);
+              // });
+              // // (await _getAvailableAppointmentsForDoctorUseCase
+              // //         .call("64564cc5061fd8d24c5ef612"))
+              // //     .fold((l) {
+              // //   print(l.message.toString());
+              // // }, (r) {
+              // //   // print(r.availableAppointmentsData![0].appointmentId);
+              // //   // print(r.reviews!.length);
 
-              //   // print(r.user!.specialization);
-              //   // print(r.user!.fees);
-              //   // print(r.user!.scheduleTiming.length);
-              //   // print("sss${r.token}");
+              // // });
+              // (await _getMyAppointmentsUseCase.call(const NoParameters())).fold(
+              //     (l) {
+              //   print(l.message.toString());
+              // }, (r) {
+              //   // print(r.availableAppointmentsData![0].appointmentId);
+              //   print(r.upcomingAppointmentsData!.length);
+              // });
+              // (await _getAvailableAppointmentsForDoctorUseCase
+              //         .call("64564cc5061fd8d24c5ef612"))
+              //     .fold((l) {
+              //   print(l.message.toString());
+              // }, (r) {
+              //   // print(r.availableAppointmentsData![0].appointmentId);
+              //   // print(r.reviews!.length);
 
-              //   // print(r.doctorsData![1].name);
-              //   // print(r.doctorsData![2].fees);
-              //   // print(r.doctorsData![4].averageRating);
-              //   // print(r.doctorsData![5].timePerPatient);
               // });
               // (await _createBlogUseCase.call(
               //   CreateBlogUseCaseInput(
@@ -119,32 +190,13 @@ class TestPage extends StatelessWidget {
               //   print("create ${r.blogDataInfo!.blogId}");
               //   // print("all ${r.allBlogsData![0].blogId}");
               // });
-              (await _getAllBlogsUseCase.call(const NoParameters())).fold((l) {
-                print(l.message.toString());
-              }, (r) {
-                // print(r.availableAppointmentsData![0].appointmentId);
-                // print(r.reviews!.length);
+              // (await _getAllBlogsUseCase.call(const NoParameters())).fold((l) {
+              //   print(l.message.toString());
+              // }, (r) {
+              //   // print(r.availableAppointmentsData![0].appointmentId);
+              //   // print(r.reviews!.length);
 
-                // print("message of get all ${r.message}");
-                // print(
-                //     "test one blog of get all ${r.blogDataInfo!.blogDescription}");
-                // print("test one blog of get all ${r.blogDataInfo!.blogId}");
-                print("all blogs ${r.allBlogsData![0].blogId}");
-                // print(r.pastAppointment!.length);
-                // print(r.upcomingAppointmentsData![0].appointmentId);
-                // print(
-                //     r.upcomingAppointmentsData![0].doctorInfo!.profilePicture);
-
-                // print(r.user!.specialization);
-                // print(r.user!.fees);
-                // print(r.user!.scheduleTiming.length);
-                // print("sss${r.token}");
-
-                // print(r.doctorsData![1].name);
-                // print(r.doctorsData![2].fees);
-                // print(r.doctorsData![4].averageRating);
-                // print(r.doctorsData![5].timePerPatient);
-              });
+              // });
 
               // (await _getPatientDataUseCase.call(const NoParameters())).fold(
               //     (l) {
@@ -177,21 +229,6 @@ class TestPage extends StatelessWidget {
               //   // print(r.availableAppointmentsData![0].appointmentId);
               //   // print(r.reviews!.length);
 
-              //   print(r.allDoctorsData!.length);
-              //   print(r.allDoctorsData![0].name);
-              //   // print(r.upcomingAppointmentsData![0].appointmentId);
-              //   // print(
-              //   //     r.upcomingAppointmentsData![0].doctorInfo!.profilePicture);
-
-              //   // print(r.user!.specialization);
-              //   // print(r.user!.fees);
-              //   // print(r.user!.scheduleTiming.length);
-              //   // print("sss${r.token}");
-
-              //   // print(r.doctorsData![1].name);
-              //   // print(r.doctorsData![2].fees);
-              //   // print(r.doctorsData![4].averageRating);
-              //   // print(r.doctorsData![5].timePerPatient);
               // });
 
               // _appPreferences.clearSharedPreferences();

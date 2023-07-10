@@ -24,15 +24,21 @@ import 'package:health_care/authentication/domain/usecase/user_update_info_useca
 import 'package:health_care/authentication/domain/usecase/user_update_password_usecase.dart';
 import 'package:health_care/authentication/presentation/controller/auth_cubit.dart';
 import 'package:health_care/chat/data/data_source/chat_remote_data_source.dart';
-import 'package:health_care/chat/data/repository/doctor_repo_impl.dart';
+import 'package:health_care/chat/data/network/doctor_api/chat_api.dart';
+import 'package:health_care/chat/data/repository/chat_repo_impl.dart';
 import 'package:health_care/chat/domain/repository/chat_repository.dart';
 import 'package:health_care/chat/domain/usecase/conncet_to_socket_use_case.dart';
+import 'package:health_care/chat/domain/usecase/user_create_chat_use_case.dart';
 import 'package:health_care/doctor/data/data_source/doctor_remote_data_source.dart';
 import 'package:health_care/doctor/data/network/doctor_api/doctor_api.dart';
 import 'package:health_care/doctor/data/repository/doctor_repo_impl.dart';
 import 'package:health_care/doctor/domain/repository/doctor_repo.dart';
 import 'package:health_care/doctor/domain/usecase/create_blog_use_case.dart';
+import 'package:health_care/doctor/domain/usecase/create_comment_use_case.dart';
+import 'package:health_care/doctor/domain/usecase/create_dislike_use_case.dart';
+import 'package:health_care/doctor/domain/usecase/create_like_use_case.dart';
 import 'package:health_care/doctor/domain/usecase/create_time_block_use_case.dart';
+import 'package:health_care/doctor/domain/usecase/get_blogs_comments_use_case.dart';
 import 'package:health_care/doctor/presentation/controller/doctor_cubit/doctor_cubit.dart';
 import 'package:health_care/doctor/domain/usecase/get_all_blogs_use_case.dart';
 import 'package:health_care/patient/data/data_source/patient_remote_data_source.dart';
@@ -95,6 +101,7 @@ Future<void> initAppModule() async {
 
   sl.registerLazySingleton<UserServiceClient>(() => UserServiceClient(dio));
 
+  sl.registerLazySingleton<ChatServiceClient>(() => ChatServiceClient(dio));
   // remote data source
 
   sl.registerLazySingleton<PatientAuthRemoteDataSource>(
@@ -114,7 +121,7 @@ Future<void> initAppModule() async {
 
 /////////// chat /////////////
   sl.registerLazySingleton<BaseChatRemoteDataSource>(
-      () => ChatRemoteDataSourceImpl());
+      () => ChatRemoteDataSourceImpl(sl()));
 
   // local data source
 
@@ -212,13 +219,29 @@ Future<void> initAppModule() async {
 
   // ////////////// chat////////////
 
-  sl.registerLazySingleton<ConnectToSocketUseCase>(
-      () => ConnectToSocketUseCase(sl()));
+  // sl.registerLazySingleton<ConnectToSocketUseCase>(
+  //     () => ConnectToSocketUseCase(sl()));
+
+  sl.registerLazySingleton<UserCreateChatUseCase>(
+      () => UserCreateChatUseCase(sl()));
 
 // /////////////////////// blog /////////////
 
   sl.registerLazySingleton<CreateBlogUseCase>(() => CreateBlogUseCase(sl()));
   sl.registerLazySingleton<GetAllBlogsUseCase>(() => GetAllBlogsUseCase(sl()));
+
+// /////////////////////// comments likes /////////////
+
+  sl.registerLazySingleton<CreateCommentUseCase>(
+      () => CreateCommentUseCase(sl()));
+
+  sl.registerLazySingleton<GetBlogsCommentsUseCase>(
+      () => GetBlogsCommentsUseCase(sl()));
+
+  sl.registerLazySingleton<CreateLikeUseCase>(() => CreateLikeUseCase(sl()));
+
+  sl.registerLazySingleton<CreateDisLikeUseCase>(
+      () => CreateDisLikeUseCase(sl()));
 
   // cubit
 

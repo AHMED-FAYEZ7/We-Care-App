@@ -1,5 +1,7 @@
+import 'package:health_care/core/response/base_response.dart';
 import 'package:health_care/doctor/data/network/doctor_api/doctor_api.dart';
 import 'package:health_care/doctor/data/response/blog/blog_response.dart';
+import 'package:health_care/doctor/data/response/comments_likes/comments_likes_response.dart';
 import 'package:health_care/doctor/data/response/time_block/time_block_response.dart';
 
 abstract class BaseDoctorRemoteDataSource {
@@ -16,6 +18,25 @@ abstract class BaseDoctorRemoteDataSource {
   });
 
   Future<BlogInfoResponse> getAllBlogs();
+
+  //////////////// comments & likes ///////////
+
+  Future<CommentInfoResponse> createComment({
+    required String blogId,
+    required String commentContent,
+  });
+
+  Future<CommentInfoResponse> getBlogsComments({
+    required String blogId,
+  });
+
+  Future<BaseResponse> createLike({
+    required String blogId,
+  });
+
+  Future<BaseResponse> createDisLike({
+    required String blogId,
+  });
 }
 
 class DoctorRemoteDataSourceImpl implements BaseDoctorRemoteDataSource {
@@ -52,5 +73,37 @@ class DoctorRemoteDataSourceImpl implements BaseDoctorRemoteDataSource {
   @override
   Future<BlogInfoResponse> getAllBlogs() async {
     return await _doctorServiceClient.getAllBlogs();
+  }
+
+  @override
+  Future<CommentInfoResponse> createComment({
+    required String blogId,
+    required String commentContent,
+  }) async {
+    return await _doctorServiceClient.createComment(
+      blogId,
+      commentContent,
+    );
+  }
+
+  @override
+  Future<CommentInfoResponse> getBlogsComments({required String blogId}) async {
+    return await _doctorServiceClient.getBlogsComments(
+      blogId,
+    );
+  }
+
+  @override
+  Future<BaseResponse> createLike({required String blogId}) async {
+    return await _doctorServiceClient.createLike(
+      blogId,
+    );
+  }
+
+  @override
+  Future<BaseResponse> createDisLike({required String blogId}) async {
+    return await _doctorServiceClient.createDisLike(
+      blogId,
+    );
   }
 }

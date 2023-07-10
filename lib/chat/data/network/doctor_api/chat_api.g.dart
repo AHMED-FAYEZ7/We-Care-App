@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'doctor_api.dart';
+part of 'chat_api.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'doctor_api.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _DoctorServiceClient implements DoctorServiceClient {
-  _DoctorServiceClient(
+class _ChatServiceClient implements ChatServiceClient {
+  _ChatServiceClient(
     this._dio, {
     this.baseUrl,
   }) {
@@ -21,33 +21,25 @@ class _DoctorServiceClient implements DoctorServiceClient {
   String? baseUrl;
 
   @override
-  Future<TimeBlockResponse> createTimeBlock(
-    period,
-    startTime,
-    callType,
-  ) async {
+  Future<BaseChatResponse> createChatRoom(receiverId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = {
-      'period': period,
-      'startTime': startTime,
-      'type': callType,
-    };
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<TimeBlockResponse>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<BaseChatResponse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              'api/v1/timeBlocks',
+              'api/v1/chats/${receiverId}',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = TimeBlockResponse.fromJson(_result.data!);
+    final value = BaseChatResponse.fromJson(_result.data!);
     return value;
   }
 

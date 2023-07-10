@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:health_care/authentication/data/response/patient_auth_response/patient_auth_response.dart';
 import 'package:health_care/authentication/data/response/user_response/user_response.dart';
 import 'package:health_care/core/network/api_constance.dart';
 import 'package:health_care/patient/data/response/appointments_response.dart';
@@ -51,8 +50,9 @@ abstract class PatientServiceClient {
   @GET("api/v1/appointments/availableByday/{docId}")
   Future<AppointmentInfoResponse> getAvailableAppointmentsByDay(
     @Path("docId") String docId,
-    @Field("day") String date,
-  );
+    @Query("day") String dayDate, {
+    @Query("type") String? visitType,
+  });
 
   @GET("api/v1/appointments")
   Future<AppointmentInfoResponse> getMyAppointments();
