@@ -38,6 +38,7 @@ abstract class BasePatientRepo {
 
   Future<Either<Failure, BookedAppointment>> bookAppointment({
     required String appointmentID,
+    String? comment,
   });
 
   Future<Either<Failure, RateInfo>> getDoctorReviews({

@@ -59,8 +59,9 @@ abstract class PatientServiceClient {
 
   @POST("api/v1/appointments/book")
   Future<BookedAppointmentResponse> bookAppointment(
-    @Field("AppointmentID") String appointmentID,
-  );
+    @Field("AppointmentID") String appointmentID, {
+    @Field("comment") String? comment,
+  });
 
 //////////////////// reviews ////////////
 

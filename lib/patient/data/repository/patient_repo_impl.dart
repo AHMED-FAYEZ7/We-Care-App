@@ -219,11 +219,13 @@ class PatientRepoImpl implements BasePatientRepo {
   @override
   Future<Either<Failure, BookedAppointment>> bookAppointment({
     required String appointmentID,
+    String? comment,
   }) async {
     if (await _networkInfo.isConnected) {
       try {
         final response = await _basePatientRemoteDataSource.bookAppointment(
           appointmentID: appointmentID,
+          comment: comment,
         );
 
         return Right(response.toDomain());

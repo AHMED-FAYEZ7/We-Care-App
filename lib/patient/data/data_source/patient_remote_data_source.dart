@@ -25,7 +25,8 @@ abstract class BasePatientRemoteDataSource {
   ///////////////// appointment ////////////////
 
   Future<AvailableAppointmentsResponse> getDoctorAvailableAppointments(
-      String docId);
+    String docId,
+  );
 
   Future<AvailableAppointmentsResponse> getAvailableAppointmentsByDay({
     required String docId,
@@ -37,6 +38,7 @@ abstract class BasePatientRemoteDataSource {
 
   Future<BookedAppointmentResponse> bookAppointment({
     required String appointmentID,
+    String? comment,
   });
 
   ///////////////// reviews ////////////////
@@ -135,9 +137,11 @@ class PatientRemoteDataSourceImpl implements BasePatientRemoteDataSource {
   @override
   Future<BookedAppointmentResponse> bookAppointment({
     required String appointmentID,
+    String? comment,
   }) async {
     return await _patientServiceClient.bookAppointment(
       appointmentID,
+      comment: comment,
     );
   }
 

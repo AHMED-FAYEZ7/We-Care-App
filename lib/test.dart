@@ -4,6 +4,7 @@ import 'package:health_care/chat/domain/usecase/conncet_to_socket_use_case.dart'
 import 'package:health_care/chat/domain/usecase/user_create_chat_use_case.dart';
 import 'package:health_care/core/app/app_prefs.dart';
 import 'package:health_care/core/services/services_locator.dart';
+import 'package:health_care/core/usecase/base_usecase.dart';
 import 'package:health_care/doctor/domain/usecase/create_blog_use_case.dart';
 import 'package:health_care/doctor/domain/usecase/create_comment_use_case.dart';
 import 'package:health_care/doctor/domain/usecase/create_dislike_use_case.dart';
@@ -80,19 +81,7 @@ class TestPage extends StatelessWidget {
           TextButton(
             onPressed: () async {
               // (await _connectToSocketUseCase.call(const NoParameters()));
-              // (await _availableAppointmentsByDay.call(
-              //   TwoParametersUseCase(
-              //     "64564cc5061fd8d24c5ef612",
-              //     "2025-10-05",
-              //   ),
-              // ))
-              //     .fold((l) {
-              //   print(l.message.toString());
-              // }, (r) {
-              //   // print(r.availableAppointmentsData![0].appointmentId);
-              //   // print(r.reviews!.length);
 
-              // });
               // (await _availableAppointmentsByDay.call(
               //   AvailableAppointmentsByDayInputUseCase(
               //     doctorId: "64564cc5061fd8d24c5ef612",
@@ -102,8 +91,21 @@ class TestPage extends StatelessWidget {
               //     .fold((l) {
               //   print(l.message.toString());
               // }, (r) {
-              //   print(r.availableAppointmentsByDayData!.length);
+              //   print(r.results);
+              //   print(r.allAvailableAppointmentsInfo);
+              //   print(r.availableAppointmentsByDayInfo);
               // });
+              (await _bookAppointmentUseCase.call(
+                BookAppointmentUseCaseInput(
+                  appointmentID: "64a703f21b3330b02853e3a4",
+                  // comment: "im tired boss",
+                ),
+              ))
+                  .fold((l) {
+                print(l.message.toString());
+              }, (r) {
+                print(r.bookedAppointmentInfo!.doctorInfo!.specialization);
+              });
               // (await _createCommentUseCase.call(
               //   CreateCommentUseCaseInput(
               //     blogId: "643b4534a9b2cec52f141877",
@@ -132,12 +134,12 @@ class TestPage extends StatelessWidget {
               // }, (r) {
               //   print("test $r");
               // });
-              (await _createDisLikeUseCase.call("643b4534a9b2cec52f141877"))
-                  .fold((l) {
-                print(l.message.toString());
-              }, (r) {
-                print("test $r");
-              });
+              // (await _createDisLikeUseCase.call("643b4534a9b2cec52f141877"))
+              //     .fold((l) {
+              //   print(l.message.toString());
+              // }, (r) {
+              //   print("test $r");
+              // });
               // (await _userCreateChatUseCase.call("64564cc5061fd8d24c5ef612"))
               //     .fold((l) {
               //   print(l.message.toString());
@@ -145,21 +147,23 @@ class TestPage extends StatelessWidget {
               //   // print(r.availableAppointmentsData![0].appointmentId);
               //   print(r.roomId);
               // });
-              // // (await _getAvailableAppointmentsForDoctorUseCase
-              // //         .call("64564cc5061fd8d24c5ef612"))
-              // //     .fold((l) {
-              // //   print(l.message.toString());
-              // // }, (r) {
-              // //   // print(r.availableAppointmentsData![0].appointmentId);
-              // //   // print(r.reviews!.length);
-
-              // // });
+              // (await _getAvailableAppointmentsForDoctorUseCase
+              //         .call("64564cc5061fd8d24c5ef612"))
+              //     .fold((l) {
+              //   print(l.message.toString());
+              // }, (r) {
+              //   print(r.results);
+              //   print(r.allAvailableAppointmentsInfo![0].appointmentId);
+              //   print(r.availableAppointmentsByDayInfo);
+              // });
               // (await _getMyAppointmentsUseCase.call(const NoParameters())).fold(
               //     (l) {
               //   print(l.message.toString());
               // }, (r) {
-              //   // print(r.availableAppointmentsData![0].appointmentId);
-              //   print(r.upcomingAppointmentsData!.length);
+              //   print(r.pastAppointmentInfo![0].appointmentId);
+              //   print(r.upcomingAppointmentsInfo![0].appointmentId);
+              //   print(r.pastAppointmentInfo!.length);
+              //   print(r.upcomingAppointmentsInfo!.length);
               // });
               // (await _getAvailableAppointmentsForDoctorUseCase
               //         .call("64564cc5061fd8d24c5ef612"))
