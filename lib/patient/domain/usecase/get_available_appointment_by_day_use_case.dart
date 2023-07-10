@@ -6,13 +6,14 @@ import 'package:health_care/patient/domain/repository/patient_repo.dart';
 
 class GetAvailableAppointmentsByDayUseCase
     implements
-        BaseUseCase<AvailableAppointmentsByDayInputUseCase, AppointmentsInfo> {
+        BaseUseCase<AvailableAppointmentsByDayInputUseCase,
+            AvailableAppointments> {
   final BasePatientRepo _basePatientRepo;
 
   GetAvailableAppointmentsByDayUseCase(this._basePatientRepo);
 
   @override
-  Future<Either<Failure, AppointmentsInfo>> call(
+  Future<Either<Failure, AvailableAppointments>> call(
     AvailableAppointmentsByDayInputUseCase params,
   ) async {
     return await _basePatientRepo.getAvailableAppointmentsByDay(

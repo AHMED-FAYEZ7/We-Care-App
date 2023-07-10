@@ -169,13 +169,14 @@ class _PatientServiceClient implements PatientServiceClient {
   }
 
   @override
-  Future<AppointmentInfoResponse> getDoctorAvailableAppointments(docId) async {
+  Future<AvailableAppointmentsResponse> getDoctorAvailableAppointments(
+      docId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<AppointmentInfoResponse>(Options(
+        _setStreamType<AvailableAppointmentsResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -187,12 +188,12 @@ class _PatientServiceClient implements PatientServiceClient {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = AppointmentInfoResponse.fromJson(_result.data!);
+    final value = AvailableAppointmentsResponse.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<AppointmentInfoResponse> getAvailableAppointmentsByDay(
+  Future<AvailableAppointmentsResponse> getAvailableAppointmentsByDay(
     docId,
     dayDate, {
     visitType,
@@ -206,7 +207,7 @@ class _PatientServiceClient implements PatientServiceClient {
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<AppointmentInfoResponse>(Options(
+        _setStreamType<AvailableAppointmentsResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -218,18 +219,18 @@ class _PatientServiceClient implements PatientServiceClient {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = AppointmentInfoResponse.fromJson(_result.data!);
+    final value = AvailableAppointmentsResponse.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<AppointmentInfoResponse> getMyAppointments() async {
+  Future<MyAppointmentsResponse> getMyAppointments() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<AppointmentInfoResponse>(Options(
+        _setStreamType<MyAppointmentsResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -241,18 +242,18 @@ class _PatientServiceClient implements PatientServiceClient {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = AppointmentInfoResponse.fromJson(_result.data!);
+    final value = MyAppointmentsResponse.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<AppointmentInfoResponse> bookAppointment(appointmentID) async {
+  Future<BookedAppointmentResponse> bookAppointment(appointmentID) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = {'AppointmentID': appointmentID};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<AppointmentInfoResponse>(Options(
+        _setStreamType<BookedAppointmentResponse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -264,7 +265,7 @@ class _PatientServiceClient implements PatientServiceClient {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = AppointmentInfoResponse.fromJson(_result.data!);
+    final value = BookedAppointmentResponse.fromJson(_result.data!);
     return value;
   }
 

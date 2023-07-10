@@ -7,97 +7,212 @@ import 'package:health_care/core/response/base_response.dart';
 part 'appointments_response.g.dart';
 
 @JsonSerializable()
-class AppointmentResponse {
-  @JsonKey(name: "paid")
-  bool? paid;
+class BaseAppointmentResponse {
   @JsonKey(name: "_id")
   String? appointmentId;
+
   @JsonKey(name: "type")
   String? type;
+
   @JsonKey(name: "status")
   String? status;
-  @JsonKey(name: "doctor")
-  UserResponse? doctorInfo;
-  // @JsonKey(name: "doctor")
-  // String? doctorId;
-  // @JsonKey(name: "patient")
-  // UserResponse? patientInfo;
-  @JsonKey(name: "patient")
-  String? patientId;
+
+  @JsonKey(name: "paid")
+  bool? paid;
+
   @JsonKey(name: "date")
   String? date;
-  @JsonKey(name: "__v")
-  int? v;
+
+  @JsonKey(name: "comment")
+  String? comment;
+
+  @JsonKey(name: "payTime")
+  String? payTime;
+
   @JsonKey(name: "price")
   int? price;
 
-  AppointmentResponse(
-    this.paid,
+  @JsonKey(name: "__v")
+  int? v;
+
+  BaseAppointmentResponse(
     this.appointmentId,
     this.type,
     this.status,
-    this.doctorInfo,
-    // this.doctorId,
-    // this.patientInfo,
-    this.patientId,
+    this.paid,
     this.date,
-    this.v,
+    this.comment,
+    this.payTime,
     this.price,
+    this.v,
   );
 
-  factory AppointmentResponse.fromJson(Map<String, dynamic> json) =>
-      _$AppointmentResponseFromJson(json);
+  factory BaseAppointmentResponse.fromJson(Map<String, dynamic> json) =>
+      _$BaseAppointmentResponseFromJson(json);
 
-  Map<String, dynamic> toJson() => _$AppointmentResponseToJson(this);
+  Map<String, dynamic> toJson() => _$BaseAppointmentResponseToJson(this);
 }
 
 @JsonSerializable()
-class AppointmentInfoResponse extends BaseResponse {
-  @JsonKey(name: "allAppointments")
-  List<AppointmentResponse>? allAppointmentsResponseData;
+class UserMyAppointmentsResponse extends BaseAppointmentResponse {
+  @JsonKey(name: "doctor")
+  UserResponse? doctorInfo;
 
-  @JsonKey(name: "availableAppointments")
-  List<AppointmentResponse>? availableAppointmentsResponseData;
+  @JsonKey(name: "patient")
+  UserResponse? patientInfo;
 
-  @JsonKey(name: "availableAppointmentsByDay")
-  List<AppointmentResponse>? availableAppointmentsByDayResponseData;
+  UserMyAppointmentsResponse(
+    this.doctorInfo,
+    this.patientInfo,
+    super.appointmentId,
+    super.type,
+    super.status,
+    super.paid,
+    super.date,
+    super.comment,
+    super.payTime,
+    super.price,
+    super.v,
+  );
 
-  @JsonKey(name: "appointment")
-  AppointmentResponse? bookedAppointmentResponseData;
+  factory UserMyAppointmentsResponse.fromJson(Map<String, dynamic> json) =>
+      _$UserMyAppointmentsResponseFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$UserMyAppointmentsResponseToJson(this);
+}
+
+@JsonSerializable()
+class MyAppointmentsResponse extends BaseResponse {
+  @JsonKey(name: "results")
+  int? results;
 
   @JsonKey(name: "pastAppointment")
-  List<AppointmentResponse>? pastAppointment;
+  List<MyAppointmentsResponse>? pastAppointmentInfo;
 
   @JsonKey(name: "upcomingApointments")
-  List<AppointmentResponse>? upcomingAppointments;
+  List<MyAppointmentsResponse>? upcomingAppointmentsInfo;
 
-  factory AppointmentInfoResponse.fromJson(Map<String, dynamic> json) {
-    if (json.containsKey('allAppointments')) {
-      return _$AppointmentInfoResponseFromJson(json);
-    } else if (json.containsKey('availableAppointments')) {
-      return _$AppointmentInfoResponseFromJson(json);
-    } else if (json.containsKey('availableAppointmentsByDay')) {
-      return _$AppointmentInfoResponseFromJson(json);
-    } else if (json.containsKey('appointment')) {
-      return _$AppointmentInfoResponseFromJson(json);
-    } else if (json.containsKey('upcomingApointments')) {
-      return _$AppointmentInfoResponseFromJson(json);
-    } else {
-      throw ArgumentError('Invalid JSON structure for AllDoctorsResponse');
-    }
-  }
-
-  @override
-  Map<String, dynamic> toJson() => _$AppointmentInfoResponseToJson(this);
-
-  AppointmentInfoResponse(
+  MyAppointmentsResponse(
+    this.results,
+    this.pastAppointmentInfo,
+    this.upcomingAppointmentsInfo,
     super.status,
     super.message,
-    this.allAppointmentsResponseData,
-    this.availableAppointmentsResponseData,
-    this.availableAppointmentsByDayResponseData,
-    this.bookedAppointmentResponseData,
-    this.pastAppointment,
-    this.upcomingAppointments,
   );
+
+  factory MyAppointmentsResponse.fromJson(Map<String, dynamic> json) =>
+      _$MyAppointmentsResponseFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$MyAppointmentsResponseToJson(this);
+}
+
+@JsonSerializable()
+class BaseAllDoctorAppointmentsResponse extends BaseAppointmentResponse {
+  @JsonKey(name: "patient")
+  String? patientId;
+
+  BaseAllDoctorAppointmentsResponse(
+    this.patientId,
+    super.appointmentId,
+    super.type,
+    super.status,
+    super.paid,
+    super.date,
+    super.comment,
+    super.payTime,
+    super.price,
+    super.v,
+  );
+
+  factory BaseAllDoctorAppointmentsResponse.fromJson(
+          Map<String, dynamic> json) =>
+      _$BaseAllDoctorAppointmentsResponseFromJson(json);
+  @override
+  Map<String, dynamic> toJson() =>
+      _$BaseAllDoctorAppointmentsResponseToJson(this);
+}
+
+@JsonSerializable()
+class AllDoctorAppointmentsResponse extends BaseResponse {
+  @JsonKey(name: "results")
+  int? results;
+
+  @JsonKey(name: "allAppointments")
+  List<BaseAllDoctorAppointmentsResponse>? allAppointmentsInfo;
+
+  AllDoctorAppointmentsResponse(
+    this.results,
+    this.allAppointmentsInfo,
+    super.status,
+    super.message,
+  );
+
+  factory AllDoctorAppointmentsResponse.fromJson(Map<String, dynamic> json) =>
+      _$AllDoctorAppointmentsResponseFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$AllDoctorAppointmentsResponseToJson(this);
+}
+
+@JsonSerializable()
+class AvailableAppointmentsResponse extends BaseResponse {
+  @JsonKey(name: "results")
+  int? results;
+
+  @JsonKey(name: "availableAppointments")
+  List<BaseAppointmentResponse>? availableAppointmentsInfo;
+
+  @JsonKey(name: "availableAppointmentsByDay")
+  List<BaseAppointmentResponse>? availableAppointmentsByDayInfo;
+
+  AvailableAppointmentsResponse(
+    this.results,
+    this.availableAppointmentsInfo,
+    this.availableAppointmentsByDayInfo,
+    super.status,
+    super.message,
+  );
+
+  factory AvailableAppointmentsResponse.fromJson(Map<String, dynamic> json) =>
+      _$AvailableAppointmentsResponseFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$AvailableAppointmentsResponseToJson(this);
+}
+
+@JsonSerializable()
+class BaseBookedAppointmentResponse extends UserMyAppointmentsResponse {
+  BaseBookedAppointmentResponse(
+    super.doctorInfo,
+    super.patientInfo,
+    super.appointmentId,
+    super.type,
+    super.status,
+    super.paid,
+    super.date,
+    super.comment,
+    super.payTime,
+    super.price,
+    super.v,
+  );
+
+  factory BaseBookedAppointmentResponse.fromJson(Map<String, dynamic> json) =>
+      _$BaseBookedAppointmentResponseFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$BaseBookedAppointmentResponseToJson(this);
+}
+
+@JsonSerializable()
+class BookedAppointmentResponse extends BaseResponse {
+  @JsonKey(name: "appointment")
+  UserMyAppointmentsResponse? bookedAppointmentInfo;
+
+  BookedAppointmentResponse(
+    this.bookedAppointmentInfo,
+    super.status,
+    super.message,
+  );
+
+  factory BookedAppointmentResponse.fromJson(Map<String, dynamic> json) =>
+      _$BookedAppointmentResponseFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$BookedAppointmentResponseToJson(this);
 }

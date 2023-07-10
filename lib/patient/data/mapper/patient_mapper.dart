@@ -53,75 +53,123 @@ extension DoctorInfoResponseMapper on DoctorInfResponse? {
   }
 }
 
-extension AppointmentResponseMapper on AppointmentResponse? {
-  Appointment toDomain() {
-    return Appointment(
-      this?.paid?.orFalse() ?? Constants.FALSE,
+extension BaseAppointmentResponseMapper on BaseAppointmentResponse? {
+  BaseAppointment toDomain() {
+    return BaseAppointment(
       this?.appointmentId?.orEmpty() ?? Constants.empty,
       this?.type?.orEmpty() ?? Constants.empty,
       this?.status?.orEmpty() ?? Constants.empty,
-      this?.doctorInfo?.toDomain(),
-      this?.patientId?.orEmpty() ?? Constants.empty,
+      this?.paid?.orFalse() ?? Constants.FALSE,
       this?.date?.orEmpty() ?? Constants.empty,
-      this?.v?.orZero() ?? Constants.zero,
+      this?.comment?.orEmpty() ?? Constants.empty,
+      this?.payTime?.orEmpty() ?? Constants.empty,
       this?.price?.orZero() ?? Constants.zero,
+      this?.v?.orZero() ?? Constants.zero,
     );
   }
 }
 
-extension AppointmentInfoResponseMapper on AppointmentInfoResponse? {
-  AppointmentsInfo toDomain() {
-    List<Appointment> allAppointmentsMapped =
-        (this?.allAppointmentsResponseData?.map(
-                      (appointments) => appointments.toDomain(),
-                    ) ??
-                const Iterable.empty())
-            .cast<Appointment>()
-            .toList();
-
-    List<Appointment> availableAppointmentsMapped = (this
-                ?.availableAppointmentsResponseData
-                ?.map((availableAppointments) =>
-                    availableAppointments.toDomain()) ??
-            const Iterable.empty())
-        .cast<Appointment>()
-        .toList();
-
-    List<Appointment> availableAppointmentsByDayMapped =
-        (this?.availableAppointmentsByDayResponseData?.map(
-                      (availableAppointmentsByDay) =>
-                          availableAppointmentsByDay.toDomain(),
-                    ) ??
-                const Iterable.empty())
-            .cast<Appointment>()
-            .toList();
-
-    List<Appointment> pastAppointment = (this?.pastAppointment?.map(
-                  (pastAppointmentData) => pastAppointmentData.toDomain(),
-                ) ??
-            const Iterable.empty())
-        .cast<Appointment>()
-        .toList();
-    List<Appointment> upcomingAppointmentsDataMapped =
-        (this?.upcomingAppointments?.map(
-                      (upcomingAppointmentsData) =>
-                          upcomingAppointmentsData.toDomain(),
-                    ) ??
-                const Iterable.empty())
-            .cast<Appointment>()
-            .toList();
-
-    return AppointmentsInfo(
-      allAppointmentsMapped,
-      availableAppointmentsMapped,
-      availableAppointmentsByDayMapped,
-      this?.bookedAppointmentResponseData?.toDomain(),
-      pastAppointment,
-      upcomingAppointmentsDataMapped,
+extension UserMyAppointmentsResponseMapper on UserMyAppointmentsResponse? {
+  UserMyAppointments toDomain() {
+    return UserMyAppointments(
+      this?.doctorInfo?.toDomain(),
+      this?.patientInfo?.toDomain(),
+      this?.appointmentId?.orEmpty() ?? Constants.empty,
+      this?.type?.orEmpty() ?? Constants.empty,
+      this?.status?.orEmpty() ?? Constants.empty,
+      this?.paid?.orFalse() ?? Constants.FALSE,
+      this?.date?.orEmpty() ?? Constants.empty,
+      this?.comment?.orEmpty() ?? Constants.empty,
+      this?.payTime?.orEmpty() ?? Constants.empty,
+      this?.price?.orZero() ?? Constants.zero,
+      this?.v?.orZero() ?? Constants.zero,
     );
   }
 }
 
+extension MyAppointmentsResponseMapper on MyAppointmentsResponse? {
+  MyAppointments toDomain() {
+    return MyAppointments(
+      this?.results?.orZero() ?? Constants.zero,
+      (this?.pastAppointmentInfo?.map(
+                    (appointments) => appointments.toDomain(),
+                  ) ??
+              const Iterable.empty())
+          .cast<UserMyAppointments>()
+          .toList(),
+      (this?.upcomingAppointmentsInfo?.map(
+                    (appointments) => appointments.toDomain(),
+                  ) ??
+              const Iterable.empty())
+          .cast<UserMyAppointments>()
+          .toList(),
+    );
+  }
+}
+
+extension AllDoctorAppointmentsResponseMapper
+    on AllDoctorAppointmentsResponse? {
+  AllDoctorAppointments toDomain() {
+    return AllDoctorAppointments(
+      this?.results?.orZero() ?? Constants.zero,
+      (this?.allAppointmentsInfo?.map(
+                    (appointments) => appointments.toDomain(),
+                  ) ??
+              const Iterable.empty())
+          .cast<BaseAllDoctorAppointments>()
+          .toList(),
+    );
+  }
+}
+
+extension AvailableAppointmentsResponseMapper
+    on AvailableAppointmentsResponse? {
+  AvailableAppointments toDomain() {
+    return AvailableAppointments(
+      this?.results?.orZero() ?? Constants.zero,
+      (this?.availableAppointmentsInfo?.map(
+                    (appointments) => appointments.toDomain(),
+                  ) ??
+              const Iterable.empty())
+          .cast<BaseAppointment>()
+          .toList(),
+      (this?.availableAppointmentsByDayInfo?.map(
+                    (appointments) => appointments.toDomain(),
+                  ) ??
+              const Iterable.empty())
+          .cast<BaseAppointment>()
+          .toList(),
+    );
+  }
+}
+
+extension BaseAllDoctorAppointmentsResponseMapper
+    on BaseAllDoctorAppointmentsResponse? {
+  BaseAllDoctorAppointments toDomain() {
+    return BaseAllDoctorAppointments(
+      this?.patientId?.orEmpty() ?? Constants.empty,
+      this?.appointmentId?.orEmpty() ?? Constants.empty,
+      this?.type?.orEmpty() ?? Constants.empty,
+      this?.status?.orEmpty() ?? Constants.empty,
+      this?.paid?.orFalse() ?? Constants.FALSE,
+      this?.date?.orEmpty() ?? Constants.empty,
+      this?.comment?.orEmpty() ?? Constants.empty,
+      this?.payTime?.orEmpty() ?? Constants.empty,
+      this?.price?.orZero() ?? Constants.zero,
+      this?.v?.orZero() ?? Constants.zero,
+    );
+  }
+}
+
+extension BookedAppointmentResponseMapper on BookedAppointmentResponse? {
+  BookedAppointment toDomain() {
+    return BookedAppointment(
+      this?.bookedAppointmentInfo?.toDomain(),
+    );
+  }
+}
+
+/////////// rate //////////
 extension RateResponseMapper on RateResponse? {
   Rate toDomain() {
     return Rate(
