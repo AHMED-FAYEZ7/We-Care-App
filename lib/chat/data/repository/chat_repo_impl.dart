@@ -1,5 +1,6 @@
 import 'package:health_care/chat/data/data_source/chat_remote_data_source.dart';
 import 'package:health_care/chat/data/mapper/chat_mapper.dart';
+import 'package:health_care/chat/data/response/chat_response/chat_response.dart';
 import 'package:health_care/chat/domain/model/chat_model.dart';
 import 'package:health_care/chat/domain/repository/chat_repository.dart';
 import 'package:health_care/core/error/error_handler.dart';
@@ -75,8 +76,13 @@ class ChatRepoImpl implements BaseChatRepository {
   }
 
   @override
-  Stream<Either<Failure, AllMessages>> userReceiveMessage() {
-    // TODO: implement userReceiveMessage
-    throw UnimplementedError();
+  Stream<AllMessagesResponse> userReceiveMessage({
+    required String roomId,
+  }) {
+    final response = _baseChatRemoteDataSource.getAllMessages(
+      roomId: roomId,
+    );
+
+    return response;
   }
 }

@@ -116,3 +116,16 @@ extension CommentInfoMapper on CommentInfoResponse? {
     );
   }
 }
+
+extension AllLikesResponseMapper on AllLikesResponse? {
+  LikesModel toDomain() {
+    return LikesModel(
+      (this?.blogLikesResponse?.map(
+                    (blogComment) => blogComment.toDomain(),
+                  ) ??
+              const Iterable.empty())
+          .cast<Comments>()
+          .toList(),
+    );
+  }
+}

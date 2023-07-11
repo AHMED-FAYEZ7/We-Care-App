@@ -28,6 +28,7 @@ import 'package:health_care/chat/data/network/doctor_api/chat_api.dart';
 import 'package:health_care/chat/data/repository/chat_repo_impl.dart';
 import 'package:health_care/chat/domain/repository/chat_repository.dart';
 import 'package:health_care/chat/domain/usecase/get_all_messages_use_case.dart';
+import 'package:health_care/chat/domain/usecase/get_messages_use_case.dart';
 import 'package:health_care/chat/domain/usecase/user_create_chat_use_case.dart';
 import 'package:health_care/doctor/data/data_source/doctor_remote_data_source.dart';
 import 'package:health_care/doctor/data/network/doctor_api/doctor_api.dart';
@@ -39,6 +40,7 @@ import 'package:health_care/doctor/domain/usecase/create_dislike_use_case.dart';
 import 'package:health_care/doctor/domain/usecase/create_like_use_case.dart';
 import 'package:health_care/doctor/domain/usecase/create_time_block_use_case.dart';
 import 'package:health_care/doctor/domain/usecase/get_blogs_comments_use_case.dart';
+import 'package:health_care/doctor/domain/usecase/get_blogs_likes_use_case.dart';
 import 'package:health_care/doctor/presentation/controller/doctor_cubit/doctor_cubit.dart';
 import 'package:health_care/doctor/domain/usecase/get_all_blogs_use_case.dart';
 import 'package:health_care/patient/data/data_source/patient_remote_data_source.dart';
@@ -227,6 +229,7 @@ Future<void> initAppModule() async {
 
   sl.registerLazySingleton<SendMessageUseCase>(() => SendMessageUseCase(sl()));
 
+  sl.registerLazySingleton<GetMessagesUseCase>(() => GetMessagesUseCase(sl()));
 // /////////////////////// blog /////////////
 
   sl.registerLazySingleton<CreateBlogUseCase>(() => CreateBlogUseCase(sl()));
@@ -239,6 +242,9 @@ Future<void> initAppModule() async {
 
   sl.registerLazySingleton<GetBlogsCommentsUseCase>(
       () => GetBlogsCommentsUseCase(sl()));
+
+  sl.registerLazySingleton<GetBlogsLikesUseCase>(
+      () => GetBlogsLikesUseCase(sl()));
 
   sl.registerLazySingleton<CreateLikeUseCase>(() => CreateLikeUseCase(sl()));
 

@@ -105,11 +105,32 @@ class DoctorRepoImpl implements BaseDoctorRepo {
   }
 
   @override
-  Future<Either<Failure, CommentInfo>> getBlogsComments(
-      {required String blogId}) async {
+  Future<Either<Failure, CommentInfo>> getBlogsComments({
+    required String blogId,
+  }) async {
     if (await _networkInfo.isConnected) {
       try {
         final response = await _baseDoctorRemoteDataSource.getBlogsComments(
+          blogId: blogId,
+        );
+
+        return Right(response.toDomain());
+      } catch (error) {
+        print("error ${error.toString()}");
+        return Left((ErrorHandler.handle(error).failure));
+      }
+    } else {
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, LikesModel>> getBlogsLikes({
+    required String blogId,
+  }) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final response = await _baseDoctorRemoteDataSource.getBlogsLikes(
           blogId: blogId,
         );
 

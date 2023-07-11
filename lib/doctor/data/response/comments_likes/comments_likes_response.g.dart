@@ -93,3 +93,19 @@ Map<String, dynamic> _$CommentInfoResponseToJson(
       'Comment': instance.commentResponse,
       'Comments': instance.blogCommentsResponse,
     };
+
+AllLikesResponse _$AllLikesResponseFromJson(Map<String, dynamic> json) =>
+    AllLikesResponse(
+      json['status'] as String?,
+      json['message'] as String?,
+      (json['likes'] as List<dynamic>?)
+          ?.map((e) => CommentsResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$AllLikesResponseToJson(AllLikesResponse instance) =>
+    <String, dynamic>{
+      'status': instance.status,
+      'message': instance.message,
+      'likes': instance.blogLikesResponse,
+    };

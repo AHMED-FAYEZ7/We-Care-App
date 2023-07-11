@@ -11,9 +11,9 @@ abstract class BaseChatRemoteDataSource {
     required String roomId,
     required String messageContent,
   });
-  // Stream<BaseChatResponse> getAllMessages({
-  //   required String roomId,
-  // });
+  Stream<AllMessagesResponse> getAllMessages({
+    required String roomId,
+  });
 }
 
 class ChatRemoteDataSourceImpl implements BaseChatRemoteDataSource {
@@ -43,6 +43,13 @@ class ChatRemoteDataSourceImpl implements BaseChatRemoteDataSource {
     return await _chatServiceClient.sendMessage(
       roomId,
       messageContent,
+    );
+  }
+
+  @override
+  Stream<AllMessagesResponse> getAllMessages({required String roomId}) {
+    return _chatServiceClient.getAllMessages(
+      roomId,
     );
   }
 }

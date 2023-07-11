@@ -41,6 +41,12 @@ abstract class DoctorServiceClient {
   Future<CommentInfoResponse> getBlogsComments(
     @Path("blogId") String blogId,
   );
+
+  @GET("api/v1/blog/likes/{blogId}")
+  Future<AllLikesResponse> getBlogsLikes(
+    @Path("blogId") String blogId,
+  );
+
   @POST("api/v1/blog/like/{blogId}")
   Future<BaseResponse> createLike(
     @Path("blogId") String blogId,
