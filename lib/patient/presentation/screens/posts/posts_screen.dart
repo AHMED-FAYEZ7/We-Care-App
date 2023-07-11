@@ -21,7 +21,7 @@ class PostsPatientScreen extends StatefulWidget {
 
 class _PostsPatientScreenState extends State<PostsPatientScreen> {
   final RefreshController _refreshController =
-      RefreshController(initialRefresh: false);
+  RefreshController(initialRefresh: false);
 
   @override
   void initState() {
@@ -48,36 +48,35 @@ class _PostsPatientScreenState extends State<PostsPatientScreen> {
               Expanded(
                 child: ConditionalBuilder(
                   condition: widget.isRefresh != false,
-                  builder: (context) => cubit.allBlogs.isNotEmpty
+                  builder: (context) =>
+                  cubit.allBlogs.isNotEmpty
                       ? SmartRefresher(
-                          controller: _refreshController,
-                          onRefresh: () async {
-                            // Perform refresh logic here
-                            // For example, call cubit.getAllBlogs() again
-                            await cubit.getAllBlogs(const NoParameters());
-                            _refreshController.refreshCompleted();
-                          },
-                          child: ListView.separated(
-                            scrollDirection: Axis.vertical,
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: AppPadding.p12,
-                            ),
-                            physics: const BouncingScrollPhysics(),
-                            itemBuilder: (BuildContext context, int index) =>
-                                PostWidget(
-                              model: cubit.allBlogs[index],
-                            ),
-                            separatorBuilder:
-                                (BuildContext context, int index) =>
-                                    const SizedBox(
-                              width: AppSize.s10,
-                            ),
-                            itemCount: cubit.allBlogs.length,
+                    controller: _refreshController,
+                    onRefresh: () async {
+                      await cubit.getAllBlogs(const NoParameters());
+                      _refreshController.refreshCompleted();
+                    },
+                    child: ListView.separated(
+                      scrollDirection: Axis.vertical,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AppPadding.p12,
+                      ),
+                      physics: const BouncingScrollPhysics(),
+                      itemBuilder: (BuildContext context, int index) =>
+                          PostWidget(
+                            model: cubit.allBlogs[index],
                           ),
-                        )
+                      separatorBuilder:
+                          (BuildContext context, int index) =>
+                      const SizedBox(
+                        width: AppSize.s10,
+                      ),
+                      itemCount: cubit.allBlogs.length,
+                    ),
+                  )
                       : EmptyListWidget(
-                          text: 'No Posts Loaded',
-                        ),
+                    text: 'No Posts Loaded',
+                  ),
                   fallback: (context) => PostsShimmerWidget(),
                 ),
               ),
