@@ -28,3 +28,9 @@ class CreatePostSuccessState extends DoctorState {}
 class CreatePostFailureState extends DoctorState {}
 
 ////////////////////////////////////////////
+
+class GetMyAppointmentsLoadingState extends DoctorState {}
+
+class GetMyAppointmentsSuccessState extends DoctorState {}
+
+class GetMyAppointmentsFailureState extends DoctorState {}

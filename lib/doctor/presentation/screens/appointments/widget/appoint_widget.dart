@@ -6,8 +6,8 @@ import 'package:health_care/core/global/theme/app_color/color_manager.dart';
 import 'package:health_care/patient/domain/model/appointment_model.dart';
 import 'package:intl/intl.dart';
 
-class AppointmentWidget extends StatefulWidget {
-  AppointmentWidget({
+class AppointWidget extends StatefulWidget {
+  AppointWidget({
     required this.model,
     Key? key,
   }) : super(key: key);
@@ -15,10 +15,10 @@ class AppointmentWidget extends StatefulWidget {
   UserMyAppointments model;
 
   @override
-  State<AppointmentWidget> createState() => _AppointmentWidgetState();
+  State<AppointWidget> createState() => _AppointWidgetState();
 }
 
-class _AppointmentWidgetState extends State<AppointmentWidget> {
+class _AppointWidgetState extends State<AppointWidget> {
   @override
   void initState() {
     super.initState();

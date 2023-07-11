@@ -12,6 +12,8 @@ import 'package:health_care/doctor/presentation/screens/appointments/appointment
 import 'package:health_care/doctor/presentation/screens/home/home_screen.dart';
 import 'package:health_care/doctor/presentation/screens/posts/posts_sceen.dart';
 import 'package:health_care/doctor/presentation/screens/profile/profile_screen.dart';
+import 'package:health_care/patient/domain/model/appointment_model.dart';
+import 'package:health_care/patient/domain/usecase/get_my_appointments_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_patient_data_use_case.dart';
 
 part 'doctor_state.dart';
@@ -20,11 +22,14 @@ class DoctorCubit extends Cubit<DoctorState> {
   GetUserDataUseCase _getUserDataUseCase = sl<GetUserDataUseCase>();
   GetAllBlogsUseCase _getAllBlogsUseCase = sl<GetAllBlogsUseCase>();
   CreateBlogUseCase _createBlogUseCase = sl<CreateBlogUseCase>();
+  GetMyAppointmentsUseCase _getMyAppointmentsUseCase =
+      sl<GetMyAppointmentsUseCase>();
 
   DoctorCubit(
     this._getUserDataUseCase,
     this._getAllBlogsUseCase,
     this._createBlogUseCase,
+    this._getMyAppointmentsUseCase,
   ) : super(DoctorInitial());
 
   static DoctorCubit get(context) => BlocProvider.of(context);
@@ -39,7 +44,7 @@ class DoctorCubit extends Cubit<DoctorState> {
   List<Widget> screens = [
     const HomeDoctorScreen(),
     PostsDoctorScreen(),
-    const AppointmentDoctorScreen(),
+    AppointmentDoctorScreen(),
     const ProfileDoctorScreen(),
   ];
 
@@ -97,6 +102,27 @@ class DoctorCubit extends Cubit<DoctorState> {
     }, (r) {
       emit(CreatePostSuccessState());
     });
+  }
+
+  /////////////get my appointment////////////////
+  List<UserMyAppointments> upcomingAppointments = [];
+  List<UserMyAppointments> pastAppointments = [];
+
+  getMyAppointments(NoParameters params) async {
+    emit(GetMyAppointmentsLoadingState());
+
+    (await _getMyAppointmentsUseCase.call(params)).fold(
+      (l) {
+        emit(GetMyAppointmentsFailureState());
+      },
+      (r) {
+        upcomingAppointments = [];
+        pastAppointments = [];
+        upcomingAppointments = r.upcomingAppointmentsInfo!;
+        pastAppointments = r.pastAppointmentInfo!;
+        emit(GetMyAppointmentsSuccessState());
+      },
+    );
   }
 
 /////////////get all blogs////////////////
