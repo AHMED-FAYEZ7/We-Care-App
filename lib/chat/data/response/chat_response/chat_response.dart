@@ -1,6 +1,10 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:health_care/doctor/data/response/blog/blog_response.dart';
+import 'package:json_annotation/json_annotation.dart';
+
 import 'package:health_care/authentication/data/response/user_response/user_response.dart';
 import 'package:health_care/core/response/base_response.dart';
-import 'package:json_annotation/json_annotation.dart';
+
 part 'chat_response.g.dart';
 
 @JsonSerializable()
@@ -56,7 +60,7 @@ class ChatsResponse {
 @JsonSerializable()
 class ChatsInfoResponse extends BaseResponse {
   @JsonKey(name: "results")
-  String? results;
+  int? results;
 
   @JsonKey(name: "chats")
   List<ChatsResponse>? chatsInfoResponse;
@@ -75,4 +79,83 @@ class ChatsInfoResponse extends BaseResponse {
     this.results,
     this.chatsInfoResponse,
   );
+}
+
+@JsonSerializable()
+class BaseMessageResponse {
+  @JsonKey(name: "chatId")
+  String? roomId;
+
+  @JsonKey(name: "sender")
+  String? senderId;
+
+  @JsonKey(name: "msg")
+  String? messageContent;
+
+  @JsonKey(name: "image")
+  ImageResponse? imageResponse;
+
+  @JsonKey(name: "_id")
+  String? messageId;
+
+  @JsonKey(name: "createdAt")
+  String? createdAt;
+
+  @JsonKey(name: "updatedAt")
+  String? updatedAt;
+
+  @JsonKey(name: "__v")
+  int? v;
+
+  BaseMessageResponse(
+    this.roomId,
+    this.senderId,
+    this.messageContent,
+    this.imageResponse,
+    this.messageId,
+    this.createdAt,
+    this.updatedAt,
+    this.v,
+  );
+  factory BaseMessageResponse.fromJson(Map<String, dynamic> json) =>
+      _$BaseMessageResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$BaseMessageResponseToJson(this);
+}
+
+@JsonSerializable()
+class MessageResponse {
+  @JsonKey(name: "status")
+  String? status;
+
+  @JsonKey(name: "message")
+  BaseMessageResponse? messageData;
+
+  MessageResponse(this.messageData, this.status);
+
+  factory MessageResponse.fromJson(Map<String, dynamic> json) =>
+      _$MessageResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$MessageResponseToJson(this);
+}
+
+@JsonSerializable()
+class AllMessagesResponse extends BaseResponse {
+  @JsonKey(name: "results")
+  int? results;
+  @JsonKey(name: "messages")
+  List<BaseMessageResponse>? allMessagesResponse;
+
+  AllMessagesResponse(
+    this.results,
+    this.allMessagesResponse,
+    super.status,
+    super.message,
+  );
+
+  factory AllMessagesResponse.fromJson(Map<String, dynamic> json) =>
+      _$AllMessagesResponseFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() => _$AllMessagesResponseToJson(this);
 }

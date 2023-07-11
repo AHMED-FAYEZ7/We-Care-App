@@ -27,7 +27,7 @@ import 'package:health_care/chat/data/data_source/chat_remote_data_source.dart';
 import 'package:health_care/chat/data/network/doctor_api/chat_api.dart';
 import 'package:health_care/chat/data/repository/chat_repo_impl.dart';
 import 'package:health_care/chat/domain/repository/chat_repository.dart';
-import 'package:health_care/chat/domain/usecase/conncet_to_socket_use_case.dart';
+import 'package:health_care/chat/domain/usecase/get_all_messages_use_case.dart';
 import 'package:health_care/chat/domain/usecase/user_create_chat_use_case.dart';
 import 'package:health_care/doctor/data/data_source/doctor_remote_data_source.dart';
 import 'package:health_care/doctor/data/network/doctor_api/doctor_api.dart';
@@ -63,6 +63,7 @@ import 'package:health_care/patient/presentation/controller/Patient_cubit/patien
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:socket_io_client/socket_io_client.dart' as io;
 
+import '../../chat/domain/usecase/send_message_use_case.dart';
 import '../network/dio_factory.dart';
 import '../network/network_info.dart';
 import '../app/app_prefs.dart';
@@ -219,11 +220,12 @@ Future<void> initAppModule() async {
 
   // ////////////// chat////////////
 
-  // sl.registerLazySingleton<ConnectToSocketUseCase>(
-  //     () => ConnectToSocketUseCase(sl()));
-
   sl.registerLazySingleton<UserCreateChatUseCase>(
       () => UserCreateChatUseCase(sl()));
+
+  sl.registerLazySingleton<GetAllChatsUseCase>(() => GetAllChatsUseCase(sl()));
+
+  sl.registerLazySingleton<SendMessageUseCase>(() => SendMessageUseCase(sl()));
 
 // /////////////////////// blog /////////////
 

@@ -1,4 +1,5 @@
 import 'package:health_care/authentication/domain/model/user_model.dart';
+import 'package:health_care/doctor/domain/model/blog_model.dart';
 
 class BaseChat {
   String success;
@@ -10,7 +11,7 @@ class BaseChat {
 }
 
 class Chats {
-  String conversationId;
+  String roomId;
   List<User> membersList;
   String createdAt;
   String updatedAt;
@@ -18,7 +19,7 @@ class Chats {
   String lastMSG;
 
   Chats(
-    this.conversationId,
+    this.roomId,
     this.membersList,
     this.createdAt,
     this.updatedAt,
@@ -28,11 +29,46 @@ class Chats {
 }
 
 class ChatsInfo {
-  String results;
+  int results;
   List<Chats>? chatInfo;
 
   ChatsInfo(
     this.results,
     this.chatInfo,
   );
+}
+
+class BaseMessage {
+  String roomId;
+  String senderId;
+  String messageContent;
+  BlogImage? imageResponse;
+  String messageId;
+  String createdAt;
+  String updatedAt;
+  int v;
+
+  BaseMessage(
+    this.roomId,
+    this.senderId,
+    this.messageContent,
+    this.imageResponse,
+    this.messageId,
+    this.createdAt,
+    this.updatedAt,
+    this.v,
+  );
+}
+
+class MessageModel {
+  BaseMessage? messageData;
+
+  MessageModel(this.messageData);
+}
+
+class AllMessages {
+  int results;
+  List<BaseMessage>? messageData;
+
+  AllMessages(this.results, this.messageData);
 }
