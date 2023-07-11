@@ -97,25 +97,25 @@ class RouteGenerator {
             builder: (_) => const SpecialistDoctorPatientScreen());
       case Routes.topDoctorPatientRoute:
         return MaterialPageRoute(builder: (_) => TopDoctorPatientScreen());
-      case Routes.doctorProfilePatientRoute:
-        final User doctorModel = routeSettings.arguments as User;
-        return MaterialPageRoute(
-            builder: (_) => DoctorProfilePatientScreen(
-                  doctorModel: doctorModel,
-                ));
-      case Routes.bookAppointmentRoute:
-        final Map<String, dynamic> arguments =
-            routeSettings.arguments as Map<String, dynamic>;
-        final List<Appointment> appointmentList =
-            arguments['appointmentList'] as List<Appointment>;
-        final String date = arguments['date'] as String;
-        final String day = arguments['day'] as String;
-        return MaterialPageRoute(
-            builder: (_) => BookAppointmentScreen(
-                  appointmentList: appointmentList,
-                  date: date,
-                  day: day,
-                ));
+      // case Routes.doctorProfilePatientRoute:
+      //   final User doctorModel = routeSettings.arguments as User;
+      //   return MaterialPageRoute(
+      //       builder: (_) => DoctorProfilePatientScreen(
+      //             doctorModel: doctorModel,
+      //           ));
+      // case Routes.bookAppointmentRoute:
+      //   final Map<String, dynamic> arguments =
+      //       routeSettings.arguments as Map<String, dynamic>;
+      //   final List<Appointment> appointmentList =
+      //       arguments['appointmentList'] as List<Appointment>;
+      //   final String date = arguments['date'] as String;
+      //   final String day = arguments['day'] as String;
+      //   return MaterialPageRoute(
+      //       builder: (_) => BookAppointmentScreen(
+      //             appointmentList: appointmentList,
+      //             date: date,
+      //             day: day,
+      //           ));
       case Routes.reviewsRoute:
         final List<Rate> reviews = routeSettings.arguments as List<Rate>;
         return MaterialPageRoute(

@@ -16,17 +16,6 @@ class ChatRepoImpl implements BaseChatRepository {
     this._networkInfo,
   );
 
-  // @override
-  // Future<void> connectToSocket() async {
-  //   _baseChatRemoteDataSource.connectToSocket();
-  // }
-
-  // @override
-  // Future<void> disconnectSocket() {
-  //   // TODO: implement disconnectSocket
-  //   throw UnimplementedError();
-  // }
-
   @override
   Future<Either<Failure, BaseChat>> userCreateChat({
     required String receiverId,
@@ -48,14 +37,46 @@ class ChatRepoImpl implements BaseChatRepository {
   }
 
   @override
-  Stream<Either<Failure, ChatsInfo>> userReceiveMessage() {
-    // TODO: implement userReceiveMessage
-    throw UnimplementedError();
+  Future<Either<Failure, ChatsInfo>> getAllChats() async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final response = await _baseChatRemoteDataSource.getAllChats();
+
+        return Right(response.toDomain());
+      } catch (error) {
+        print("catch error ${error.toString()}");
+        return Left((ErrorHandler.handle(error).failure));
+      }
+    } else {
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
   }
 
   @override
-  Future<void> userSendMessage(String message) {
-    // TODO: implement userSendMessage
+  Future<Either<Failure, MessageModel>> userSendMessage({
+    required String roomId,
+    required String messageContent,
+  }) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final response = await _baseChatRemoteDataSource.sendMessage(
+          roomId: roomId,
+          messageContent: messageContent,
+        );
+
+        return Right(response.toDomain());
+      } catch (error) {
+        print("catch error ${error.toString()}");
+        return Left((ErrorHandler.handle(error).failure));
+      }
+    } else {
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
+
+  @override
+  Stream<Either<Failure, AllMessages>> userReceiveMessage() {
+    // TODO: implement userReceiveMessage
     throw UnimplementedError();
   }
 }

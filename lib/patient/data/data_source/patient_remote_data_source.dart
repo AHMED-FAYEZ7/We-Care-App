@@ -1,4 +1,3 @@
-import 'package:health_care/authentication/data/response/patient_auth_response/patient_auth_response.dart';
 import 'package:health_care/authentication/data/response/user_response/user_response.dart';
 import 'package:health_care/patient/data/network/patient_api/patient_api.dart';
 import 'package:health_care/patient/data/response/appointments_response.dart';
@@ -25,18 +24,21 @@ abstract class BasePatientRemoteDataSource {
 
   ///////////////// appointment ////////////////
 
-  Future<AppointmentInfoResponse> getDoctorAvailableAppointments(String docId);
+  Future<AvailableAppointmentsResponse> getDoctorAvailableAppointments(
+    String docId,
+  );
 
-  Future<AppointmentInfoResponse> getAvailableAppointmentsByDay({
+  Future<AvailableAppointmentsResponse> getAvailableAppointmentsByDay({
     required String docId,
     required String dayDate,
     String? visitType,
   });
 
-  Future<AppointmentInfoResponse> getMyAppointments();
+  Future<MyAppointmentsResponse> getMyAppointments();
 
-  Future<AppointmentInfoResponse> bookAppointment({
+  Future<BookedAppointmentResponse> bookAppointment({
     required String appointmentID,
+    String? comment,
   });
 
   ///////////////// reviews ////////////////
@@ -108,14 +110,14 @@ class PatientRemoteDataSourceImpl implements BasePatientRemoteDataSource {
   }
 
   @override
-  Future<AppointmentInfoResponse> getDoctorAvailableAppointments(
+  Future<AvailableAppointmentsResponse> getDoctorAvailableAppointments(
     String docId,
   ) async {
     return await _patientServiceClient.getDoctorAvailableAppointments(docId);
   }
 
   @override
-  Future<AppointmentInfoResponse> getAvailableAppointmentsByDay({
+  Future<AvailableAppointmentsResponse> getAvailableAppointmentsByDay({
     required String docId,
     required String dayDate,
     String? visitType,
@@ -128,16 +130,18 @@ class PatientRemoteDataSourceImpl implements BasePatientRemoteDataSource {
   }
 
   @override
-  Future<AppointmentInfoResponse> getMyAppointments() async {
+  Future<MyAppointmentsResponse> getMyAppointments() async {
     return await _patientServiceClient.getMyAppointments();
   }
 
   @override
-  Future<AppointmentInfoResponse> bookAppointment({
+  Future<BookedAppointmentResponse> bookAppointment({
     required String appointmentID,
+    String? comment,
   }) async {
     return await _patientServiceClient.bookAppointment(
       appointmentID,
+      comment: comment,
     );
   }
 

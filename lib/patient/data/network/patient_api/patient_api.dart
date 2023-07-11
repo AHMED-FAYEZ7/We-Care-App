@@ -43,24 +43,25 @@ abstract class PatientServiceClient {
   ////////////// Appointment ////////////////
 
   @GET("api/v1/appointments/available/{docId}")
-  Future<AppointmentInfoResponse> getDoctorAvailableAppointments(
+  Future<AvailableAppointmentsResponse> getDoctorAvailableAppointments(
     @Path("docId") String docId,
   );
 
   @GET("api/v1/appointments/availableByday/{docId}")
-  Future<AppointmentInfoResponse> getAvailableAppointmentsByDay(
+  Future<AvailableAppointmentsResponse> getAvailableAppointmentsByDay(
     @Path("docId") String docId,
     @Query("day") String dayDate, {
     @Query("type") String? visitType,
   });
 
   @GET("api/v1/appointments")
-  Future<AppointmentInfoResponse> getMyAppointments();
+  Future<MyAppointmentsResponse> getMyAppointments();
 
   @POST("api/v1/appointments/book")
-  Future<AppointmentInfoResponse> bookAppointment(
-    @Field("AppointmentID") String appointmentID,
-  );
+  Future<BookedAppointmentResponse> bookAppointment(
+    @Field("AppointmentID") String appointmentID, {
+    @Field("comment") String? comment,
+  });
 
 //////////////////// reviews ////////////
 

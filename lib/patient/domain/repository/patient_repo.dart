@@ -24,20 +24,21 @@ abstract class BasePatientRepo {
 
   Future<Either<Failure, UserData>> getUserData();
 
-  Future<Either<Failure, AppointmentsInfo>> getDoctorAvailableAppointments(
+  Future<Either<Failure, AvailableAppointments>> getDoctorAvailableAppointments(
     String docID,
   );
 
-  Future<Either<Failure, AppointmentsInfo>> getMyAppointments();
+  Future<Either<Failure, MyAppointments>> getMyAppointments();
 
-  Future<Either<Failure, AppointmentsInfo>> getAvailableAppointmentsByDay({
+  Future<Either<Failure, AvailableAppointments>> getAvailableAppointmentsByDay({
     required String docID,
     required String dayDate,
     String? visitType,
   });
 
-  Future<Either<Failure, AppointmentsInfo>> bookAppointment({
+  Future<Either<Failure, BookedAppointment>> bookAppointment({
     required String appointmentID,
+    String? comment,
   });
 
   Future<Either<Failure, RateInfo>> getDoctorReviews({

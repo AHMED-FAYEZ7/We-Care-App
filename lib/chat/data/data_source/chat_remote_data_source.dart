@@ -1,20 +1,19 @@
-import 'package:socket_io_client/socket_io_client.dart' as io;
-
 import 'package:health_care/chat/data/network/doctor_api/chat_api.dart';
 import 'package:health_care/chat/data/response/chat_response/chat_response.dart';
 
 abstract class BaseChatRemoteDataSource {
-  // Future<void> connectToSocket();
-
   Future<BaseChatResponse> userCreateChat({
     required String receiverId,
   });
+  Future<ChatsInfoResponse> getAllChats();
 
-  // void userSendMessage(String roomId, String message);
-
-  // void listenToMessages(Function(dynamic) callback);
-
-  // void disconnect();
+  Future<MessageResponse> sendMessage({
+    required String roomId,
+    required String messageContent,
+  });
+  // Stream<BaseChatResponse> getAllMessages({
+  //   required String roomId,
+  // });
 }
 
 class ChatRemoteDataSourceImpl implements BaseChatRemoteDataSource {
@@ -23,35 +22,27 @@ class ChatRemoteDataSourceImpl implements BaseChatRemoteDataSource {
   ChatRemoteDataSourceImpl(
     this._chatServiceClient,
   );
-  // io.Socket? _socket;
-  // List<ChatsInfoResponse> messageList = [];
-  // ChatRemoteDataSourceImpl();
-
-  // @override
-  // Future<void> connectToSocket() async {
-  //   const url = 'https://helth-clinc.onrender.com/';
-  //   final options = io.OptionBuilder().setTransports(['websocket']).build();
-
-  //   _socket = io.io(url, options);
-
-  //   _socket!.on('', (newMessage) {
-  //     // messageList.add(ChatsInfoResponse.fromJson(newMessage));
-  //     // print(messageList.length);
-  //     print('Connection done');
-  //   });
-  //   _socket!.send(messageList);
-
-  //   _socket!.onConnect((_) {
-  //     print('Connection established');
-  //   });
-
-  //   _socket!.connect();
-  // }
 
   @override
   Future<BaseChatResponse> userCreateChat({
     required String receiverId,
   }) async {
     return await _chatServiceClient.createChatRoom(receiverId);
+  }
+
+  @override
+  Future<ChatsInfoResponse> getAllChats() async {
+    return await _chatServiceClient.getAllChats();
+  }
+
+  @override
+  Future<MessageResponse> sendMessage({
+    required String roomId,
+    required String messageContent,
+  }) async {
+    return await _chatServiceClient.sendMessage(
+      roomId,
+      messageContent,
+    );
   }
 }

@@ -68,7 +68,7 @@ class PatientCubit extends Cubit<PatientState> {
   List<Widget> screens = [
     const HomePatientScreen(),
     PostsPatientScreen(),
-    AppointmentPatientScreen(),
+    // AppointmentPatientScreen(),
     const ProfilePatientScreen(),
   ];
 
@@ -173,59 +173,59 @@ class PatientCubit extends Cubit<PatientState> {
 
 /////////////available appointment by day////////////////
 
-  List<Appointment> availableAppointmentsByDayData = [];
+//   List<Appointment> availableAppointmentsByDayData = [];
 
-  getAvailableAppointmentByDay(String docId, String date) async {
-    emit(GetAvailableAppointmentByDayLoadingState());
-    availableAppointmentsByDayData = [];
-    (await _availableAppointmentsByDayUseCase.call(
-      AvailableAppointmentsByDayInputUseCase(
-        doctorId: docId,
-        dayDate: date,
-      ),
-    ))
-        .fold((l) {
-      emit(GetAvailableAppointmentByDayFailureState());
-    }, (r) {
-      availableAppointmentsByDayData = r.availableAppointmentsByDayData!;
-      emit(GetAvailableAppointmentByDaySuccessState());
-    });
-  }
+//   getAvailableAppointmentByDay(String docId, String date) async {
+//     emit(GetAvailableAppointmentByDayLoadingState());
+//     availableAppointmentsByDayData = [];
+//     (await _availableAppointmentsByDayUseCase.call(
+//       AvailableAppointmentsByDayInputUseCase(
+//         doctorId: docId,
+//         dayDate: date,
+//       ),
+//     ))
+//         .fold((l) {
+//       emit(GetAvailableAppointmentByDayFailureState());
+//     }, (r) {
+//       availableAppointmentsByDayData = r.availableAppointmentsByDayData!;
+//       emit(GetAvailableAppointmentByDaySuccessState());
+//     });
+//   }
 
-/////////////book appointment////////////////
+// /////////////book appointment////////////////
 
-  bookAppointment(String appointmentId) async {
-    emit(BookAppointmentByIdLoadingState());
-    (await _bookAppointmentUseCase.call(appointmentId)).fold(
-      (l) {
-        emit(BookAppointmentByIdFailureState());
-      },
-      (r) {
-        emit(BookAppointmentByIdSuccessState());
-      },
-    );
-  }
+//   bookAppointment(String appointmentId) async {
+//     emit(BookAppointmentByIdLoadingState());
+//     (await _bookAppointmentUseCase.call(appointmentId)).fold(
+//       (l) {
+//         emit(BookAppointmentByIdFailureState());
+//       },
+//       (r) {
+//         emit(BookAppointmentByIdSuccessState());
+//       },
+//     );
+//   }
 
-  /////////////get my appointment////////////////
-  List<Appointment> upcomingAppointments = [];
-  List<Appointment> pastAppointments = [];
+//   /////////////get my appointment////////////////
+//   List<Appointment> upcomingAppointments = [];
+//   List<Appointment> pastAppointments = [];
 
-  getMyAppointments(NoParameters params) async {
-    emit(GetMyAppointmentsLoadingState());
+//   getMyAppointments(NoParameters params) async {
+//     emit(GetMyAppointmentsLoadingState());
 
-    (await _getMyAppointmentsUseCase.call(params)).fold(
-      (l) {
-        emit(GetMyAppointmentsFailureState());
-      },
-      (r) {
-        upcomingAppointments = [];
-        pastAppointments = [];
-        upcomingAppointments = r.upcomingAppointmentsData!;
-        pastAppointments = r.pastAppointment!;
-        emit(GetMyAppointmentsSuccessState());
-      },
-    );
-  }
+//     (await _getMyAppointmentsUseCase.call(params)).fold(
+//       (l) {
+//         emit(GetMyAppointmentsFailureState());
+//       },
+//       (r) {
+//         upcomingAppointments = [];
+//         pastAppointments = [];
+//         upcomingAppointments = r.upcomingAppointmentsData!;
+//         pastAppointments = r.pastAppointment!;
+//         emit(GetMyAppointmentsSuccessState());
+//       },
+//     );
+//   }
 
   /////////////get reviews////////////////
 

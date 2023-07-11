@@ -4,13 +4,28 @@ import 'package:health_care/core/usecase/base_usecase.dart';
 import 'package:health_care/patient/domain/model/appointment_model.dart';
 import 'package:health_care/patient/domain/repository/patient_repo.dart';
 
-class BookAppointmentUseCase implements BaseUseCase<String, AppointmentsInfo> {
+class BookAppointmentUseCase
+    implements BaseUseCase<BookAppointmentUseCaseInput, BookedAppointment> {
   final BasePatientRepo _basePatientRepo;
 
   BookAppointmentUseCase(this._basePatientRepo);
 
   @override
-  Future<Either<Failure, AppointmentsInfo>> call(String input) async {
-    return await _basePatientRepo.bookAppointment(appointmentID: input);
+  Future<Either<Failure, BookedAppointment>> call(
+    BookAppointmentUseCaseInput input,
+  ) async {
+    return await _basePatientRepo.bookAppointment(
+      appointmentID: input.appointmentID,
+      comment: input.comment,
+    );
   }
+}
+
+class BookAppointmentUseCaseInput {
+  String appointmentID;
+  String? comment;
+  BookAppointmentUseCaseInput({
+    required this.appointmentID,
+    this.comment,
+  });
 }

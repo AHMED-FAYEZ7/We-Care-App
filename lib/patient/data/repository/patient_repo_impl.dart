@@ -151,7 +151,7 @@ class PatientRepoImpl implements BasePatientRepo {
   }
 
   @override
-  Future<Either<Failure, AppointmentsInfo>> getDoctorAvailableAppointments(
+  Future<Either<Failure, AvailableAppointments>> getDoctorAvailableAppointments(
     String docID,
   ) async {
     if (await _networkInfo.isConnected) {
@@ -175,7 +175,7 @@ class PatientRepoImpl implements BasePatientRepo {
   }
 
   @override
-  Future<Either<Failure, AppointmentsInfo>> getAvailableAppointmentsByDay({
+  Future<Either<Failure, AvailableAppointments>> getAvailableAppointmentsByDay({
     required String docID,
     required String dayDate,
     String? visitType,
@@ -200,7 +200,7 @@ class PatientRepoImpl implements BasePatientRepo {
   }
 
   @override
-  Future<Either<Failure, AppointmentsInfo>> getMyAppointments() async {
+  Future<Either<Failure, MyAppointments>> getMyAppointments() async {
     if (await _networkInfo.isConnected) {
       try {
         final response = await _basePatientRemoteDataSource.getMyAppointments();
@@ -217,21 +217,18 @@ class PatientRepoImpl implements BasePatientRepo {
   }
 
   @override
-  Future<Either<Failure, AppointmentsInfo>> bookAppointment({
+  Future<Either<Failure, BookedAppointment>> bookAppointment({
     required String appointmentID,
+    String? comment,
   }) async {
     if (await _networkInfo.isConnected) {
       try {
         final response = await _basePatientRemoteDataSource.bookAppointment(
           appointmentID: appointmentID,
+          comment: comment,
         );
 
-        if (response.status == ApiInternalStatus.SUCCESS) {
-          return Right(response.toDomain());
-        } else {
-          print("error ${response.message!}");
-          return Left(Failure(1, response.message!));
-        }
+        return Right(response.toDomain());
       } catch (error) {
         print("errorsss ${error.toString()}");
         return Left((ErrorHandler.handle(error).failure));
