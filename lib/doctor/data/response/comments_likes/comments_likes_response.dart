@@ -99,3 +99,20 @@ class CommentInfoResponse extends BaseResponse {
   @override
   Map<String, dynamic> toJson() => _$CommentInfoResponseToJson(this);
 }
+
+@JsonSerializable()
+class AllLikesResponse extends BaseResponse {
+  @JsonKey(name: "likes")
+  List<CommentsResponse>? blogLikesResponse;
+
+  AllLikesResponse(
+    super.status,
+    super.message,
+    this.blogLikesResponse,
+  );
+
+  factory AllLikesResponse.fromJson(Map<String, dynamic> json) =>
+      _$AllLikesResponseFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$AllLikesResponseToJson(this);
+}

@@ -30,6 +30,10 @@ abstract class BaseDoctorRemoteDataSource {
     required String blogId,
   });
 
+  Future<AllLikesResponse> getBlogsLikes({
+    required String blogId,
+  });
+
   Future<BaseResponse> createLike({
     required String blogId,
   });
@@ -89,6 +93,13 @@ class DoctorRemoteDataSourceImpl implements BaseDoctorRemoteDataSource {
   @override
   Future<CommentInfoResponse> getBlogsComments({required String blogId}) async {
     return await _doctorServiceClient.getBlogsComments(
+      blogId,
+    );
+  }
+
+  @override
+  Future<AllLikesResponse> getBlogsLikes({required String blogId}) async {
+    return await _doctorServiceClient.getBlogsLikes(
       blogId,
     );
   }

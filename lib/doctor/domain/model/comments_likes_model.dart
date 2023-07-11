@@ -51,3 +51,10 @@ class CommentInfo {
     this.blogComments,
   );
 }
+
+class LikesModel {
+  List<Comments>? blogLikes;
+  LikesModel(
+    this.blogLikes,
+  );
+}

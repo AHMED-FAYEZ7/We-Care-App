@@ -7,7 +7,7 @@ abstract class BaseUseCase<In, Out> {
 }
 
 abstract class TestUseCase<In, Out> {
-  Future<Out> call(In input);
+  Stream<Out> call(In input);
 }
 
 abstract class OptionalBaseUseCase<In, Out> {

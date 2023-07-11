@@ -157,6 +157,29 @@ class _DoctorServiceClient implements DoctorServiceClient {
   }
 
   @override
+  Future<AllLikesResponse> getBlogsLikes(blogId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<AllLikesResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'api/v1/blog/likes/${blogId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = AllLikesResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<BaseResponse> createLike(blogId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

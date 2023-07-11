@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:health_care/authentication/domain/usecase/user_login_usecase.dart';
 import 'package:health_care/chat/domain/usecase/get_all_messages_use_case.dart';
+import 'package:health_care/chat/domain/usecase/get_messages_use_case.dart';
 import 'package:health_care/chat/domain/usecase/send_message_use_case.dart';
 import 'package:health_care/chat/domain/usecase/user_create_chat_use_case.dart';
 import 'package:health_care/core/app/app_prefs.dart';
@@ -13,6 +14,7 @@ import 'package:health_care/doctor/domain/usecase/create_like_use_case.dart';
 import 'package:health_care/doctor/domain/usecase/create_time_block_use_case.dart';
 import 'package:health_care/doctor/domain/usecase/get_all_blogs_use_case.dart';
 import 'package:health_care/doctor/domain/usecase/get_blogs_comments_use_case.dart';
+import 'package:health_care/doctor/domain/usecase/get_blogs_likes_use_case.dart';
 import 'package:health_care/patient/domain/usecase/book_appointment_use_case.dart';
 import 'package:health_care/patient/domain/usecase/delete_review_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_all_doctors_use_case.dart';
@@ -72,6 +74,8 @@ class TestPage extends StatelessWidget {
   final CreateDisLikeUseCase _createDisLikeUseCase = sl<CreateDisLikeUseCase>();
   final SendMessageUseCase _sendMessageUseCase = sl<SendMessageUseCase>();
   final GetAllChatsUseCase _getAllChatsUseCase = sl<GetAllChatsUseCase>();
+  final GetMessagesUseCase _getMessagesUseCase = sl<GetMessagesUseCase>();
+  final GetBlogsLikesUseCase _getBlogsLikesUseCase = sl<GetBlogsLikesUseCase>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,18 +89,25 @@ class TestPage extends StatelessWidget {
             onPressed: () async {
               // (await _connectToSocketUseCase.call(const NoParameters()));
 
-              (await _sendMessageUseCase.call(
-                SendMessageUseCaseInput(
-                  roomId: "64a58861ba807d78e7fcc487",
-                  messageContent: "production test",
-                ),
-              ))
-                  .fold((l) {
-                print(l.message.toString());
-              }, (r) {
-                print(r.messageData!.messageContent);
-                print(r.messageData!.messageId);
+              (_getMessagesUseCase.call(
+                "64a58861ba807d78e7fcc487",
+              )).listen((message) {
+                print("messages ${message.allMessagesResponse!.length}");
+                print(
+                    "messages ${message.allMessagesResponse![0].messageContent}");
               });
+              // (await _sendMessageUseCase.call(
+              //   SendMessageUseCaseInput(
+              //     roomId: "64a58861ba807d78e7fcc487",
+              //     messageContent: "production test",
+              //   ),
+              // ))
+              //     .fold((l) {
+              //   print(l.message.toString());
+              // }, (r) {
+              //   print(r.messageData!.messageContent);
+              //   print(r.messageData!.messageId);
+              // });
               // (await _getAllChatsUseCase.call(
               //   const NoParameters(),
               // ))
@@ -142,17 +153,17 @@ class TestPage extends StatelessWidget {
               // }, (r) {
               //   print(r.commentData!.commentContent);
               // });
-              // (await _getBlogsCommentsUseCase.call("643b4534a9b2cec52f141877"))
-              //     .fold((l) {
-              //   print(l.message.toString());
-              // }, (r) {
-              //   // print("test ${r.commentData!.commentContent}");
-              //   print("comment ${r.blogComments![0].commentId}");
-              //   print("comment ${r.blogComments![1].commentId}");
-              //   print("comment ${r.blogComments![2].commentId}");
-              //   print("comment ${r.blogComments![3].commentId}");
-              //   print("comment ${r.blogComments![4].commentId}");
-              // });
+              (await _getBlogsLikesUseCase.call("643b4534a9b2cec52f141877"))
+                  .fold((l) {
+                print(l.message.toString());
+              }, (r) {
+                // print("test ${r.commentData!.commentContent}");
+                print("comment ${r.blogLikes![0].commentId}");
+                print("comment ${r.blogLikes![1].commentId}");
+                print("comment ${r.blogLikes![2].commentId}");
+                print("comment ${r.blogLikes![3].commentId}");
+                print("comment ${r.blogLikes![4].commentId}");
+              });
               // (await _createLikeUseCase.call("643b4534a9b2cec52f141877")).fold(
               //     (l) {
               //   print(l.message.toString());
