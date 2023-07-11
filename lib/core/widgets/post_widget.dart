@@ -2,17 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:health_care/core/global/resources/icons_manger.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
+import 'package:health_care/core/widgets/comments_widget.dart';
 import 'package:health_care/core/widgets/divider_widget.dart';
+import 'package:health_care/core/widgets/likes_widget.dart';
 import 'package:health_care/doctor/domain/model/blog_model.dart';
 import 'package:intl/intl.dart';
 
 class PostWidget extends StatelessWidget {
   PostWidget({
     required this.model,
+    required this.getComments,
+    this.like,
+    this.comment,
     Key? key,
   }) : super(key: key);
 
   Blog model;
+
+  // VoidCallback getLikes;
+  Function getComments;
+  VoidCallback? like;
+  VoidCallback? comment;
 
   @override
   Widget build(BuildContext context) {
@@ -199,6 +209,15 @@ class PostWidget extends StatelessWidget {
                   ),
                   Expanded(
                     child: InkWell(
+                      onTap: () {
+                        getComments;
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => LikesWidget(),
+                          ),
+                        );
+                      },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 5),
                         child: Row(
@@ -219,7 +238,6 @@ class PostWidget extends StatelessWidget {
                           ],
                         ),
                       ),
-                      onTap: () {},
                     ),
                   ),
                 ],
@@ -232,6 +250,7 @@ class PostWidget extends StatelessWidget {
               children: [
                 Expanded(
                   child: InkWell(
+                    onTap: comment,
                     child: Row(
                       children: [
                         CircleAvatar(
@@ -251,18 +270,18 @@ class PostWidget extends StatelessWidget {
                         ),
                       ],
                     ),
-                    onTap: () {},
                   ),
                 ),
                 InkWell(
+                  onTap: like,
                   child: Row(
                     children: [
-                      Icon(
+                      const Icon(
                         size: 18,
                         IconBroken.Heart,
                         color: Colors.red,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 5,
                       ),
                       Text(
@@ -271,7 +290,6 @@ class PostWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                  onTap: () {},
                 ),
               ],
             ),

@@ -77,7 +77,7 @@ class _AppointmentWidgetState extends State<AppointmentWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.model.patientInfo?.name ?? '',
+                    widget.model.doctorInfo?.name ?? '',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: ColorManager.black,

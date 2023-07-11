@@ -120,6 +120,9 @@ class _PostsDoctorScreenState extends State<PostsDoctorScreen> {
                             itemBuilder: (BuildContext context, int index) =>
                                 PostWidget(
                               model: cubit.allBlogs[index],
+                              getComments: cubit.getComments(
+                                cubit.allBlogs[index].blogId,
+                              ),
                             ),
                             separatorBuilder:
                                 (BuildContext context, int index) =>

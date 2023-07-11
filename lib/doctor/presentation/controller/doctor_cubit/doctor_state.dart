@@ -34,3 +34,40 @@ class GetMyAppointmentsLoadingState extends DoctorState {}
 class GetMyAppointmentsSuccessState extends DoctorState {}
 
 class GetMyAppointmentsFailureState extends DoctorState {}
+////////////////////////////////////////////
+
+class CreateLikeLoadingState extends DoctorState {}
+
+class CreateLikeSuccessState extends DoctorState {}
+
+class CreateLikeFailureState extends DoctorState {}
+////////////////////////////////////////////
+
+class CreateDisLikeLoadingState extends DoctorState {}
+
+class CreateDisLikeSuccessState extends DoctorState {}
+
+class CreateDisLikeFailureState extends DoctorState {}
+
+////////////////////////////////////////////
+class CreateCommentLoadingState extends DoctorState {}
+
+class CreateCommentSuccessState extends DoctorState {}
+
+class CreateCommentFailureState extends DoctorState {}
+
+////////////////////////////////////////////
+
+class GetAllLikesLoadingState extends DoctorState {}
+
+class GetAllLikesSuccessState extends DoctorState {}
+
+class GetAllLikesFailureState extends DoctorState {}
+
+////////////////////////////////////////////
+
+class GetAllCommentsLoadingState extends DoctorState {}
+
+class GetAllCommentsSuccessState extends DoctorState {}
+
+class GetAllCommentsFailureState extends DoctorState {}
