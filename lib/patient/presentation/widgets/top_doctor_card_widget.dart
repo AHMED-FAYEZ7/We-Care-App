@@ -48,7 +48,7 @@ class TopDoctorCardWidget extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: AppSize.s5,
+                height: AppSize.s2,
               ),
               Text(
                 "${model.specialization} Specialist",
@@ -59,7 +59,7 @@ class TopDoctorCardWidget extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: AppSize.s5,
+                height: AppSize.s2,
               ),
               RateWidget(
                 ignoreGestures: true,

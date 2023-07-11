@@ -86,7 +86,7 @@ class RouteGenerator {
       case Routes.layoutDoctorRoute:
         return MaterialPageRoute(builder: (_) => const DoctorLayoutScreen());
       case Routes.createPostRoute:
-        return MaterialPageRoute(builder: (_) => const CreatePostScreen());
+        return MaterialPageRoute(builder: (_) => CreatePostScreen());
       /////////////patient//////////////
       case Routes.layoutPatientRoute:
         return MaterialPageRoute(builder: (_) => const LayoutPatientScreen());

@@ -3,26 +3,34 @@
 import 'package:flutter/material.dart';
 import 'package:health_care/core/assets/app_assets.dart';
 import 'package:health_care/core/global/resources/icons_manger.dart';
+import 'package:health_care/core/global/resources/values_manger.dart';
+import 'package:health_care/core/global/theme/app_color/color_manager.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
 import 'package:health_care/patient/presentation/widgets/search_bar_widget.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   AppBarWidget({
     this.title,
+    this.textButton,
     this.isBack = false,
     this.isSearch = false,
     this.isHome = false,
+    this.isTextButton = false,
     this.controller,
     this.onSearch,
+    this.onTap,
     Key? key,
   }) : super(key: key);
 
   String? title;
+  String? textButton;
   bool isBack = false;
   bool isSearch = false;
   bool isHome = false;
+  bool isTextButton = false;
   TextEditingController? controller;
   VoidCallback? onSearch;
+  VoidCallback? onTap;
 
   @override
   Size get preferredSize => const Size.fromHeight(60);
@@ -75,6 +83,23 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
             icon: Icon(
               IconBroken.Heart,
               color: ColorManager.primary,
+            ),
+          ),
+        if (isTextButton)
+          Padding(
+            padding: const EdgeInsets.all(AppPadding.p12),
+            child: TextButton(
+              style: ButtonStyle(
+                backgroundColor:
+                    MaterialStateProperty.all(ColorManager.primary),
+              ),
+              onPressed: onTap,
+              child: Text(
+                textButton!,
+                style: TextStyle(
+                  color: ColorManager.white,
+                ),
+              ),
             ),
           ),
       ],

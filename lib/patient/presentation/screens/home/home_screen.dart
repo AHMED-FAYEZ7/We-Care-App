@@ -92,7 +92,7 @@ class HomePatientScreen extends StatelessWidget {
                     left: AppPadding.p12,
                   ),
                   child: Container(
-                    height: MediaQuery.of(context).size.height * .25,
+                    height: MediaQuery.of(context).size.height * .267,
                     margin: const EdgeInsets.symmetric(vertical: AppMargin.m8),
                     child: ConditionalBuilder(
                       condition: cubit.topDoctor.isNotEmpty,
@@ -132,7 +132,7 @@ class HomePatientScreen extends StatelessWidget {
                     left: AppPadding.p12,
                   ),
                   child: Container(
-                    height: MediaQuery.of(context).size.height * .25,
+                    height: MediaQuery.of(context).size.height * .267,
                     margin: const EdgeInsets.symmetric(vertical: AppMargin.m8),
                     child: ConditionalBuilder(
                       condition: cubit.allDoctor.isNotEmpty,

@@ -44,7 +44,6 @@ class PostWidget extends StatelessWidget {
                       Row(
                         children: [
                           SizedBox(
-                            width: MediaQuery.of(context).size.width * .38,
                             child: Text(
                               model.doctorInfo!.name,
                               overflow: TextOverflow.ellipsis,
@@ -88,28 +87,30 @@ class PostWidget extends StatelessWidget {
             MyDividerWidget(
               height: AppSize.s3,
             ),
-            Text(
-              "${model.blogTitle}: ",
-              maxLines: 2,
-              style: TextStyle(
-                color: ColorManager.black,
-                fontSize: AppSize.s12,
-                fontWeight: FontWeight.w600,
+            if (model.blogTitle != '')
+              Text(
+                "${model.blogTitle}: ",
+                maxLines: 2,
+                style: TextStyle(
+                  color: ColorManager.black,
+                  fontSize: AppSize.s12,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
-            ),
             const SizedBox(
               height: AppSize.s1,
             ),
-            Text(
-              model.blogDescription,
-              maxLines: 3,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                color: ColorManager.black,
-                fontSize: AppSize.s12,
-                fontWeight: FontWeight.w500,
+            if (model.blogDescription != '')
+              Text(
+                model.blogDescription,
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  color: ColorManager.black,
+                  fontSize: AppSize.s12,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
-            ),
             SizedBox(
               width: double.infinity,
               child: Wrap(
@@ -151,20 +152,19 @@ class PostWidget extends StatelessWidget {
                 ],
               ),
             ),
-            if (model.imageData!.imageUrl != '')
-              Container(
-                height: AppSize.s150,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4),
-                  image: DecorationImage(
-                    image: NetworkImage(
-                      model.imageData!.imageUrl,
-                    ),
-                    fit: BoxFit.cover,
+            Container(
+              height: AppSize.s150,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(4),
+                image: DecorationImage(
+                  image: NetworkImage(
+                    model.imageData!.imageUrl,
                   ),
+                  fit: BoxFit.cover,
                 ),
               ),
+            ),
             Padding(
               padding: const EdgeInsets.only(
                 top: 1,

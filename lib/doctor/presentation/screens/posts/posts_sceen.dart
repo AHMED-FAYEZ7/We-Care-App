@@ -51,27 +51,32 @@ class _PostsDoctorScreenState extends State<PostsDoctorScreen> {
           body: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.all(12.0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppPadding.p12,
+                ),
                 child: Card(
                   elevation: AppSize.s3,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(AppSize.s12),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppPadding.p12,
+                      vertical: AppPadding.p2,
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
                           children: [
                             CircleAvatar(
-                              radius: 25,
+                              radius: 23,
                               backgroundImage: NetworkImage(
                                 "https://idsb.tmgrup.com.tr/ly/uploads/images/2022/12/19/247181.jpg",
                               ),
                             ),
                             SizedBox(
-                              width: MediaQuery.of(context).size.width * .66,
+                              width: MediaQuery.of(context).size.width * .62,
                               child: SearchBarWidget(
                                 readOnly: true,
                                 onTap: () {
