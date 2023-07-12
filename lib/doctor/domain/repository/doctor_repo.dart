@@ -10,26 +10,31 @@ abstract class BaseDoctorRepo {
     required String startTime,
     required String callType,
   });
+
   // /////////////// blog ////////////
   Future<Either<Failure, BlogInfo>> createBlog(
     String blogDescription,
     String blogTitle, {
     String? blogImage,
   });
+
   Future<Either<Failure, BlogInfo>> getAllBlogs();
 
   /////////////// comments & likes ////////
-  Future<Either<Failure, CommentInfo>> createComment({
+  Future<Either<Failure, BaseComment>> createComment({
     required String blogId,
     required String commentContent,
   });
+
   Future<Either<Failure, CommentInfo>> getBlogsComments({
     required String blogId,
   });
+
   Future<Either<Failure, LikesModel>> getBlogsLikes({
     required String blogId,
   });
 
   Future<Either<Failure, String>> createLike({required String blogId});
+
   Future<Either<Failure, String>> createDisLike({required String blogId});
 }

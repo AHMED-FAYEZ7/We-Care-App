@@ -1,4 +1,4 @@
-// ignore_for_file: unrelated_type_equality_checks
+// ignore_for_file: unrelated_type_equality_checks, avoid_print, must_be_immutable, prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,7 +9,6 @@ import 'package:health_care/core/global/theme/app_color/color_manager.dart';
 import 'package:health_care/core/services/services_locator.dart';
 import 'package:health_care/core/widgets/divider_widget.dart';
 import 'package:health_care/doctor/domain/model/blog_model.dart';
-import 'package:health_care/doctor/domain/model/comments_likes_model.dart';
 import 'package:health_care/doctor/presentation/controller/doctor_cubit/doctor_cubit.dart';
 import 'package:health_care/patient/presentation/controller/Patient_cubit/patient_cubit.dart';
 import 'package:health_care/post/presentation/controller/post_cubit.dart';
@@ -21,13 +20,6 @@ class PostWidget extends StatelessWidget {
   PostWidget({
     this.isLike = false,
     required this.model,
-    // required this.getLikes,
-    // required this.getComments,
-    // required this.like,
-    // required this.disLike,
-    // required this.comment,
-    // required this.comments,
-    // required this.likes,
     this.handelComment,
     Key? key,
   }) : super(key: key);
@@ -36,13 +28,6 @@ class PostWidget extends StatelessWidget {
   bool isLike = false;
   final AppPreferences _appPreferences = sl<AppPreferences>();
 
-  // VoidCallback getLikes;
-  // VoidCallback getComments;
-  // VoidCallback like;
-  // VoidCallback disLike;
-  // VoidCallback comment;
-  // List<Comments> comments;
-  // List<LikesModel> likes;
   Function({String? comment})? handelComment;
 
   @override
@@ -250,7 +235,9 @@ class PostWidget extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => CommentsWidget(),
+                                builder: (context) => CommentsWidget(
+                                  postId: model.blogId,
+                                ),
                               ),
                             );
                           },
@@ -291,7 +278,9 @@ class PostWidget extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => CommentsWidget(),
+                              builder: (context) => CommentsWidget(
+                                postId: model.blogId,
+                              ),
                             ),
                           );
                         },

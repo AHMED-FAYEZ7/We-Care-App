@@ -8,7 +8,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/authentication/presentation/widgets/snack_bar_widget.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
-import 'package:health_care/core/routes/app_routes.dart';
 import 'package:health_care/core/widgets/app_bar_widget.dart';
 import 'package:health_care/doctor/presentation/controller/doctor_cubit/doctor_cubit.dart';
 import 'package:health_care/post/presentation/controller/post_cubit.dart';

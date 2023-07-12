@@ -120,7 +120,7 @@ class PostCubit extends Cubit<PostState> {
   }
 
   /////////////get post comments////////////////
-  List<Comments> comments = [];
+  List<BaseComment> comments = [];
 
   getComments(String blogId) async {
     emit(GetAllCommentsLoadingState());
@@ -137,18 +137,18 @@ class PostCubit extends Cubit<PostState> {
   }
 
   /////////////get post likes////////////////
-  List<Comments> likes = [];
+  List<BaseComment> likes = [];
 
   getLikes(String blogId) async {
-    emit(GetAllCommentsLoadingState());
+    emit(GetAllLikesLoadingState());
     (await _getBlogsLikesUseCase.call(blogId)).fold(
       (l) {
-        emit(GetAllCommentsFailureState());
+        emit(GetAllLikesFailureState());
       },
       (r) {
         likes = [];
         likes = r.blogLikes!;
-        emit(GetAllCommentsSuccessState());
+        emit(GetAllLikesSuccessState());
       },
     );
   }

@@ -83,7 +83,7 @@ class DoctorRepoImpl implements BaseDoctorRepo {
   }
 
   @override
-  Future<Either<Failure, CommentInfo>> createComment({
+  Future<Either<Failure, BaseComment>> createComment({
     required String blogId,
     required String commentContent,
   }) async {

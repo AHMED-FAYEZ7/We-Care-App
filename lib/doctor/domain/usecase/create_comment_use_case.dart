@@ -5,13 +5,13 @@ import 'package:health_care/doctor/domain/model/comments_likes_model.dart';
 import 'package:health_care/doctor/domain/repository/doctor_repo.dart';
 
 class CreateCommentUseCase
-    implements BaseUseCase<CreateCommentUseCaseInput, CommentInfo> {
+    implements BaseUseCase<CreateCommentUseCaseInput, BaseComment> {
   final BaseDoctorRepo _baseDoctorRepo;
 
   CreateCommentUseCase(this._baseDoctorRepo);
 
   @override
-  Future<Either<Failure, CommentInfo>> call(
+  Future<Either<Failure, BaseComment>> call(
     CreateCommentUseCaseInput input,
   ) async {
     return await _baseDoctorRepo.createComment(

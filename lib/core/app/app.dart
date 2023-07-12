@@ -3,12 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/authentication/presentation/controller/auth_cubit.dart';
+import 'package:health_care/chat/presentation/controller/chat_cubit.dart';
 import 'package:health_care/core/routes/app_routes.dart';
 import 'package:health_care/core/services/services_locator.dart';
 import 'package:health_care/core/usecase/base_usecase.dart';
 import 'package:health_care/core/utils/constants.dart';
 import 'package:health_care/doctor/presentation/controller/doctor_cubit/doctor_cubit.dart';
 import 'package:health_care/patient/presentation/controller/Patient_cubit/patient_cubit.dart';
+import 'package:health_care/post/presentation/controller/post_cubit.dart';
 
 import '../global/theme/theme_data/theme_data_light.dart';
 

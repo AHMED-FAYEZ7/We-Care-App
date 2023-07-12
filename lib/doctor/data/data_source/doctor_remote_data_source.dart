@@ -10,6 +10,7 @@ abstract class BaseDoctorRemoteDataSource {
     required String startTime,
     required String callType,
   });
+
   // ////////////// blog ///////////////
   Future<BlogInfoResponse> createBlog(
     String postDescription,
@@ -21,7 +22,7 @@ abstract class BaseDoctorRemoteDataSource {
 
   //////////////// comments & likes ///////////
 
-  Future<CommentInfoResponse> createComment({
+  Future<BaseCommentResponse> createComment({
     required String blogId,
     required String commentContent,
   });
@@ -80,7 +81,7 @@ class DoctorRemoteDataSourceImpl implements BaseDoctorRemoteDataSource {
   }
 
   @override
-  Future<CommentInfoResponse> createComment({
+  Future<BaseCommentResponse> createComment({
     required String blogId,
     required String commentContent,
   }) async {

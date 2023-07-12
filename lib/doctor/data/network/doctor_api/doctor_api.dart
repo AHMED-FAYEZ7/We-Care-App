@@ -18,6 +18,7 @@ abstract class DoctorServiceClient {
     @Field("startTime") String startTime,
     @Field("type") String callType,
   );
+
 // ///////////////// blogs //////////
   @POST("api/v1/blog")
   Future<BlogInfoResponse> createBlog(
@@ -32,7 +33,7 @@ abstract class DoctorServiceClient {
 /////////////////// comments & likes //////////
 
   @POST("api/v1/blog/add-comment/{blogId}")
-  Future<CommentInfoResponse> createComment(
+  Future<BaseCommentResponse> createComment(
     @Path("blogId") String blogId,
     @Field("content") String commentContent,
   );
@@ -51,6 +52,7 @@ abstract class DoctorServiceClient {
   Future<BaseResponse> createLike(
     @Path("blogId") String blogId,
   );
+
   @POST("api/v1/blog/unlike/{blogId}")
   Future<BaseResponse> createDisLike(
     @Path("blogId") String blogId,

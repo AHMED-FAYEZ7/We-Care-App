@@ -76,6 +76,7 @@ class TestPage extends StatelessWidget {
   final GetAllChatsUseCase _getAllChatsUseCase = sl<GetAllChatsUseCase>();
   final GetMessagesUseCase _getMessagesUseCase = sl<GetMessagesUseCase>();
   final GetBlogsLikesUseCase _getBlogsLikesUseCase = sl<GetBlogsLikesUseCase>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -151,7 +152,7 @@ class TestPage extends StatelessWidget {
                   .fold((l) {
                 print(l.message.toString());
               }, (r) {
-                print(r.commentData!.commentContent);
+                // print(r.commentData!.commentContent);
               });
               (await _getBlogsCommentsUseCase.call("643b4534a9b2cec52f141877"))
                   .fold((l) {

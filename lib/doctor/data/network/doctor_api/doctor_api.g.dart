@@ -108,7 +108,7 @@ class _DoctorServiceClient implements DoctorServiceClient {
   }
 
   @override
-  Future<CommentInfoResponse> createComment(
+  Future<BaseCommentResponse> createComment(
     blogId,
     commentContent,
   ) async {
@@ -117,7 +117,7 @@ class _DoctorServiceClient implements DoctorServiceClient {
     final _headers = <String, dynamic>{};
     final _data = {'content': commentContent};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<CommentInfoResponse>(Options(
+        _setStreamType<BaseCommentResponse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -129,7 +129,7 @@ class _DoctorServiceClient implements DoctorServiceClient {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = CommentInfoResponse.fromJson(_result.data!);
+    final value = BaseCommentResponse.fromJson(_result.data!);
     return value;
   }
 
