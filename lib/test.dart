@@ -89,13 +89,13 @@ class TestPage extends StatelessWidget {
             onPressed: () async {
               // (await _connectToSocketUseCase.call(const NoParameters()));
 
-              (_getMessagesUseCase.call(
-                "64a58861ba807d78e7fcc487",
-              )).listen((message) {
-                print("messages ${message.allMessagesResponse!.length}");
-                print(
-                    "messages ${message.allMessagesResponse![0].messageContent}");
-              });
+              // (_getMessagesUseCase.call(
+              //   "64a58861ba807d78e7fcc487",
+              // )).listen((message) {
+              //   print("messages ${message.allMessagesResponse!.length}");
+              //   print(
+              //       "messages ${message.allMessagesResponse![0].messageContent}");
+              // });
               // (await _sendMessageUseCase.call(
               //   SendMessageUseCaseInput(
               //     roomId: "64a58861ba807d78e7fcc487",
@@ -142,17 +142,24 @@ class TestPage extends StatelessWidget {
               // }, (r) {
               //   print(r.bookedAppointmentInfo!.doctorInfo!.specialization);
               // });
-              // (await _createCommentUseCase.call(
-              //   CreateCommentUseCaseInput(
-              //     blogId: "643b4534a9b2cec52f141877",
-              //     commentContent: "production comment",
-              //   ),
-              // ))
-              //     .fold((l) {
-              //   print(l.message.toString());
-              // }, (r) {
-              //   print(r.commentData!.commentContent);
-              // });
+              (await _createCommentUseCase.call(
+                CreateCommentUseCaseInput(
+                  blogId: "643b4534a9b2cec52f141877",
+                  commentContent: "what is wrong",
+                ),
+              ))
+                  .fold((l) {
+                print(l.message.toString());
+              }, (r) {
+                print(r.commentData!.commentContent);
+              });
+              (await _getBlogsCommentsUseCase.call("643b4534a9b2cec52f141877"))
+                  .fold((l) {
+                print(l.message.toString());
+              }, (r) {
+                // print(r.commentData!.commentContent);
+                print(r.blogComments![4].commentContent);
+              });
               (await _getBlogsLikesUseCase.call("643b4534a9b2cec52f141877"))
                   .fold((l) {
                 print(l.message.toString());

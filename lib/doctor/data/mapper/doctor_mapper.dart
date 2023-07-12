@@ -65,33 +65,6 @@ extension BlogInfoResponseMapper on BlogInfoResponse? {
 extension BaseCommentMapper on BaseCommentResponse? {
   BaseComment toDomain() {
     return BaseComment(
-      this?.blogId?.orEmpty() ?? Constants.empty,
-      this?.commentContent?.orEmpty() ?? Constants.empty,
-      this?.commentId?.orEmpty() ?? Constants.empty,
-      this?.createdAt?.orEmpty() ?? Constants.empty,
-      this?.updatedAt?.orEmpty() ?? Constants.empty,
-      this?.v?.orZero() ?? Constants.zero,
-    );
-  }
-}
-
-extension CommentMapper on CommentResponse? {
-  Comment toDomain() {
-    return Comment(
-      this?.userId?.orEmpty() ?? Constants.empty,
-      this?.blogId?.orEmpty() ?? Constants.empty,
-      this?.commentContent?.orEmpty() ?? Constants.empty,
-      this?.commentId?.orEmpty() ?? Constants.empty,
-      this?.createdAt?.orEmpty() ?? Constants.empty,
-      this?.updatedAt?.orEmpty() ?? Constants.empty,
-      this?.v?.orZero() ?? Constants.zero,
-    );
-  }
-}
-
-extension CommentsMapper on CommentsResponse? {
-  Comments toDomain() {
-    return Comments(
       this?.userInfo?.toDomain(),
       this?.blogId?.orEmpty() ?? Constants.empty,
       this?.commentContent?.orEmpty() ?? Constants.empty,
@@ -103,6 +76,34 @@ extension CommentsMapper on CommentsResponse? {
   }
 }
 
+// extension CommentMapper on CommentResponse? {
+//   Comment toDomain() {
+//     return Comment(
+//       this?.userId?.orEmpty() ?? Constants.empty,
+//       this?.blogId?.orEmpty() ?? Constants.empty,
+//       this?.commentContent?.orEmpty() ?? Constants.empty,
+//       this?.commentId?.orEmpty() ?? Constants.empty,
+//       this?.createdAt?.orEmpty() ?? Constants.empty,
+//       this?.updatedAt?.orEmpty() ?? Constants.empty,
+//       this?.v?.orZero() ?? Constants.zero,
+//     );
+//   }
+// }
+
+// extension CommentsMapper on CommentsResponse? {
+//   Comments toDomain() {
+//     return Comments(
+//       this?.userInfo?.toDomain(),
+//       this?.blogId?.orEmpty() ?? Constants.empty,
+//       this?.commentContent?.orEmpty() ?? Constants.empty,
+//       this?.commentId?.orEmpty() ?? Constants.empty,
+//       this?.createdAt?.orEmpty() ?? Constants.empty,
+//       this?.updatedAt?.orEmpty() ?? Constants.empty,
+//       this?.v?.orZero() ?? Constants.zero,
+//     );
+//   }
+// }
+
 extension CommentInfoMapper on CommentInfoResponse? {
   CommentInfo toDomain() {
     return CommentInfo(
@@ -111,7 +112,7 @@ extension CommentInfoMapper on CommentInfoResponse? {
                     (blogComment) => blogComment.toDomain(),
                   ) ??
               const Iterable.empty())
-          .cast<Comments>()
+          .cast<BaseComment>()
           .toList(),
     );
   }
@@ -124,7 +125,7 @@ extension AllLikesResponseMapper on AllLikesResponse? {
                     (blogComment) => blogComment.toDomain(),
                   ) ??
               const Iterable.empty())
-          .cast<Comments>()
+          .cast<BaseComment>()
           .toList(),
     );
   }

@@ -6,6 +6,9 @@ part 'comments_likes_response.g.dart';
 
 @JsonSerializable()
 class BaseCommentResponse {
+  @JsonKey(name: "user")
+  UserResponse? userInfo;
+
   @JsonKey(name: "blog")
   String? blogId;
 
@@ -25,6 +28,7 @@ class BaseCommentResponse {
   int? v;
 
   BaseCommentResponse(
+    this.userInfo,
     this.blogId,
     this.commentContent,
     this.commentId,
@@ -40,52 +44,12 @@ class BaseCommentResponse {
 }
 
 @JsonSerializable()
-class CommentResponse extends BaseCommentResponse {
-  @JsonKey(name: "user")
-  String? userId;
-  CommentResponse(
-    this.userId,
-    super.blogId,
-    super.commentContent,
-    super.commentId,
-    super.createdAt,
-    super.updatedAt,
-    super.v,
-  );
-
-  factory CommentResponse.fromJson(Map<String, dynamic> json) =>
-      _$CommentResponseFromJson(json);
-  @override
-  Map<String, dynamic> toJson() => _$CommentResponseToJson(this);
-}
-
-@JsonSerializable()
-class CommentsResponse extends BaseCommentResponse {
-  @JsonKey(name: "user")
-  UserResponse? userInfo;
-  CommentsResponse(
-    this.userInfo,
-    super.blogId,
-    super.commentContent,
-    super.commentId,
-    super.createdAt,
-    super.updatedAt,
-    super.v,
-  );
-
-  factory CommentsResponse.fromJson(Map<String, dynamic> json) =>
-      _$CommentsResponseFromJson(json);
-  @override
-  Map<String, dynamic> toJson() => _$CommentsResponseToJson(this);
-}
-
-@JsonSerializable()
 class CommentInfoResponse extends BaseResponse {
   @JsonKey(name: "Comment")
-  CommentResponse? commentResponse;
+  BaseCommentResponse? commentResponse;
 
   @JsonKey(name: "Comments")
-  List<CommentsResponse>? blogCommentsResponse;
+  List<BaseCommentResponse>? blogCommentsResponse;
 
   CommentInfoResponse(
     super.status,
@@ -103,7 +67,7 @@ class CommentInfoResponse extends BaseResponse {
 @JsonSerializable()
 class AllLikesResponse extends BaseResponse {
   @JsonKey(name: "likes")
-  List<CommentsResponse>? blogLikesResponse;
+  List<BaseCommentResponse>? blogLikesResponse;
 
   AllLikesResponse(
     super.status,
