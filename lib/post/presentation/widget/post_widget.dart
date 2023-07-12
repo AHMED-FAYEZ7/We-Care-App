@@ -16,7 +16,7 @@ import 'package:health_care/post/presentation/screen/comments/comments.dart';
 import 'package:health_care/post/presentation/screen/likes/likes.dart';
 import 'package:intl/intl.dart';
 
-class PostWidget extends StatelessWidget {
+class PostWidget extends StatefulWidget {
   PostWidget({
     this.isLike = false,
     required this.model,
@@ -26,9 +26,15 @@ class PostWidget extends StatelessWidget {
 
   Blog model;
   bool isLike = false;
-  final AppPreferences _appPreferences = sl<AppPreferences>();
-
   Function({String? comment})? handelComment;
+  Color? likeColor;
+
+  @override
+  State<PostWidget> createState() => _PostWidgetState();
+}
+
+class _PostWidgetState extends State<PostWidget> {
+  final AppPreferences _appPreferences = sl<AppPreferences>();
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +42,36 @@ class PostWidget extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         var cubit = PostCubit.get(context);
+
+        getLikeColor() async {
+          if (await _appPreferences.getType() == 'Doctor') {
+            bool doctorExists = cubit.likes.any(
+              (user) =>
+                  user.userInfo!.id == DoctorCubit.get(context).doctorData!.id,
+            );
+            if (doctorExists) {
+              widget.likeColor = ColorManager.primary;
+              return widget.likeColor;
+            } else {
+              widget.likeColor = Colors.red;
+              return widget.likeColor;
+            }
+          } else {
+            bool patientExists = cubit.likes.any(
+              (user) =>
+                  user.userInfo!.id ==
+                  PatientCubit.get(context).patientData!.id,
+            );
+            if (patientExists) {
+              widget.likeColor = ColorManager.primary;
+              return widget.likeColor;
+            } else {
+              widget.likeColor = Colors.red;
+              return widget.likeColor;
+            }
+          }
+        }
+
         return Card(
           elevation: AppSize.s3,
           shape: RoundedRectangleBorder(
@@ -65,7 +101,7 @@ class PostWidget extends StatelessWidget {
                             children: [
                               SizedBox(
                                 child: Text(
-                                  model.doctorInfo!.name,
+                                  widget.model.doctorInfo!.name,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                     height: 1.4,
@@ -84,7 +120,7 @@ class PostWidget extends StatelessWidget {
                           ),
                           Text(
                             DateFormat.yMMMMd('en_US')
-                                .format(DateTime.parse(model.createdAt)),
+                                .format(DateTime.parse(widget.model.createdAt)),
                             style:
                                 Theme.of(context).textTheme.caption!.copyWith(
                                       height: 1.4,
@@ -108,9 +144,9 @@ class PostWidget extends StatelessWidget {
                 MyDividerWidget(
                   height: AppSize.s3,
                 ),
-                if (model.blogTitle != '')
+                if (widget.model.blogTitle != '')
                   Text(
-                    "${model.blogTitle}: ",
+                    "${widget.model.blogTitle}: ",
                     maxLines: 2,
                     style: TextStyle(
                       color: ColorManager.black,
@@ -121,9 +157,9 @@ class PostWidget extends StatelessWidget {
                 const SizedBox(
                   height: AppSize.s1,
                 ),
-                if (model.blogDescription != '')
+                if (widget.model.blogDescription != '')
                   Text(
-                    model.blogDescription,
+                    widget.model.blogDescription,
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -182,7 +218,7 @@ class PostWidget extends StatelessWidget {
                     borderRadius: BorderRadius.circular(4),
                     image: DecorationImage(
                       image: NetworkImage(
-                        model.imageData!.imageUrl,
+                        widget.model.imageData!.imageUrl,
                       ),
                       fit: BoxFit.cover,
                     ),
@@ -211,14 +247,14 @@ class PostWidget extends StatelessWidget {
                                   width: AppSize.s5,
                                 ),
                                 Text(
-                                  "${model.numLikes}",
+                                  "${widget.model.numLikes}",
                                   style: Theme.of(context).textTheme.caption,
                                 ),
                               ],
                             ),
                           ),
                           onTap: () {
-                            cubit.getLikes(model.blogId);
+                            cubit.getLikes(widget.model.blogId);
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -231,12 +267,12 @@ class PostWidget extends StatelessWidget {
                       Expanded(
                         child: InkWell(
                           onTap: () {
-                            cubit.getComments(model.blogId);
+                            cubit.getComments(widget.model.blogId);
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => CommentsWidget(
-                                  postId: model.blogId,
+                                  postId: widget.model.blogId,
                                 ),
                               ),
                             );
@@ -255,7 +291,7 @@ class PostWidget extends StatelessWidget {
                                   width: AppSize.s5,
                                 ),
                                 Text(
-                                  "${model.numComments}",
+                                  "${widget.model.numComments}",
                                   style: Theme.of(context).textTheme.caption,
                                 ),
                               ],
@@ -274,12 +310,12 @@ class PostWidget extends StatelessWidget {
                     Expanded(
                       child: InkWell(
                         onTap: () {
-                          cubit.getComments(model.blogId);
+                          cubit.getComments(widget.model.blogId);
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => CommentsWidget(
-                                postId: model.blogId,
+                                postId: widget.model.blogId,
                               ),
                             ),
                           );
@@ -309,33 +345,11 @@ class PostWidget extends StatelessWidget {
                     InkWell(
                       onTap: () async {
                         print(await _appPreferences.getType());
-                        if (await _appPreferences.getType() == 'Doctor') {
-                          bool doctorExists = cubit.likes.any(
-                            (user) =>
-                                user.userInfo!.id ==
-                                DoctorCubit.get(context).doctorData!.id,
-                          );
-                          if (doctorExists) {
-                            cubit.createDisLike(model.blogId);
-                          } else {
-                            cubit.createLike(model.blogId);
-                          }
-                        } else {
-                          bool patientExists = cubit.likes.any(
-                            (user) =>
-                                user.userInfo!.id ==
-                                PatientCubit.get(context).patientData!.id,
-                          );
-                          if (patientExists) {
-                            cubit.createDisLike(model.blogId);
-                          } else {
-                            cubit.createLike(model.blogId);
-                          }
-                        }
+                        await cubit.createLike(widget.model.blogId);
                       },
                       child: Row(
                         children: [
-                          const Icon(
+                          Icon(
                             size: 18,
                             IconBroken.Heart,
                             color: Colors.red,

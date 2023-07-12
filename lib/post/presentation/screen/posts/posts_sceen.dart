@@ -40,11 +40,8 @@ class PostsScreen extends StatefulWidget {
 
 class _PostsScreenState extends State<PostsScreen> {
   final RefreshController _refreshController =
-      RefreshController(initialRefresh: false);
+  RefreshController(initialRefresh: false);
 
-  handleComment({String? comment}) {
-    widget.comment = comment;
-  }
 
   @override
   void initState() {
@@ -96,7 +93,10 @@ class _PostsScreenState extends State<PostsScreen> {
                                 ),
                               ),
                               SizedBox(
-                                width: MediaQuery.of(context).size.width * .62,
+                                width: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .width * .62,
                                 child: SearchBarWidget(
                                   readOnly: true,
                                   onTap: () {
@@ -122,36 +122,37 @@ class _PostsScreenState extends State<PostsScreen> {
               Expanded(
                 child: ConditionalBuilder(
                   condition: widget.isRefresh != false,
-                  builder: (context) => cubit.allBlogs.isNotEmpty
+                  builder: (context) =>
+                  cubit.allBlogs.isNotEmpty
                       ? SmartRefresher(
-                          controller: _refreshController,
-                          onRefresh: () async {
-                            // Perform refresh logic here
-                            // For example, call cubit.getAllBlogs() again
-                            await cubit.getAllBlogs(const NoParameters());
-                            _refreshController.refreshCompleted();
-                          },
-                          child: ListView.separated(
-                            scrollDirection: Axis.vertical,
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: AppPadding.p12,
-                            ),
-                            physics: const BouncingScrollPhysics(),
-                            itemBuilder: (BuildContext context, int index) =>
-                                PostWidget(
-                              model: cubit.allBlogs[index],
-                            ),
-                            separatorBuilder:
-                                (BuildContext context, int index) =>
-                                    const SizedBox(
-                              width: AppSize.s10,
-                            ),
-                            itemCount: cubit.allBlogs.length,
+                    controller: _refreshController,
+                    onRefresh: () async {
+                      // Perform refresh logic here
+                      // For example, call cubit.getAllBlogs() again
+                      await cubit.getAllBlogs(const NoParameters());
+                      _refreshController.refreshCompleted();
+                    },
+                    child: ListView.separated(
+                      scrollDirection: Axis.vertical,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AppPadding.p12,
+                      ),
+                      physics: const BouncingScrollPhysics(),
+                      itemBuilder: (BuildContext context, int index) =>
+                          PostWidget(
+                            model: cubit.allBlogs[index],
                           ),
-                        )
+                      separatorBuilder:
+                          (BuildContext context, int index) =>
+                      const SizedBox(
+                        width: AppSize.s10,
+                      ),
+                      itemCount: cubit.allBlogs.length,
+                    ),
+                  )
                       : EmptyListWidget(
-                          text: 'No Posts Loaded',
-                        ),
+                    text: 'No Posts Loaded',
+                  ),
                   fallback: (context) => PostsShimmerWidget(),
                 ),
               ),

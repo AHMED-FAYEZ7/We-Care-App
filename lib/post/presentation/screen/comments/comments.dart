@@ -94,10 +94,11 @@ class CommentsWidget extends StatelessWidget {
                                         child: Wrap(
                                           children: [
                                             Text(
-                                              'NICE DOCTOR',
+                                              cubit.comments[index]
+                                                  .commentContent,
                                               style: Theme.of(context)
                                                   .textTheme
-                                                  .bodyMedium,
+                                                  .displayMedium,
                                             ),
                                           ],
                                         ),
@@ -179,10 +180,11 @@ class CommentsWidget extends StatelessWidget {
                           color: ColorManager.primary,
                         ),
                         onPressed: () async {
-                          cubit.createComment(
+                          await cubit.createComment(
                             postId,
                             comment.text,
                           );
+                          cubit.getComments(postId);
                         },
                       ),
                     ),

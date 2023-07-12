@@ -73,7 +73,7 @@ class PostCubit extends Cubit<PostState> {
     });
   }
 
-/////////////create like////////////////
+/////////////create like and disLike////////////////
 
   createLike(String blogId) async {
     emit(CreateLikeLoadingState());
