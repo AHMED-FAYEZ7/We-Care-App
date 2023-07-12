@@ -77,4 +77,7 @@ class AppStrings {
   static const String appointment = "Appointment";
   static const String feeds = "Feeds";
   static const String profile = "Profile";
+
+  // Chat
+  static const String send = "Send";
 }

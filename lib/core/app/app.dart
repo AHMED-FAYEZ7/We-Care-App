@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/authentication/presentation/controller/auth_cubit.dart';
+import 'package:health_care/chat/presentation/controller/chat_cubit.dart';
 import 'package:health_care/core/routes/app_routes.dart';
 import 'package:health_care/core/services/services_locator.dart';
 import 'package:health_care/core/usecase/base_usecase.dart';
@@ -40,6 +41,9 @@ class _MyAppState extends State<MyApp> {
         BlocProvider<DoctorCubit>(
           create: (BuildContext context) =>
               sl<DoctorCubit>()..getDoctorData(const NoParameters()),
+        ),
+        BlocProvider<ChatCubit>(
+          create: (BuildContext context) => sl<ChatCubit>(),
         ),
       ],
       child: MaterialApp(
