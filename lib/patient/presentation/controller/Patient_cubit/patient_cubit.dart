@@ -20,8 +20,8 @@ import 'package:health_care/patient/domain/usecase/get_top_doctors_use_case.dart
 import 'package:health_care/patient/domain/usecase/make_doctor_review_use_case.dart';
 import 'package:health_care/patient/presentation/screens/appointment/appointment_screen.dart';
 import 'package:health_care/patient/presentation/screens/home/home_screen.dart';
-import 'package:health_care/patient/presentation/screens/posts/posts_screen.dart';
 import 'package:health_care/patient/presentation/screens/profile/profile_screen.dart';
+import 'package:health_care/post/presentation/screen/posts/posts_sceen.dart';
 
 part 'patient_state.dart';
 
@@ -67,7 +67,7 @@ class PatientCubit extends Cubit<PatientState> {
 
   List<Widget> screens = [
     const HomePatientScreen(),
-    PostsPatientScreen(),
+    PostsScreen(),
     AppointmentPatientScreen(),
     const ProfilePatientScreen(),
   ];

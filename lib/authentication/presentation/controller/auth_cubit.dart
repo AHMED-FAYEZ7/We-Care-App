@@ -43,7 +43,7 @@ class AuthCubit extends Cubit<AuthState> {
       emit(AuthLogInErrorState(error: l.message!));
     }, (r) {
       _appPreferences.setToken(r.token);
-      _appPreferences.setDoctorId(r.user!.id);
+      _appPreferences.setType(r.user!.type);
       emit(AuthLogInSuccessState(userData: r));
     });
   }

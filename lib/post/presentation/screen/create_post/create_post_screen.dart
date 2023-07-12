@@ -11,7 +11,8 @@ import 'package:health_care/core/global/theme/app_color/color_manager.dart';
 import 'package:health_care/core/routes/app_routes.dart';
 import 'package:health_care/core/widgets/app_bar_widget.dart';
 import 'package:health_care/doctor/presentation/controller/doctor_cubit/doctor_cubit.dart';
-import 'package:health_care/doctor/presentation/screens/create_post/widgets/pick_up_image_widget.dart';
+import 'package:health_care/post/presentation/controller/post_cubit.dart';
+import 'package:health_care/post/presentation/screen/create_post/widgets/pick_up_image_widget.dart';
 
 class CreatePostScreen extends StatefulWidget {
   CreatePostScreen({
@@ -53,14 +54,14 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<DoctorCubit, DoctorState>(
+    return BlocConsumer<PostCubit, PostState>(
       listener: (context, state) {
         if (state is CreatePostSuccessState) {
           Navigator.pop(context);
         }
       },
       builder: (context, state) {
-        var cubit = DoctorCubit.get(context);
+        var cubit = PostCubit.get(context);
         return Scaffold(
           appBar: AppBarWidget(
             isBack: true,
@@ -134,7 +135,10 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                 children: [
                                   SizedBox(
                                     child: Text(
-                                      cubit.doctorData?.name ?? '',
+                                      DoctorCubit.get(context)
+                                              .doctorData
+                                              ?.name ??
+                                          '',
                                       overflow: TextOverflow.ellipsis,
                                       style: const TextStyle(
                                         height: 1.4,

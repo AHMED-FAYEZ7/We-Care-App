@@ -9,6 +9,7 @@ import 'package:health_care/core/usecase/base_usecase.dart';
 import 'package:health_care/core/utils/constants.dart';
 import 'package:health_care/doctor/presentation/controller/doctor_cubit/doctor_cubit.dart';
 import 'package:health_care/patient/presentation/controller/Patient_cubit/patient_cubit.dart';
+import 'package:health_care/post/presentation/controller/post_cubit.dart';
 
 import '../global/theme/theme_data/theme_data_light.dart';
 
@@ -40,6 +41,9 @@ class _MyAppState extends State<MyApp> {
         BlocProvider<DoctorCubit>(
           create: (BuildContext context) =>
               sl<DoctorCubit>()..getDoctorData(const NoParameters()),
+        ),
+        BlocProvider<PostCubit>(
+          create: (BuildContext context) => sl<PostCubit>(),
         ),
       ],
       child: MaterialApp(

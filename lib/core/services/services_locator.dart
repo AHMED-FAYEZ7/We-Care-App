@@ -62,6 +62,7 @@ import 'package:health_care/patient/domain/usecase/get_top_doctors_use_case.dart
 import 'package:health_care/patient/domain/usecase/make_doctor_review_use_case.dart';
 import 'package:health_care/patient/domain/usecase/update_doctor_review_use_case.dart';
 import 'package:health_care/patient/presentation/controller/Patient_cubit/patient_cubit.dart';
+import 'package:health_care/post/presentation/controller/post_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:socket_io_client/socket_io_client.dart' as io;
 
@@ -277,6 +278,10 @@ Future<void> initAppModule() async {
 
   sl.registerFactory<DoctorCubit>(() => DoctorCubit(
         sl(),
+        sl(),
+      ));
+
+  sl.registerFactory<PostCubit>(() => PostCubit(
         sl(),
         sl(),
         sl(),
