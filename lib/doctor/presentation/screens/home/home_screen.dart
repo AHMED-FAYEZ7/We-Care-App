@@ -339,78 +339,79 @@ class _HomeDoctorScreenState extends State<HomeDoctorScreen> {
                 SizedBox(
                   height: AppSize.s25,
                 ),
-                TextButtonWidget(
-                  icon: Container(
-                    width: AppSize.s30,
-                  ),
-                  borderColor:
-                      // appointmentId == null
-                      //     ? ColorManager.lightGrey
-                      //     :
-                      ColorManager.primary,
-                  backGroundColor:
-                      // appointmentId == null
-                      //     ? ColorManager.lightGrey
-                      //     :
-                      ColorManager.primary,
-                  textColor: ColorManager.white,
-                  width: AppSize.s330,
-                  height: AppSize.s52,
-                  text: "Next",
-                  fontWeight: FontWeight.bold,
-                  onTap:
-                      // appointmentId == null
-                      //     ? () async {}
-                      //     :
-                      () async {
-                    if (timeController.text != '' &&
-                        periodController.text != '') {
-                      String reformatDateTime(String dateTimeString) {
-                        final inputFormat = DateFormat('yyyy-MM-dd hh:mm a');
-                        final dateTime = inputFormat.parse(dateTimeString);
-                        final outputFormat =
-                            DateFormat('yyyy-MM-dd\'T\'HH:mm:ss.SSS\'Z\'');
-                        final formattedDateTime = outputFormat.format(dateTime);
-                        return formattedDateTime;
-                      }
+                ConditionalBuilder(
+                  condition: state is! CreateBlockLoadingState,
+                  builder: (context) => TextButtonWidget(
+                    icon: Container(
+                      width: AppSize.s30,
+                    ),
+                    borderColor:
+                        // appointmentId == null
+                        //     ? ColorManager.lightGrey
+                        //     :
+                        ColorManager.primary,
+                    backGroundColor:
+                        // appointmentId == null
+                        //     ? ColorManager.lightGrey
+                        //     :
+                        ColorManager.primary,
+                    textColor: ColorManager.white,
+                    width: AppSize.s330,
+                    height: AppSize.s52,
+                    text: "Next",
+                    fontWeight: FontWeight.bold,
+                    onTap: () async {
+                      if (timeController.text != '' &&
+                          periodController.text != '') {
+                        String reformatDateTime(String dateTimeString) {
+                          final inputFormat = DateFormat('yyyy-MM-dd hh:mm a');
+                          final dateTime = inputFormat.parse(dateTimeString);
+                          final outputFormat =
+                              DateFormat('yyyy-MM-dd\'T\'HH:mm:ss.SSS\'Z\'');
+                          final formattedDateTime =
+                              outputFormat.format(dateTime);
+                          return formattedDateTime;
+                        }
 
-                      final originalDateTime =
-                          "${date ?? todayDate} ${timeController.text}";
-                      final formattedDateTime =
-                          reformatDateTime(originalDateTime);
-                      cubit.createTimeBlock(
-                        int.parse(periodController.text),
-                        formattedDateTime,
-                        type,
-                      );
-                    } else if (timeController.text == '') {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBarWidget(
-                          text: Text(
-                            'please add time',
-                            style: TextStyle(
-                              color: ColorManager.white,
-                              fontSize: AppSize.s16,
+                        final originalDateTime =
+                            "${date ?? todayDate} ${timeController.text}";
+                        final formattedDateTime =
+                            reformatDateTime(originalDateTime);
+                        cubit.createTimeBlock(
+                          int.parse(periodController.text),
+                          formattedDateTime,
+                          type,
+                        );
+                      } else if (timeController.text == '') {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBarWidget(
+                            text: Text(
+                              'please add time',
+                              style: TextStyle(
+                                color: ColorManager.white,
+                                fontSize: AppSize.s16,
+                              ),
                             ),
+                            backGroundColor: ColorManager.error,
                           ),
-                          backGroundColor: ColorManager.error,
-                        ),
-                      );
-                    } else if (periodController.text == '') {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBarWidget(
-                          text: Text(
-                            'please add period',
-                            style: TextStyle(
-                              color: ColorManager.white,
-                              fontSize: AppSize.s16,
+                        );
+                      } else if (periodController.text == '') {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBarWidget(
+                            text: Text(
+                              'please add period',
+                              style: TextStyle(
+                                color: ColorManager.white,
+                                fontSize: AppSize.s16,
+                              ),
                             ),
+                            backGroundColor: ColorManager.error,
                           ),
-                          backGroundColor: ColorManager.error,
-                        ),
-                      );
-                    }
-                  },
+                        );
+                      }
+                    },
+                  ),
+                  fallback: (context) => LoadingWidget(),
                 ),
               ],
             ),

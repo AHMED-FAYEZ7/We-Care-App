@@ -13,7 +13,30 @@ import 'package:health_care/patient/presentation/widgets/specialist_doctor_card_
 import 'package:health_care/patient/presentation/widgets/top_doctor_card_widget.dart';
 
 class HomePatientScreen extends StatelessWidget {
-  const HomePatientScreen({Key? key}) : super(key: key);
+  HomePatientScreen({Key? key}) : super(key: key);
+
+  List<Item1> specialistList = [
+    Item1(
+      ImageAssets.splashLogo,
+      "Allergist",
+      250,
+    ),
+    Item1(
+      ImageAssets.splashLogo,
+      'Heart',
+      252,
+    ),
+    Item1(
+      ImageAssets.splashLogo,
+      "Radiologist",
+      240,
+    ),
+    Item1(
+      ImageAssets.splashLogo,
+      "Urologist",
+      235,
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -62,16 +85,16 @@ class HomePatientScreen extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (BuildContext context, int index) =>
                           SpecialistDoctorCardWidget(
-                        specialistImage: ImageAssets.splashLogo,
-                        specialistName: 'heart',
-                        specialistNoDoctors: 252,
+                        specialistImage: specialistList[index].image,
+                        specialistName: specialistList[index].title,
+                        specialistNoDoctors: specialistList[index].num,
                         specialistColor: ColorManager.error,
                       ),
                       separatorBuilder: (BuildContext context, int index) =>
                           const SizedBox(
                         width: AppSize.s10,
                       ),
-                      itemCount: 10,
+                      itemCount: specialistList.length,
                     ),
                   ),
                 ),
@@ -168,4 +191,16 @@ class HomePatientScreen extends StatelessWidget {
       },
     );
   }
+}
+
+class Item1 {
+  String image;
+  String title;
+  int num;
+
+  Item1(
+    this.image,
+    this.title,
+    this.num,
+  );
 }

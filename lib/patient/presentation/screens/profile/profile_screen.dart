@@ -30,11 +30,12 @@ class ProfilePatientScreen extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      const CircleAvatar(
+                      CircleAvatar(
                         radius: AppSize.s40,
-                        backgroundImage: NetworkImage(
-                          "https://idsb.tmgrup.com.tr/ly/uploads/images/2022/12/19/247181.jpg",
+                        backgroundImage: const NetworkImage(
+                          "https://www.immunology.virginia.edu/wp-content/uploads/2021/08/blank-person-icon.png",
                         ),
+                        backgroundColor: ColorManager.white,
                       ),
                       const SizedBox(
                         width: AppSize.s20,

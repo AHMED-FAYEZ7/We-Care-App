@@ -7,6 +7,7 @@ import 'package:health_care/core/global/resources/icons_manger.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
 import 'package:health_care/core/services/services_locator.dart';
+import 'package:health_care/core/utils/constants.dart';
 import 'package:health_care/core/widgets/divider_widget.dart';
 import 'package:health_care/doctor/domain/model/blog_model.dart';
 import 'package:health_care/doctor/presentation/controller/doctor_cubit/doctor_cubit.dart';
@@ -21,6 +22,7 @@ class PostWidget extends StatefulWidget {
     this.isLike = false,
     required this.model,
     this.handelComment,
+    required this.type,
     Key? key,
   }) : super(key: key);
 
@@ -28,14 +30,18 @@ class PostWidget extends StatefulWidget {
   bool isLike = false;
   Function({String? comment})? handelComment;
   Color? likeColor;
+  String? type;
+
+  // final AppPreferences _appPreferences = sl<AppPreferences>();
+  // getType() async {
+  //   type = await _appPreferences.getType();
+  // }
 
   @override
   State<PostWidget> createState() => _PostWidgetState();
 }
 
 class _PostWidgetState extends State<PostWidget> {
-  final AppPreferences _appPreferences = sl<AppPreferences>();
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<PostCubit, PostState>(
@@ -43,34 +49,34 @@ class _PostWidgetState extends State<PostWidget> {
       builder: (context, state) {
         var cubit = PostCubit.get(context);
 
-        getLikeColor() async {
-          if (await _appPreferences.getType() == 'Doctor') {
-            bool doctorExists = cubit.likes.any(
-              (user) =>
-                  user.userInfo!.id == DoctorCubit.get(context).doctorData!.id,
-            );
-            if (doctorExists) {
-              widget.likeColor = ColorManager.primary;
-              return widget.likeColor;
-            } else {
-              widget.likeColor = Colors.red;
-              return widget.likeColor;
-            }
-          } else {
-            bool patientExists = cubit.likes.any(
-              (user) =>
-                  user.userInfo!.id ==
-                  PatientCubit.get(context).patientData!.id,
-            );
-            if (patientExists) {
-              widget.likeColor = ColorManager.primary;
-              return widget.likeColor;
-            } else {
-              widget.likeColor = Colors.red;
-              return widget.likeColor;
-            }
-          }
-        }
+        // getLikeColor() async {
+        //   if (await _appPreferences.getType() == 'Doctor') {
+        //     bool doctorExists = cubit.likes.any(
+        //       (user) =>
+        //           user.userInfo!.id == DoctorCubit.get(context).doctorData!.id,
+        //     );
+        //     if (doctorExists) {
+        //       widget.likeColor = ColorManager.primary;
+        //       return widget.likeColor;
+        //     } else {
+        //       widget.likeColor = Colors.red;
+        //       return widget.likeColor;
+        //     }
+        //   } else {
+        //     bool patientExists = cubit.likes.any(
+        //       (user) =>
+        //           user.userInfo!.id ==
+        //           PatientCubit.get(context).patientData!.id,
+        //     );
+        //     if (patientExists) {
+        //       widget.likeColor = ColorManager.primary;
+        //       return widget.likeColor;
+        //     } else {
+        //       widget.likeColor = Colors.red;
+        //       return widget.likeColor;
+        //     }
+        //   }
+        // }
 
         return Card(
           elevation: AppSize.s3,
@@ -87,8 +93,10 @@ class _PostWidgetState extends State<PostWidget> {
                     CircleAvatar(
                       radius: 25,
                       backgroundImage: NetworkImage(
-                        "https://idsb.tmgrup.com.tr/ly/uploads/images/2022/12/19/247181.jpg",
+                        widget.model.doctorInfo?.profilePicture ??
+                            Constants.defaultDoctorImage,
                       ),
+                      backgroundColor: ColorManager.white,
                     ),
                     const SizedBox(
                       width: AppSize.s8,
@@ -182,7 +190,7 @@ class _PostWidgetState extends State<PostWidget> {
                           minWidth: 1,
                           padding: EdgeInsets.zero,
                           child: Text(
-                            '#software',
+                            '#doctor',
                             style:
                                 Theme.of(context).textTheme.caption!.copyWith(
                                       color: ColorManager.primary,
@@ -200,7 +208,7 @@ class _PostWidgetState extends State<PostWidget> {
                           minWidth: 1,
                           padding: EdgeInsets.zero,
                           child: Text(
-                            '#flutter-dev',
+                            '#patient-recovery',
                             style:
                                 Theme.of(context).textTheme.caption!.copyWith(
                                       color: ColorManager.primary,
@@ -325,8 +333,17 @@ class _PostWidgetState extends State<PostWidget> {
                             CircleAvatar(
                               radius: 18,
                               backgroundImage: NetworkImage(
-                                "https://idsb.tmgrup.com.tr/ly/uploads/images/2022/12/19/247181.jpg",
+                                widget.type == 'Doctor'
+                                    ? DoctorCubit.get(context)
+                                            .doctorData
+                                            ?.profilePicture ??
+                                        Constants.defaultDoctorImage
+                                    : PatientCubit.get(context)
+                                            .patientData
+                                            ?.profilePicture ??
+                                        Constants.defaultPatientImage,
                               ),
+                              backgroundColor: ColorManager.white,
                             ),
                             const SizedBox(
                               width: 15,
@@ -344,7 +361,7 @@ class _PostWidgetState extends State<PostWidget> {
                     ),
                     InkWell(
                       onTap: () async {
-                        print(await _appPreferences.getType());
+                        // print(await _appPreferences.getType());
                         await cubit.createLike(widget.model.blogId);
                       },
                       child: Row(

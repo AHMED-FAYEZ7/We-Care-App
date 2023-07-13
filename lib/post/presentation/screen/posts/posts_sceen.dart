@@ -5,9 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/core/app/app_prefs.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
+import 'package:health_care/core/global/theme/app_color/color_manager.dart';
 import 'package:health_care/core/routes/app_routes.dart';
 import 'package:health_care/core/services/services_locator.dart';
 import 'package:health_care/core/usecase/base_usecase.dart';
+import 'package:health_care/core/utils/constants.dart';
+import 'package:health_care/doctor/presentation/controller/doctor_cubit/doctor_cubit.dart';
 import 'package:health_care/patient/presentation/widgets/empty_list_widget.dart';
 import 'package:health_care/patient/presentation/widgets/search_bar_widget.dart';
 import 'package:health_care/post/presentation/widget/shimmer/post_shimmer.dart';
@@ -40,8 +43,7 @@ class PostsScreen extends StatefulWidget {
 
 class _PostsScreenState extends State<PostsScreen> {
   final RefreshController _refreshController =
-  RefreshController(initialRefresh: false);
-
+      RefreshController(initialRefresh: false);
 
   @override
   void initState() {
@@ -86,17 +88,18 @@ class _PostsScreenState extends State<PostsScreen> {
                         children: [
                           Row(
                             children: [
-                              const CircleAvatar(
+                              CircleAvatar(
                                 radius: 23,
                                 backgroundImage: NetworkImage(
-                                  "https://idsb.tmgrup.com.tr/ly/uploads/images/2022/12/19/247181.jpg",
+                                  DoctorCubit.get(context)
+                                          .doctorData
+                                          ?.profilePicture ??
+                                      Constants.defaultDoctorImage,
                                 ),
+                                backgroundColor: ColorManager.white,
                               ),
                               SizedBox(
-                                width: MediaQuery
-                                    .of(context)
-                                    .size
-                                    .width * .62,
+                                width: MediaQuery.of(context).size.width * .62,
                                 child: SearchBarWidget(
                                   readOnly: true,
                                   onTap: () {
@@ -122,37 +125,37 @@ class _PostsScreenState extends State<PostsScreen> {
               Expanded(
                 child: ConditionalBuilder(
                   condition: widget.isRefresh != false,
-                  builder: (context) =>
-                  cubit.allBlogs.isNotEmpty
+                  builder: (context) => cubit.allBlogs.isNotEmpty
                       ? SmartRefresher(
-                    controller: _refreshController,
-                    onRefresh: () async {
-                      // Perform refresh logic here
-                      // For example, call cubit.getAllBlogs() again
-                      await cubit.getAllBlogs(const NoParameters());
-                      _refreshController.refreshCompleted();
-                    },
-                    child: ListView.separated(
-                      scrollDirection: Axis.vertical,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: AppPadding.p12,
-                      ),
-                      physics: const BouncingScrollPhysics(),
-                      itemBuilder: (BuildContext context, int index) =>
-                          PostWidget(
-                            model: cubit.allBlogs[index],
+                          controller: _refreshController,
+                          onRefresh: () async {
+                            // Perform refresh logic here
+                            // For example, call cubit.getAllBlogs() again
+                            await cubit.getAllBlogs(const NoParameters());
+                            _refreshController.refreshCompleted();
+                          },
+                          child: ListView.separated(
+                            scrollDirection: Axis.vertical,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: AppPadding.p12,
+                            ),
+                            physics: const BouncingScrollPhysics(),
+                            itemBuilder: (BuildContext context, int index) =>
+                                PostWidget(
+                              model: cubit.allBlogs[index],
+                              type: widget.type,
+                            ),
+                            separatorBuilder:
+                                (BuildContext context, int index) =>
+                                    const SizedBox(
+                              width: AppSize.s10,
+                            ),
+                            itemCount: cubit.allBlogs.length,
                           ),
-                      separatorBuilder:
-                          (BuildContext context, int index) =>
-                      const SizedBox(
-                        width: AppSize.s10,
-                      ),
-                      itemCount: cubit.allBlogs.length,
-                    ),
-                  )
+                        )
                       : EmptyListWidget(
-                    text: 'No Posts Loaded',
-                  ),
+                          text: 'No Posts Loaded',
+                        ),
                   fallback: (context) => PostsShimmerWidget(),
                 ),
               ),

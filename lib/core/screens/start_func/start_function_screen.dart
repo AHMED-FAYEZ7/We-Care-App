@@ -94,8 +94,8 @@ class _StartFunctionScreenState extends State<StartFunctionScreen> {
                       bottomLeft: Radius.circular(AppSize.s12),
                     ),
                     child: Image.network(
-                      "https://idsb.tmgrup.com.tr/ly/uploads/images/2022/12/19/247181.jpg",
-                      fit: BoxFit.cover,
+                      "https://cdn-icons-png.flaticon.com/512/3774/3774299.png",
+                      fit: BoxFit.fill,
                       width: AppSize.s100,
                       height: AppSize.s100,
                     ),

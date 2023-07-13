@@ -66,7 +66,7 @@ class PatientCubit extends Cubit<PatientState> {
   ];
 
   List<Widget> screens = [
-    const HomePatientScreen(),
+    HomePatientScreen(),
     PostsScreen(),
     AppointmentPatientScreen(),
     const ProfilePatientScreen(),

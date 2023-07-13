@@ -80,14 +80,6 @@ class UserLoginScreen extends StatelessWidget {
       builder: (context, state) {
         final cubit = AuthCubit.get(context);
         return Scaffold(
-          appBar: AppBar(
-            systemOverlayStyle: const SystemUiOverlayStyle(
-              statusBarColor: Colors.transparent,
-              statusBarIconBrightness: Brightness.dark,
-            ),
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-          ),
           body: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -97,9 +89,9 @@ class UserLoginScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    // const SizedBox(
-                    //   height: AppSize.s50,
-                    // ),
+                    const SizedBox(
+                      height: AppSize.s50,
+                    ),
                     const Image(
                       fit: BoxFit.fitHeight,
                       height: AppSize.s150,

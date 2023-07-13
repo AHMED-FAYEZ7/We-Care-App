@@ -15,9 +15,12 @@ class Constants {
   static const double zeroDouble = 0.0;
   static const List<String> emptyList = [];
   static const bool FALSE = false;
+
   // static const int apiTimeOut = 60000;
   static bool isLogout = false;
+
+  static const String defaultDoctorImage =
+      "https://cdn-icons-png.flaticon.com/512/3774/3774299.png";
+  static const String defaultPatientImage =
+      "https://www.immunology.virginia.edu/wp-content/uploads/2021/08/blank-person-icon.png";
 }
-
-
-

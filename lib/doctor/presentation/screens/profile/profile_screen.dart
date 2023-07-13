@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/core/global/resources/icons_manger.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
+import 'package:health_care/core/utils/constants.dart';
 import 'package:health_care/core/widgets/divider_widget.dart';
 import 'package:health_care/core/widgets/logout_widget.dart';
 import 'package:health_care/core/widgets/profile_item_widget.dart';
@@ -28,11 +29,13 @@ class ProfileDoctorScreen extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      const CircleAvatar(
+                      CircleAvatar(
                         radius: AppSize.s40,
                         backgroundImage: NetworkImage(
-                          "https://idsb.tmgrup.com.tr/ly/uploads/images/2022/12/19/247181.jpg",
+                          cubit.doctorData?.profilePicture ??
+                              Constants.defaultDoctorImage,
                         ),
+                        backgroundColor: ColorManager.white,
                       ),
                       const SizedBox(
                         width: AppSize.s20,

@@ -138,7 +138,7 @@ class PatientRegisterScreen extends StatelessWidget {
                 ),
                 TextButtonWidget(
                   icon: Container(
-                    width: AppSize.s30,
+                    width: AppSize.s0,
                   ),
                   borderColor: ColorManager.primary,
                   backGroundColor: ColorManager.primary,

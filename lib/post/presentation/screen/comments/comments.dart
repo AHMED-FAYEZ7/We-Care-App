@@ -48,11 +48,12 @@ class CommentsWidget extends StatelessWidget {
                           itemBuilder: (context, index) => Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const CircleAvatar(
+                              CircleAvatar(
                                 radius: AppSize.s25,
                                 backgroundImage: NetworkImage(
-                                  "https://idsb.tmgrup.com.tr/ly/uploads/images/2022/12/19/247181.jpg",
+                                  "https://www.immunology.virginia.edu/wp-content/uploads/2021/08/blank-person-icon.png",
                                 ),
+                                backgroundColor: ColorManager.white,
                               ),
                               const SizedBox(
                                 width: AppSize.s5,

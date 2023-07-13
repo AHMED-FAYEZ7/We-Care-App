@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
+import 'package:health_care/core/utils/constants.dart';
 import 'package:health_care/core/widgets/app_bar_widget.dart';
 import 'package:health_care/core/widgets/snack_bar_widget.dart';
 import 'package:health_care/doctor/presentation/controller/doctor_cubit/doctor_cubit.dart';
@@ -121,8 +122,12 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                           CircleAvatar(
                             radius: 23,
                             backgroundImage: NetworkImage(
-                              "https://idsb.tmgrup.com.tr/ly/uploads/images/2022/12/19/247181.jpg",
+                              DoctorCubit.get(context)
+                                      .doctorData
+                                      ?.profilePicture ??
+                                  Constants.defaultDoctorImage,
                             ),
+                            backgroundColor: ColorManager.white,
                           ),
                           const SizedBox(
                             width: AppSize.s8,
