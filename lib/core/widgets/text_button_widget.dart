@@ -38,17 +38,14 @@ class TextButtonWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Expanded(
-              child: Padding(
-                padding: const EdgeInsetsDirectional.only(end: AppPadding.p35),
-                child: Text(
-                  textAlign: TextAlign.center,
-                  text,
-                  style: TextStyle(
-                    fontSize: AppSize.s18,
-                    fontWeight: fontWeight,
-                    color: textColor,
-                    fontStyle: FontStyle.normal,
-                  ),
+              child: Text(
+                textAlign: TextAlign.center,
+                text,
+                style: TextStyle(
+                  fontSize: AppSize.s18,
+                  fontWeight: fontWeight,
+                  color: textColor,
+                  fontStyle: FontStyle.normal,
                 ),
               ),
             ),

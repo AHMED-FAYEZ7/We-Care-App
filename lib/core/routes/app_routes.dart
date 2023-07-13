@@ -12,6 +12,9 @@ import 'package:health_care/authentication/presentation/screens/user/user_update
 import 'package:health_care/authentication/presentation/screens/user/user_update_password_screen.dart';
 import 'package:health_care/chat/presentation/screens/chat_screen.dart';
 import 'package:health_care/core/global/resources/strings_manger.dart';
+import 'package:health_care/core/screens/start_func/start_function_screen.dart';
+import 'package:health_care/core/screens/video/video_screen.dart';
+import 'package:health_care/patient/presentation/screens/payment/payment_screen.dart';
 import 'package:health_care/post/presentation/screen/create_post/create_post_screen.dart';
 import 'package:health_care/doctor/presentation/screens/doctor_layout/doctor_layout_screen.dart';
 import 'package:health_care/patient/domain/model/appointment_model.dart';
@@ -53,6 +56,9 @@ class Routes {
   static const String bookAppointmentRoute = "/bookAppointment";
   static const String reviewsRoute = "/reviews";
   static const String writeReviewRoute = "/writeReview";
+  static const String paymentRoute = "/payment";
+  static const String startFuncRoute = "/startFunc";
+  static const String videoRoute = "/videoFunc";
 
 ////////////////Chat/////////////
   static const String chatRoute = "/chatRoute";
@@ -107,6 +113,17 @@ class RouteGenerator {
             builder: (_) => DoctorProfilePatientScreen(
                   doctorModel: doctorModel,
                 ));
+      case Routes.paymentRoute:
+        return MaterialPageRoute(builder: (_) => const PaymentScreen());
+      case Routes.videoRoute:
+        return MaterialPageRoute(builder: (_) => const VideoScreen());
+      case Routes.startFuncRoute:
+        final UserMyAppointments model =
+            routeSettings.arguments as UserMyAppointments;
+        return MaterialPageRoute(
+            builder: (_) => StartFunctionScreen(
+                  model: model,
+                ));
       case Routes.bookAppointmentRoute:
         final Map<String, dynamic> arguments =
             routeSettings.arguments as Map<String, dynamic>;
@@ -129,11 +146,13 @@ class RouteGenerator {
       case Routes.writeReviewRoute:
         return MaterialPageRoute(builder: (_) => WriteReviewScreen());
       case Routes.chatRoute:
-        // final String senderId = routeSettings.arguments as String;
-        // final String receiverId = routeSettings.arguments as String;
+        final Map<String, dynamic> arguments =
+            routeSettings.arguments as Map<String, dynamic>;
+        final String senderId = arguments['senderId'] as String;
+        final String receiverId = arguments['receiverId'] as String;
         // final String roomId = routeSettings.arguments as String;
-        String senderId = "64564cc5061fd8d24c5ef612";
-        String receiverId = "64564d4b061fd8d24c5ef61a";
+        // String senderId = "64564cc5061fd8d24c5ef612";
+        // String receiverId = "64564d4b061fd8d24c5ef61a";
         String roomId = "6458ccfba57c498eef445131";
 
         return MaterialPageRoute(

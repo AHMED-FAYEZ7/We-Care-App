@@ -32,7 +32,7 @@ class _AppointmentWidgetState extends State<AppointmentWidget> {
   getType(String type) {
     if (type == 'chat') {
       text = 'Chat';
-      icon = Icons.chat;
+      icon = Icons.chat_outlined;
     } else if (type == 'video call') {
       text = 'Video Call';
       icon = Icons.videocam_outlined;
@@ -88,25 +88,39 @@ class _AppointmentWidgetState extends State<AppointmentWidget> {
                   const SizedBox(
                     height: AppSize.s5,
                   ),
-                  RichText(
-                    textAlign: TextAlign.center,
-                    text: TextSpan(
-                      style: const TextStyle(
-                        fontSize: AppSize.s14,
-                        color: Colors.black, // Default color for the text
+                  Row(
+                    children: [
+                      Text(
+                        text,
+                        style: const TextStyle(
+                          fontSize: AppSize.s14,
+                          color: Colors.black,
+                        ),
                       ),
-                      children: [
-                        TextSpan(
-                          text: text,
+                      const SizedBox(
+                        width: AppSize.s5,
+                      ),
+                      Card(
+                        elevation: AppSize.s0,
+                        shape: RoundedRectangleBorder(),
+                        color: widget.model.paid
+                            ? Colors.green
+                            : ColorManager.grey,
+                        child: Padding(
+                          padding: const EdgeInsets.all(
+                            AppPadding.p2,
+                          ),
+                          child: Text(
+                            widget.model.paid ? 'Paid' : 'Not Paid',
+                            style: TextStyle(
+                              color: widget.model.paid
+                                  ? ColorManager.white
+                                  : ColorManager.black,
+                            ),
+                          ),
                         ),
-                        TextSpan(
-                          text: ' - Schedule',
-                          style: TextStyle(
-                            color: ColorManager.primary,
-                          ), // Blue color for "Dr. Leo Messi"
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                   const SizedBox(
                     height: AppSize.s5,

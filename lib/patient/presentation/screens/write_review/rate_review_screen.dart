@@ -152,7 +152,7 @@ class WriteReviewScreen extends StatelessWidget {
                   condition: state is! MakeDoctorReviewLoadingState,
                   builder: (context) => TextButtonWidget(
                     icon: Container(
-                      width: AppSize.s30,
+                      width: AppSize.s0,
                     ),
                     borderColor:
                         // appointmentId == null

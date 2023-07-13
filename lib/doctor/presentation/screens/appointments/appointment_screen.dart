@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
+import 'package:health_care/core/routes/app_routes.dart';
 import 'package:health_care/core/usecase/base_usecase.dart';
+import 'package:health_care/core/widgets/appointment_widget.dart';
+import 'package:health_care/core/widgets/snack_bar_widget.dart';
 import 'package:health_care/doctor/presentation/controller/doctor_cubit/doctor_cubit.dart';
-import 'package:health_care/doctor/presentation/screens/appointments/widget/appoint_widget.dart';
 import 'package:health_care/patient/presentation/widgets/empty_list_widget.dart';
 import 'package:health_care/patient/presentation/widgets/shimmer/doctor_shimmer_widget.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -107,8 +109,33 @@ class _AppointmentDoctorScreenState extends State<AppointmentDoctorScreen> {
                               ),
                               physics: const BouncingScrollPhysics(),
                               itemBuilder: (BuildContext context, int index) =>
-                                  AppointWidget(
-                                model: cubit.upcomingAppointments[index],
+                                  InkWell(
+                                onTap: () {
+                                  if (cubit.upcomingAppointments[index].paid) {
+                                    Navigator.pushNamed(
+                                      context,
+                                      Routes.startFuncRoute,
+                                      arguments:
+                                          cubit.upcomingAppointments[index],
+                                    );
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBarWidget(
+                                        text: Text(
+                                          'Sorry, doctor ${cubit.doctorData?.name ?? ''} Not Paid yet',
+                                          style: TextStyle(
+                                            color: ColorManager.white,
+                                            fontSize: AppSize.s16,
+                                          ),
+                                        ),
+                                        backGroundColor: ColorManager.error,
+                                      ),
+                                    );
+                                  }
+                                },
+                                child: AppointmentWidget(
+                                  model: cubit.upcomingAppointments[index],
+                                ),
                               ),
                               separatorBuilder:
                                   (BuildContext context, int index) =>
@@ -142,7 +169,7 @@ class _AppointmentDoctorScreenState extends State<AppointmentDoctorScreen> {
                               ),
                               physics: const BouncingScrollPhysics(),
                               itemBuilder: (BuildContext context, int index) =>
-                                  AppointWidget(
+                                  AppointmentWidget(
                                 model: cubit.pastAppointments[index],
                               ),
                               separatorBuilder:

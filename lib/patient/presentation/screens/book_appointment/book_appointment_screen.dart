@@ -164,7 +164,7 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                   condition: state is! BookAppointmentByIdLoadingState,
                   builder: (context) => TextButtonWidget(
                     icon: Container(
-                      width: AppSize.s30,
+                      width: AppSize.s0,
                     ),
                     borderColor: appointmentId == null
                         ? ColorManager.lightGrey
