@@ -8,6 +8,7 @@ import 'package:health_care/core/global/resources/icons_manger.dart';
 import 'package:health_care/core/global/resources/strings_manger.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
+import 'package:health_care/core/routes/app_routes.dart';
 import 'package:health_care/core/widgets/app_bar_widget.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -220,6 +221,24 @@ class _ChatScreenState extends State<ChatScreen> {
                                         widget.receiverId,
                                       );
                                       _scrollToBottom();
+                                    },
+                                  ),
+                                  IconButton(
+                                    icon: Icon(
+                                      IconBroken.Call,
+                                      size: AppSize.s30,
+                                      color: ColorManager.primary,
+                                    ),
+                                    onPressed: () {
+                                      Navigator.pushNamed(
+                                          context, Routes.videoRoute,
+                                          arguments: {
+                                            // 'userID': widget.model.patientInfo!.id,
+                                            // 'userName': widget.model.patientInfo!.name,
+                                            'userID':
+                                                "64564cc5061fd8d24c5ef612",
+                                            'userName': "basyon",
+                                          });
                                     },
                                   ),
                                 ],

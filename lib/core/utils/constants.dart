@@ -9,6 +9,9 @@ class Constants {
   // static const String empty = "";
   // static const String token = "SEND TOKEN HERE";
   static const String empty = "";
+  static const int APPID = 456506763;
+  static const String APPSign =
+      "ee68e6d728e58732e8ee47e4629cacbcf894c7cabe06440c6baff477caaf4cd1";
   static const int zero = 0;
   static const int three = 3;
   static const int five = 5;
@@ -18,6 +21,3 @@ class Constants {
   // static const int apiTimeOut = 60000;
   static bool isLogout = false;
 }
-
-
-

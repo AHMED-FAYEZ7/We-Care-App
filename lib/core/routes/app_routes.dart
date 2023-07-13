@@ -116,7 +116,15 @@ class RouteGenerator {
       case Routes.paymentRoute:
         return MaterialPageRoute(builder: (_) => const PaymentScreen());
       case Routes.videoRoute:
-        return MaterialPageRoute(builder: (_) => const VideoScreen());
+        final Map<String, dynamic> arguments =
+            routeSettings.arguments as Map<String, dynamic>;
+        final String userID = arguments['userID'] as String;
+        final String userName = arguments['userName'] as String;
+        return MaterialPageRoute(
+            builder: (_) => VideoScreen(
+                  userID: userID,
+                  userName: userName,
+                ));
       case Routes.startFuncRoute:
         final UserMyAppointments model =
             routeSettings.arguments as UserMyAppointments;
@@ -148,18 +156,18 @@ class RouteGenerator {
       case Routes.chatRoute:
         final Map<String, dynamic> arguments =
             routeSettings.arguments as Map<String, dynamic>;
-        final String senderId = arguments['senderId'] as String;
-        final String receiverId = arguments['receiverId'] as String;
+        // final String senderId = arguments['senderId'] as String;
+        // final String receiverId = arguments['receiverId'] as String;
         // final String roomId = routeSettings.arguments as String;
-        // String senderId = "64564cc5061fd8d24c5ef612";
-        // String receiverId = "64564d4b061fd8d24c5ef61a";
+        String senderId = "64564cc5061fd8d24c5ef612";
+        String receiverId = "64564d4b061fd8d24c5ef61a";
         String roomId = "6458ccfba57c498eef445131";
 
         return MaterialPageRoute(
             builder: (_) => ChatScreen(
                   senderId: senderId,
                   receiverId: receiverId,
-                  roomId: roomId,
+                  // roomId: roomId,
                 ));
       default:
         return unDefinedRoute();
