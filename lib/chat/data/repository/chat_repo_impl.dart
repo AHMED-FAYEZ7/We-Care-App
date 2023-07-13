@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:health_care/chat/data/data_source/chat_remote_data_source.dart';
 import 'package:health_care/chat/data/mapper/chat_mapper.dart';
 import 'package:health_care/chat/data/response/chat_response/chat_response.dart';
@@ -54,7 +55,7 @@ class ChatRepoImpl implements BaseChatRepository {
   }
 
   @override
-  Future<Either<Failure, MessageModel>> userSendMessage({
+  Future<Either<Failure, MessageModelServer>> userSendMessage({
     required String roomId,
     required String messageContent,
   }) async {
@@ -84,5 +85,25 @@ class ChatRepoImpl implements BaseChatRepository {
     );
 
     return response;
+  }
+
+  @override
+  Future<void> sendMessage(MessageModel messageModel) async {
+    try {
+      await _baseChatRemoteDataSource.userSendMessage(messageModel);
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  @override
+  Stream<List<MessageModel>> streamMessagesForChat({
+    required String senderId,
+    required String receiverId,
+  }) {
+    return _baseChatRemoteDataSource.streamMessagesForChat(
+      senderId,
+      receiverId,
+    );
   }
 }

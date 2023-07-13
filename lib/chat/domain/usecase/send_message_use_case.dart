@@ -6,13 +6,13 @@ import 'package:health_care/core/error/failure.dart';
 import 'package:health_care/core/usecase/base_usecase.dart';
 
 class SendMessageUseCase
-    implements BaseUseCase<SendMessageUseCaseInput, MessageModel> {
+    implements BaseUseCase<SendMessageUseCaseInput, MessageModelServer> {
   final BaseChatRepository _baseChatRepository;
 
   SendMessageUseCase(this._baseChatRepository);
 
   @override
-  Future<Either<Failure, MessageModel>> call(
+  Future<Either<Failure, MessageModelServer>> call(
     SendMessageUseCaseInput input,
   ) async {
     return await _baseChatRepository.userSendMessage(

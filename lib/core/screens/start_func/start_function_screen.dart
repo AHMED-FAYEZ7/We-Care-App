@@ -354,10 +354,12 @@ class _StartFunctionScreenState extends State<StartFunctionScreen> {
                       'receiverId': widget.model.doctorInfo!.id,
                     });
                   } else {
-                    Navigator.pushNamed(
-                      context,
-                      Routes.videoRoute,
-                    );
+                    Navigator.pushNamed(context, Routes.videoRoute, arguments: {
+                      // 'userID': widget.model.patientInfo!.id,
+                      // 'userName': widget.model.patientInfo!.name,
+                      'userID': "64564cc5061fd8d24c5ef612",
+                      'userName': "basyon",
+                    });
                   }
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(

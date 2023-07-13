@@ -25,7 +25,7 @@ class CreateChatErrorState extends ChatState {
 class SendMessageLoadingState extends ChatState {}
 
 class SendMessageLoadedState extends ChatState {
-  final MessageModel messageData;
+  final MessageModelServer messageData;
 
   SendMessageLoadedState({required this.messageData});
 }
@@ -53,6 +53,21 @@ class GetAllChatsErrorState extends ChatState {
 }
 
 //
+class StreamLoadingState extends ChatState {}
+
+class StreamLoadedState extends ChatState {
+  final List<MessageModel> listOfMessages;
+  StreamLoadedState({
+    required this.listOfMessages,
+  });
+}
+
+class StreamErrorState extends ChatState {
+  final String error;
+
+  StreamErrorState(this.error);
+}
+
 class ChatLoadingState extends ChatState {}
 
 class ChatLoadedState extends ChatState {
@@ -67,3 +82,15 @@ class ChatErrorState extends ChatState {
 
   ChatErrorState(this.error);
 }
+
+class GalleryImagePickedSuccessState extends ChatState {}
+
+class GalleryImagePickedErrorState extends ChatState {}
+
+class CameraImagePickedSuccessState extends ChatState {}
+
+class CameraImagePickedErrorState extends ChatState {}
+
+class UploadImagePickedSuccessState extends ChatState {}
+
+class UploadImagePickedErrorState extends ChatState {}

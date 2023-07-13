@@ -38,6 +38,14 @@ dependencies:
   image_picker: ^1.0.0
   permission_handler:
   time_picker_widget: ^1.0.0+10
+  firebase_core: ^2.9.0
+  cloud_firestore: ^4.5.2
+  timeago: "3.1.0"
+  firebase_storage: ^11.2.4
+  zego_uikit_prebuilt_call: ^3.10.4
+
+
+
 
 dev_dependencies:
   flutter_test:

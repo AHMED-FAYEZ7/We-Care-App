@@ -6,6 +6,10 @@ abstract class BaseUseCase<In, Out> {
   Future<Either<Failure, Out>> call(In input);
 }
 
+abstract class VoidUseCase<R, P> {
+  Future<R> call({required P params});
+}
+
 abstract class TestUseCase<In, Out> {
   Stream<Out> call(In input);
 }
