@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:health_care/chat/data/response/chat_response/chat_response.dart';
 import 'package:health_care/chat/domain/model/chat_model.dart';
@@ -7,7 +8,7 @@ abstract class BaseChatRepository {
   Future<Either<Failure, BaseChat>> userCreateChat({
     required String receiverId,
   });
-  Future<Either<Failure, MessageModel>> userSendMessage({
+  Future<Either<Failure, MessageModelServer>> userSendMessage({
     required String roomId,
     required String messageContent,
   });
@@ -15,5 +16,12 @@ abstract class BaseChatRepository {
 
   Stream<AllMessagesResponse> userReceiveMessage({
     required String roomId,
+  });
+
+  Future<void> sendMessage(MessageModel messageModel);
+
+  Stream<List<MessageModel>> streamMessagesForChat({
+    required String senderId,
+    required String receiverId,
   });
 }

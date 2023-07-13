@@ -29,7 +29,9 @@ import 'package:health_care/chat/data/repository/chat_repo_impl.dart';
 import 'package:health_care/chat/domain/repository/chat_repository.dart';
 import 'package:health_care/chat/domain/usecase/get_all_messages_use_case.dart';
 import 'package:health_care/chat/domain/usecase/get_messages_use_case.dart';
+import 'package:health_care/chat/domain/usecase/get_stream_messages_use_case.dart';
 import 'package:health_care/chat/domain/usecase/user_create_chat_use_case.dart';
+import 'package:health_care/chat/domain/usecase/user_send_message_use_case.dart';
 import 'package:health_care/chat/presentation/controller/chat_cubit.dart';
 import 'package:health_care/doctor/data/data_source/doctor_remote_data_source.dart';
 import 'package:health_care/doctor/data/network/doctor_api/doctor_api.dart';
@@ -232,6 +234,13 @@ Future<void> initAppModule() async {
   sl.registerLazySingleton<SendMessageUseCase>(() => SendMessageUseCase(sl()));
 
   sl.registerLazySingleton<GetMessagesUseCase>(() => GetMessagesUseCase(sl()));
+
+  sl.registerLazySingleton<UserSendMessageUseCase>(
+      () => UserSendMessageUseCase(sl()));
+
+  sl.registerLazySingleton<GetStreamMessagesUseCase>(
+      () => GetStreamMessagesUseCase(sl()));
+
 // /////////////////////// blog /////////////
 
   sl.registerLazySingleton<CreateBlogUseCase>(() => CreateBlogUseCase(sl()));
@@ -293,6 +302,8 @@ Future<void> initAppModule() async {
         sl(),
       ));
   sl.registerFactory<ChatCubit>(() => ChatCubit(
+        sl(),
+        sl(),
         sl(),
         sl(),
         sl(),

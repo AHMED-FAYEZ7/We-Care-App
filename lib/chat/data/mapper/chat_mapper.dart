@@ -61,8 +61,8 @@ extension BaseMessageResponseMapper on BaseMessageResponse? {
 }
 
 extension MessageResponseMapper on MessageResponse? {
-  MessageModel toDomain() {
-    return MessageModel(
+  MessageModelServer toDomain() {
+    return MessageModelServer(
       this?.messageData?.toDomain(),
     );
   }

@@ -77,7 +77,8 @@ class AppStrings {
   static const String appointment = "Appointment";
   static const String feeds = "Feeds";
   static const String profile = "Profile";
-
+  static const photoGallery = "photo_from_galley";
+  static const photoCamera = "photo_from_camera";
   // Chat
   static const String send = "Send";
 }

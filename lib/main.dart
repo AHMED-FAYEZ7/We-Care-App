@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
@@ -10,8 +11,11 @@ void main() async {
   BlocOverrides.runZoned(
     () async {
       WidgetsFlutterBinding.ensureInitialized();
+      await Firebase.initializeApp();
       await initAppModule();
-      runApp(Phoenix(child: MyApp(),));
+      runApp(Phoenix(
+        child: MyApp(),
+      ));
     },
     blocObserver: MyBlocObserver(),
   );
