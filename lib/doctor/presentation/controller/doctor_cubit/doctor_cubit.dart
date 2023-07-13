@@ -11,6 +11,7 @@ import 'package:health_care/doctor/domain/usecase/create_blog_use_case.dart';
 import 'package:health_care/doctor/domain/usecase/create_comment_use_case.dart';
 import 'package:health_care/doctor/domain/usecase/create_dislike_use_case.dart';
 import 'package:health_care/doctor/domain/usecase/create_like_use_case.dart';
+import 'package:health_care/doctor/domain/usecase/create_time_block_use_case.dart';
 import 'package:health_care/doctor/domain/usecase/get_all_blogs_use_case.dart';
 import 'package:health_care/doctor/domain/usecase/get_blogs_comments_use_case.dart';
 import 'package:health_care/doctor/domain/usecase/get_blogs_likes_use_case.dart';
@@ -26,12 +27,14 @@ part 'doctor_state.dart';
 
 class DoctorCubit extends Cubit<DoctorState> {
   GetUserDataUseCase _getUserDataUseCase = sl<GetUserDataUseCase>();
+  CreateTimeBlockUseCase _createTimeBlockUseCase = sl<CreateTimeBlockUseCase>();
 
   GetMyAppointmentsUseCase _getMyAppointmentsUseCase =
       sl<GetMyAppointmentsUseCase>();
 
   DoctorCubit(
     this._getUserDataUseCase,
+    this._createTimeBlockUseCase,
     this._getMyAppointmentsUseCase,
   ) : super(DoctorInitial());
 
@@ -45,7 +48,7 @@ class DoctorCubit extends Cubit<DoctorState> {
   ];
 
   List<Widget> screens = [
-    const HomeDoctorScreen(),
+    HomeDoctorScreen(),
     PostsScreen(),
     AppointmentDoctorScreen(),
     const ProfileDoctorScreen(),
@@ -91,6 +94,32 @@ class DoctorCubit extends Cubit<DoctorState> {
         upcomingAppointments = r.upcomingAppointmentsInfo!;
         pastAppointments = r.pastAppointmentInfo!;
         emit(GetMyAppointmentsSuccessState());
+      },
+    );
+  }
+
+  /////////////get my appointment////////////////
+
+  createTimeBlock(
+    int period,
+    String startTime,
+    String type,
+  ) async {
+    emit(CreateBlockLoadingState());
+
+    (await _createTimeBlockUseCase.call(
+      CreateTimeBlockUseCaseInput(
+        period: period,
+        startTime: startTime,
+        callType: type,
+      ),
+    ))
+        .fold(
+      (l) {
+        emit(CreateBlockFailureState(error: l.message!));
+      },
+      (r) {
+        emit(CreateBlockSuccessState());
       },
     );
   }

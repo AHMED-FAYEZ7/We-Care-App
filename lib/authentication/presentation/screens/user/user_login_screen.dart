@@ -7,8 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/authentication/domain/usecase/user_login_usecase.dart';
 import 'package:health_care/authentication/presentation/controller/auth_cubit.dart';
 import 'package:health_care/authentication/presentation/widgets/form_field_widget.dart';
-import 'package:health_care/authentication/presentation/widgets/snack_bar_widget.dart';
-import 'package:health_care/authentication/presentation/widgets/text_button_widget.dart';
+import 'package:health_care/core/widgets/text_button_widget.dart';
 import 'package:health_care/authentication/presentation/widgets/horizontal_or_line_widget.dart';
 import 'package:health_care/core/app/app_prefs.dart';
 import 'package:health_care/core/assets/app_assets.dart';
@@ -20,6 +19,7 @@ import 'package:health_care/core/routes/app_routes.dart';
 import 'package:health_care/core/services/services_locator.dart';
 import 'package:health_care/core/utils/functions.dart';
 import 'package:health_care/core/widgets/loading_widget.dart';
+import 'package:health_care/core/widgets/snack_bar_widget.dart';
 
 class UserLoginScreen extends StatelessWidget {
   UserLoginScreen({Key? key}) : super(key: key);

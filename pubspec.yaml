@@ -37,6 +37,7 @@ dependencies:
   pull_to_refresh: ^2.0.0
   image_picker: ^1.0.0
   permission_handler:
+  time_picker_widget: ^1.0.0+10
 
 dev_dependencies:
   flutter_test:

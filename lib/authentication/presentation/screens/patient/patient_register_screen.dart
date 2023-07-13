@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health_care/authentication/presentation/widgets/form_field_widget.dart';
-import 'package:health_care/authentication/presentation/widgets/text_button_widget.dart';
+import 'package:health_care/core/widgets/text_button_widget.dart';
 import 'package:health_care/authentication/presentation/widgets/horizontal_or_line_widget.dart';
 import 'package:health_care/core/assets/app_assets.dart';
 import 'package:health_care/core/global/resources/strings_manger.dart';

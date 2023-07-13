@@ -20,3 +20,15 @@ class GetMyAppointmentsLoadingState extends DoctorState {}
 class GetMyAppointmentsSuccessState extends DoctorState {}
 
 class GetMyAppointmentsFailureState extends DoctorState {}
+
+////////////////////////////////////////////
+
+class CreateBlockLoadingState extends DoctorState {}
+
+class CreateBlockSuccessState extends DoctorState {}
+
+class CreateBlockFailureState extends DoctorState {
+  final String error;
+
+  CreateBlockFailureState({required this.error});
+}

@@ -4,12 +4,12 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/authentication/domain/model/user_model.dart';
-import 'package:health_care/authentication/presentation/widgets/text_button_widget.dart';
+import 'package:health_care/core/widgets/text_button_widget.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
 import 'package:health_care/core/routes/app_routes.dart';
 import 'package:health_care/patient/presentation/controller/Patient_cubit/patient_cubit.dart';
-import 'package:health_care/patient/presentation/screens/doctor_profile/widget/clendar.dart';
+import 'package:health_care/core/widgets/clendar.dart';
 import 'package:health_care/patient/presentation/screens/doctor_profile/widget/column_info.dart';
 import 'package:health_care/core/widgets/app_bar_widget.dart';
 import 'package:health_care/patient/presentation/widgets/doctor_widget.dart';

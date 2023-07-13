@@ -3,7 +3,7 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:health_care/authentication/presentation/widgets/text_button_widget.dart';
+import 'package:health_care/core/widgets/text_button_widget.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
 import 'package:health_care/core/routes/app_routes.dart';
@@ -178,12 +178,7 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                     text: "Next",
                     fontWeight: FontWeight.bold,
                     onTap: appointmentId == null
-                        ? () async {
-                            Navigator.pushNamed(
-                              context,
-                              Routes.writeReviewRoute,
-                            );
-                          }
+                        ? () async {}
                         : () async {
                             cubit.bookAppointment(appointmentId!);
                             print(
