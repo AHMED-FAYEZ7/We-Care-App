@@ -41,7 +41,7 @@ class WriteReviewScreen extends StatelessWidget {
               children: [
                 ClipOval(
                   child: Image.network(
-                    "https://idsb.tmgrup.com.tr/ly/uploads/images/2022/12/19/247181.jpg",
+                    "https://images.unsplash.com/photo-1550831107-1553da8c8464?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjR8fGRvY3RvcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
                     fit: BoxFit.cover,
                     width: AppSize.s150,
                     height: AppSize.s150,
@@ -61,7 +61,7 @@ class WriteReviewScreen extends StatelessWidget {
                     children: [
                       const TextSpan(text: 'How was your experience\nwith '),
                       TextSpan(
-                        text: 'Dr. Leo Messi',
+                        text: 'Dr. Ahmed Ammar',
                         style: TextStyle(
                           color: ColorManager.primary,
                         ), // Blue color for "Dr. Leo Messi"

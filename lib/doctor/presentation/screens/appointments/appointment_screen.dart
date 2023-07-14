@@ -3,13 +3,15 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:health_care/core/app/app_prefs.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
 import 'package:health_care/core/routes/app_routes.dart';
+import 'package:health_care/core/services/services_locator.dart';
 import 'package:health_care/core/usecase/base_usecase.dart';
-import 'package:health_care/core/widgets/appointment_widget.dart';
 import 'package:health_care/core/widgets/snack_bar_widget.dart';
 import 'package:health_care/doctor/presentation/controller/doctor_cubit/doctor_cubit.dart';
+import 'package:health_care/doctor/presentation/screens/appointments/widget/appointment_doctor_widget.dart';
 import 'package:health_care/patient/presentation/widgets/empty_list_widget.dart';
 import 'package:health_care/patient/presentation/widgets/shimmer/doctor_shimmer_widget.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -24,6 +26,13 @@ class AppointmentDoctorScreen extends StatefulWidget {
 
   int appointmentIndex = 0;
 
+  final AppPreferences _appPreferences = sl<AppPreferences>();
+  String? type;
+
+  getType() async {
+    type = await _appPreferences.getType();
+  }
+
   @override
   State<AppointmentDoctorScreen> createState() =>
       _AppointmentDoctorScreenState();
@@ -36,6 +45,7 @@ class _AppointmentDoctorScreenState extends State<AppointmentDoctorScreen> {
   @override
   void initState() {
     super.initState();
+    widget.getType();
     if (widget.isRefresh == false) {
       DoctorCubit.get(context).getMyAppointments(const NoParameters());
     }
@@ -113,11 +123,12 @@ class _AppointmentDoctorScreenState extends State<AppointmentDoctorScreen> {
                                 onTap: () {
                                   if (cubit.upcomingAppointments[index].paid) {
                                     Navigator.pushNamed(
-                                      context,
-                                      Routes.startFuncRoute,
-                                      arguments:
-                                          cubit.upcomingAppointments[index],
-                                    );
+                                        context, Routes.startFuncRoute,
+                                        arguments: {
+                                          'model':
+                                              cubit.upcomingAppointments[index],
+                                          'type': widget.type,
+                                        });
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBarWidget(
@@ -133,7 +144,7 @@ class _AppointmentDoctorScreenState extends State<AppointmentDoctorScreen> {
                                     );
                                   }
                                 },
-                                child: AppointmentWidget(
+                                child: AppointmentDoctorWidget(
                                   model: cubit.upcomingAppointments[index],
                                 ),
                               ),
@@ -169,7 +180,7 @@ class _AppointmentDoctorScreenState extends State<AppointmentDoctorScreen> {
                               ),
                               physics: const BouncingScrollPhysics(),
                               itemBuilder: (BuildContext context, int index) =>
-                                  AppointmentWidget(
+                                  AppointmentDoctorWidget(
                                 model: cubit.pastAppointments[index],
                               ),
                               separatorBuilder:

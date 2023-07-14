@@ -22,6 +22,7 @@ class User {
   String userName;
   int v;
   String emailConfirm;
+  String userBio;
 
   User(
     this.specialization,
@@ -44,6 +45,7 @@ class User {
     this.userName,
     this.v,
     this.emailConfirm,
+    this.userBio,
   );
 }
 

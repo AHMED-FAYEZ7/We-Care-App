@@ -3,12 +3,14 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:health_care/core/app/app_prefs.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
 import 'package:health_care/core/routes/app_routes.dart';
+import 'package:health_care/core/services/services_locator.dart';
 import 'package:health_care/core/usecase/base_usecase.dart';
 import 'package:health_care/patient/presentation/controller/Patient_cubit/patient_cubit.dart';
-import 'package:health_care/core/widgets/appointment_widget.dart';
+import 'package:health_care/patient/presentation/screens/appointment/widget/appointment_patient_widget.dart';
 import 'package:health_care/patient/presentation/widgets/empty_list_widget.dart';
 import 'package:health_care/patient/presentation/widgets/shimmer/doctor_shimmer_widget.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -23,6 +25,13 @@ class AppointmentPatientScreen extends StatefulWidget {
 
   int appointmentIndex = 0;
 
+  final AppPreferences _appPreferences = sl<AppPreferences>();
+  String? type;
+
+  getType() async {
+    type = await _appPreferences.getType();
+  }
+
   @override
   State<AppointmentPatientScreen> createState() =>
       _AppointmentPatientScreenState();
@@ -30,11 +39,12 @@ class AppointmentPatientScreen extends StatefulWidget {
 
 class _AppointmentPatientScreenState extends State<AppointmentPatientScreen> {
   final RefreshController _refreshController =
-      RefreshController(initialRefresh: false);
+  RefreshController(initialRefresh: false);
 
   @override
   void initState() {
     super.initState();
+    widget.getType();
     if (widget.isRefresh == false) {
       PatientCubit.get(context).getMyAppointments(const NoParameters());
     }
@@ -90,93 +100,101 @@ class _AppointmentPatientScreenState extends State<AppointmentPatientScreen> {
               ),
               ConditionalBuilder(
                 condition: widget.appointmentIndex == 0,
-                builder: (context) => Expanded(
-                  child: ConditionalBuilder(
-                    condition: state is! GetMyAppointmentsLoadingState,
-                    builder: (context) => cubit.upcomingAppointments.isNotEmpty
-                        ? SmartRefresher(
-                            controller: _refreshController,
-                            onRefresh: () async {
-                              await cubit
-                                  .getMyAppointments(const NoParameters());
-                              _refreshController.refreshCompleted();
-                            },
-                            child: ListView.separated(
-                              scrollDirection: Axis.vertical,
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: AppPadding.p12,
-                              ),
-                              physics: const BouncingScrollPhysics(),
-                              itemBuilder: (BuildContext context, int index) =>
-                                  InkWell(
-                                onTap: () {
-                                  if (cubit.upcomingAppointments[index].paid) {
-                                    Navigator.pushNamed(
-                                      context,
-                                      Routes.startFuncRoute,
-                                      arguments:
-                                          cubit.upcomingAppointments[index],
-                                    );
-                                  } else {
-                                    Navigator.pushNamed(
-                                      context,
-                                      Routes.paymentRoute,
-                                    );
-                                  }
-                                },
-                                child: AppointmentWidget(
-                                  model: cubit.upcomingAppointments[index],
+                builder: (context) =>
+                    Expanded(
+                      child: ConditionalBuilder(
+                        condition: state is! GetMyAppointmentsLoadingState,
+                        builder: (context) =>
+                        cubit.upcomingAppointments.isNotEmpty
+                            ? SmartRefresher(
+                          controller: _refreshController,
+                          onRefresh: () async {
+                            await cubit
+                                .getMyAppointments(const NoParameters());
+                            _refreshController.refreshCompleted();
+                          },
+                          child: ListView.separated(
+                            scrollDirection: Axis.vertical,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: AppPadding.p12,
+                            ),
+                            physics: const BouncingScrollPhysics(),
+                            itemBuilder: (BuildContext context, int index) =>
+                                InkWell(
+                                  onTap: () {
+                                    if (cubit.upcomingAppointments[index]
+                                        .paid) {
+                                      Navigator.pushNamed(
+                                          context,
+                                          Routes.startFuncRoute,
+                                          arguments: {
+                                            'model': cubit
+                                                .upcomingAppointments[index],
+                                            'type': widget.type,
+                                          }
+                                      );
+                                    } else {
+                                      Navigator.pushNamed(
+                                        context,
+                                        Routes.paymentRoute,
+                                      );
+                                    }
+                                  },
+                                  child: AppointmentPatientWidget(
+                                    model: cubit.upcomingAppointments[index],
+                                  ),
                                 ),
-                              ),
-                              separatorBuilder:
-                                  (BuildContext context, int index) =>
-                                      const SizedBox(
-                                width: AppSize.s10,
-                              ),
-                              itemCount: cubit.upcomingAppointments.length,
+                            separatorBuilder:
+                                (BuildContext context, int index) =>
+                            const SizedBox(
+                              width: AppSize.s10,
                             ),
-                          )
-                        : EmptyListWidget(
-                            text: 'No Upcoming Appointments Here',
+                            itemCount: cubit.upcomingAppointments.length,
                           ),
-                    fallback: (context) => DoctorShimmerWidget(),
-                  ),
-                ),
-                fallback: (context) => Expanded(
-                  child: ConditionalBuilder(
-                    condition: state is! GetMyAppointmentsLoadingState,
-                    builder: (context) => cubit.pastAppointments.isNotEmpty
-                        ? SmartRefresher(
-                            controller: _refreshController,
-                            onRefresh: () async {
-                              await cubit
-                                  .getMyAppointments(const NoParameters());
-                              _refreshController.refreshCompleted();
-                            },
-                            child: ListView.separated(
-                              scrollDirection: Axis.vertical,
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: AppPadding.p12,
-                              ),
-                              physics: const BouncingScrollPhysics(),
-                              itemBuilder: (BuildContext context, int index) =>
-                                  AppointmentWidget(
-                                model: cubit.pastAppointments[index],
-                              ),
-                              separatorBuilder:
-                                  (BuildContext context, int index) =>
-                                      const SizedBox(
-                                width: AppSize.s10,
-                              ),
-                              itemCount: cubit.pastAppointments.length,
+                        )
+                            : EmptyListWidget(
+                          text: 'No Upcoming Appointments Here',
+                        ),
+                        fallback: (context) => DoctorShimmerWidget(),
+                      ),
+                    ),
+                fallback: (context) =>
+                    Expanded(
+                      child: ConditionalBuilder(
+                        condition: state is! GetMyAppointmentsLoadingState,
+                        builder: (context) =>
+                        cubit.pastAppointments.isNotEmpty
+                            ? SmartRefresher(
+                          controller: _refreshController,
+                          onRefresh: () async {
+                            await cubit
+                                .getMyAppointments(const NoParameters());
+                            _refreshController.refreshCompleted();
+                          },
+                          child: ListView.separated(
+                            scrollDirection: Axis.vertical,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: AppPadding.p12,
                             ),
-                          )
-                        : EmptyListWidget(
-                            text: 'No Past Appointments Here',
+                            physics: const BouncingScrollPhysics(),
+                            itemBuilder: (BuildContext context, int index) =>
+                                AppointmentPatientWidget(
+                                  model: cubit.pastAppointments[index],
+                                ),
+                            separatorBuilder:
+                                (BuildContext context, int index) =>
+                            const SizedBox(
+                              width: AppSize.s10,
+                            ),
+                            itemCount: cubit.pastAppointments.length,
                           ),
-                    fallback: (context) => DoctorShimmerWidget(),
-                  ),
-                ),
+                        )
+                            : EmptyListWidget(
+                          text: 'No Past Appointments Here',
+                        ),
+                        fallback: (context) => DoctorShimmerWidget(),
+                      ),
+                    ),
               ),
             ],
           ),

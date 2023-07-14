@@ -1,10 +1,12 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:health_care/core/app/app_prefs.dart';
 import 'package:health_care/core/global/resources/icons_manger.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
 import 'package:health_care/core/routes/app_routes.dart';
+import 'package:health_care/core/services/services_locator.dart';
 import 'package:health_care/core/widgets/app_bar_widget.dart';
 import 'package:health_care/core/widgets/divider_widget.dart';
 import 'package:health_care/core/widgets/snack_bar_widget.dart';
@@ -13,15 +15,18 @@ import 'package:health_care/patient/domain/model/appointment_model.dart';
 import 'package:health_care/patient/presentation/screens/doctor_profile/widget/column_info.dart';
 import 'package:health_care/patient/presentation/widgets/doctor_widget.dart';
 import 'package:health_care/patient/presentation/widgets/hint_text_widget.dart';
+import 'package:health_care/patient/presentation/widgets/rate_widget.dart';
 import 'package:intl/intl.dart';
 
 class StartFunctionScreen extends StatefulWidget {
   StartFunctionScreen({
     required this.model,
+    required this.type,
     Key? key,
   }) : super(key: key);
 
   UserMyAppointments model;
+  String type;
 
   @override
   State<StartFunctionScreen> createState() => _StartFunctionScreenState();
@@ -35,10 +40,10 @@ class _StartFunctionScreenState extends State<StartFunctionScreen> {
   @override
   void initState() {
     super.initState();
-    getType(widget.model.type);
+    getAppointmentType(widget.model.type);
   }
 
-  getType(String type) {
+  getAppointmentType(String type) {
     if (type == 'chat') {
       button = 'Message Now';
       icon = Icons.chat_outlined;
@@ -94,8 +99,10 @@ class _StartFunctionScreenState extends State<StartFunctionScreen> {
                       bottomLeft: Radius.circular(AppSize.s12),
                     ),
                     child: Image.network(
-                      "https://cdn-icons-png.flaticon.com/512/3774/3774299.png",
-                      fit: BoxFit.fill,
+                      widget.type == 'Doctor'
+                          ? widget.model.patientInfo!.profilePicture
+                          : widget.model.doctorInfo!.profilePicture,
+                      fit: BoxFit.cover,
                       width: AppSize.s100,
                       height: AppSize.s100,
                     ),
@@ -111,7 +118,9 @@ class _StartFunctionScreenState extends State<StartFunctionScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          widget.model.doctorInfo!.name,
+                          widget.type == 'Doctor'
+                              ? widget.model.patientInfo!.name
+                              : widget.model.doctorInfo!.name,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: ColorManager.black,
@@ -122,18 +131,23 @@ class _StartFunctionScreenState extends State<StartFunctionScreen> {
                         const SizedBox(
                           height: AppSize.s5,
                         ),
-                        Row(
-                          children: [
-                            Text(
-                              "(12 reviews)",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: ColorManager.black,
-                                fontSize: AppSize.s10,
+                        if (widget.type != 'Doctor')
+                          Row(
+                            children: [
+                              RateWidget(
+                                ignoreGestures: true,
+                                rate: widget.model.doctorInfo!.averageRating,
                               ),
-                            ),
-                          ],
-                        ),
+                              Text(
+                                "(${widget.model.doctorInfo!.numberOfRating} reviews)",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: ColorManager.black,
+                                  fontSize: AppSize.s10,
+                                ),
+                              ),
+                            ],
+                          ),
                         const SizedBox(
                           height: AppSize.s5,
                         ),
@@ -345,36 +359,41 @@ class _StartFunctionScreenState extends State<StartFunctionScreen> {
               fontWeight: FontWeight.bold,
               onTap: () async {
                 // "2023-07-13T17:12:00.000Z"
-                final isWithinRange = isTimeWithinRange(widget.model.date);
-                print('Is time within range: $isWithinRange');
-                if (isWithinRange) {
-                  if (widget.model.type == 'chat') {
-                    Navigator.pushNamed(context, Routes.chatRoute, arguments: {
-                      'senderId': widget.model.patientInfo!.id,
-                      'receiverId': widget.model.doctorInfo!.id,
-                    });
-                  } else {
-                    Navigator.pushNamed(context, Routes.videoRoute, arguments: {
-                      // 'userID': widget.model.patientInfo!.id,
-                      // 'userName': widget.model.patientInfo!.name,
-                      'userID': "64564cc5061fd8d24c5ef612",
-                      'userName': "basyon",
-                    });
-                  }
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBarWidget(
-                      text: Text(
-                        'Sorry, you are out of Time',
-                        style: TextStyle(
-                          color: ColorManager.white,
-                          fontSize: AppSize.s16,
-                        ),
-                      ),
-                      backGroundColor: ColorManager.error,
-                    ),
-                  );
-                }
+                // Navigator.pushNamed(context, Routes.chatRoute, arguments: {
+                //   'senderId': widget.model.patientInfo!.id,
+                //   'receiverId': widget.model.doctorInfo!.id,
+                // });
+                // final isWithinRange = isTimeWithinRange(widget.model.date);
+                // print('Is time within range: $isWithinRange');
+                // if (isWithinRange) {
+                //   if (widget.model.type == 'chat') {
+                //     Navigator.pushNamed(context, Routes.chatRoute, arguments: {
+                //       'senderId': widget.model.patientInfo!.id,
+                //       'receiverId': widget.model.doctorInfo!.id,
+                //     });
+                //   } else {
+                //     Navigator.pushNamed(context, Routes.videoRoute, arguments: {
+                //       // 'userID': widget.model.patientInfo!.id,
+                //       // 'userName': widget.model.patientInfo!.name,
+                //       'userID': "64564cc5061fd8d24c5ef612",
+                //       'userName': "basyon",
+                //     });
+                //   }
+                // } else {
+                //   ScaffoldMessenger.of(context).showSnackBar(
+                //     SnackBarWidget(
+                //       text: Text(
+                //         'Sorry, you are out of Time',
+                //         style: TextStyle(
+                //           color: ColorManager.white,
+                //           fontSize: AppSize.s16,
+                //         ),
+                //       ),
+                //       backGroundColor: ColorManager.error,
+                //     ),
+                //   );
+                // }
+                Navigator.pushNamed(context, Routes.writeReviewRoute);
               },
             ),
         ],

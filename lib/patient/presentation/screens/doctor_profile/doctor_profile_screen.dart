@@ -118,7 +118,7 @@ class DoctorProfilePatientScreen extends StatelessWidget {
                   child: Align(
                     alignment: AlignmentDirectional.topStart,
                     child: Text(
-                      '',
+                      doctorModel.userBio,
                       maxLines: 4,
                       style: Theme.of(context).textTheme.displayMedium,
                     ),
@@ -153,7 +153,7 @@ class DoctorProfilePatientScreen extends StatelessWidget {
                   onTapTitle: 'See Reviews',
                   onTap: () {
                     // cubit.getDoctorRate(doctorModel.id);
-                    cubit.getDoctorRate("649593403f0633e0bc1cb0c8");
+                    cubit.getDoctorRate(doctorModel.id);
                   },
                 ),
                 const SizedBox(
@@ -185,15 +185,15 @@ class DoctorProfilePatientScreen extends StatelessWidget {
                     text: "Book Appointment",
                     fontWeight: FontWeight.bold,
                     onTap: () async {
-                      // cubit.getAvailableAppointmentByDay(
-                      //   doctorModel.id,
-                      //   date ?? todayDate,
-                      // );
-
                       cubit.getAvailableAppointmentByDay(
-                        "64b03d2a57ba4c7ac260e479",
-                        "2023-07-18",
+                        doctorModel.id,
+                        date ?? todayDate,
                       );
+
+                      // cubit.getAvailableAppointmentByDay(
+                      //   "64b03d2a57ba4c7ac260e479",
+                      //   "2023-07-18",
+                      // );
                     },
                   ),
                   fallback: (context) => const LoadingWidget(),

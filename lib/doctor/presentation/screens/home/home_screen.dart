@@ -100,9 +100,6 @@ class _HomeDoctorScreenState extends State<HomeDoctorScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(
-                  height: AppSize.s25,
-                ),
                 Card(
                   elevation: AppSize.s3,
                   shape: RoundedRectangleBorder(
@@ -112,7 +109,7 @@ class _HomeDoctorScreenState extends State<HomeDoctorScreen> {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      "Hi ${cubit.doctorData?.name ?? ''}, let's add more appointments to treat \nmore people and help them complete their lives \nsafely and without fear",
+                      "Hi Dr.${cubit.doctorData?.name ?? ''}, let's add more appointments to treat more people and help them complete their lives \nsafely and without fear",
                       style: TextStyle(
                           fontSize: AppSize.s15,
                           fontWeight: FontWeight.w600,
@@ -337,13 +334,13 @@ class _HomeDoctorScreenState extends State<HomeDoctorScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: AppSize.s25,
+                  height: AppSize.s5,
                 ),
                 ConditionalBuilder(
                   condition: state is! CreateBlockLoadingState,
                   builder: (context) => TextButtonWidget(
                     icon: Container(
-                      width: AppSize.s30,
+                      width: AppSize.s0,
                     ),
                     borderColor:
                         // appointmentId == null

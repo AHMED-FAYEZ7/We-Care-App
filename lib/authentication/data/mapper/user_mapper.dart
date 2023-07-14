@@ -34,6 +34,7 @@ extension UserResponseMapper on UserResponse? {
       this?.userName?.orEmpty() ?? Constants.empty,
       this?.v?.orZero() ?? Constants.zero,
       this?.emailConfirm?.orEmpty() ?? Constants.empty,
+      this?.userBio?.orEmpty() ?? Constants.empty,
     );
   }
 }

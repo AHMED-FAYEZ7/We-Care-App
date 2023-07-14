@@ -14,6 +14,7 @@ import 'package:health_care/core/widgets/app_bar_widget.dart';
 class ChatScreen extends StatefulWidget {
   final String senderId;
   final String receiverId;
+
   // final String roomId;
 
   ChatScreen({
@@ -31,6 +32,7 @@ class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _messageController = TextEditingController();
 
   final ScrollController _scrollController = ScrollController();
+
   @override
   void initState() {
     super.initState();
@@ -221,24 +223,6 @@ class _ChatScreenState extends State<ChatScreen> {
                                         widget.receiverId,
                                       );
                                       _scrollToBottom();
-                                    },
-                                  ),
-                                  IconButton(
-                                    icon: Icon(
-                                      IconBroken.Call,
-                                      size: AppSize.s30,
-                                      color: ColorManager.primary,
-                                    ),
-                                    onPressed: () {
-                                      Navigator.pushNamed(
-                                          context, Routes.videoRoute,
-                                          arguments: {
-                                            // 'userID': widget.model.patientInfo!.id,
-                                            // 'userName': widget.model.patientInfo!.name,
-                                            'userID':
-                                                "64564cc5061fd8d24c5ef612",
-                                            'userName': "basyon",
-                                          });
                                     },
                                   ),
                                 ],

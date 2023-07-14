@@ -114,7 +114,11 @@ class RouteGenerator {
                   doctorModel: doctorModel,
                 ));
       case Routes.paymentRoute:
-        return MaterialPageRoute(builder: (_) => const PaymentScreen());
+        // final String url = routeSettings.arguments as String;
+        return MaterialPageRoute(
+            builder: (_) => PaymentScreen(
+                // url: url,
+                ));
       case Routes.videoRoute:
         final Map<String, dynamic> arguments =
             routeSettings.arguments as Map<String, dynamic>;
@@ -126,11 +130,15 @@ class RouteGenerator {
                   userName: userName,
                 ));
       case Routes.startFuncRoute:
+        final Map<String, dynamic> arguments =
+            routeSettings.arguments as Map<String, dynamic>;
         final UserMyAppointments model =
-            routeSettings.arguments as UserMyAppointments;
+            arguments['model'] as UserMyAppointments;
+        final String type = arguments['type'] as String;
         return MaterialPageRoute(
             builder: (_) => StartFunctionScreen(
                   model: model,
+                  type: type,
                 ));
       case Routes.bookAppointmentRoute:
         final Map<String, dynamic> arguments =
