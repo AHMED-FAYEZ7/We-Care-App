@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
+import 'package:health_care/core/utils/constants.dart';
 import 'package:health_care/core/widgets/app_bar_widget.dart';
 import 'package:health_care/patient/presentation/widgets/empty_list_widget.dart';
 import 'package:health_care/post/presentation/controller/post_cubit.dart';
@@ -34,95 +35,84 @@ class LikesWidget extends StatelessWidget {
               Expanded(
                 child: ConditionalBuilder(
                   condition: state is! GetAllLikesLoadingState,
-                  builder: (context) =>
-                  cubit.likes.isNotEmpty
+                  builder: (context) => cubit.likes.isNotEmpty
                       ? ListView.separated(
-                    physics: const BouncingScrollPhysics(),
-                    scrollDirection: Axis.vertical,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: AppPadding.p12,
-                    ),
-                    itemBuilder: (context, index) =>
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            CircleAvatar(
-                              radius: AppSize.s25,
-                              backgroundImage: NetworkImage(
-                                "https://www.immunology.virginia.edu/wp-content/uploads/2021/08/blank-person-icon.png",
-                              ),
-                              backgroundColor: ColorManager.white,
-
-                            ),
-                            const SizedBox(
-                              width: AppSize.s5,
-                            ),
-                            Flexible(
-                              child: Card(
-                                elevation: AppSize.s3,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                  BorderRadius.circular(AppSize.s12),
+                          physics: const BouncingScrollPhysics(),
+                          scrollDirection: Axis.vertical,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: AppPadding.p12,
+                          ),
+                          itemBuilder: (context, index) => Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CircleAvatar(
+                                radius: AppSize.s25,
+                                backgroundImage: NetworkImage(
+                                  cubit.likes[index].userInfo!.profilePicture,
                                 ),
-                                child: Row(
-                                  crossAxisAlignment:
-                                  CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                        top: 5,
-                                        bottom: 2,
-                                        left: 8,
-                                        right: 12,
-                                      ),
-                                      child: SizedBox(
-                                        width: MediaQuery
-                                            .of(context)
-                                            .size
-                                            .width *
-                                            .28,
-                                        child: Text(
-                                          cubit.likes[index].userInfo?.name ??
-                                              '',
-                                          overflow: TextOverflow.ellipsis,
-                                          style: Theme
-                                              .of(context)
-                                              .textTheme
-                                              .displayLarge,
+                                backgroundColor: ColorManager.white,
+                              ),
+                              const SizedBox(
+                                width: AppSize.s5,
+                              ),
+                              Flexible(
+                                child: Card(
+                                  elevation: AppSize.s3,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(AppSize.s12),
+                                  ),
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                          top: 5,
+                                          bottom: 2,
+                                          left: 8,
+                                          right: 12,
+                                        ),
+                                        child: SizedBox(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              .28,
+                                          child: Text(
+                                            cubit.likes[index].userInfo?.name ??
+                                                '',
+                                            overflow: TextOverflow.ellipsis,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .displayLarge,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                        top: 5,
-                                        bottom: 2,
-                                        left: 8,
-                                        right: 12,
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                          top: 5,
+                                          bottom: 2,
+                                          left: 8,
+                                          right: 12,
+                                        ),
+                                        child: Text(
+                                          "${DateFormat.jm().format(DateTime.parse(cubit.likes[index].createdAt))} ${DateFormat.yMMMMd('en_US').format(DateTime.parse(cubit.likes[index].createdAt))}",
+                                        ),
                                       ),
-                                      child: Text(
-                                        "${DateFormat.jm().format(
-                                            DateTime.parse(cubit.likes[index]
-                                                .createdAt))} ${DateFormat
-                                            .yMMMMd('en_US').format(
-                                            DateTime.parse(cubit.likes[index]
-                                                .createdAt))}",
-                                      ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                    separatorBuilder: (context, index) =>
-                    const SizedBox(
-                      height: AppSize.s15,
-                    ),
-                    itemCount: cubit.likes.length,
-                  )
+                            ],
+                          ),
+                          separatorBuilder: (context, index) => const SizedBox(
+                            height: AppSize.s15,
+                          ),
+                          itemCount: cubit.likes.length,
+                        )
                       : EmptyListWidget(
-                    text: 'No Likes Her Yet',
-                  ),
+                          text: 'No Likes Her Yet',
+                        ),
                   fallback: (context) => LikesShimmerWidget(),
                 ),
               ),

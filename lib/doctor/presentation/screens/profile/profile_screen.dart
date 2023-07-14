@@ -56,12 +56,17 @@ class ProfileDoctorScreen extends StatelessWidget {
                           const SizedBox(
                             height: AppSize.s5,
                           ),
-                          Text(
-                            cubit.doctorData?.email ?? '',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: ColorManager.black,
-                              fontSize: AppSize.s14,
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * .5,
+                            child: Text(
+                              cubit.doctorData?.email ?? '',
+                              textAlign: TextAlign.center,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                              style: TextStyle(
+                                color: ColorManager.black,
+                                fontSize: AppSize.s14,
+                              ),
                             ),
                           ),
                           const SizedBox(

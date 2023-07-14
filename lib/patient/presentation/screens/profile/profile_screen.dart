@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/core/global/resources/icons_manger.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
+import 'package:health_care/core/utils/constants.dart';
 import 'package:health_care/core/widgets/logout_widget.dart';
 import 'package:health_care/core/widgets/profile_item_widget.dart';
 import 'package:health_care/patient/presentation/controller/Patient_cubit/patient_cubit.dart';
@@ -32,8 +33,9 @@ class ProfilePatientScreen extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         radius: AppSize.s40,
-                        backgroundImage: const NetworkImage(
-                          "https://www.immunology.virginia.edu/wp-content/uploads/2021/08/blank-person-icon.png",
+                        backgroundImage: NetworkImage(
+                          cubit.patientData?.profilePicture ??
+                              Constants.defaultPatientImage,
                         ),
                         backgroundColor: ColorManager.white,
                       ),
@@ -56,12 +58,17 @@ class ProfilePatientScreen extends StatelessWidget {
                           const SizedBox(
                             height: AppSize.s5,
                           ),
-                          Text(
-                            cubit.patientData?.email ?? '',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: ColorManager.black,
-                              fontSize: AppSize.s14,
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * .5,
+                            child: Text(
+                              cubit.patientData?.email ?? '',
+                              textAlign: TextAlign.center,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                              style: TextStyle(
+                                color: ColorManager.black,
+                                fontSize: AppSize.s14,
+                              ),
                             ),
                           ),
                           const SizedBox(

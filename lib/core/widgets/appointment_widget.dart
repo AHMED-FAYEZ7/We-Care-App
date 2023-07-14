@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
+import 'package:health_care/core/utils/constants.dart';
 import 'package:health_care/patient/domain/model/appointment_model.dart';
 import 'package:intl/intl.dart';
 
@@ -60,8 +61,9 @@ class _AppointmentWidgetState extends State<AppointmentWidget> {
                 bottomLeft: Radius.circular(AppSize.s12),
               ),
               child: Image.network(
-                "https://cdn-icons-png.flaticon.com/512/3774/3774299.png",
-                fit: BoxFit.fill,
+                widget.model.doctorInfo?.profilePicture ??
+                    Constants.defaultDoctorImage,
+                fit: BoxFit.cover,
                 width: AppSize.s100,
                 height: AppSize.s100,
               ),

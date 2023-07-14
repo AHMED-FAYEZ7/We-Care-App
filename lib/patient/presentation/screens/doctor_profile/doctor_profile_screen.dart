@@ -118,7 +118,7 @@ class DoctorProfilePatientScreen extends StatelessWidget {
                   child: Align(
                     alignment: AlignmentDirectional.topStart,
                     child: Text(
-                      "Material is an adaptable system of guidelines, components, and tools that support the best practices of user interface design. Backed by open-source code, Material streamlines collaboration between designers and developers, and helps teams quickly build beautiful products.",
+                      '',
                       maxLines: 4,
                       style: Theme.of(context).textTheme.displayMedium,
                     ),

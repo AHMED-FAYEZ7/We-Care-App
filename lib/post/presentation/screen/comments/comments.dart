@@ -51,7 +51,8 @@ class CommentsWidget extends StatelessWidget {
                               CircleAvatar(
                                 radius: AppSize.s25,
                                 backgroundImage: NetworkImage(
-                                  "https://www.immunology.virginia.edu/wp-content/uploads/2021/08/blank-person-icon.png",
+                                  cubit
+                                      .comments[index].userInfo!.profilePicture,
                                 ),
                                 backgroundColor: ColorManager.white,
                               ),

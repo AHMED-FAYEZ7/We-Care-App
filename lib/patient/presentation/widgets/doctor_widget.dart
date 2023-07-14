@@ -33,8 +33,8 @@ class DoctorWidget extends StatelessWidget {
                 bottomLeft: Radius.circular(AppSize.s12),
               ),
               child: Image.network(
-                "https://cdn-icons-png.flaticon.com/512/3774/3774299.png",
-                fit: BoxFit.fill,
+                model.profilePicture,
+                fit: BoxFit.cover,
                 width: AppSize.s100,
                 height: AppSize.s100,
               ),

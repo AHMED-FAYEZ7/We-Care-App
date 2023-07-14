@@ -23,28 +23,31 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   _goNext() async {
-    Navigator.pushReplacementNamed(context, Routes.chatRoute);
-    // _appPreferences.isDoctorLoggedIn().then((isDoctorLoggedIn) {
-    //   if (isDoctorLoggedIn) {
-    //     Navigator.pushReplacementNamed(context, Routes.layoutDoctorRoute);
-    //   } else {
-    //     _appPreferences.isPatientLoggedIn().then((isPatientLoggedIn) {
-    //       if (isPatientLoggedIn) {
-    //         Navigator.pushReplacementNamed(context, Routes.layoutPatientRoute);
-    //       } else {
-    //         _appPreferences
-    //             .isOnBoardingScreenViewed()
-    //             .then((isOnBoardingScreenViewed) {
-    //           if (isOnBoardingScreenViewed) {
-    //             Navigator.pushReplacementNamed(context, Routes.userLoginRoute);
-    //           } else {
-    //             Navigator.pushReplacementNamed(context, Routes.onBoardingRoute);
-    //           }
-    //         });
-    //       }
-    //     });
-    //   }
+    // Navigator.pushReplacementNamed(context, Routes.videoRoute, arguments: {
+    //   'userID': "64b099faf76e067cacba5c3f",
+    //   'userName': "el metr4em",
     // });
+    _appPreferences.isDoctorLoggedIn().then((isDoctorLoggedIn) {
+      if (isDoctorLoggedIn) {
+        Navigator.pushReplacementNamed(context, Routes.layoutDoctorRoute);
+      } else {
+        _appPreferences.isPatientLoggedIn().then((isPatientLoggedIn) {
+          if (isPatientLoggedIn) {
+            Navigator.pushReplacementNamed(context, Routes.layoutPatientRoute);
+          } else {
+            _appPreferences
+                .isOnBoardingScreenViewed()
+                .then((isOnBoardingScreenViewed) {
+              if (isOnBoardingScreenViewed) {
+                Navigator.pushReplacementNamed(context, Routes.userLoginRoute);
+              } else {
+                Navigator.pushReplacementNamed(context, Routes.onBoardingRoute);
+              }
+            });
+          }
+        });
+      }
+    });
   }
 
   @override
