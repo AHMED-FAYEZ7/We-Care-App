@@ -3,6 +3,7 @@ import 'package:health_care/authentication/data/response/user_response/user_resp
 import 'package:health_care/core/network/api_constance.dart';
 import 'package:health_care/patient/data/response/appointments_response.dart';
 import 'package:health_care/patient/data/response/patient_response.dart';
+import 'package:health_care/patient/data/response/payment_response.dart';
 import 'package:health_care/patient/data/response/rate_response.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -87,5 +88,12 @@ abstract class PatientServiceClient {
   @DELETE("api/v1/reviews/{docId}")
   Future<RateInfoResponse> deleteReview(
     @Path("docId") String docId,
+  );
+
+///////////////// Payment ////////////
+
+  @POST("api/v1/bookings/checkoutsession/{appointmentID}")
+  Future<SessionResponse> openStripeSession(
+    @Path("appointmentID") String appointmentID,
   );
 }

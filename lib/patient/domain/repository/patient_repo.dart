@@ -4,6 +4,7 @@ import 'package:health_care/authentication/domain/model/user_model.dart';
 import 'package:health_care/core/error/failure.dart';
 import 'package:health_care/patient/domain/model/appointment_model.dart';
 import 'package:health_care/patient/domain/model/patient_entities.dart';
+import 'package:health_care/patient/domain/model/payment_model.dart';
 import 'package:health_care/patient/domain/model/rarte_model.dart';
 
 abstract class BasePatientRepo {
@@ -58,4 +59,8 @@ abstract class BasePatientRepo {
   });
 
   Future<Either<Failure, RateInfo>> deleteReview({required String docId});
+
+  Future<Either<Failure, SessionModel>> openStripeSession({
+    required String appointmentId,
+  });
 }

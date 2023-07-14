@@ -44,6 +44,7 @@ import 'package:health_care/doctor/domain/usecase/create_like_use_case.dart';
 import 'package:health_care/doctor/domain/usecase/create_time_block_use_case.dart';
 import 'package:health_care/doctor/domain/usecase/get_blogs_comments_use_case.dart';
 import 'package:health_care/doctor/domain/usecase/get_blogs_likes_use_case.dart';
+import 'package:health_care/doctor/domain/usecase/is_patient_examined_use_case.dart';
 import 'package:health_care/doctor/presentation/controller/doctor_cubit/doctor_cubit.dart';
 import 'package:health_care/doctor/domain/usecase/get_all_blogs_use_case.dart';
 import 'package:health_care/patient/data/data_source/patient_remote_data_source.dart';
@@ -63,6 +64,7 @@ import 'package:health_care/patient/domain/usecase/get_patient_data_use_case.dar
 import 'package:health_care/patient/domain/usecase/get_rate_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_top_doctors_use_case.dart';
 import 'package:health_care/patient/domain/usecase/make_doctor_review_use_case.dart';
+import 'package:health_care/patient/domain/usecase/open_stripe_session_use_case.dart';
 import 'package:health_care/patient/domain/usecase/update_doctor_review_use_case.dart';
 import 'package:health_care/patient/presentation/controller/Patient_cubit/patient_cubit.dart';
 import 'package:health_care/post/presentation/controller/post_cubit.dart';
@@ -205,6 +207,9 @@ Future<void> initAppModule() async {
   sl.registerLazySingleton<BookAppointmentUseCase>(
       () => BookAppointmentUseCase(sl()));
 
+  sl.registerLazySingleton<IsPatientExaminedUseCase>(
+      () => IsPatientExaminedUseCase(sl()));
+
 ///////// Rate & Reviews ///////////
 
   sl.registerLazySingleton<GetDoctorRateUseCase>(
@@ -261,6 +266,11 @@ Future<void> initAppModule() async {
 
   sl.registerLazySingleton<CreateDisLikeUseCase>(
       () => CreateDisLikeUseCase(sl()));
+
+// /////////////////////// Payment /////////////
+
+  sl.registerLazySingleton<OpenStripeSessionUseCase>(
+      () => OpenStripeSessionUseCase(sl()));
 
   // cubit
 

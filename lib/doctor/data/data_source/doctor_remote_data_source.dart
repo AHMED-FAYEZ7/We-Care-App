@@ -42,6 +42,11 @@ abstract class BaseDoctorRemoteDataSource {
   Future<BaseResponse> createDisLike({
     required String blogId,
   });
+
+  Future<BaseResponse> isExamined({
+    required String appointmentId,
+    required String status,
+  });
 }
 
 class DoctorRemoteDataSourceImpl implements BaseDoctorRemoteDataSource {
@@ -116,6 +121,17 @@ class DoctorRemoteDataSourceImpl implements BaseDoctorRemoteDataSource {
   Future<BaseResponse> createDisLike({required String blogId}) async {
     return await _doctorServiceClient.createDisLike(
       blogId,
+    );
+  }
+
+  @override
+  Future<BaseResponse> isExamined({
+    required String appointmentId,
+    required String status,
+  }) async {
+    return await _doctorServiceClient.isExamined(
+      appointmentId,
+      status,
     );
   }
 }

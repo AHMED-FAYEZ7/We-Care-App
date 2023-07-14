@@ -52,6 +52,9 @@ class UserResponse {
   @JsonKey(name: "emailConfirm")
   String? emailConfirm;
 
+  @JsonKey(name: "bio")
+  String? userBio;
+
   UserResponse(
     this.specialization,
     this.fees,
@@ -73,6 +76,7 @@ class UserResponse {
     this.userName,
     this.v,
     this.emailConfirm,
+    this.userBio,
   );
 
   factory UserResponse.fromJson(Map<String, dynamic> json) =>
