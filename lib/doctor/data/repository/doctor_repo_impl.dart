@@ -162,8 +162,9 @@ class DoctorRepoImpl implements BaseDoctorRepo {
   }
 
   @override
-  Future<Either<Failure, String>> createDisLike(
-      {required String blogId}) async {
+  Future<Either<Failure, String>> createDisLike({
+    required String blogId,
+  }) async {
     if (await _networkInfo.isConnected) {
       try {
         final response = await _baseDoctorRemoteDataSource.createDisLike(
@@ -171,6 +172,28 @@ class DoctorRepoImpl implements BaseDoctorRepo {
         );
 
         return Right(response.message!);
+      } catch (error) {
+        print("error ${error.toString()}");
+        return Left((ErrorHandler.handle(error).failure));
+      }
+    } else {
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> isExamined({
+    required String appointmentId,
+    required String status,
+  }) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        await _baseDoctorRemoteDataSource.isExamined(
+          appointmentId: appointmentId,
+          status: status,
+        );
+
+        return const Right("success");
       } catch (error) {
         print("error ${error.toString()}");
         return Left((ErrorHandler.handle(error).failure));

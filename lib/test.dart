@@ -15,6 +15,7 @@ import 'package:health_care/doctor/domain/usecase/create_time_block_use_case.dar
 import 'package:health_care/doctor/domain/usecase/get_all_blogs_use_case.dart';
 import 'package:health_care/doctor/domain/usecase/get_blogs_comments_use_case.dart';
 import 'package:health_care/doctor/domain/usecase/get_blogs_likes_use_case.dart';
+import 'package:health_care/doctor/domain/usecase/is_patient_examined_use_case.dart';
 import 'package:health_care/patient/domain/usecase/book_appointment_use_case.dart';
 import 'package:health_care/patient/domain/usecase/delete_review_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_all_doctors_use_case.dart';
@@ -30,6 +31,7 @@ import 'package:health_care/patient/domain/usecase/update_doctor_review_use_case
 
 import 'patient/domain/usecase/get_available_appointment_by_day_use_case.dart';
 import 'patient/domain/usecase/get_available_apponitments_for_doctor_use_case.dart';
+import 'patient/domain/usecase/open_stripe_session_use_case.dart';
 
 class TestPage extends StatelessWidget {
   TestPage({Key? key}) : super(key: key);
@@ -76,6 +78,10 @@ class TestPage extends StatelessWidget {
   final GetAllChatsUseCase _getAllChatsUseCase = sl<GetAllChatsUseCase>();
   final GetMessagesUseCase _getMessagesUseCase = sl<GetMessagesUseCase>();
   final GetBlogsLikesUseCase _getBlogsLikesUseCase = sl<GetBlogsLikesUseCase>();
+  final OpenStripeSessionUseCase _openStripeSessionUseCase =
+      sl<OpenStripeSessionUseCase>();
+  final IsPatientExaminedUseCase _isPatientExaminedUseCase =
+      sl<IsPatientExaminedUseCase>();
 
   @override
   Widget build(BuildContext context) {
@@ -90,24 +96,12 @@ class TestPage extends StatelessWidget {
             onPressed: () async {
               // (await _connectToSocketUseCase.call(const NoParameters()));
 
-              // (_getMessagesUseCase.call(
-              //   "64a58861ba807d78e7fcc487",
-              // )).listen((message) {
-              //   print("messages ${message.allMessagesResponse!.length}");
-              //   print(
-              //       "messages ${message.allMessagesResponse![0].messageContent}");
-              // });
-              // (await _sendMessageUseCase.call(
-              //   SendMessageUseCaseInput(
-              //     roomId: "64a58861ba807d78e7fcc487",
-              //     messageContent: "production test",
-              //   ),
-              // ))
+              // (await _openStripeSessionUseCase.call("64a58861ba807d78e7fcc487"))
               //     .fold((l) {
               //   print(l.message.toString());
               // }, (r) {
-              //   print(r.messageData!.messageContent);
-              //   print(r.messageData!.messageId);
+              //   print(r.sessionData!.cancelUrl);
+              //   print(r.sessionData!.stripeUrl);
               // });
               // (await _getAllChatsUseCase.call(
               //   const NoParameters(),
@@ -119,19 +113,15 @@ class TestPage extends StatelessWidget {
               //   print(r.chatInfo![1].membersList[1].name);
               //   print(r.results);
               // });
-              // (await _availableAppointmentsByDay.call(
-              //   AvailableAppointmentsByDayInputUseCase(
-              //     doctorId: "64564cc5061fd8d24c5ef612",
-              //     dayDate: "2025-10-05",
-              //   ),
-              // ))
-              //     .fold((l) {
-              //   print(l.message.toString());
-              // }, (r) {
-              //   print(r.results);
-              //   print(r.allAvailableAppointmentsInfo);
-              //   print(r.availableAppointmentsByDayInfo);
-              // });
+              (await _isPatientExaminedUseCase.call(
+                IsPatientExaminedUseCaseInput(
+                  appointmentId: "64b099edf76e067cacba5c27",
+                  status: "accepted",
+                ),
+              ))
+                  .fold((l) {
+                print(l.message.toString());
+              }, (r) {});
               // (await _bookAppointmentUseCase.call(
               //   BookAppointmentUseCaseInput(
               //     appointmentID: "64a703f21b3330b02853e3a4",
@@ -143,35 +133,35 @@ class TestPage extends StatelessWidget {
               // }, (r) {
               //   print(r.bookedAppointmentInfo!.doctorInfo!.specialization);
               // });
-              (await _createCommentUseCase.call(
-                CreateCommentUseCaseInput(
-                  blogId: "643b4534a9b2cec52f141877",
-                  commentContent: "what is wrong",
-                ),
-              ))
-                  .fold((l) {
-                print(l.message.toString());
-              }, (r) {
-                // print(r.commentData!.commentContent);
-              });
-              (await _getBlogsCommentsUseCase.call("643b4534a9b2cec52f141877"))
-                  .fold((l) {
-                print(l.message.toString());
-              }, (r) {
-                // print(r.commentData!.commentContent);
-                print(r.blogComments![4].commentContent);
-              });
-              (await _getBlogsLikesUseCase.call("643b4534a9b2cec52f141877"))
-                  .fold((l) {
-                print(l.message.toString());
-              }, (r) {
-                // print("test ${r.commentData!.commentContent}");
-                print("comment ${r.blogLikes![0].commentId}");
-                print("comment ${r.blogLikes![1].commentId}");
-                print("comment ${r.blogLikes![2].commentId}");
-                print("comment ${r.blogLikes![3].commentId}");
-                print("comment ${r.blogLikes![4].commentId}");
-              });
+              // (await _createCommentUseCase.call(
+              //   CreateCommentUseCaseInput(
+              //     blogId: "643b4534a9b2cec52f141877",
+              //     commentContent: "what is wrong",
+              //   ),
+              // ))
+              //     .fold((l) {
+              //   print(l.message.toString());
+              // }, (r) {
+              //   // print(r.commentData!.commentContent);
+              // });
+              // (await _getBlogsCommentsUseCase.call("643b4534a9b2cec52f141877"))
+              //     .fold((l) {
+              //   print(l.message.toString());
+              // }, (r) {
+              //   // print(r.commentData!.commentContent);
+              //   print(r.blogComments![4].commentContent);
+              // });
+              // (await _getBlogsLikesUseCase.call("643b4534a9b2cec52f141877"))
+              //     .fold((l) {
+              //   print(l.message.toString());
+              // }, (r) {
+              //   // print("test ${r.commentData!.commentContent}");
+              //   print("comment ${r.blogLikes![0].commentId}");
+              //   print("comment ${r.blogLikes![1].commentId}");
+              //   print("comment ${r.blogLikes![2].commentId}");
+              //   print("comment ${r.blogLikes![3].commentId}");
+              //   print("comment ${r.blogLikes![4].commentId}");
+              // });
               // (await _createLikeUseCase.call("643b4534a9b2cec52f141877")).fold(
               //     (l) {
               //   print(l.message.toString());
@@ -283,8 +273,8 @@ class TestPage extends StatelessWidget {
 
               // (await _userLoginUseCase.call(
               //   UserLoginUseCaseInput(
-              //     "patient@gmail.com",
-              //     "123-456*",
+              //     "mohamed-assem@gmail.com",
+              //     "MOHAMED-ASSEM",
               //   ),
               // ))
               //     .fold((l) {

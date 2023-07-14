@@ -57,4 +57,11 @@ abstract class DoctorServiceClient {
   Future<BaseResponse> createDisLike(
     @Path("blogId") String blogId,
   );
+/////////////////// Appointments //////////
+
+  @POST("api/v1/appointments/completedOrNot")
+  Future<BaseResponse> isExamined(
+    @Field("appointmentId") String appointmentId,
+    @Field("status") String status,
+  );
 }

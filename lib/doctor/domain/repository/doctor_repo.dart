@@ -37,4 +37,8 @@ abstract class BaseDoctorRepo {
   Future<Either<Failure, String>> createLike({required String blogId});
 
   Future<Either<Failure, String>> createDisLike({required String blogId});
+  Future<Either<Failure, void>> isExamined({
+    required String appointmentId,
+    required String status,
+  });
 }

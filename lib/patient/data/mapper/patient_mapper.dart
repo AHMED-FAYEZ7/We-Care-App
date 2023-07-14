@@ -4,9 +4,11 @@ import 'package:health_care/core/utils/constants.dart';
 import 'package:health_care/core/utils/extension.dart';
 import 'package:health_care/patient/data/response/appointments_response.dart';
 import 'package:health_care/patient/data/response/patient_response.dart';
+import 'package:health_care/patient/data/response/payment_response.dart';
 import 'package:health_care/patient/data/response/rate_response.dart';
 import 'package:health_care/patient/domain/model/appointment_model.dart';
 import 'package:health_care/patient/domain/model/patient_entities.dart';
+import 'package:health_care/patient/domain/model/payment_model.dart';
 import 'package:health_care/patient/domain/model/rarte_model.dart';
 
 extension DoctorInfoResponseMapper on DoctorInfResponse? {
@@ -202,6 +204,31 @@ extension RateInfoResponseMapper on RateInfoResponse? {
       results,
       successMessage,
       reviewsMapped,
+    );
+  }
+}
+
+extension BaseSessionResponseMapper on BaseSessionResponse? {
+  BaseSession toDomain() {
+    return BaseSession(
+      this?.sessionId?.orEmpty() ?? Constants.empty,
+      this?.objectType?.orEmpty() ?? Constants.empty,
+      this?.subtotalAmount?.orZero() ?? Constants.zero,
+      this?.totalAmount?.orZero() ?? Constants.zero,
+      this?.cancelUrl?.orEmpty() ?? Constants.empty,
+      this?.successUrl?.orEmpty() ?? Constants.empty,
+      this?.clientReferenceId?.orEmpty() ?? Constants.empty,
+      this?.customerEmail?.orEmpty() ?? Constants.empty,
+      this?.currencyType?.orEmpty() ?? Constants.empty,
+      this?.stripeUrl?.orEmpty() ?? Constants.empty,
+    );
+  }
+}
+
+extension SessionResponseMapper on SessionResponse? {
+  SessionModel toDomain() {
+    return SessionModel(
+      this?.sessionResponse?.toDomain(),
     );
   }
 }

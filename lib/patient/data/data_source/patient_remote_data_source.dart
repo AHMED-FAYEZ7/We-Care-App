@@ -2,6 +2,7 @@ import 'package:health_care/authentication/data/response/user_response/user_resp
 import 'package:health_care/patient/data/network/patient_api/patient_api.dart';
 import 'package:health_care/patient/data/response/appointments_response.dart';
 import 'package:health_care/patient/data/response/patient_response.dart';
+import 'package:health_care/patient/data/response/payment_response.dart';
 import 'package:health_care/patient/data/response/rate_response.dart';
 
 abstract class BasePatientRemoteDataSource {
@@ -60,6 +61,10 @@ abstract class BasePatientRemoteDataSource {
   });
 
   Future<RateInfoResponse> deleteReview({required String docId});
+
+  ///////////////// Payment ////////////////
+
+  Future<SessionResponse> openStripeSession({required String appointmentId});
 }
 
 class PatientRemoteDataSourceImpl implements BasePatientRemoteDataSource {
@@ -182,6 +187,15 @@ class PatientRemoteDataSourceImpl implements BasePatientRemoteDataSource {
   Future<RateInfoResponse> deleteReview({required String docId}) async {
     return await _patientServiceClient.deleteReview(
       docId,
+    );
+  }
+
+  @override
+  Future<SessionResponse> openStripeSession({
+    required String appointmentId,
+  }) async {
+    return await _patientServiceClient.openStripeSession(
+      appointmentId,
     );
   }
 }
