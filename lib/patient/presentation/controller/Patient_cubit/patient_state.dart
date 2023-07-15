@@ -78,3 +78,17 @@ class GetAllBlogsSuccessState extends PatientState {}
 class GetAllBlogsFailureState extends PatientState {}
 
 ////////////////////////////////////////////
+
+class OpenSessionLoadingState extends PatientState {}
+
+class OpenSessionSuccessState extends PatientState {}
+
+class OpenSessionFailureState extends PatientState {}
+
+////////////////////////////////////////////
+
+class AfterPaymentLoadingState extends PatientState {}
+
+class AfterPaymentSuccessState extends PatientState {}
+
+class AfterPaymentFailureState extends PatientState {}

@@ -1,13 +1,23 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:health_care/core/routes/app_routes.dart';
 import 'package:health_care/core/widgets/app_bar_widget.dart';
+import 'package:health_care/patient/presentation/controller/Patient_cubit/patient_cubit.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class PaymentScreen extends StatefulWidget {
   PaymentScreen({
+    required this.url,
+    required this.sessionId,
+    required this.appointmentId,
     Key? key,
   }) : super(key: key);
 
-  // String url;
+  String url;
+  String sessionId;
+  String appointmentId;
 
   @override
   State<PaymentScreen> createState() => _PaymentScreenState();
@@ -21,20 +31,38 @@ class _PaymentScreenState extends State<PaymentScreen> {
     controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..loadRequest(Uri.parse(
-          'https://checkout.stripe.com/c/pay/cs_test_a1UXt4NMbVy6KgnA3EzEZ6yr7gQZkh45gl7nVwEWoiBv4R9nS71a2uv5Ss#fidkdWxOYHwnPyd1blpxYHZxWjA0S1VVTHZNUUFVfWxkNHZJfHd3N3JddkhiUUkzbG9pUGNPTzRyRkNES2JGNWtBRElRZ1BGa2lTTldXXWM3NFVuajd8fVxyNn1tVHx%2FTkx9YlZQaGNEcFFENTUwSGd3Tml3MScpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl'));
+        widget.url,
+      ));
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBarWidget(
-        isBack: true,
-        title: 'Let\'s Pay',
-      ),
-      body: WebViewWidget(
-        controller: controller,
-      ),
+    return BlocConsumer<PatientCubit, PatientState>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        var cubit = PatientCubit.get(context);
+        return Scaffold(
+          appBar: AppBarWidget(
+            isBack: true,
+            isBackWithFunc: true,
+            onTapBackFunc: () {
+              cubit.afterPayment(
+                widget.appointmentId,
+                widget.sessionId,
+              );
+              Navigator.pushNamed(
+                context,
+                Routes.layoutPatientRoute,
+              );
+            },
+            title: 'Return Home',
+          ),
+          body: WebViewWidget(
+            controller: controller,
+          ),
+        );
+      },
     );
   }
 }

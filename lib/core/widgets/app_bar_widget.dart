@@ -13,24 +13,28 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
     this.title,
     this.textButton,
     this.isBack = false,
+    this.isBackWithFunc = false,
     this.isSearch = false,
     this.isHome = false,
     this.isTextButton = false,
     this.controller,
     this.onSearch,
     this.onTap,
+    this.onTapBackFunc,
     Key? key,
   }) : super(key: key);
 
   String? title;
   String? textButton;
   bool isBack = false;
+  bool isBackWithFunc = false;
   bool isSearch = false;
   bool isHome = false;
   bool isTextButton = false;
   TextEditingController? controller;
   VoidCallback? onSearch;
   VoidCallback? onTap;
+  Function? onTapBackFunc;
 
   @override
   Size get preferredSize => const Size.fromHeight(60);
@@ -43,7 +47,11 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
       leading: isBack
           ? IconButton(
               onPressed: () {
-                Navigator.pop(context);
+                if (isBackWithFunc) {
+                  onTapBackFunc!();
+                } else {
+                  Navigator.pop(context);
+                }
               },
               icon: Icon(
                 IconBroken.Arrow___Left,

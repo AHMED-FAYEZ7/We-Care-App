@@ -153,8 +153,17 @@ class _PostsScreenState extends State<PostsScreen> {
                             itemCount: cubit.allBlogs.length,
                           ),
                         )
-                      : EmptyListWidget(
-                          text: 'No Posts Loaded',
+                      : SmartRefresher(
+                          controller: _refreshController,
+                          onRefresh: () async {
+                            // Perform refresh logic here
+                            // For example, call cubit.getAllBlogs() again
+                            await cubit.getAllBlogs(const NoParameters());
+                            _refreshController.refreshCompleted();
+                          },
+                          child: EmptyListWidget(
+                            text: 'No Posts Loaded',
+                          ),
                         ),
                   fallback: (context) => PostsShimmerWidget(),
                 ),

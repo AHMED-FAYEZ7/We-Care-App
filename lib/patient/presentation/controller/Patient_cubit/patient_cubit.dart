@@ -8,7 +8,9 @@ import 'package:health_care/core/usecase/base_usecase.dart';
 import 'package:health_care/doctor/domain/model/blog_model.dart';
 import 'package:health_care/doctor/domain/usecase/get_all_blogs_use_case.dart';
 import 'package:health_care/patient/domain/model/appointment_model.dart';
+import 'package:health_care/patient/domain/model/payment_model.dart';
 import 'package:health_care/patient/domain/model/rarte_model.dart';
+import 'package:health_care/patient/domain/usecase/after_payment_use_case.dart';
 import 'package:health_care/patient/domain/usecase/book_appointment_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_all_doctors_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_available_appointment_by_day_use_case.dart';
@@ -18,6 +20,7 @@ import 'package:health_care/patient/domain/usecase/get_patient_data_use_case.dar
 import 'package:health_care/patient/domain/usecase/get_rate_use_case.dart';
 import 'package:health_care/patient/domain/usecase/get_top_doctors_use_case.dart';
 import 'package:health_care/patient/domain/usecase/make_doctor_review_use_case.dart';
+import 'package:health_care/patient/domain/usecase/open_stripe_session_use_case.dart';
 import 'package:health_care/patient/presentation/screens/appointment/appointment_screen.dart';
 import 'package:health_care/patient/presentation/screens/home/home_screen.dart';
 import 'package:health_care/patient/presentation/screens/profile/profile_screen.dart';
@@ -42,6 +45,9 @@ class PatientCubit extends Cubit<PatientState> {
 
   GetUserDataUseCase _getUserDataUseCase = sl<GetUserDataUseCase>();
   GetAllBlogsUseCase _getAllBlogsUseCase = sl<GetAllBlogsUseCase>();
+  AfterPaymentUseCase _afterPaymentUseCase = sl<AfterPaymentUseCase>();
+  OpenStripeSessionUseCase _openStripeSessionUseCase =
+      sl<OpenStripeSessionUseCase>();
 
   PatientCubit(
     this._getTopDoctorsUseCase,
@@ -54,6 +60,8 @@ class PatientCubit extends Cubit<PatientState> {
     this._getMyAppointmentsUseCase,
     this._getUserDataUseCase,
     this._getAllBlogsUseCase,
+    this._openStripeSessionUseCase,
+    this._afterPaymentUseCase,
   ) : super(PatientInitial());
 
   static PatientCubit get(context) => BlocProvider.of(context);
@@ -286,6 +294,39 @@ class PatientCubit extends Cubit<PatientState> {
       allBlogs = [];
       allBlogs = r.allBlogsData!;
       emit(GetAllBlogsSuccessState());
+    });
+  }
+
+  /////////////open session////////////////
+
+  BaseSession? sessionData;
+
+  openSession(String appointmentId) async {
+    emit(OpenSessionLoadingState());
+
+    (await _openStripeSessionUseCase.call(appointmentId)).fold((l) {
+      emit(OpenSessionFailureState());
+    }, (r) {
+      sessionData = r.sessionData;
+      emit(OpenSessionSuccessState());
+    });
+  }
+
+  /////////////after payment////////////////
+
+  afterPayment(String appointmentId, String sessionId) async {
+    emit(AfterPaymentLoadingState());
+
+    (await _afterPaymentUseCase.call(
+      AfterPaymentUseCaseInput(
+        appointmentId: appointmentId,
+        sessionId: sessionId,
+      ),
+    ))
+        .fold((l) {
+      emit(AfterPaymentFailureState());
+    }, (r) {
+      emit(AfterPaymentSuccessState());
     });
   }
 }

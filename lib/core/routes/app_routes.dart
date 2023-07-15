@@ -114,10 +114,16 @@ class RouteGenerator {
                   doctorModel: doctorModel,
                 ));
       case Routes.paymentRoute:
-        // final String url = routeSettings.arguments as String;
+        final Map<String, dynamic> arguments =
+            routeSettings.arguments as Map<String, dynamic>;
+        final String url = arguments['url'] as String;
+        final String sessionId = arguments['sessionId'] as String;
+        final String appointmentId = arguments['appointmentId'] as String;
         return MaterialPageRoute(
             builder: (_) => PaymentScreen(
-                // url: url,
+                  url: url,
+                  sessionId: sessionId,
+                  appointmentId: appointmentId,
                 ));
       case Routes.videoRoute:
         final Map<String, dynamic> arguments =

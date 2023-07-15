@@ -156,8 +156,16 @@ class _AppointmentDoctorScreenState extends State<AppointmentDoctorScreen> {
                               itemCount: cubit.upcomingAppointments.length,
                             ),
                           )
-                        : EmptyListWidget(
-                            text: 'No Upcoming Appointments Here',
+                        : SmartRefresher(
+                            controller: _refreshController,
+                            onRefresh: () async {
+                              await cubit
+                                  .getMyAppointments(const NoParameters());
+                              _refreshController.refreshCompleted();
+                            },
+                            child: EmptyListWidget(
+                              text: 'No Upcoming Appointments Here',
+                            ),
                           ),
                     fallback: (context) => DoctorShimmerWidget(),
                   ),
@@ -191,8 +199,16 @@ class _AppointmentDoctorScreenState extends State<AppointmentDoctorScreen> {
                               itemCount: cubit.pastAppointments.length,
                             ),
                           )
-                        : EmptyListWidget(
-                            text: 'No Past Appointments Here',
+                        : SmartRefresher(
+                            controller: _refreshController,
+                            onRefresh: () async {
+                              await cubit
+                                  .getMyAppointments(const NoParameters());
+                              _refreshController.refreshCompleted();
+                            },
+                            child: EmptyListWidget(
+                              text: 'No Past Appointments Here',
+                            ),
                           ),
                     fallback: (context) => DoctorShimmerWidget(),
                   ),

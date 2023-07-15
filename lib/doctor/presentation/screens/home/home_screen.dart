@@ -181,7 +181,7 @@ class _HomeDoctorScreenState extends State<HomeDoctorScreen> {
                       onTap: () {
                         showTimePicker(
                           context: context,
-                          initialTime: TimeOfDay(hour: 7, minute: 15),
+                          initialTime: TimeOfDay(hour: 10, minute: 00),
                           initialEntryMode: TimePickerEntryMode.input,
                           builder: (BuildContext context, Widget? child) {
                             return Theme(

@@ -12,7 +12,7 @@ import 'package:health_care/core/widgets/app_bar_widget.dart';
 import 'package:health_care/core/widgets/snack_bar_widget.dart';
 import 'package:health_care/doctor/presentation/controller/doctor_cubit/doctor_cubit.dart';
 import 'package:health_care/post/presentation/controller/post_cubit.dart';
-import 'package:health_care/post/presentation/screen/create_post/widgets/pick_up_image_widget.dart';
+import 'package:health_care/post/presentation/widget/pick_up_image_widget.dart';
 
 class CreatePostScreen extends StatefulWidget {
   CreatePostScreen({

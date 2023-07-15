@@ -182,10 +182,12 @@ class CommentsWidget extends StatelessWidget {
                           color: ColorManager.primary,
                         ),
                         onPressed: () async {
+                          comment.text = '';
                           await cubit.createComment(
                             postId,
                             comment.text,
                           );
+                          comment.text = '';
                           cubit.getComments(postId);
                         },
                       ),
