@@ -63,4 +63,9 @@ abstract class BasePatientRepo {
   Future<Either<Failure, SessionModel>> openStripeSession({
     required String appointmentId,
   });
+
+  Future<Either<Failure, void>> afterPayment({
+    required String appointmentId,
+    required String sessionId,
+  });
 }

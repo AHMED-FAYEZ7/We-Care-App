@@ -167,8 +167,10 @@ class RouteGenerator {
         // final String senderId = arguments['senderId'] as String;
         // final String receiverId = arguments['receiverId'] as String;
         // final String roomId = routeSettings.arguments as String;
-        String senderId = "64564cc5061fd8d24c5ef612";
-        String receiverId = "64564d4b061fd8d24c5ef61a";
+        String senderId = "64b0939587109c94b6da96df";
+        String receiverId = "64b093301f07f3fef0d6872a";
+        // String senderId = "64b093301f07f3fef0d6872a";
+        // String receiverId = "64b0939587109c94b6da96df";
         String roomId = "6458ccfba57c498eef445131";
 
         return MaterialPageRoute(

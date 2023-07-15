@@ -120,9 +120,8 @@ class _ChatScreenState extends State<ChatScreen> {
                         ),
                       );
                     },
-                    fallback: (context) => SizedBox(
-                      height: MediaQuery.of(context).size.height / 2,
-                      child: const Align(
+                    fallback: (context) => const Expanded(
+                      child: Align(
                         alignment: Alignment.center,
                         child: Text(
                           "You do'nt have any messages yet",

@@ -96,4 +96,10 @@ abstract class PatientServiceClient {
   Future<SessionResponse> openStripeSession(
     @Path("appointmentID") String appointmentID,
   );
+
+  @POST("api/v1/bookings/BookingCheckout")
+  Future<void> afterPayment(
+    @Field("appointmentId") String appointmentId,
+    @Field("sessionId") String sessionId,
+  );
 }

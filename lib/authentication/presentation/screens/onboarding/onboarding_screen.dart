@@ -31,7 +31,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         SliderObject(
           AppStrings.onBoardingTitle1,
           AppStrings.onBoardingSubTitle1,
-          ImageAssets.onBoardingLogo2,
+          ImageAssets.onBoardingLogo1,
         ),
         SliderObject(
           AppStrings.onBoardingTitle2,
@@ -41,12 +41,12 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         SliderObject(
           AppStrings.onBoardingTitle3,
           AppStrings.onBoardingSubTitle3,
-          ImageAssets.onBoardingLogo2,
+          ImageAssets.onBoardingLogo3,
         ),
         SliderObject(
           AppStrings.onBoardingTitle4,
           AppStrings.onBoardingSubTitle4,
-          ImageAssets.onBoardingLogo2,
+          ImageAssets.onBoardingLogo4,
         ),
       ];
 
@@ -185,7 +185,7 @@ class OnBoardingPage extends StatelessWidget {
           image: AssetImage(
             _sliderObject.image,
           ),
-          fit: BoxFit.fitHeight,
+          fit: BoxFit.fill,
           height: 250,
         ),
         const SizedBox(

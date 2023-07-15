@@ -269,7 +269,7 @@ class TestPage extends StatelessWidget {
 
               // });
 
-              // _appPreferences.clearSharedPreferences();
+              _appPreferences.clearSharedPreferences();
 
               // (await _userLoginUseCase.call(
               //   UserLoginUseCaseInput(

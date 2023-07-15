@@ -59,4 +59,8 @@ class AppPreferences {
     _sharedPreferences.remove(PREFS_KEY_IS_PATIENT_LOGGED_IN);
     _sharedPreferences.remove(PREFS_KEY_IS_DOCTOR_LOGGED_IN);
   }
+
+  Future<void> clearSharedPreferences() async {
+    _sharedPreferences.clear();
+  }
 }
