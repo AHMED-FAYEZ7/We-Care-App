@@ -21,13 +21,20 @@ import 'package:health_care/core/utils/functions.dart';
 import 'package:health_care/core/widgets/loading_widget.dart';
 import 'package:health_care/core/widgets/snack_bar_widget.dart';
 
-class UserLoginScreen extends StatelessWidget {
+class UserLoginScreen extends StatefulWidget {
   UserLoginScreen({Key? key}) : super(key: key);
 
+  @override
+  State<UserLoginScreen> createState() => _UserLoginScreenState();
+}
+
+class _UserLoginScreenState extends State<UserLoginScreen> {
   final AppPreferences _appPreferences = sl<AppPreferences>();
+
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController _emailEditingController = TextEditingController();
+
   final TextEditingController _passwordEditingController =
       TextEditingController();
 
@@ -130,7 +137,7 @@ class UserLoginScreen extends StatelessWidget {
                       obscureText: false,
                     ),
                     FormFieldWidget(
-                      obscureText: true,
+                      obscureText: cubit.isPassword,
                       hintText: AppStrings.passwordHint,
                       controller: _passwordEditingController,
                       type: TextInputType.text,
@@ -139,8 +146,12 @@ class UserLoginScreen extends StatelessWidget {
                           : AppStrings.passwordError,
                       prefix: IconBroken.Lock,
                       prefixPressed: () {},
-                      suffix: IconBroken.Unlock,
-                      suffixPressed: () {},
+                      suffix: cubit.suffix,
+                      suffixPressed: () {
+                        setState(() {
+                          cubit.changePasswordVisibility();
+                        });
+                      },
                     ),
                     Align(
                       alignment: Alignment.topRight,

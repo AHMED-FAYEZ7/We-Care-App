@@ -51,11 +51,10 @@ class DoctorProfilePatientScreen extends StatelessWidget {
             },
           );
         }
-        if (state is GetDoctorRateSuccessState) {
+        if (state is GetDoctorRateLoadingState) {
           Navigator.pushNamed(
             context,
             Routes.reviewsRoute,
-            arguments: cubit.rateList,
           );
         }
       },
@@ -189,11 +188,6 @@ class DoctorProfilePatientScreen extends StatelessWidget {
                         doctorModel.id,
                         date ?? todayDate,
                       );
-
-                      // cubit.getAvailableAppointmentByDay(
-                      //   "64b03d2a57ba4c7ac260e479",
-                      //   "2023-07-18",
-                      // );
                     },
                   ),
                   fallback: (context) => const LoadingWidget(),

@@ -4,6 +4,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/authentication/domain/model/user_model.dart';
 import 'package:health_care/authentication/domain/usecase/doctor_sinup_usecase.dart';
@@ -46,5 +47,14 @@ class AuthCubit extends Cubit<AuthState> {
       _appPreferences.setType(r.user!.type);
       emit(AuthLogInSuccessState(userData: r));
     });
+  }
+
+  IconData suffix = Icons.visibility_outlined;
+  bool isPassword = true;
+
+  void changePasswordVisibility() {
+    isPassword = !isPassword;
+    suffix = isPassword ? Icons.visibility_outlined : Icons.visibility_off;
+    emit(ChangePasswordVisibilityState());
   }
 }

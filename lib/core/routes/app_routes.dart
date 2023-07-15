@@ -154,11 +154,7 @@ class RouteGenerator {
                   day: day,
                 ));
       case Routes.reviewsRoute:
-        final List<Rate> reviews = routeSettings.arguments as List<Rate>;
-        return MaterialPageRoute(
-            builder: (_) => ReviewsScreen(
-                  reviews: reviews,
-                ));
+        return MaterialPageRoute(builder: (_) => ReviewsScreen());
       case Routes.writeReviewRoute:
         return MaterialPageRoute(builder: (_) => WriteReviewScreen());
       case Routes.chatRoute:

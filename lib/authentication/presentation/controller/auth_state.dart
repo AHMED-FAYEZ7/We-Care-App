@@ -16,14 +16,23 @@ class AuthLogInLoadingState extends AuthState {
 
 class AuthLogInSuccessState extends AuthState {
   final UserData userData;
+
   const AuthLogInSuccessState({required this.userData});
+
   @override
   List<Object> get props => [];
 }
 
 class AuthLogInErrorState extends AuthState {
   final String error;
+
   const AuthLogInErrorState({required this.error});
+
+  @override
+  List<Object> get props => [];
+}
+
+class ChangePasswordVisibilityState extends AuthState {
   @override
   List<Object> get props => [];
 }
