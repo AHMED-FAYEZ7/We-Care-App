@@ -65,6 +65,11 @@ abstract class BasePatientRemoteDataSource {
   ///////////////// Payment ////////////////
 
   Future<SessionResponse> openStripeSession({required String appointmentId});
+
+  Future<void> afterPayment({
+    required String appointmentId,
+    required String sessionId,
+  });
 }
 
 class PatientRemoteDataSourceImpl implements BasePatientRemoteDataSource {
@@ -196,6 +201,17 @@ class PatientRemoteDataSourceImpl implements BasePatientRemoteDataSource {
   }) async {
     return await _patientServiceClient.openStripeSession(
       appointmentId,
+    );
+  }
+
+  @override
+  Future<void> afterPayment({
+    required String appointmentId,
+    required String sessionId,
+  }) async {
+    return await _patientServiceClient.afterPayment(
+      appointmentId,
+      sessionId,
     );
   }
 }

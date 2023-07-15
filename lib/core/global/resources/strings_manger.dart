@@ -1,20 +1,22 @@
 class AppStrings {
   // slider onBoarding
   static const String onBoardingTitle1 =
-      "Easy consultation with a doctor in your pocket";
+      "Easy Consultation With a Doctor In Your Pocket";
   static const String onBoardingSubTitle1 =
-      "A complete health app that allows patient to get diagnosed via there phone.";
+      "Get access to a network of experienced doctors ready to provide quality healthcare at your fingertips.";
 
   static const String onBoardingTitle2 =
-      "Schedule appointments with expert doctors";
+      "Schedule Appointments With Expert Doctors";
   static const String onBoardingSubTitle2 =
       "Find experienced specialist doctors with expert ratings and reviews and book your appointments hassle-free.";
 
-  static const String onBoardingTitle3 = "Doctors onBoardingTitle";
-  static const String onBoardingSubTitle3 = "Doctors onBoardingSubTitle3";
+  static const String onBoardingTitle3 = "Efficient Appointment Management";
+  static const String onBoardingSubTitle3 =
+      "Streamline your practice by effortlessly managing appointments and ensuring smooth patient experiences.";
 
-  static const String onBoardingTitle4 = "Doctors onBoardingTitle4";
-  static const String onBoardingSubTitle4 = "Doctors onBoardingSubTitle4";
+  static const String onBoardingTitle4 = "Empower Your Patients";
+  static const String onBoardingSubTitle4 =
+      "Empower patients with accurate diagnoses, personalized treatments, and comprehensive healthcare guidance.";
 
   static const String noRouteFound = "No Route Found";
   // error handler
@@ -65,7 +67,7 @@ class AppStrings {
   static const String phoneNumberHint = "Enter PhoneNumber";
   static const String signUp = "Sign up";
   static const String signIn = "Sign in";
-  static const String logIn = "Log in";
+  static const String logIn = "Login";
   static const String signUpWithGoogle = "Continue with Google";
   static const String doNotHaveAccount = "Does not have account ?";
   static const String haveAccount = "Already have an account ?";

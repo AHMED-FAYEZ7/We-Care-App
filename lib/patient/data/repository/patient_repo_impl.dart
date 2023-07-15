@@ -333,8 +333,9 @@ class PatientRepoImpl implements BasePatientRepo {
   }
 
   @override
-  Future<Either<Failure, SessionModel>> openStripeSession(
-      {required String appointmentId}) async {
+  Future<Either<Failure, SessionModel>> openStripeSession({
+    required String appointmentId,
+  }) async {
     if (await _networkInfo.isConnected) {
       try {
         final response = await _basePatientRemoteDataSource.openStripeSession(
@@ -342,6 +343,28 @@ class PatientRepoImpl implements BasePatientRepo {
         );
 
         return Right(response.toDomain());
+      } catch (error) {
+        print("error ${error.toString()}");
+        return Left((ErrorHandler.handle(error).failure));
+      }
+    } else {
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> afterPayment({
+    required String appointmentId,
+    required String sessionId,
+  }) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final response = await _basePatientRemoteDataSource.afterPayment(
+          appointmentId: appointmentId,
+          sessionId: sessionId,
+        );
+
+        return const Right("success");
       } catch (error) {
         print("error ${error.toString()}");
         return Left((ErrorHandler.handle(error).failure));
