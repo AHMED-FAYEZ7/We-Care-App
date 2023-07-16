@@ -20,6 +20,10 @@ abstract class BaseDoctorRepo {
 
   Future<Either<Failure, BlogInfo>> getAllBlogs();
 
+  Future<Either<Failure, BlogInfo>> getDoctorBlogsById({
+    required String doctorId,
+  });
+
   /////////////// comments & likes ////////
   Future<Either<Failure, BaseComment>> createComment({
     required String blogId,
@@ -37,6 +41,7 @@ abstract class BaseDoctorRepo {
   Future<Either<Failure, String>> createLike({required String blogId});
 
   Future<Either<Failure, String>> createDisLike({required String blogId});
+
   Future<Either<Failure, void>> isExamined({
     required String appointmentId,
     required String status,

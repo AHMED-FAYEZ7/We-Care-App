@@ -30,6 +30,11 @@ abstract class DoctorServiceClient {
   @GET("api/v1/blog")
   Future<BlogInfoResponse> getAllBlogs();
 
+  @GET("api/v1/blog/{userId}")
+  Future<BlogInfoResponse> getDoctorBlogsById(
+    @Path("userId") String userId,
+  );
+
 /////////////////// comments & likes //////////
 
   @POST("api/v1/blog/add-comment/{blogId}")

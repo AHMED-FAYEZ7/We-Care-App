@@ -83,6 +83,26 @@ class DoctorRepoImpl implements BaseDoctorRepo {
   }
 
   @override
+  Future<Either<Failure, BlogInfo>> getDoctorBlogsById({
+    required String doctorId,
+  }) async {
+    if (await _networkInfo.isConnected) {
+      try {
+        final response = await _baseDoctorRemoteDataSource.getDoctorBlogsById(
+          doctorId: doctorId,
+        );
+
+        return Right(response.toDomain());
+      } catch (error) {
+        print("error ${error.toString()}");
+        return Left((ErrorHandler.handle(error).failure));
+      }
+    } else {
+      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+    }
+  }
+
+  @override
   Future<Either<Failure, BaseComment>> createComment({
     required String blogId,
     required String commentContent,
