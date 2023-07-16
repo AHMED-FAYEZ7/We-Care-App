@@ -103,26 +103,26 @@ class _AppointmentPatientWidgetState extends State<AppointmentPatientWidget> {
                       const SizedBox(
                         width: AppSize.s5,
                       ),
-                      Card(
-                        elevation: AppSize.s0,
-                        shape: RoundedRectangleBorder(),
-                        color: widget.model.paid
-                            ? Colors.green
-                            : ColorManager.grey,
-                        child: Padding(
-                          padding: const EdgeInsets.all(
-                            AppPadding.p2,
-                          ),
-                          child: Text(
-                            widget.model.paid ? 'Paid' : 'Not Paid',
-                            style: TextStyle(
-                              color: widget.model.paid
-                                  ? ColorManager.white
-                                  : ColorManager.black,
-                            ),
-                          ),
-                        ),
-                      ),
+                      // Card(
+                      //   elevation: AppSize.s0,
+                      //   shape: RoundedRectangleBorder(),
+                      //   color: widget.model.paid
+                      //       ? Colors.green
+                      //       : ColorManager.grey,
+                      //   child: Padding(
+                      //     padding: const EdgeInsets.all(
+                      //       AppPadding.p2,
+                      //     ),
+                      //     child: Text(
+                      //       widget.model.paid ? 'Paid' : 'Not Paid',
+                      //       style: TextStyle(
+                      //         color: widget.model.paid
+                      //             ? ColorManager.white
+                      //             : ColorManager.black,
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                   const SizedBox(

@@ -30,13 +30,13 @@ class _SelectedFeeInfoWidgetState extends State<SelectedFeeInfoWidget> {
       Icons.videocam,
       'Video Call',
       'Can make a video call with doctor',
-      '250',
+      '300',
     ),
     Item(
       Icons.offline_bolt_outlined,
       'Visit',
       'Can visit the doctor',
-      '300',
+      '350',
     ),
   ];
 
