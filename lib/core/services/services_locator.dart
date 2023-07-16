@@ -44,6 +44,7 @@ import 'package:health_care/doctor/domain/usecase/create_like_use_case.dart';
 import 'package:health_care/doctor/domain/usecase/create_time_block_use_case.dart';
 import 'package:health_care/doctor/domain/usecase/get_blogs_comments_use_case.dart';
 import 'package:health_care/doctor/domain/usecase/get_blogs_likes_use_case.dart';
+import 'package:health_care/doctor/domain/usecase/get_doctor_blogs_by_id.dart';
 import 'package:health_care/doctor/domain/usecase/is_patient_examined_use_case.dart';
 import 'package:health_care/doctor/presentation/controller/doctor_cubit/doctor_cubit.dart';
 import 'package:health_care/doctor/domain/usecase/get_all_blogs_use_case.dart';
@@ -251,6 +252,7 @@ Future<void> initAppModule() async {
 
   sl.registerLazySingleton<CreateBlogUseCase>(() => CreateBlogUseCase(sl()));
   sl.registerLazySingleton<GetAllBlogsUseCase>(() => GetAllBlogsUseCase(sl()));
+  sl.registerLazySingleton<GetDoctorBlogsById>(() => GetDoctorBlogsById(sl()));
 
 // /////////////////////// comments likes /////////////
 

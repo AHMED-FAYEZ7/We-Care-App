@@ -20,6 +20,9 @@ abstract class BaseDoctorRemoteDataSource {
 
   Future<BlogInfoResponse> getAllBlogs();
 
+  Future<BlogInfoResponse> getDoctorBlogsById({
+    required String doctorId,
+  });
   //////////////// comments & likes ///////////
 
   Future<BaseCommentResponse> createComment({
@@ -132,6 +135,15 @@ class DoctorRemoteDataSourceImpl implements BaseDoctorRemoteDataSource {
     return await _doctorServiceClient.isExamined(
       appointmentId,
       status,
+    );
+  }
+
+  @override
+  Future<BlogInfoResponse> getDoctorBlogsById({
+    required String doctorId,
+  }) async {
+    return await _doctorServiceClient.getDoctorBlogsById(
+      doctorId,
     );
   }
 }
