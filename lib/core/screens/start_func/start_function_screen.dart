@@ -81,147 +81,9 @@ class _StartFunctionScreenState extends State<StartFunctionScreen> {
         isBack: true,
         title: 'My Appointments',
       ),
-      body: Column(
-        children: [
-          SizedBox(
-            width: MediaQuery.of(context).size.width * .95,
-            height: AppSize.s100,
-            child: Card(
-              elevation: AppSize.s3,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(AppSize.s12),
-              ),
-              child: Row(
-                children: [
-                  ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(AppSize.s12),
-                      bottomLeft: Radius.circular(AppSize.s12),
-                    ),
-                    child: Image.network(
-                      widget.type == 'Doctor'
-                          ? widget.model.patientInfo!.profilePicture
-                          : widget.model.doctorInfo!.profilePicture,
-                      fit: BoxFit.cover,
-                      width: AppSize.s100,
-                      height: AppSize.s100,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: AppSize.s10,
-                  ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * .46,
-                    height: AppSize.s100,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          widget.type == 'Doctor'
-                              ? widget.model.patientInfo!.name
-                              : widget.model.doctorInfo!.name,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: ColorManager.black,
-                            fontSize: AppSize.s14,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: AppSize.s5,
-                        ),
-                        if (widget.type != 'Doctor')
-                          Row(
-                            children: [
-                              RateWidget(
-                                ignoreGestures: true,
-                                rate: widget.model.doctorInfo!.averageRating,
-                              ),
-                              Text(
-                                "(${widget.model.doctorInfo!.numberOfRating} reviews)",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: ColorManager.black,
-                                  fontSize: AppSize.s10,
-                                ),
-                              ),
-                            ],
-                          ),
-                        const SizedBox(
-                          height: AppSize.s5,
-                        ),
-                        if (widget.type != 'Doctor')
-                          Text(
-                            "${widget.model.doctorInfo!.specialization} Specialist - Ramsay College Hospital",
-                            maxLines: 2,
-                            style: TextStyle(
-                              color: ColorManager.black,
-                              fontSize: AppSize.s10,
-                            ),
-                          ),
-                      ],
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      icon,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: AppSize.s5,
-          ),
-          if (widget.type == 'Doctor')
-            Column(
-              children: [
-                const SizedBox(
-                  height: AppSize.s10,
-                ),
-                HintTextWidget(
-                  title: 'Pay Time',
-                  isSuffix: false,
-                ),
-                const SizedBox(
-                  height: AppSize.s10,
-                ),
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: AppPadding.p12,
-                      ),
-                      child: Align(
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                          DateFormat.yMMMMd('en_US')
-                              .format(DateTime.parse(widget.model.payTime)),
-                          style: Theme.of(context).textTheme.displayMedium,
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: AppPadding.p12,
-                      ),
-                      child: Align(
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                          DateFormat.jm()
-                              .format(DateTime.parse(widget.model.payTime)),
-                          style: Theme.of(context).textTheme.displayMedium,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          if (widget.type != 'Doctor')
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
             SizedBox(
               width: MediaQuery.of(context).size.width * .95,
               height: AppSize.s100,
@@ -231,223 +93,404 @@ class _StartFunctionScreenState extends State<StartFunctionScreen> {
                   borderRadius: BorderRadius.circular(AppSize.s12),
                 ),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    ColumnInfoWidget(
-                      icon: Icons.group,
-                      number: 5000,
-                      subTitle: 'Patient',
+                    ClipRRect(
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(AppSize.s12),
+                        bottomLeft: Radius.circular(AppSize.s12),
+                      ),
+                      child: Image.network(
+                        widget.type == 'Doctor'
+                            ? widget.model.patientInfo!.profilePicture
+                            : widget.model.doctorInfo!.profilePicture,
+                        fit: BoxFit.cover,
+                        width: AppSize.s100,
+                        height: AppSize.s100,
+                      ),
                     ),
-                    ColumnInfoWidget(
-                      icon: Icons.person,
-                      number: 15,
-                      subTitle: 'Years experiences',
+                    const SizedBox(
+                      width: AppSize.s10,
                     ),
-                    ColumnInfoWidget(
-                      icon: Icons.chat,
-                      number: 3800,
-                      subTitle: 'Reviews',
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * .46,
+                      height: AppSize.s100,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.type == 'Doctor'
+                                ? widget.model.patientInfo!.name
+                                : widget.model.doctorInfo!.name,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: ColorManager.black,
+                              fontSize: AppSize.s14,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: AppSize.s5,
+                          ),
+                          if (widget.type != 'Doctor')
+                            Row(
+                              children: [
+                                RateWidget(
+                                  ignoreGestures: true,
+                                  rate: widget.model.doctorInfo!.averageRating,
+                                ),
+                                Text(
+                                  "(${widget.model.doctorInfo!.numberOfRating} reviews)",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: ColorManager.black,
+                                    fontSize: AppSize.s10,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          const SizedBox(
+                            height: AppSize.s5,
+                          ),
+                          if (widget.type != 'Doctor')
+                            Text(
+                              "${widget.model.doctorInfo!.specialization} Specialist - Ramsay College Hospital",
+                              maxLines: 2,
+                              style: TextStyle(
+                                color: ColorManager.black,
+                                fontSize: AppSize.s10,
+                              ),
+                            ),
+                        ],
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        icon,
+                      ),
                     ),
                   ],
                 ),
               ),
             ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppPadding.p12,
+            const SizedBox(
+              height: AppSize.s5,
             ),
-            child: MyDividerWidget(
+            if (widget.type == 'Doctor')
+              Column(
+                children: [
+                  const SizedBox(
+                    height: AppSize.s10,
+                  ),
+                  HintTextWidget(
+                    title: 'Pay Time',
+                    isSuffix: false,
+                  ),
+                  const SizedBox(
+                    height: AppSize.s10,
+                  ),
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: AppPadding.p12,
+                        ),
+                        child: Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            DateFormat.yMMMMd('en_US')
+                                .format(DateTime.parse(widget.model.payTime)),
+                            style: Theme.of(context).textTheme.displayMedium,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: AppPadding.p12,
+                        ),
+                        child: Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            DateFormat.jm()
+                                .format(DateTime.parse(widget.model.payTime)),
+                            style: Theme.of(context).textTheme.displayMedium,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            if (widget.type != 'Doctor')
+              SizedBox(
+                width: MediaQuery.of(context).size.width * .95,
+                height: AppSize.s100,
+                child: Card(
+                  elevation: AppSize.s3,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(AppSize.s12),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ColumnInfoWidget(
+                        icon: Icons.group,
+                        number: 5000,
+                        subTitle: 'Patient',
+                      ),
+                      ColumnInfoWidget(
+                        icon: Icons.person,
+                        number: 15,
+                        subTitle: 'Years experiences',
+                      ),
+                      ColumnInfoWidget(
+                        icon: Icons.chat,
+                        number: 3800,
+                        subTitle: 'Reviews',
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppPadding.p12,
+              ),
+              child: MyDividerWidget(
+                height: AppSize.s10,
+              ),
+            ),
+            SizedBox(
               height: AppSize.s10,
             ),
-          ),
-          SizedBox(
-            height: AppSize.s10,
-          ),
-          HintTextWidget(
-            title: 'Visit Time',
-            isSuffix: false,
-          ),
-          const SizedBox(
-            height: AppSize.s10,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppPadding.p12,
+            HintTextWidget(
+              title: 'Visit Time',
+              isSuffix: false,
             ),
-            child: Align(
-              alignment: Alignment.topLeft,
-              child: Text(
-                DateFormat.yMMMMd('en_US')
-                    .format(DateTime.parse(widget.model.date)),
-                style: Theme.of(context).textTheme.displayMedium,
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: AppSize.s10,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppPadding.p12,
-            ),
-            child: Align(
-              alignment: Alignment.topLeft,
-              child: Text(
-                DateFormat.jm().format(DateTime.parse(widget.model.date)),
-                style: Theme.of(context).textTheme.displayMedium,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppPadding.p12,
-            ),
-            child: MyDividerWidget(
+            const SizedBox(
               height: AppSize.s10,
             ),
-          ),
-          SizedBox(
-            height: AppSize.s10,
-          ),
-          HintTextWidget(
-            title: 'Patient Information',
-            isSuffix: false,
-          ),
-          const SizedBox(
-            height: AppSize.s10,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppPadding.p12,
-            ),
-            child: Align(
-              alignment: Alignment.topLeft,
-              child: Text(
-                "Full Name   : ${widget.model.patientInfo!.name}",
-                style: Theme.of(context).textTheme.displayMedium,
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppPadding.p12,
+              ),
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  DateFormat.yMMMMd('en_US')
+                      .format(DateTime.parse(widget.model.date)),
+                  style: Theme.of(context).textTheme.displayMedium,
+                ),
               ),
             ),
-          ),
-          const SizedBox(
-            height: AppSize.s10,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppPadding.p12,
-            ),
-            child: Align(
-              alignment: Alignment.topLeft,
-              child: Text(
-                "Age               : 30+",
-                style: Theme.of(context).textTheme.displayMedium,
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: AppSize.s10,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppPadding.p12,
-            ),
-            child: Align(
-              alignment: Alignment.topLeft,
-              child: Text(
-                "Phone          : +201026142957",
-                style: Theme.of(context).textTheme.displayMedium,
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: AppSize.s10,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppPadding.p12,
-            ),
-            child: Align(
-              alignment: Alignment.topLeft,
-              child: Text(
-                "Gender        : Male",
-                style: Theme.of(context).textTheme.displayMedium,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppPadding.p12,
-            ),
-            child: MyDividerWidget(
+            const SizedBox(
               height: AppSize.s10,
             ),
-          ),
-          SizedBox(
-            height: AppSize.s10,
-          ),
-          HintTextWidget(
-            title: 'Fee Information',
-            isSuffix: false,
-          ),
-          const SizedBox(
-            height: AppSize.s10,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppPadding.p12,
-            ),
-            child: Align(
-              alignment: Alignment.topLeft,
-              child: Text(
-                "\$${widget.model.price} (Paid)",
-                style: Theme.of(context).textTheme.displayMedium,
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppPadding.p12,
+              ),
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  DateFormat.jm().format(DateTime.parse(widget.model.date)),
+                  style: Theme.of(context).textTheme.displayMedium,
+                ),
               ),
             ),
-          ),
-          const SizedBox(
-            height: AppSize.s10,
-          ),
-          if (widget.model.type != 'visit')
-            TextButtonWidget(
-              icon: Container(
-                width: AppSize.s0,
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppPadding.p12,
               ),
-              borderColor: ColorManager.primary,
-              backGroundColor: ColorManager.primary,
-              textColor: ColorManager.white,
-              width: AppSize.s330,
-              height: AppSize.s52,
-              text:
-                  "$button (Start at ${DateFormat.jm().format(DateTime.parse(widget.model.date))})",
-              fontWeight: FontWeight.bold,
-              onTap: () async {
-                // "2023-07-13T17:12:00.000Z"
-                // Navigator.pushNamed(context, Routes.chatRoute, arguments: {
-                //   'senderId': widget.model.patientInfo!.id,
-                //   'receiverId': widget.model.doctorInfo!.id,
-                // });
-                final isWithinRange = isTimeWithinRange(widget.model.date);
-                print('Is time within range: $isWithinRange');
-                if (isWithinRange) {
+              child: MyDividerWidget(
+                height: AppSize.s10,
+              ),
+            ),
+            SizedBox(
+              height: AppSize.s10,
+            ),
+            HintTextWidget(
+              title: widget.type != 'Doctor'
+                  ? 'My Information'
+                  : 'Patient Information',
+              isSuffix: false,
+            ),
+            const SizedBox(
+              height: AppSize.s10,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppPadding.p12,
+              ),
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  "Full Name   : ${widget.model.patientInfo!.name}",
+                  style: Theme.of(context).textTheme.displayMedium,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: AppSize.s10,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppPadding.p12,
+              ),
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  "Age               : 30+",
+                  style: Theme.of(context).textTheme.displayMedium,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: AppSize.s10,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppPadding.p12,
+              ),
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  "Phone          : +201026142957",
+                  style: Theme.of(context).textTheme.displayMedium,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: AppSize.s10,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppPadding.p12,
+              ),
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  "Gender        : Male",
+                  style: Theme.of(context).textTheme.displayMedium,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppPadding.p12,
+              ),
+              child: MyDividerWidget(
+                height: AppSize.s10,
+              ),
+            ),
+            SizedBox(
+              height: AppSize.s10,
+            ),
+            HintTextWidget(
+              title: 'Fee Information',
+              isSuffix: false,
+            ),
+            const SizedBox(
+              height: AppSize.s10,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppPadding.p12,
+              ),
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  "\$${widget.model.price} (Paid)",
+                  style: Theme.of(context).textTheme.displayMedium,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: AppSize.s10,
+            ),
+            if (widget.model.type != 'visit')
+              TextButtonWidget(
+                icon: Container(
+                  width: AppSize.s0,
+                ),
+                borderColor: ColorManager.primary,
+                backGroundColor: ColorManager.primary,
+                textColor: ColorManager.white,
+                width: AppSize.s330,
+                height: AppSize.s52,
+                text:
+                    "$button (Start at ${DateFormat.jm().format(DateTime.parse(widget.model.date))})",
+                fontWeight: FontWeight.bold,
+                onTap: () async {
                   if (widget.model.type == 'chat') {
-                    Navigator.pushNamed(context, Routes.chatRoute, arguments: {
-                      'senderId': widget.model.patientInfo!.id,
-                      'receiverId': widget.model.doctorInfo!.id,
-                    });
+                    if (widget.type != 'Doctor') {
+                      Navigator.pushNamed(context, Routes.chatRoute,
+                          arguments: {
+                            'senderId': widget.model.patientInfo!.id,
+                            'receiverId': widget.model.doctorInfo!.id,
+                            'name': widget.model.doctorInfo!.name,
+                            'type': widget.type,
+                            'appointmentId': widget.model.appointmentId,
+                          });
+                    } else {
+                      Navigator.pushNamed(context, Routes.chatRoute,
+                          arguments: {
+                            'senderId': widget.model.doctorInfo!.id,
+                            'receiverId': widget.model.patientInfo!.id,
+                            'name': widget.model.patientInfo!.name,
+                            'type': widget.type,
+                            'appointmentId': widget.model.appointmentId,
+                          });
+                    }
                   } else {
-                    Navigator.pushNamed(context, Routes.videoRoute, arguments: {
-                      // 'userID': widget.model.patientInfo!.id,
-                      // 'userName': widget.model.patientInfo!.name,
-                      'userID': "64564cc5061fd8d24c5ef612",
-                      'userName': "basyon",
-                    });
+                    if (widget.type != 'Doctor') {
+                      Navigator.pushNamed(context, Routes.videoRoute,
+                          arguments: {
+                            'userID': widget.model.patientInfo!.id,
+                            'userName': widget.model.patientInfo!.name,
+                            // 'userID': "64564cc5061fd8d24c5ef612",
+                            // 'userName': "basyon",
+                          });
+                    } else {
+                      Navigator.pushNamed(context, Routes.videoRoute,
+                          arguments: {
+                            'userID': widget.model.doctorInfo!.id,
+                            'userName': widget.model.doctorInfo!.name,
+                            // 'userID': "64564cc5061fd8d24c5ef612",
+                            // 'userName': "basyon",
+                          });
+                    }
                   }
-                } else {
-                  _dialogBuilder(context);
-                }
-                // Navigator.pushNamed(context, Routes.writeReviewRoute);
-              },
-            ),
-        ],
+                  // "2023-07-13T17:12:00.000Z"
+                  // Navigator.pushNamed(context, Routes.chatRoute, arguments: {
+                  //   'senderId': widget.model.patientInfo!.id,
+                  //   'receiverId': widget.model.doctorInfo!.id,
+                  // });
+                  // final isWithinRange = isTimeWithinRange(widget.model.date);
+                  // print('Is time within range: $isWithinRange');
+                  // if (isWithinRange) {
+                  //   if (widget.model.type == 'chat') {
+                  //     Navigator.pushNamed(context, Routes.chatRoute, arguments: {
+                  //       'senderId': widget.model.patientInfo!.id,
+                  //       'receiverId': widget.model.doctorInfo!.id,
+                  //     });
+                  //   } else {
+                  //     Navigator.pushNamed(context, Routes.videoRoute, arguments: {
+                  //       // 'userID': widget.model.patientInfo!.id,
+                  //       // 'userName': widget.model.patientInfo!.name,
+                  //       'userID': "64564cc5061fd8d24c5ef612",
+                  //       'userName': "basyon",
+                  //     });
+                  //   }
+                  // } else {
+                  //   _dialogBuilder(context);
+                  // }
+                  // Navigator.pushNamed(context, Routes.writeReviewRoute);
+                },
+              ),
+          ],
+        ),
       ),
     );
   }

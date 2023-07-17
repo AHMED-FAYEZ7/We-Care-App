@@ -170,19 +170,24 @@ class RouteGenerator {
       case Routes.chatRoute:
         final Map<String, dynamic> arguments =
             routeSettings.arguments as Map<String, dynamic>;
-        // final String senderId = arguments['senderId'] as String;
-        // final String receiverId = arguments['receiverId'] as String;
-        // final String roomId = routeSettings.arguments as String;
-        String senderId = "64b0939587109c94b6da96df";
-        String receiverId = "64b093301f07f3fef0d6872a";
-        // String senderId = "64b093301f07f3fef0d6872a";
-        // String receiverId = "64b0939587109c94b6da96df";
+        final String senderId = arguments['senderId'] as String;
+        final String receiverId = arguments['receiverId'] as String;
+        final String name = arguments['name'] as String;
+        final String type = arguments['type'] as String;
+        final String appointmentId = arguments['appointmentId'] as String;
+        // // final String roomId = routeSettings.arguments as String;
+        // String senderId = "64b0939587109c94b6da96df";
+        // String receiverId = "64b093301f07f3fef0d6872a";
+
         String roomId = "6458ccfba57c498eef445131";
 
         return MaterialPageRoute(
             builder: (_) => ChatScreen(
                   senderId: senderId,
                   receiverId: receiverId,
+                  name: name,
+                  type: type,
+                  appointmentId: appointmentId,
                   // roomId: roomId,
                 ));
       default:

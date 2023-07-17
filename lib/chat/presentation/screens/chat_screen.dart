@@ -10,10 +10,14 @@ import 'package:health_care/core/global/resources/values_manger.dart';
 import 'package:health_care/core/global/theme/app_color/color_manager.dart';
 import 'package:health_care/core/routes/app_routes.dart';
 import 'package:health_care/core/widgets/app_bar_widget.dart';
+import 'package:health_care/doctor/presentation/controller/doctor_cubit/doctor_cubit.dart';
 
 class ChatScreen extends StatefulWidget {
   final String senderId;
   final String receiverId;
+  final String name;
+  final String type;
+  final String appointmentId;
 
   // final String roomId;
 
@@ -21,6 +25,9 @@ class ChatScreen extends StatefulWidget {
     Key? key,
     required this.senderId,
     required this.receiverId,
+    required this.name,
+    required this.type,
+    required this.appointmentId,
     // required this.roomId,
   }) : super(key: key);
 
@@ -36,6 +43,12 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   void initState() {
     super.initState();
+    if (widget.type == "Doctor") {
+      DoctorCubit.get(context).isExamined(
+        widget.appointmentId,
+        "accepted",
+      );
+    }
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (_scrollController.hasClients) {
         startScrolling();
@@ -73,8 +86,22 @@ class _ChatScreenState extends State<ChatScreen> {
     final messages = ChatCubit.get(context).messagesOfStream;
     return Scaffold(
       appBar: AppBarWidget(
-        title: 'Messaging',
+        title: widget.name,
         isBack: true,
+        isBackWithFunc: true,
+        onTapBackFunc: () {
+          if (widget.type != "Doctor") {
+            Navigator.pushNamed(
+              context,
+              Routes.writeReviewRoute,
+            );
+          } else {
+            Navigator.pushNamed(
+              context,
+              Routes.layoutDoctorRoute,
+            );
+          }
+        },
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(

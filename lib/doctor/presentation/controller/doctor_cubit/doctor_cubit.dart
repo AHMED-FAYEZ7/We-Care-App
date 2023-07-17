@@ -15,6 +15,7 @@ import 'package:health_care/doctor/domain/usecase/create_time_block_use_case.dar
 import 'package:health_care/doctor/domain/usecase/get_all_blogs_use_case.dart';
 import 'package:health_care/doctor/domain/usecase/get_blogs_comments_use_case.dart';
 import 'package:health_care/doctor/domain/usecase/get_blogs_likes_use_case.dart';
+import 'package:health_care/doctor/domain/usecase/is_patient_examined_use_case.dart';
 import 'package:health_care/doctor/presentation/screens/appointments/appointment_screen.dart';
 import 'package:health_care/doctor/presentation/screens/home/home_screen.dart';
 import 'package:health_care/post/presentation/screen/posts/posts_sceen.dart';
@@ -28,6 +29,8 @@ part 'doctor_state.dart';
 class DoctorCubit extends Cubit<DoctorState> {
   GetUserDataUseCase _getUserDataUseCase = sl<GetUserDataUseCase>();
   CreateTimeBlockUseCase _createTimeBlockUseCase = sl<CreateTimeBlockUseCase>();
+  IsPatientExaminedUseCase _isPatientExaminedUseCase =
+      sl<IsPatientExaminedUseCase>();
 
   GetMyAppointmentsUseCase _getMyAppointmentsUseCase =
       sl<GetMyAppointmentsUseCase>();
@@ -36,6 +39,7 @@ class DoctorCubit extends Cubit<DoctorState> {
     this._getUserDataUseCase,
     this._createTimeBlockUseCase,
     this._getMyAppointmentsUseCase,
+    this._isPatientExaminedUseCase,
   ) : super(DoctorInitial());
 
   static DoctorCubit get(context) => BlocProvider.of(context);
@@ -120,6 +124,30 @@ class DoctorCubit extends Cubit<DoctorState> {
       },
       (r) {
         emit(CreateBlockSuccessState());
+      },
+    );
+  }
+
+  /////////////get my appointment////////////////
+
+  isExamined(
+    String appointmentId,
+    String status,
+  ) async {
+    emit(IsExaminedLoadingState());
+
+    (await _isPatientExaminedUseCase.call(
+      IsPatientExaminedUseCaseInput(
+        appointmentId: appointmentId,
+        status: status,
+      ),
+    ))
+        .fold(
+      (l) {
+        emit(IsExaminedFailureState());
+      },
+      (r) {
+        emit(IsExaminedSuccessState());
       },
     );
   }

@@ -32,3 +32,11 @@ class CreateBlockFailureState extends DoctorState {
 
   CreateBlockFailureState({required this.error});
 }
+
+////////////////////////////////////////////
+
+class IsExaminedLoadingState extends DoctorState {}
+
+class IsExaminedSuccessState extends DoctorState {}
+
+class IsExaminedFailureState extends DoctorState {}
