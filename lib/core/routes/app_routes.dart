@@ -14,6 +14,7 @@ import 'package:health_care/chat/presentation/screens/chat_screen.dart';
 import 'package:health_care/core/global/resources/strings_manger.dart';
 import 'package:health_care/core/screens/start_func/start_function_screen.dart';
 import 'package:health_care/core/screens/video/video_screen.dart';
+import 'package:health_care/patient/presentation/screens/doctor_posts/doctor_posts_screen.dart';
 import 'package:health_care/patient/presentation/screens/payment/payment_screen.dart';
 import 'package:health_care/post/presentation/screen/create_post/create_post_screen.dart';
 import 'package:health_care/doctor/presentation/screens/doctor_layout/doctor_layout_screen.dart';
@@ -59,6 +60,7 @@ class Routes {
   static const String paymentRoute = "/payment";
   static const String startFuncRoute = "/startFunc";
   static const String videoRoute = "/videoFunc";
+  static const String doctorPostsRoute = "/doctorPosts";
 
 ////////////////Chat/////////////
   static const String chatRoute = "/chatRoute";
@@ -161,6 +163,8 @@ class RouteGenerator {
                 ));
       case Routes.reviewsRoute:
         return MaterialPageRoute(builder: (_) => ReviewsScreen());
+      case Routes.doctorPostsRoute:
+        return MaterialPageRoute(builder: (_) => const DoctorPostsScreen());
       case Routes.writeReviewRoute:
         return MaterialPageRoute(builder: (_) => WriteReviewScreen());
       case Routes.chatRoute:

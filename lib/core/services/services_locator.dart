@@ -318,6 +318,7 @@ Future<void> initAppModule() async {
         sl(),
         sl(),
         sl(),
+        sl(),
       ));
   sl.registerFactory<ChatCubit>(() => ChatCubit(
         sl(),

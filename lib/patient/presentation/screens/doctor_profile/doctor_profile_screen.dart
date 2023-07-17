@@ -15,6 +15,7 @@ import 'package:health_care/core/widgets/app_bar_widget.dart';
 import 'package:health_care/patient/presentation/widgets/doctor_widget.dart';
 import 'package:health_care/patient/presentation/widgets/hint_text_widget.dart';
 import 'package:health_care/core/widgets/loading_widget.dart';
+import 'package:health_care/post/presentation/controller/post_cubit.dart';
 import 'package:jiffy/jiffy.dart';
 
 class DoctorProfilePatientScreen extends StatelessWidget {
@@ -153,6 +154,22 @@ class DoctorProfilePatientScreen extends StatelessWidget {
                   onTap: () {
                     // cubit.getDoctorRate(doctorModel.id);
                     cubit.getDoctorRate(doctorModel.id);
+                  },
+                ),
+                const SizedBox(
+                  height: AppSize.s10,
+                ),
+                HintTextWidget(
+                  title: 'Posts',
+                  isSuffix: true,
+                  onTapTitle: 'See Posts',
+                  onTap: () {
+                    // cubit.getDoctorRate(doctorModel.id);
+                    PostCubit.get(context).getDoctorPosts(doctorModel.id);
+                    Navigator.pushNamed(
+                      context,
+                      Routes.doctorPostsRoute,
+                    );
                   },
                 ),
                 const SizedBox(

@@ -57,7 +57,7 @@ class ProfileDoctorScreen extends StatelessWidget {
                             height: AppSize.s5,
                           ),
                           SizedBox(
-                            width: MediaQuery.of(context).size.width * .5,
+                            // width: MediaQuery.of(context).size.width * .5,
                             child: Text(
                               cubit.doctorData?.email ?? '',
                               textAlign: TextAlign.center,

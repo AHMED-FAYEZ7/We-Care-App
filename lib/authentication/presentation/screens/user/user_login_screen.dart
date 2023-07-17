@@ -36,7 +36,7 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
   final TextEditingController _emailEditingController = TextEditingController();
 
   final TextEditingController _passwordEditingController =
-      TextEditingController();
+  TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -132,7 +132,7 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
                       controller: _emailEditingController,
                       type: TextInputType.emailAddress,
                       validator: (input) =>
-                          input!.isValidEmail() ? null : AppStrings.emailError,
+                      input!.isValidEmail() ? null : AppStrings.emailError,
                       prefix: IconBroken.Profile,
                       obscureText: false,
                     ),
@@ -141,7 +141,8 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
                       hintText: AppStrings.passwordHint,
                       controller: _passwordEditingController,
                       type: TextInputType.text,
-                      validator: (input) => input!.isValidPassword()
+                      validator: (input) =>
+                      input!.isValidPassword()
                           ? null
                           : AppStrings.passwordError,
                       prefix: IconBroken.Lock,
@@ -179,28 +180,31 @@ class _UserLoginScreenState extends State<UserLoginScreen> {
                     ),
                     ConditionalBuilder(
                       condition: state is! AuthLogInLoadingState,
-                      builder: (context) => TextButtonWidget(
-                        icon: Container(
-                          width: AppSize.s0,
-                        ),
-                        borderColor: ColorManager.primary,
-                        backGroundColor: ColorManager.primary,
-                        textColor: ColorManager.white,
-                        width: AppSize.s330,
-                        height: AppSize.s52,
-                        text: AppStrings.logIn,
-                        fontWeight: FontWeight.bold,
-                        onTap: () async {
-                          // if (_formKey.currentState!.validate()) {}
-                          // cubit.clear();
-                          await cubit.userLogin(
-                            UserLoginUseCaseInput(
-                              _emailEditingController.text,
-                              _passwordEditingController.text,
+                      builder: (context) =>
+                          TextButtonWidget(
+                            icon: Container(
+                              width: AppSize.s0,
                             ),
-                          );
-                        },
-                      ),
+                            borderColor: ColorManager.primary,
+                            backGroundColor: ColorManager.primary,
+                            textColor: ColorManager.white,
+                            width: AppSize.s330,
+                            height: AppSize.s52,
+                            text: AppStrings.logIn,
+                            fontWeight: FontWeight.bold,
+                            onTap: () async {
+                              if (_formKey.currentState!.validate()) {
+                                await cubit.userLogin(
+                                  UserLoginUseCaseInput(
+                                    _emailEditingController.text,
+                                    _passwordEditingController.text,
+                                  ),
+                                );
+                              }
+                              // cubit.clear();
+
+                            },
+                          ),
                       fallback: (context) => const LoadingWidget(),
                     ),
                     const HorizontalOrLineWidget(

@@ -151,14 +151,15 @@ class _StartFunctionScreenState extends State<StartFunctionScreen> {
                         const SizedBox(
                           height: AppSize.s5,
                         ),
-                        Text(
-                          "${widget.model.doctorInfo!.specialization} Specialist - Ramsay College Hospital",
-                          maxLines: 2,
-                          style: TextStyle(
-                            color: ColorManager.black,
-                            fontSize: AppSize.s10,
+                        if (widget.type != 'Doctor')
+                          Text(
+                            "${widget.model.doctorInfo!.specialization} Specialist - Ramsay College Hospital",
+                            maxLines: 2,
+                            style: TextStyle(
+                              color: ColorManager.black,
+                              fontSize: AppSize.s10,
+                            ),
                           ),
-                        ),
                       ],
                     ),
                   ),
@@ -175,36 +176,82 @@ class _StartFunctionScreenState extends State<StartFunctionScreen> {
           const SizedBox(
             height: AppSize.s5,
           ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * .95,
-            height: AppSize.s100,
-            child: Card(
-              elevation: AppSize.s3,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(AppSize.s12),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ColumnInfoWidget(
-                    icon: Icons.group,
-                    number: 5000,
-                    subTitle: 'Patient',
-                  ),
-                  ColumnInfoWidget(
-                    icon: Icons.person,
-                    number: 15,
-                    subTitle: 'Years experiences',
-                  ),
-                  ColumnInfoWidget(
-                    icon: Icons.chat,
-                    number: 3800,
-                    subTitle: 'Reviews',
-                  ),
-                ],
+          if (widget.type == 'Doctor')
+            Column(
+              children: [
+                const SizedBox(
+                  height: AppSize.s10,
+                ),
+                HintTextWidget(
+                  title: 'Pay Time',
+                  isSuffix: false,
+                ),
+                const SizedBox(
+                  height: AppSize.s10,
+                ),
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AppPadding.p12,
+                      ),
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          DateFormat.yMMMMd('en_US')
+                              .format(DateTime.parse(widget.model.payTime)),
+                          style: Theme.of(context).textTheme.displayMedium,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AppPadding.p12,
+                      ),
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          DateFormat.jm()
+                              .format(DateTime.parse(widget.model.payTime)),
+                          style: Theme.of(context).textTheme.displayMedium,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          if (widget.type != 'Doctor')
+            SizedBox(
+              width: MediaQuery.of(context).size.width * .95,
+              height: AppSize.s100,
+              child: Card(
+                elevation: AppSize.s3,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(AppSize.s12),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ColumnInfoWidget(
+                      icon: Icons.group,
+                      number: 5000,
+                      subTitle: 'Patient',
+                    ),
+                    ColumnInfoWidget(
+                      icon: Icons.person,
+                      number: 15,
+                      subTitle: 'Years experiences',
+                    ),
+                    ColumnInfoWidget(
+                      icon: Icons.chat,
+                      number: 3800,
+                      subTitle: 'Reviews',
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
           Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: AppPadding.p12,
@@ -306,7 +353,22 @@ class _StartFunctionScreenState extends State<StartFunctionScreen> {
             child: Align(
               alignment: Alignment.topLeft,
               child: Text(
-                "Phone          :+201026142957",
+                "Phone          : +201026142957",
+                style: Theme.of(context).textTheme.displayMedium,
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: AppSize.s10,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppPadding.p12,
+            ),
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                "Gender        : Male",
                 style: Theme.of(context).textTheme.displayMedium,
               ),
             ),
@@ -363,41 +425,86 @@ class _StartFunctionScreenState extends State<StartFunctionScreen> {
                 //   'senderId': widget.model.patientInfo!.id,
                 //   'receiverId': widget.model.doctorInfo!.id,
                 // });
-                // final isWithinRange = isTimeWithinRange(widget.model.date);
-                // print('Is time within range: $isWithinRange');
-                // if (isWithinRange) {
-                //   if (widget.model.type == 'chat') {
-                //     Navigator.pushNamed(context, Routes.chatRoute, arguments: {
-                //       'senderId': widget.model.patientInfo!.id,
-                //       'receiverId': widget.model.doctorInfo!.id,
-                //     });
-                //   } else {
-                //     Navigator.pushNamed(context, Routes.videoRoute, arguments: {
-                //       // 'userID': widget.model.patientInfo!.id,
-                //       // 'userName': widget.model.patientInfo!.name,
-                //       'userID': "64564cc5061fd8d24c5ef612",
-                //       'userName': "basyon",
-                //     });
-                //   }
-                // } else {
-                //   ScaffoldMessenger.of(context).showSnackBar(
-                //     SnackBarWidget(
-                //       text: Text(
-                //         'Sorry, you are out of Time',
-                //         style: TextStyle(
-                //           color: ColorManager.white,
-                //           fontSize: AppSize.s16,
-                //         ),
-                //       ),
-                //       backGroundColor: ColorManager.error,
-                //     ),
-                //   );
-                // }
-                Navigator.pushNamed(context, Routes.writeReviewRoute);
+                final isWithinRange = isTimeWithinRange(widget.model.date);
+                print('Is time within range: $isWithinRange');
+                if (isWithinRange) {
+                  if (widget.model.type == 'chat') {
+                    Navigator.pushNamed(context, Routes.chatRoute, arguments: {
+                      'senderId': widget.model.patientInfo!.id,
+                      'receiverId': widget.model.doctorInfo!.id,
+                    });
+                  } else {
+                    Navigator.pushNamed(context, Routes.videoRoute, arguments: {
+                      // 'userID': widget.model.patientInfo!.id,
+                      // 'userName': widget.model.patientInfo!.name,
+                      'userID': "64564cc5061fd8d24c5ef612",
+                      'userName': "basyon",
+                    });
+                  }
+                } else {
+                  _dialogBuilder(context);
+                }
+                // Navigator.pushNamed(context, Routes.writeReviewRoute);
               },
             ),
         ],
       ),
     );
   }
+}
+
+Future<void> _dialogBuilder(
+  BuildContext context,
+) {
+  return showDialog<void>(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppSize.s12),
+        ),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: AppSize.s16,
+          vertical: AppSize.s16,
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'Sorry',
+              style: TextStyle(
+                color: ColorManager.primary,
+                fontSize: AppSize.s20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(
+              height: AppSize.s10,
+            ),
+            Text(
+              'Your appointment time not come',
+              style: TextStyle(
+                color: ColorManager.black,
+                fontSize: AppSize.s12,
+              ),
+            ),
+            const SizedBox(
+              height: AppSize.s20,
+            ),
+            TextButtonWidget(
+              borderColor: ColorManager.primary,
+              backGroundColor: ColorManager.primary,
+              textColor: ColorManager.white,
+              height: AppSize.s52,
+              text: 'Ok',
+              icon: Container(),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      );
+    },
+  );
 }

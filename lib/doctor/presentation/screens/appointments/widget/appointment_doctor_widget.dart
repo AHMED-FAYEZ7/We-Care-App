@@ -47,10 +47,7 @@ class _AppointmentDoctorWidgetState extends State<AppointmentDoctorWidget> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery
-          .of(context)
-          .size
-          .width * .95,
+      width: MediaQuery.of(context).size.width * .95,
       height: AppSize.s100,
       child: Card(
         elevation: AppSize.s3,
@@ -69,8 +66,7 @@ class _AppointmentDoctorWidgetState extends State<AppointmentDoctorWidget> {
               ),
               child: Image.network(
                 widget.model.patientInfo?.profilePicture ??
-                    Constants.defaultPatientImage
-                ,
+                    Constants.defaultPatientImage,
                 fit: BoxFit.cover,
                 width: AppSize.s100,
                 height: AppSize.s100,
@@ -80,18 +76,14 @@ class _AppointmentDoctorWidgetState extends State<AppointmentDoctorWidget> {
               width: AppSize.s10,
             ),
             SizedBox(
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width * .46,
+              width: MediaQuery.of(context).size.width * .46,
               height: AppSize.s100,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.model.patientInfo?.name ?? ''
-                    ,
+                    widget.model.patientInfo?.name ?? '',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: ColorManager.black,
@@ -108,32 +100,11 @@ class _AppointmentDoctorWidgetState extends State<AppointmentDoctorWidget> {
                         text,
                         style: TextStyle(
                           fontSize: AppSize.s14,
-                          color:
-                          Colors.black,
+                          color: Colors.black,
                         ),
                       ),
                       const SizedBox(
                         width: AppSize.s5,
-                      ),
-                      Card(
-                        elevation: AppSize.s0,
-                        shape: RoundedRectangleBorder(),
-                        color: widget.model.paid
-                            ? Colors.green
-                            : ColorManager.grey,
-                        child: Padding(
-                          padding: const EdgeInsets.all(
-                            AppPadding.p2,
-                          ),
-                          child: Text(
-                            widget.model.paid ? 'Paid' : 'Not Paid',
-                            style: TextStyle(
-                              color: widget.model.paid
-                                  ? ColorManager.white
-                                  : ColorManager.black,
-                            ),
-                          ),
-                        ),
                       ),
                     ],
                   ),
@@ -141,10 +112,7 @@ class _AppointmentDoctorWidgetState extends State<AppointmentDoctorWidget> {
                     height: AppSize.s5,
                   ),
                   Text(
-                    "${DateFormat.jm().format(
-                        DateTime.parse(widget.model.date))}  ${DateFormat
-                        .yMMMMd('en_US').format(
-                        DateTime.parse(widget.model.date))}",
+                    "${DateFormat.jm().format(DateTime.parse(widget.model.date))}  ${DateFormat.yMMMMd('en_US').format(DateTime.parse(widget.model.date))}",
                     maxLines: 2,
                     style: TextStyle(
                       color: ColorManager.black,

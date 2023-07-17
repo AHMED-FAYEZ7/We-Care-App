@@ -55,3 +55,10 @@ class GetAllCommentsLoadingState extends PostState {}
 class GetAllCommentsSuccessState extends PostState {}
 
 class GetAllCommentsFailureState extends PostState {}
+////////////////////////////////////////////
+
+class GetDoctorPostsLoadingState extends PostState {}
+
+class GetDoctorPostsSuccessState extends PostState {}
+
+class GetDoctorPostsFailureState extends PostState {}

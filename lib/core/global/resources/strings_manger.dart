@@ -1,12 +1,10 @@
 class AppStrings {
   // slider onBoarding
-  static const String onBoardingTitle1 =
-      "Easy Consultation With a Doctor In Your Pocket";
+  static const String onBoardingTitle1 = "Easy Consultation";
   static const String onBoardingSubTitle1 =
       "Get access to a network of experienced doctors ready to provide quality healthcare at your fingertips.";
 
-  static const String onBoardingTitle2 =
-      "Schedule Appointments With Expert Doctors";
+  static const String onBoardingTitle2 = "Schedule Appointments";
   static const String onBoardingSubTitle2 =
       "Find experienced specialist doctors with expert ratings and reviews and book your appointments hassle-free.";
 
@@ -19,6 +17,7 @@ class AppStrings {
       "Empower patients with accurate diagnoses, personalized treatments, and comprehensive healthcare guidance.";
 
   static const String noRouteFound = "No Route Found";
+
   // error handler
   static const String success = "Success";
   static const String badRequestError = "Bad Request Error";
@@ -47,8 +46,7 @@ class AppStrings {
   static const String userNameHint = "Enter Username";
   static const String userNameError = "Name must be more than 2 character";
   static const String emailError = "Email Invalid! check your email";
-  static const String passwordError =
-      "8 characters, at least one letter and one number";
+  static const String passwordError = "6 characters, at least";
   static const String specializationError =
       "Specialization must be more than 4 character";
   static const String phoneError = "Enter Valid Phone Number (01********)";
@@ -81,6 +79,7 @@ class AppStrings {
   static const String profile = "Profile";
   static const photoGallery = "photo_from_galley";
   static const photoCamera = "photo_from_camera";
+
   // Chat
   static const String send = "Send";
 }

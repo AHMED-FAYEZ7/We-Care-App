@@ -7,6 +7,7 @@ import 'package:health_care/core/services/services_locator.dart';
 import 'package:health_care/core/usecase/base_usecase.dart';
 import 'package:health_care/doctor/domain/model/blog_model.dart';
 import 'package:health_care/doctor/domain/usecase/get_all_blogs_use_case.dart';
+import 'package:health_care/doctor/domain/usecase/get_doctor_blogs_by_id.dart';
 import 'package:health_care/patient/domain/model/appointment_model.dart';
 import 'package:health_care/patient/domain/model/payment_model.dart';
 import 'package:health_care/patient/domain/model/rarte_model.dart';

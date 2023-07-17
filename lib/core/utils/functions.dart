@@ -10,6 +10,6 @@ extension EmailValidator on String {
   }
 
   bool isValidPassword() {
-    return RegExp(r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$').hasMatch(this);
+    return RegExp(r'^.{6,}$').hasMatch(this);
   }
 }

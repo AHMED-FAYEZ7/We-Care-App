@@ -12,6 +12,7 @@ import 'package:health_care/doctor/domain/usecase/create_like_use_case.dart';
 import 'package:health_care/doctor/domain/usecase/get_all_blogs_use_case.dart';
 import 'package:health_care/doctor/domain/usecase/get_blogs_comments_use_case.dart';
 import 'package:health_care/doctor/domain/usecase/get_blogs_likes_use_case.dart';
+import 'package:health_care/doctor/domain/usecase/get_doctor_blogs_by_id.dart';
 import 'package:meta/meta.dart';
 
 part 'post_state.dart';
@@ -24,17 +25,17 @@ class PostCubit extends Cubit<PostState> {
   GetBlogsLikesUseCase _getBlogsLikesUseCase = sl<GetBlogsLikesUseCase>();
   CreateCommentUseCase _createCommentUseCase = sl<CreateCommentUseCase>();
   GetBlogsCommentsUseCase _getBlogsCommentsUseCase =
-      sl<GetBlogsCommentsUseCase>();
+  sl<GetBlogsCommentsUseCase>();
+  GetDoctorBlogsById _getDoctorBlogsById = sl<GetDoctorBlogsById>();
 
-  PostCubit(
-    this._getAllBlogsUseCase,
-    this._createBlogUseCase,
-    this._createLikeUseCase,
-    this._createDisLikeUseCase,
-    this._createCommentUseCase,
-    this._getBlogsCommentsUseCase,
-    this._getBlogsLikesUseCase,
-  ) : super(PostInitial());
+  PostCubit(this._getAllBlogsUseCase,
+      this._createBlogUseCase,
+      this._createLikeUseCase,
+      this._createDisLikeUseCase,
+      this._createCommentUseCase,
+      this._getBlogsCommentsUseCase,
+      this._getBlogsLikesUseCase,
+      this._getDoctorBlogsById,) : super(PostInitial());
 
   static PostCubit get(context) => BlocProvider.of(context);
 
@@ -78,10 +79,10 @@ class PostCubit extends Cubit<PostState> {
   createLike(String blogId) async {
     emit(CreateLikeLoadingState());
     (await _createLikeUseCase.call(blogId)).fold(
-      (l) {
+          (l) {
         emit(CreateLikeFailureState());
       },
-      (r) {
+          (r) {
         emit(CreateLikeSuccessState());
       },
     );
@@ -92,10 +93,10 @@ class PostCubit extends Cubit<PostState> {
   createDisLike(String blogId) async {
     emit(CreateDisLikeLoadingState());
     (await _createDisLikeUseCase.call(blogId)).fold(
-      (l) {
+          (l) {
         emit(CreateDisLikeFailureState());
       },
-      (r) {
+          (r) {
         emit(CreateDisLikeSuccessState());
       },
     );
@@ -110,10 +111,10 @@ class PostCubit extends Cubit<PostState> {
       commentContent: comment,
     )))
         .fold(
-      (l) {
+          (l) {
         emit(CreateCommentFailureState());
       },
-      (r) {
+          (r) {
         emit(CreateCommentSuccessState());
       },
     );
@@ -125,10 +126,10 @@ class PostCubit extends Cubit<PostState> {
   getComments(String blogId) async {
     emit(GetAllCommentsLoadingState());
     (await _getBlogsCommentsUseCase.call(blogId)).fold(
-      (l) {
+          (l) {
         emit(GetAllCommentsFailureState());
       },
-      (r) {
+          (r) {
         comments = [];
         comments = r.blogComments!;
         emit(GetAllCommentsSuccessState());
@@ -142,14 +143,30 @@ class PostCubit extends Cubit<PostState> {
   getLikes(String blogId) async {
     emit(GetAllLikesLoadingState());
     (await _getBlogsLikesUseCase.call(blogId)).fold(
-      (l) {
+          (l) {
         emit(GetAllLikesFailureState());
       },
-      (r) {
+          (r) {
         likes = [];
         likes = r.blogLikes!;
         emit(GetAllLikesSuccessState());
       },
     );
+  }
+
+  /////////////doctor posts////////////////
+
+  List<Blog> doctorBlogs = [];
+
+  getDoctorPosts(String doctorId) async {
+    emit(GetDoctorPostsLoadingState());
+    doctorBlogs = [];
+
+    (await _getDoctorBlogsById.call(doctorId)).fold((l) {
+      emit(GetDoctorPostsFailureState());
+    }, (r) {
+      doctorBlogs = r.allBlogsData!;
+      emit(GetDoctorPostsSuccessState());
+    });
   }
 }
