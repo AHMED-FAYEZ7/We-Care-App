@@ -108,10 +108,9 @@ class _ChatScreenState extends State<ChatScreen> {
           horizontal: AppPadding.p20,
           vertical: AppPadding.p20,
         ),
-        child: BlocConsumer<ChatCubit, ChatState>(
-          listener: (context, state) {
-            // TODO: implement listener
-          },
+        child: BlocConsumer<ChatCubit,ChatState>(
+          listener: (context, state){}// TODO: implement listener
+          ,
           builder: (context, state) {
             return Column(
               children: [
