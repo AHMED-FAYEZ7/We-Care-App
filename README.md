@@ -1,6 +1,6 @@
 # we-care
 
-we-care app with Flutter.
+we-care app is designed to facilitate communication between patients and doctors, allowing users to book appointments online.
 
 ## If you want to work with me, you can find me here:
 
